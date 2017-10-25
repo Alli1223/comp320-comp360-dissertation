@@ -98,8 +98,8 @@ The abstract goes here.
 \section{Literature Review}
 \subsection{What is General Video Game AI (GVGAI)?}
 
-GVGAI is an AI competition framework, in which AI controllers are designed to be able to play any game it is given, even when it has never played that game before \cite{perez2016GVGAICompetition, GVGAI}.
-The framework contains a library of Java based video games.
+GVGAI is an AI competition framework, in which AI controllers are designed to be able to play any game it is given, even when it has never played that game before. The controllers are given allowed upto 40ms to compute the agents action(s) \cite{perez2016GVGAICompetition, GVGAI}.
+The framework contains a library of 2D Java based video games some of which are based of classic arcade games, there are currently as of writing this, 62 games that AI controllers can be tested on.
 
 \subsection{Goal Orientation}
 This paper 
@@ -110,6 +110,12 @@ This paper
 This paper 
 \cite{perez2016analyzing}
 
+\subsection{Efficient Implementation of Breadth First Search for General Video Game Playing}
+This paper proposes an efficient implementation of Breath First search, however it only works well for deterministic game sets.
+The paper proposes a method of BFS where a node that has already been visited in other nodes will not be expanded, this is stored in a hash function.
+The algorithm uses hash codes to improve the efficiency and performance.
+
+\cite{EfficientBFS}
 
 \subsection{HyperHeuristic}
 
