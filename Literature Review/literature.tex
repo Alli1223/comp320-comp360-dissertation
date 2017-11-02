@@ -93,6 +93,7 @@ TODO: Simplify research questions
     \item Where does GVGAI succeed best in set games?
     \item Where does each tree search technique do well in each game?
     \item What are the most challenging areas for GVGAI in the GVGAI competition?
+    \item What are the strengths and weaknesses of different search techniques and how can they be improved?
 \end{itemize}
 
 \section{Hypothesis}
@@ -118,6 +119,24 @@ The GVG-AI Competition is a competition framework that proposes the challenge of
 
 The framework contains a library of 2D Java based video games some of which are based of classic arcade games, there are currently as of writing this, 62 games that AI controllers can be tested on.
 
+
+\subsection{Challenges and Goals of GVGAI}
+The goal of GVGAI is to create a generally intelligent agent that is able to win any game it is placed in, when it doesn't know the game.
+During the tournament a completely new set of games are used, to avoid the agents becoming too deomain specific.
+Another challenge is the time limit that an agent can choose an action, this avoids the agent spending too long deciding a task and not making an action. \cite{schuster2015mcts}
+
+
+\subsection{Competition \& Rules}
+
+The winning conditions are decided by three factors:
+\begin{itemize}
+    \item Number of games finished with a victory
+    \item Total sum of points
+    \item Total time spent
+\end{itemize}
+The fist objective to be considered is the number of victories, however in case of a tie, the next objective is the number of points. Then if those two are a tie then the final decider is the total time spent before the win \cite{perez20162014}.
+
+\subsection{The GVGAI Framework}
 %Limits of the framework
 The controllers are allowed upto 40ms to compute the agents action(s) \cite{perez2016GVGAICompetition, GVGAI}.
 
@@ -125,13 +144,26 @@ The controllers are allowed upto 40ms to compute the agents action(s) \cite{pere
 
 
 
+
 \subsection{Game Search Techniques}
+
+Alpha beta pruning
+
+minimax
 
 Breath First Search
 
 Depth First Search
 
 MCTS
+
+OLETS
+
+%Ranked 3rd in GVGAI comp
+%Devided into four steps, selection, expansions playout, backpropigation
+
+Evolutianry Algorithms
+(RHEA)
 
 
 
