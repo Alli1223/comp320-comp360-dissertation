@@ -58,7 +58,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Comparing game tree search techniques for general videogame AI (GVGAI) Literature Review}
+\title{Comparing game tree search techniques for general videogame AI (GVGAI)}
 %
 %
 % author name
@@ -146,7 +146,7 @@ In the competition the agent will play 10 unknown games and 5 levels per game. F
 The Framework is developed in the Java Enviroment
 The controllers are allowed upto 40ms to compute the agents action(s) \cite{perez2016GVGAICompetition, GVGAI}.
 
-The GVGAI framework comes with quite a few sample agents, 
+The GVGAI framework comes with quite a few sample agents;
 
 \begin{itemize}
     \item doNothing
@@ -155,13 +155,16 @@ The GVGAI framework comes with quite a few sample agents,
     \item olets
     \item repeatOlets
     \item and more.
-    \item
 \end{itemize}
+These sample agents provide useful insigths into how new agents can be created for the competition by applying common AI techniques.
+The \textit{HUMAN} player and the \textit{REPLAYER} can be used for debugging the gmae and to help the programmer get a better understading of how the game can be played.
 
 
-The framework uses a Video Game Descriotion Language (VGDL) to describe a wide variety of video games. The VGDL is based on a python version developed by Schaul (2014) called PyVGDL. 
+The framework uses a Video Game Descriotion Language (VGDL) to describe a wide variety of video games. The VGDL is based on a python version developed by Schaul (2014) called PyVGDL \cite{schuster2015mcts}. Furthermore in the GVG-AI Competition the AI agent does not have access to the whole games description, where as in GGP the agent was able to see the whole game description. This means that the agent has to analyze and simulate the game in order to figure out the rules and goal of the game.
 
+To create an agent in 
 
+The framework has an interaction set that consists of 
 
 \subsection{Game Search Techniques}
 
