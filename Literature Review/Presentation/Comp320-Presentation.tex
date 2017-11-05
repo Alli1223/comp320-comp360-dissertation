@@ -21,12 +21,12 @@
 	  \begin{itemize}
 	      \item The GVG-AI is an AI competition that aims to create an AI that is able to play any game. \pause
 	      \item There have been a few different AI competitions in the past. \pause
-	      \item However most of the winning AI stratagies used in those games are very domain specific and it is often more about knowing the game than developing good general AI \pause
+	      \item However most of the winning AI strategies used in those games are very domain specific and it is often more about knowing the game than developing good general AI \pause
 	  \end{itemize}
 \end{frame}
 
 
-\begin{frame}{About the competiton}		
+\begin{frame}{About the competition}		
 	\textbf{Game Concept} \pause
 		\begin{itemize}
 			\item The concept of my demake is a 2D space shooter, similar to Galaga but based on the modern game Star Citizen.  \pause
@@ -41,14 +41,14 @@
 \begin{frame}{Challenges and goals}		
 			\begin{itemize}
 			\item The goal of GVGAI is to create a generally intelligent agent that is able to win any game it is placed in, when it doesn't know the game.
-			\item During the tournament a completely new set of games are used, to avoid the agents becoming too deomain specific.
+			\item During the tournament a completely new set of games are used, to avoid the agents becoming too domain specific.
 			\item Another challenge is the time limit that an agent can choose an action, this avoids the agent spending too long deciding a task and not making an action.
 		\end{itemize}
 \end{frame}
 	
 \begin{frame}{Competition \& Rules}		
 			\begin{itemize}
-			\item The Framework is developed in the Java Enviroment \pause
+			
 			\item The controllers are allowed upto 40ms to compute the agents action(s)  \pause
 
 		\end{itemize}
@@ -57,15 +57,28 @@
 
 \begin{frame}{The GVGAI Framework}		
 			\begin{itemize}
-			\item 
-
+			\item The Framework is developed in the Java Environment \pause
+			\item The framework uses a Video Game Description Language (VGDL) to describe a wide variety of video games. \pasue
+			\item The VGDL is based on a python version developed by Schaul (2014) called PyVGDL \pause
+			\item  Furthermore in the GVG-AI Competition the AI agent does not have access to the whole games description, where as in GGP the agent was able to see the whole game description. \pause
+			\item  This means that the agent has to analyze and simulate the game in order to figure out the rules and goal of the game. \pause
 		\end{itemize}
 \end{frame}
 
-\begin{frame}{Game Search Techniques}		
+\begin{frame}{Game Search Techniques}
+		There are a lot of game tree search techniques used in AI. 
 			\begin{itemize}
-			\item 
-
+			\item Alpha beta pruning \pause
+			\item Minimax \pause
+			\item Breath First Search \pause
+			\item Depth First Search \pause
+			\item MCTS \pause
+			\item Evolutionary Algorithms \pause
 		\end{itemize}
+\end{frame}
+
+\begin{frame}{Hyper Heuristics}
+hyper Heuristics 
+	
 \end{frame}
 \end{document}

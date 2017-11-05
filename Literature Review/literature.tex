@@ -108,7 +108,7 @@ Does visualising the search space in GVGAI help identify the challenges.
 In most modern video games the AI is tailored specifically for that game and can't easily be modified for use in a different game type. However this is what GVGAI aims to create an AI that can play any game. 
 
 There have been quite a few AI competitions before in video games, such as Unreal Tournament \cite{hingston2010new}, Super Mario Bros \cite{citationNeeded}, Starcraft \cite{ontanon2013survey} \cite{perez20162014}. 
-However most of the winning AI stratagies used in those games are very domain specific and it is often more about knowing the game than developing good general AI \cite{perez20162014}. 
+However most of the winning AI strategies used in those games are very domain specific and it is often more about knowing the game than developing good general AI \cite{perez20162014}. 
  \par
 
 
@@ -116,7 +116,7 @@ However most of the winning AI stratagies used in those games are very domain sp
 Another competition that was similar to GVG-AI was the General Game Playing (GGP) competition \cite{GGP2005general}. However almost all of the games in the GGP are board games, and the Game Description Language (GDL) used is not designed for video games.
 
 %GVGAI Competiton
-The GVG-AI Competition is a competition framework that proposes the challenge of creating controllers for general video game playing. The controllers must be able to play a wide veraiety of video games, many of them will be completetly unknown to the controller. This means the controller must have some general AI to discover the merchanics and goal of the game, so it can increase it's score and win the game. \cite{GVGAI, perez20162014}
+The GVG-AI Competition is a competition framework that proposes the challenge of creating controllers for general video game playing. The controllers must be able to play a wide variety of video games, many of them will be completetly unknown to the controller. This means the controller must have some general AI to discover the mechanics and goal of the game, so it can increase it's score and win the game. \cite{GVGAI, perez20162014}
 
 The framework contains a library of 2D Java based video games some of which are based of classic arcade games, there are currently as of writing this, 62 games that AI controllers can be tested on.
 
@@ -143,7 +143,7 @@ In the competition the agent will play 10 unknown games and 5 levels per game. F
 
 \subsection{The GVGAI Framework}
 %Limits of the framework
-The Framework is developed in the Java Enviroment
+The Framework is developed in the Java Environment
 The controllers are allowed upto 40ms to compute the agents action(s) \cite{perez2016GVGAICompetition, GVGAI}.
 
 The GVGAI framework comes with quite a few sample agents;
@@ -156,11 +156,11 @@ The GVGAI framework comes with quite a few sample agents;
     \item repeatOlets
     \item and more.
 \end{itemize}
-These sample agents provide useful insigths into how new agents can be created for the competition by applying common AI techniques.
-The \textit{HUMAN} player and the \textit{REPLAYER} can be used for debugging the gmae and to help the programmer get a better understading of how the game can be played.
+These sample agents provide useful insights into how new agents can be created for the competition by applying common AI techniques.
+The \textit{HUMAN} player and the \textit{REPLAYER} can be used for debugging the game and to help the programmer get a better understanding of how the game can be played.
 
 
-The framework uses a Video Game Descriotion Language (VGDL) to describe a wide variety of video games. The VGDL is based on a python version developed by Schaul (2014) called PyVGDL \cite{schuster2015mcts}. Furthermore in the GVG-AI Competition the AI agent does not have access to the whole games description, where as in GGP the agent was able to see the whole game description. This means that the agent has to analyze and simulate the game in order to figure out the rules and goal of the game.
+The framework uses a Video Game Description Language (VGDL) to describe a wide variety of video games. The VGDL is based on a python version developed by Schaul (2014) called PyVGDL \cite{schuster2015mcts}. Furthermore in the GVG-AI Competition the AI agent does not have access to the whole games description, where as in GGP the agent was able to see the whole game description. This means that the agent has to analyze and simulate the game in order to figure out the rules and goal of the game.
 
 To create an agent in 
 
@@ -180,19 +180,19 @@ MCTS
 %Ranked 3rd in GVGAI comp
 %Devided into four steps, selection, expansions playout, backpropigation
 
-Because of vanilla MCTS's sucess in the GVGAI competition there have been quite a few papers that propose modifications to the vanilla MCTS to try and improve the sucessfulness of the algorithm.
+Because of vanilla MCTS's success in the GVGAI competition there have been quite a few papers that propose modifications to the vanilla MCTS to try and improve the successfulness of the algorithm.
 
 OLETS
 
 
-Evolutianry Algorithms
+Evolutionary Algorithms
 (RHEA)
 
 
 
 
 %Papers
-\subsection{Visualising search trees in GVGAI}
+\subsection{Visualizing search trees in GVGAI}
 
 
 \subsection{Goal Orientation}
