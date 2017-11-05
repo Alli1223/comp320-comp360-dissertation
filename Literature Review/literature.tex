@@ -99,6 +99,7 @@ TODO: Simplify research questions
 \section{Hypothesis}
 
 //TODO: Hypothesis
+Does visualising the search space in GVGAI help identify the challenges.
 
 \section{Literature Review}
 \subsection{The General Video Game AI Competition}
@@ -136,14 +137,29 @@ The winning conditions are decided by three factors:
 \end{itemize}
 The fist objective to be considered is the number of victories, however in case of a tie, the next objective is the number of points. Then if those two are a tie then the final decider is the total time spent before the win \cite{perez20162014}.
 
-In the competition the agent will play 10 unknown games and 5 levels per game \cite{schuster2015mcts}.
+In the competition the agent will play 10 unknown games and 5 levels per game. Furthermore each level is played ten times, so each agent plays roughly 500 total games in the tournament \cite{schuster2015mcts}.
+
+
 
 \subsection{The GVGAI Framework}
 %Limits of the framework
+The Framework is developed in the Java Enviroment
 The controllers are allowed upto 40ms to compute the agents action(s) \cite{perez2016GVGAICompetition, GVGAI}.
 
+The GVGAI framework comes with quite a few sample agents, 
+
+\begin{itemize}
+    \item doNothing
+    \item Heuristics
+    \item Human
+    \item olets
+    \item repeatOlets
+    \item and more.
+    \item
+\end{itemize}
 
 
+The framework uses a Video Game Descriotion Language (VGDL) to describe a wide variety of video games. The VGDL is based on a python version developed by Schaul (2014) called PyVGDL. 
 
 
 
@@ -161,6 +177,8 @@ MCTS
 %Ranked 3rd in GVGAI comp
 %Devided into four steps, selection, expansions playout, backpropigation
 
+Because of vanilla MCTS's sucess in the GVGAI competition there have been quite a few papers that propose modifications to the vanilla MCTS to try and improve the sucessfulness of the algorithm.
+
 OLETS
 
 
@@ -170,9 +188,9 @@ Evolutianry Algorithms
 
 
 
-
-
 %Papers
+\subsection{Visualising search trees in GVGAI}
+
 
 \subsection{Goal Orientation}
 This paper 
