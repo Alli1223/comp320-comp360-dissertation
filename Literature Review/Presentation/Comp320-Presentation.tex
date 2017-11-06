@@ -21,7 +21,7 @@
 	  \begin{itemize}
 	      \item The GVG-AI is an AI competition that aims to create an AI that is able to play any game. \pause
 	      \item There have been a few different AI competitions in the past. \pause
-	      \item However most of the winning AI strategies used in those games are very domain specific and it is often more about knowing the game than developing good general AI \pause
+	      \item However most of the winning AI strategies used in those games are very domain specific and it is often more about knowing the game than developing good general AI. \pause
 	  \end{itemize}
 \end{frame}
 
@@ -29,20 +29,24 @@
 \begin{frame}{About the competition}		
 	\textbf{Game Concept} \pause
 		\begin{itemize}
-			\item The concept of my demake is a 2D space shooter, similar to Galaga but based on the modern game Star Citizen.  \pause
-			\item The game will have a player ship at the bottom of the screen and will be able to fire projectiles at enemies that spawn at the top of the screen.\pause
-			
-			\item The player will loose health if hit by projectiles, but if the player kills enemy ships their score will increase.  \pause
+			\item 
+		\end{itemize}
+\end{frame}
 
-			\item The aim of the game is to get the best score. \pause 	
+\begin{frame}{Similar competitions}	
+	\textbf{There have been quite a few similar AI competitions} \pause
+		\begin{itemize}
+			\item General Game Playing (GGP)
 		\end{itemize}
 \end{frame}
 
 \begin{frame}{Challenges and goals}		
 			\begin{itemize}
 			\item The goal of GVGAI is to create a generally intelligent agent that is able to win any game it is placed in, when it doesn't know the game.
-			\item During the tournament a completely new set of games are used, to avoid the agents becoming too domain specific.
-			\item Another challenge is the time limit that an agent can choose an action, this avoids the agent spending too long deciding a task and not making an action.
+			\item During the tournament a completely new set of games are used
+			\item This is done to avoid the agents becoming too domain specific.
+			\item Another challenge is the time limit that an agent can choose an action
+			\item This is because one of the goals is to make a real time agent, and this makes the competition more challenging.
 		\end{itemize}
 \end{frame}
 	
@@ -58,7 +62,7 @@
 \begin{frame}{The GVGAI Framework}		
 			\begin{itemize}
 			\item The Framework is developed in the Java Environment \pause
-			\item The framework uses a Video Game Description Language (VGDL) to describe a wide variety of video games. \pasue
+			\item The framework uses a Video Game Description Language (VGDL) to describe a wide variety of video games. \pause
 			\item The VGDL is based on a python version developed by Schaul (2014) called PyVGDL \pause
 			\item  Furthermore in the GVG-AI Competition the AI agent does not have access to the whole games description, where as in GGP the agent was able to see the whole game description. \pause
 			\item  This means that the agent has to analyze and simulate the game in order to figure out the rules and goal of the game. \pause
@@ -77,8 +81,29 @@
 		\end{itemize}
 \end{frame}
 
-\begin{frame}{Hyper Heuristics}
-hyper Heuristics 
+\begin{frame}{Context of Research Project}
+	\textbf{What is the context of my research project and how does it fit into the field of computing for games?}
 	
+	
+\end{frame}
+\end{document}
+
+\begin{frame}{Key results}
+	\textbf{What are the key results from the literature that my project will be built upon?}
+		The 2014 General Video Game Playing Competition paper by Diego Perez et. al. covers how each different agent in the submission compares by victories and points. However it does not cover the challenges faced by each game, and where each controller succeed/failed.
+		
+		The potential of finding out where each AI algorthim succeeds best in what situation, could lead to the development of a hyper/meta heuristic that is able to select what algorithm to use when it gets into a certain situation.
+\end{frame}
+\end{document}
+
+\begin{frame}{Research Questions}
+	\textbf{My Research questions I aim to answer}
+	\begin{itemize}
+    \item How does game tree search techniques compare for GVGAI?
+    \item Where does GVGAI succeed best in set games?
+    \item Where does each tree search technique do well in each game?
+    \item What are the most challenging areas for GVGAI in the GVGAI competition?
+    \item What are the strengths and weaknesses of different search techniques and how can they be improved?
+\end{itemize}
 \end{frame}
 \end{document}
