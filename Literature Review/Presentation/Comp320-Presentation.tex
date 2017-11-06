@@ -7,7 +7,7 @@
 \pdfmapfile{+sansmathaccent.map}
 
 
-\title{Comp320}
+\title{Comp320 Literature Review}
 \author{Alastair Rayner}
 \date{\today}
 
@@ -27,28 +27,29 @@
 
 
 \begin{frame}{Similar competitions}	
-	\textbf{There have been quite a few similar challenges for general game intelligence} \pause
+	\textbf{Similar competitions for general game intelligence} \pause
 		\begin{itemize}
-			\item General Game Playing (GGP) has held competitions in AI for games since 2005.
+			\item General Game Playing (GGP) has held competitions in AI for games since 2005. \pause
 			\begin{itemize}
 				\item GGP is similar to GVGAI as the competitior does not know which games their agent will be playing.
 				\item The games used in GGP are usually variants of existing board games.
 			\end{itemize}
-			\item Arcade Learning Environment (ALE) is based of the Atari 2600.
+			\item Arcade Learning Environment (ALE) is based of the Atari 2600. \pause
 			\begin{itemize}
 				\item In ALE the controller is presented with the raw screen capture of the game.
 				\item As well as a score counter.
+				\item ALE provides an interface for domain-independent agents to try hundreds of Atari 2600 game environments.
 			\end{itemize}
 		\end{itemize}
 \end{frame}
 
 \begin{frame}{Challenges and goals}		
 			\begin{itemize}
-			\item The goal of GVG-AI is to create a generally intelligent agent that is able to win any game it is placed in, even when it doesn't know the game.
-			\item During the tournament a completely new set of games are used.
-			\item This is done to avoid the agents becoming too domain specific.
-			\item Another challenge is the time limit that an agent can choose an action
-			\item This is because one of the goals is to make a real time agent, and this makes the competition more challenging.
+			\item The goal of GVG-AI is to create a generally intelligent agent that is able to win any game it is placed in, even when it doesn't know the game. \pause
+			\item During the tournament a completely new set of games are used. \pause
+			\item This is done to avoid the agents becoming too domain specific. \pause
+			\item Another challenge is the time limit that an agent can choose an action \pause
+			\item This is because one of the goals is to make a real time agent, and this makes the competition more challenging. \pause
 		\end{itemize}
 \end{frame}
 	
@@ -72,7 +73,7 @@
 \end{frame}
 
 \begin{frame}{Game Search Techniques}
-		There are a lot of game tree search techniques used in AI. 
+		There are a lot of game tree search techniques used in AI such as; 
 			\begin{itemize}
 			\item Alpha beta pruning \pause
 			\item Minimax \pause
@@ -81,30 +82,26 @@
 			\item MCTS \pause
 			\item Evolutionary Algorithms \pause
 		\end{itemize}
+		Most of these techniques are provided in the GVG-AI framework as sample agents. Some of them actually did quite well in the competition. \pause
+		For example the sample MCTS agent came 3rd in one of the competitions. 
 \end{frame}
 
-\begin{frame}{Context of Research Project}
-	\textbf{What is the context of my research project and how does it fit into the field of computing for games?}
-	
-	
-\end{frame}
-\end{document}
 
 \begin{frame}{Key results}
-	\textbf{What are the key results from the literature that my project will be built upon?}
-		The 2014 General Video Game Playing Competition paper by Diego Perez et. al. covers how each different agent in the submission compares by victories and points. However it does not cover the challenges faced by each game, and where each controller succeed/failed.
+	\textbf{What research will my project will be built upon?}
+	\begin{itemize}
+		\item	The 2014 General Video Game Playing Competition paper by Diego Perez et. al. covers how each different agent in the submission compares them by victories and points. \pause
 		
-		The potential of finding out where each AI algorthim succeeds best in what situation, could lead to the development of a hyper/meta heuristic that is able to select what algorithm to use when it gets into a certain situation.
+		\item	The potential of finding out where each AI algorithm succeeds best in what situation, could lead to the development of a hyper/meta heuristic that is able to select what algorithm to use when it gets into a certain situation.
+		\end{itemize}
 \end{frame}
-\end{document}
+
 
 \begin{frame}{Research Questions}
 	\textbf{My Research questions I aim to answer}
 	\begin{itemize}
     \item How does game tree search techniques compare for GVGAI?
-    \item Where does GVGAI succeed best in set games?
     \item Where does each tree search technique do well in each game?
-    \item What are the most challenging areas for GVGAI in the GVGAI competition?
     \item What are the strengths and weaknesses of different search techniques and how can they be improved?
 	\end{itemize}
 \end{frame}
