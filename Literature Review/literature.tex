@@ -112,9 +112,10 @@ Where does tree search algorithms out perform EA?
 \section{Literature Review}
 
 	\subsection{General Artificial Intelligence in games}
-		Games play an important role in the development and benchmarking of Artificial Intelligence(AI). This literature review will cover the existing work around the general video game artificial intelligence competition and the different solutions that are available.
+		Games play an important role in the development and benchmarking of Artificial Intelligence (AI). This literature review will cover the existing work around the general video game artificial intelligence competition and the different solutions that are available.
 		There have been a lot of popular games that have been used to benchmark AI, for example games such as chess, or Go. Some of these AI programs have been improved upon until they can defeat the world champion players, such as Deep Blue which defeated Gary Kasparov in 1997 \cite{DeepBlue, shannon1988programming, DeepBlueOverview}. 
 		
+		A long standing goal of AI is to develop algorithms capable of completing various tasks without any need to create domain specific tailoring.
 		%Programming Chess
 		Deep blue was developed at IBM during the mid-1990s. It was able to beat the world chess champion by having a massively parallel system that was able to search a very large search space concurrently \cite{DeepBlue}.
 
@@ -126,7 +127,7 @@ Where does tree search algorithms out perform EA?
 		Other notable AI's are IBM's Watson, which won against a human player in the game \textit{Jeopardy!}. This used natural language processing and information retrieval combined with machine-learning. These systems analyse an input question and generate and evaluate candidate answers using a variety of techniques \cite{ferrucci2013watson}.
 
 		The reason for these AI's success are often as a result of very domain specific knowledge about the game it is playing and it means they become highly specialized and cannot be ported to other games.
-		\ref{sssec:num1}
+		
 
 	\subsection{The General Video Game AI Competition}
 	
@@ -145,7 +146,9 @@ Where does tree search algorithms out perform EA?
 		The GVG-AI Competition is a competition framework that proposes the challenge of creating controllers for general video game playing. The controllers must be able to play a wide variety of video games, many of them will be completetly unknown to the controller. This means the controller must have some general AI to discover the mechanics and goal of the game, so it can increase it's score and win the game. \cite{GVGAI, perez20162014}
 		
 		The framework contains a library of 2D Java based video games some of which are based of classic arcade games, there are currently as of writing this, 62 games that AI controllers can be tested on.
-		
+
+		%ALE
+		The Arcade Learning Enviroment \cite{bellemare2013arcade} provides an interface to hundreds of Artari 2600 game enviroments. ALE is similar to GVG-AI in a couple of ways; firstly it provides a testbed for benchmarking AI techniques within video games and secondly it is focused around creating agents within video games, as opposed to the GGP competition \cite{GGP2005general}.
 	
 	\subsubsection{Challenges and Goals of GVGAI}
 		The goal of GVGAI is to create a generally intelligent agent that is able to win any game it is placed in, when it doesn't know the game.
