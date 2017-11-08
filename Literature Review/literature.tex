@@ -58,7 +58,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Comparing game tree search techniques for general videogame AI (GVGAI)}
+\title{Comparing game tree search techniques for general video game artificial intelligence (GVGAI)}
 %
 %
 % author name
@@ -92,137 +92,151 @@ The abstract goes here.
 % Check for spelling
 % Compare and contrast papers
 % Redo hypothesis
+%types of games in gvgai
+%compare and contrast ALE vs GVGAI
 
 
 \section{Research Questions}
 
-TODO: Simplify research questions
+%TODO: Simplify research questions
 \begin{itemize}
-    \item How does game tree search techniques compare for GVGAI?
-    \item Where does GVGAI succeed best in set games?
-    \item Where does each tree search technique do well in each game?
-    \item What are the most challenging areas for GVGAI in the GVGAI competition?
-    \item What are the strengths and weaknesses of different search techniques and how can they be improved?
+    \item How does game tree search techniques compare for GVGAI? 
+    \item Where does each tree search technique do well in each game? 
+    \item What are the strengths and weaknesses of different search techniques and how can they be improved? 
 \end{itemize}
 
 \section{Hypothesis}
-
-//TODO: Hypothesis
-Does visualising the search space in GVGAI help identify the challenges.
+Does tree search algorithms perform better than Evolutionary Algorithms?
+Where does tree search algorithms out perform EA?
 
 \section{Literature Review}
-\subsection{The General Video Game AI Competition}
 
-%General Video Game AI
-In most modern video games the AI is tailored specifically for that game and can't easily be modified for use in a different game type. However this is what GVGAI aims to create an AI that can play any game. 
+	\subsection{General Artificial Intelligence in games}
+		Games play an important role in the development and benchmarking of Artificial Intelligence(AI). This literature review will cover the existing work around the general video game artificial intelligence competition and the different solutions that are available.
+		There have been a lot of popular games that have been used to benchmark AI, for example games such as chess, or Go. Some of these AI programs have been improved upon until they can defeat the world champion players, such as Deep Blue which defeated Gary Kasparov in 1997 \cite{DeepBlue, shannon1988programming, DeepBlueOverview}. 
+		
+		%Programming Chess
+		Deep blue was developed at IBM during the mid-1990s. It was able to beat the world chess champion by having a massively parallel system that was able to search a very large search space concurrently \cite{DeepBlue}.
 
-There have been quite a few AI competitions before in video games, such as Unreal Tournament \cite{hingston2010new}, Super Mario Bros \cite{citationNeeded}, Starcraft \cite{ontanon2013survey} \cite{perez20162014}. 
-However most of the winning AI strategies used in those games are very domain specific and it is often more about knowing the game than developing good general AI \cite{perez20162014}. 
- \par
-
-
-%GGP
-Another competition that was similar to GVG-AI was the General Game Playing (GGP) competition \cite{GGP2005general}. However almost all of the games in the GGP are board games, and the Game Description Language (GDL) used is not designed for video games.
-
-%GVGAI Competiton
-The GVG-AI Competition is a competition framework that proposes the challenge of creating controllers for general video game playing. The controllers must be able to play a wide variety of video games, many of them will be completetly unknown to the controller. This means the controller must have some general AI to discover the mechanics and goal of the game, so it can increase it's score and win the game. \cite{GVGAI, perez20162014}
-
-The framework contains a library of 2D Java based video games some of which are based of classic arcade games, there are currently as of writing this, 62 games that AI controllers can be tested on.
+		%Programming Go
+		There have been more recent breakthroughs within AI, such as AlphaGo \cite{silver2016mastering} which was developed by google deepmind. It was able to beat the a professional Go player in 2015 and in 2017 was able to beat Ke Jie, the world champion player at the time.
+		\cite{silver2016mastering}.
 
 
-\subsection{Challenges and Goals of GVGAI}
-The goal of GVGAI is to create a generally intelligent agent that is able to win any game it is placed in, when it doesn't know the game.
-During the tournament a completely new set of games are used, to avoid the agents becoming too deomain specific.
-Another challenge is the time limit that an agent can choose an action, this avoids the agent spending too long deciding a task and not making an action. \cite{schuster2015mcts}
-
-
-\subsection{Competition \& Rules}
-
-The winning conditions are decided by three factors:
-\begin{itemize}
-    \item Number of games finished with a victory
-    \item Total sum of points
-    \item Total time spent
-\end{itemize}
-The fist objective to be considered is the number of victories, however in case of a tie, the next objective is the number of points. Then if those two are a tie then the final decider is the total time spent before the win \cite{perez20162014}.
-
-In the competition the agent will play 10 unknown games and 5 levels per game. Furthermore each level is played ten times, so each agent plays roughly 500 total games in the tournament \cite{schuster2015mcts}.
-
-
-
-\subsection{The GVGAI Framework}
-%Limits of the framework
-The Framework is developed in the Java Environment
-The controllers are allowed upto 40ms to compute the agents action(s) \cite{perez2016GVGAICompetition, GVGAI}.
-
-The GVGAI framework comes with quite a few sample agents;
-
-\begin{itemize}
-    \item doNothing
-    \item Heuristics
-    \item Human
-    \item olets
-    \item repeatOlets
-    \item and more.
-\end{itemize}
-These sample agents provide useful insights into how new agents can be created for the competition by applying common AI techniques.
-The \textit{HUMAN} player and the \textit{REPLAYER} can be used for debugging the game and to help the programmer get a better understanding of how the game can be played.
-
-
-The framework uses a Video Game Description Language (VGDL) to describe a wide variety of video games. The VGDL is based on a python version developed by Schaul (2014) called PyVGDL \cite{schuster2015mcts}. Furthermore in the GVG-AI Competition the AI agent does not have access to the whole games description, where as in GGP the agent was able to see the whole game description. This means that the agent has to analyze and simulate the game in order to figure out the rules and goal of the game.
-
-To create an agent in 
-
-The framework has an StateObservation object that has an interaction set that consists of \textit{up, down, left, right} and \textit{use}. 
-
-\subsection{Game Search Techniques}
-
-Alpha beta pruning
-
-minimax
-
-Breath First Search
-
-Depth First Search
-
-MCTS
-%Ranked 3rd in GVGAI comp
-%Devided into four steps, selection, expansions playout, backpropigation
-
-Because of vanilla MCTS's success in the GVGAI competition there have been quite a few papers that propose modifications to the vanilla MCTS to try and improve the successfulness of the algorithm.
-
-OLETS
-
-
-Evolutionary Algorithms
-(RHEA)
-
-
-
-
-%Papers
-\subsection{Visualizing search trees in GVGAI}
-
-
-\subsection{Goal Orientation}
-This paper 
-\cite{ross2014general}
-
-
-\subsection{Analyzing the Robustness of General Video Game Playing Agents}
-This paper 
-\cite{perez2016analyzing}
-
-\subsection{Efficient Implementation of Breadth First Search for General Video Game Playing}
-This paper proposes an efficient implementation of Breath First search, however it only works well for deterministic game sets.
-The paper proposes a method of BFS where a node that has already been visited in other nodes will not be expanded, this is stored in a hash function.
-The algorithm uses hash codes to improve the efficiency and performance.
-
-\cite{EfficientBFS}
-
-\subsection{HyperHeuristic}
-Hyper Heuristic methods are 
-\cite{hyperHeurisicMendes}
+	\subsection{The General Video Game AI Competition}
+	
+	%General Video Game AI
+	In most modern video games the AI is tailored specifically for that game and can't easily be modified for use in a different game type. However this is what GVGAI aims to create an AI that can play any game. 
+	
+	There have been quite a few AI competitions before in video games, such as Unreal Tournament \cite{hingston2010new}, Super Mario Bros \cite{citationNeeded}, Starcraft \cite{ontanon2013survey} \cite{perez20162014}. 
+	However most of the winning AI strategies used in those games are very domain specific and it is often more about knowing the game than developing good general AI \cite{perez20162014}. 
+	 \par
+	
+	
+	%GGP
+	Another competition that was similar to GVG-AI was the General Game Playing (GGP) competition \cite{GGP2005general}. However almost all of the games in the GGP are board games, and the Game Description Language (GDL) used is not designed for video games.
+	
+	%GVGAI Competiton
+	The GVG-AI Competition is a competition framework that proposes the challenge of creating controllers for general video game playing. The controllers must be able to play a wide variety of video games, many of them will be completetly unknown to the controller. This means the controller must have some general AI to discover the mechanics and goal of the game, so it can increase it's score and win the game. \cite{GVGAI, perez20162014}
+	
+	The framework contains a library of 2D Java based video games some of which are based of classic arcade games, there are currently as of writing this, 62 games that AI controllers can be tested on.
+	
+	
+	\subsection{Challenges and Goals of GVGAI}
+		The goal of GVGAI is to create a generally intelligent agent that is able to win any game it is placed in, when it doesn't know the game.
+		During the tournament a completely new set of games are used, to avoid the agents becoming too deomain specific.
+		Another challenge is the time limit that an agent can choose an action, this avoids the agent spending too long deciding a task and not making an action. \cite{schuster2015mcts}
+		
+		
+	\subsection{Competition \& Rules}
+	
+		The winning conditions are decided by three factors:
+		\begin{itemize}
+		    \item Number of games finished with a victory
+		    \item Total sum of points
+		    \item Total time spent
+		\end{itemize}
+		The fist objective to be considered is the number of victories, however in case of a tie, the next objective is the number of points. Then if those two are a tie then the final decider is the total time spent before the win \cite{perez20162014}.
+		
+		In the competition the agent will play 10 unknown games and 5 levels per game. Furthermore each level is played ten times, so each agent plays roughly 500 total games in the tournament \cite{schuster2015mcts}.
+		
+	
+	
+	\subsection{The GVGAI Framework}
+		%Limits of the framework
+		The Framework is developed in the Java Environment
+		The controllers are allowed upto 40ms to compute the agents action(s) \cite{perez2016GVGAICompetition, GVGAI}.
+		
+		The GVGAI framework comes with quite a few sample agents;
+		
+		\begin{itemize}
+		    \item doNothing
+		    \item Heuristics
+		    \item Human
+		    \item olets
+		    \item repeatOlets
+		    \item and more.
+		\end{itemize}
+		These sample agents provide useful insights into how new agents can be created for the competition by applying common AI techniques.
+		The \textit{HUMAN} player and the \textit{REPLAYER} can be used for debugging the game and to help the programmer get a better understanding of how the game can be played.
+		
+		
+		The framework uses a Video Game Description Language (VGDL) to describe a wide variety of video games. The VGDL is based on a python version developed by Schaul (2014) called PyVGDL \cite{schuster2015mcts}. Furthermore in the GVG-AI Competition the AI agent does not have access to the whole games description, where as in GGP the agent was able to see the whole game description. This means that the agent has to analyze and simulate the game in order to figure out the rules and goal of the game.
+		
+		To create an agent in 
+		
+		The framework has an StateObservation object that has an interaction set that consists of \textit{up, down, left, right} and \textit{use}.
+		
+		
+	
+	\subsection{Game Search Techniques}
+		
+		Alpha beta pruning
+		
+		minimax
+		
+		Breath First Search
+		
+		Depth First Search
+		
+		MCTS
+		%Ranked 3rd in GVGAI comp
+		%Devided into four steps, selection, expansions playout, backpropigation
+		
+		Because of vanilla MCTS's success in the GVGAI competition there have been quite a few papers that propose modifications to the vanilla MCTS to try and improve the successfulness of the algorithm.
+		
+		OLETS
+		
+		
+		Evolutionary Algorithms
+		(RHEA)
+		
+		
+		
+		
+	%Papers
+	\subsection{Visualizing search trees in GVGAI}
+	
+	
+	\subsection{Goal Orientation}
+	This paper 
+	\cite{ross2014general}
+	
+	
+	\subsection{Analyzing the Robustness of General Video Game Playing Agents}
+	This paper 
+	\cite{perez2016analyzing}
+	
+	\subsection{Efficient Implementation of Breadth First Search for General Video Game Playing}
+	This paper proposes an efficient implementation of Breath First search, however it only works well for deterministic game sets.
+	The paper proposes a method of BFS where a node that has already been visited in other nodes will not be expanded, this is stored in a hash function.
+	The algorithm uses hash codes to improve the efficiency and performance.
+	
+	\cite{EfficientBFS}
+	
+	\subsection{HyperHeuristic}
+	Hyper Heuristic methods are 
+	\cite{hyperHeurisicMendes}
 
 \section{Conclusion}
 The conclusion goes here.
