@@ -120,35 +120,40 @@ Where does tree search algorithms out perform EA?
 
 		%Programming Go
 		There have been more recent breakthroughs within AI, such as AlphaGo \cite{silver2016mastering} which was developed by google deepmind. It was able to beat the a professional Go player in 2015 and in 2017 was able to beat Ke Jie, the world champion player at the time.
-		\cite{silver2016mastering}.
+		\cite{silver2016mastering}. AlphaGo used a combination of neural networks and tree search algorithms to achieve a 99.8\% win rate against other Go programs.
 
+		%Other
+		Other notable AI's are IBM's Watson, which won against a human player in the game \textit{Jeopardy!}. This used natural language processing and information retrieval combined with machine-learning. These systems analyse an input question and generate and evaluate candidate answers using a variety of techniques \cite{ferrucci2013watson}.
+
+		The reason for these AI's success are often as a result of very domain specific knowledge about the game it is playing and it means they become highly specialized and cannot be ported to other games.
+		\ref{sssec:num1}
 
 	\subsection{The General Video Game AI Competition}
 	
-	%General Video Game AI
-	In most modern video games the AI is tailored specifically for that game and can't easily be modified for use in a different game type. However this is what GVGAI aims to create an AI that can play any game. 
+		%General Video Game AI
+		In most modern video games the AI is tailored specifically for that game and can't easily be modified for use in a different game type. However this is what GVG-AI aims to solve, by creating an AI that can play any game. 
+		
+		There have been quite a few AI competitions before in video games, such as Unreal Tournament \cite{hingston2010new}, Super Mario Bros \cite{citationNeeded}, Starcraft \cite{ontanon2013survey}. 
+		However most of the winning AI strategies used in those games are very domain specific and it is often more about knowing the game than developing good general AI \cite{perez20162014}. 
+		 \par
+		
+		
+		%GGP
+		Another competition that was similar to GVG-AI was the General Game Playing (GGP) competition \cite{GGP2005general}. However almost all of the games in the GGP are board games, and the Game Description Language (GDL) used is not designed for video games.
+		
+		%GVGAI Competiton
+		The GVG-AI Competition is a competition framework that proposes the challenge of creating controllers for general video game playing. The controllers must be able to play a wide variety of video games, many of them will be completetly unknown to the controller. This means the controller must have some general AI to discover the mechanics and goal of the game, so it can increase it's score and win the game. \cite{GVGAI, perez20162014}
+		
+		The framework contains a library of 2D Java based video games some of which are based of classic arcade games, there are currently as of writing this, 62 games that AI controllers can be tested on.
+		
 	
-	There have been quite a few AI competitions before in video games, such as Unreal Tournament \cite{hingston2010new}, Super Mario Bros \cite{citationNeeded}, Starcraft \cite{ontanon2013survey} \cite{perez20162014}. 
-	However most of the winning AI strategies used in those games are very domain specific and it is often more about knowing the game than developing good general AI \cite{perez20162014}. 
-	 \par
-	
-	
-	%GGP
-	Another competition that was similar to GVG-AI was the General Game Playing (GGP) competition \cite{GGP2005general}. However almost all of the games in the GGP are board games, and the Game Description Language (GDL) used is not designed for video games.
-	
-	%GVGAI Competiton
-	The GVG-AI Competition is a competition framework that proposes the challenge of creating controllers for general video game playing. The controllers must be able to play a wide variety of video games, many of them will be completetly unknown to the controller. This means the controller must have some general AI to discover the mechanics and goal of the game, so it can increase it's score and win the game. \cite{GVGAI, perez20162014}
-	
-	The framework contains a library of 2D Java based video games some of which are based of classic arcade games, there are currently as of writing this, 62 games that AI controllers can be tested on.
-	
-	
-	\subsection{Challenges and Goals of GVGAI}
+	\subsubsection{Challenges and Goals of GVGAI}
 		The goal of GVGAI is to create a generally intelligent agent that is able to win any game it is placed in, when it doesn't know the game.
 		During the tournament a completely new set of games are used, to avoid the agents becoming too deomain specific.
 		Another challenge is the time limit that an agent can choose an action, this avoids the agent spending too long deciding a task and not making an action. \cite{schuster2015mcts}
 		
 		
-	\subsection{Competition \& Rules}
+	\subsubsection{Competition \& Rules}
 	
 		The winning conditions are decided by three factors:
 		\begin{itemize}
@@ -162,7 +167,7 @@ Where does tree search algorithms out perform EA?
 		
 	
 	
-	\subsection{The GVGAI Framework}
+	\subsubsection{The GVGAI Framework}
 		%Limits of the framework
 		The Framework is developed in the Java Environment
 		The controllers are allowed upto 40ms to compute the agents action(s) \cite{perez2016GVGAICompetition, GVGAI}.
@@ -177,6 +182,7 @@ Where does tree search algorithms out perform EA?
 		    \item repeatOlets
 		    \item and more.
 		\end{itemize}
+
 		These sample agents provide useful insights into how new agents can be created for the competition by applying common AI techniques.
 		The \textit{HUMAN} player and the \textit{REPLAYER} can be used for debugging the game and to help the programmer get a better understanding of how the game can be played.
 		
@@ -186,10 +192,17 @@ Where does tree search algorithms out perform EA?
 		To create an agent in 
 		
 		The framework has an StateObservation object that has an interaction set that consists of \textit{up, down, left, right} and \textit{use}.
-		
+
+	
 		
 	
 	\subsection{Game Search Techniques}
+
+		\subsubsection{Monte-Carlo Tree Search (MCTS) }\label{sssec:num1}
+
+		\subsubsection{Evolutionary Algorithms} \label{sssec:num2}
+
+		
 		
 		Alpha beta pruning
 		
@@ -212,31 +225,11 @@ Where does tree search algorithms out perform EA?
 		(RHEA)
 		
 		
+	
 		
 		
-	%Papers
-	\subsection{Visualizing search trees in GVGAI}
-	
-	
-	\subsection{Goal Orientation}
-	This paper 
-	\cite{ross2014general}
-	
-	
-	\subsection{Analyzing the Robustness of General Video Game Playing Agents}
-	This paper 
-	\cite{perez2016analyzing}
-	
-	\subsection{Efficient Implementation of Breadth First Search for General Video Game Playing}
-	This paper proposes an efficient implementation of Breath First search, however it only works well for deterministic game sets.
-	The paper proposes a method of BFS where a node that has already been visited in other nodes will not be expanded, this is stored in a hash function.
-	The algorithm uses hash codes to improve the efficiency and performance.
-	
-	\cite{EfficientBFS}
-	
-	\subsection{HyperHeuristic}
-	Hyper Heuristic methods are 
-	\cite{hyperHeurisicMendes}
+		
+
 
 \section{Conclusion}
 The conclusion goes here.
