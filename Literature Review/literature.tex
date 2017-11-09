@@ -202,16 +202,31 @@ Where does tree search algorithms out perform EA?
 		
 		The framework uses a Video Game Description Language (VGDL) to describe a wide variety of video games. The VGDL is based on a python version developed by Schaul (2014) called PyVGDL \cite{schuster2015mcts}. Furthermore in the GVG-AI Competition the AI agent does not have access to the whole games description, where as in GGP the agent was able to see the whole game description. This means that the agent has to analyze and simulate the game in order to figure out the rules and goal of the game.
 		
-		To create an agent in 
 		
 		The framework has an StateObservation object that has an interaction set that consists of \textit{up, down, left, right} and \textit{use}.
+
+
+		%Sample MCTS
+		The GVG-AI framework proves a sample MCTS controller, this controller has received considerable interest due to it's success in the competition. 
+		The Sample MCTS controller is an implementation of the vanilla MCTS algorithm, this is described in section \ref{sssec:MCTS}. 
+		The sample MCTS controller uses a playout depth of 10moves
+		%Sample FlatMCTS
+		%Sample OLMCTS
+
+		%Sample Genetic Algorithm (GA)
+
+		%Sample OLETS
+
+		%Sample Random
+
+		%
 
 	
 		
 	
 	\subsection{Game Search Techniques}
 
-		\subsubsection{Monte-Carlo Tree Search (MCTS) }\label{sssec:num1}
+		\subsubsection{Monte-Carlo Tree Search (MCTS) }\label{sssec:MCTS}
 
 		Monte Carlo Tree Search is a method for finding the optimal decisions in a specified domain by taking random samples in the search space and building a search tree according the the results \cite{browne2012survey}. 
 		
@@ -228,8 +243,10 @@ Where does tree search algorithms out perform EA?
 		The MCTS process is done in several stages, firstly a tree is built in an asymmetric and incremental way. Then for each iteration of the algorithm, a tree policy is used to fine the most urgent node of the current tree. The tree policy will then attempt to look in areas that have not been well sampled yet and areas which appear to be promising. A simulation is then run from the selected node and the tree is updated according to the result.
 
 		
+		MCTS is one of the most promising baseline approaches in the  literature.
+		There has been a good deal of research on MCTS variants, each providing better results according to different domains \cite{browne2012survey, park2015mcts, perez2014knowledge, ilhan2017monte, de2016monte, frydenberg2015investigating}.
 
-		There has been a good deal of research on MCTS variants, each providing better results according to different domains \cite{browne2012survey, park2015mcts, perez2014knowledge}.
+
 		\subsubsection{Evolutionary Algorithms} \label{sssec:num2}
 
 		
@@ -256,7 +273,7 @@ Where does tree search algorithms out perform EA?
 		
 		
 	
-		
+\section{Methodologies}	
 		
 		
 
