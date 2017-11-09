@@ -49,6 +49,10 @@
 
 \usepackage{graphicx}
 % Insert additional usepackage commands here
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\graphicspath{ {./images/} }
+
 
 \begin{document}
 %
@@ -122,6 +126,7 @@ Where does tree search algorithms out perform EA?
 		%Programming Go
 		There have been more recent breakthroughs within AI, such as AlphaGo \cite{silver2016mastering} which was developed by google deepmind. It was able to beat the a professional Go player in 2015 and in 2017 was able to beat Ke Jie, the world champion player at the time.
 		\cite{silver2016mastering}. AlphaGo used a combination of neural networks and tree search algorithms to achieve a 99.8\% win rate against other Go programs.
+		Monte Carlo Tree Search (MCTS) has had spectacular success in the game Go \cite{browne2012survey}, 
 
 		%Other
 		Other notable AI's are IBM's Watson, which won against a human player in the game \textit{Jeopardy!}. This used natural language processing and information retrieval combined with machine-learning. These systems analyse an input question and generate and evaluate candidate answers using a variety of techniques \cite{ferrucci2013watson}.
@@ -149,7 +154,12 @@ Where does tree search algorithms out perform EA?
 
 		%ALE
 		The Arcade Learning Enviroment \cite{bellemare2013arcade} provides an interface to hundreds of Artari 2600 game enviroments. ALE is similar to GVG-AI in a couple of ways; firstly it provides a testbed for benchmarking AI techniques within video games and secondly it is focused around creating agents within video games, as opposed to the GGP competition \cite{GGP2005general}.
-	
+		The Atari 2600 is a video game console developed in 1977 , it has had over 500 original games released for the console, and nearly all popular arcade games at the time were pored to the console such as; \textit{PAC-MAN} and \textit{SPACE INVADERS} \cite{bellemare2013arcade}. This provides a large test-bed for AI agents.
+		The hardware for the Atari 2600 is very limited compared to todays standards, it had a 1.19Mhz CPU and 128 Bytes of RAM. These hardware specs limit the complexity of the games that can be played on it, which strikes a balance of challenging but allowing search algorithms to have a small enough search space as to not have a large horizon effect \cite{MCTS}.
+		
+		%Summary
+		The growing interest in competitions such as the ones mentioned above clearly reflects a desire for general competency for AI within games.
+
 	\subsubsection{Challenges and Goals of GVGAI}
 		The goal of GVGAI is to create a generally intelligent agent that is able to win any game it is placed in, when it doesn't know the game.
 		During the tournament a completely new set of games are used, to avoid the agents becoming too deomain specific.
@@ -203,6 +213,23 @@ Where does tree search algorithms out perform EA?
 
 		\subsubsection{Monte-Carlo Tree Search (MCTS) }\label{sssec:num1}
 
+		Monte Carlo Tree Search is a method for finding the optimal decisions in a specified domain by taking random samples in the search space and building a search tree according the the results \cite{browne2012survey}. 
+		
+		MCTS has been demonstrated to work effectively with classic board games, modern board-games and video games \cite{chaslot2008monte}.
+
+		\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{MCTSProcess}
+		    \caption{Overview of Monte-Carlo Tree Search. Image sourced from \cite{chaslot2008monte}. }
+		    \label{fig:MCTS1}
+		\end{figure}
+		
+		% Explination of MCTS stages
+		The MCTS process is done in several stages, firstly a tree is built in an asymmetric and incremental way. Then for each iteration of the algorithm, a tree policy is used to fine the most urgent node of the current tree. The tree policy will then attempt to look in areas that have not been well sampled yet and areas which appear to be promising. A simulation is then run from the selected node and the tree is updated according to the result.
+
+		
+
+		There has been a good deal of research on MCTS variants, each providing better results according to different domains \cite{browne2012survey, park2015mcts, perez2014knowledge}.
 		\subsubsection{Evolutionary Algorithms} \label{sssec:num2}
 
 		
