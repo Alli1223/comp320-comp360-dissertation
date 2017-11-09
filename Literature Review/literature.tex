@@ -110,13 +110,14 @@ The abstract goes here.
 \end{itemize}
 
 \section{Hypothesis}
+In progress (will deffo change) \par
 Does tree search algorithms perform better than Evolutionary Algorithms?
-Where does tree search algorithms out perform EA?
+Where does tree search algorithms out perform Evolutionary Algorithms?
 
 \section{Literature Review}
 
 	\subsection{General Artificial Intelligence in games}
-		Games play an important role in the development and benchmarking of Artificial Intelligence (AI). This literature review will cover the existing work around the general video game artificial intelligence competition and the different solutions that are available.
+		Games play an important role in the development and bench-marking of Artificial Intelligence (AI). This literature review will cover the existing work around the general video game artificial intelligence competition and the different solutions that are available.
 		There have been a lot of popular games that have been used to benchmark AI, for example games such as chess, or Go. Some of these AI programs have been improved upon until they can defeat the world champion players, such as Deep Blue which defeated Gary Kasparov in 1997 \cite{DeepBlue, shannon1988programming, DeepBlueOverview}. 
 		
 		A long standing goal of AI is to develop algorithms capable of completing various tasks without any need to create domain specific tailoring.
@@ -124,9 +125,11 @@ Where does tree search algorithms out perform EA?
 		Deep blue was developed at IBM during the mid-1990s. It was able to beat the world chess champion by having a massively parallel system that was able to search a very large search space concurrently \cite{DeepBlue}.
 
 		%Programming Go
-		There have been more recent breakthroughs within AI, such as AlphaGo \cite{silver2016mastering} which was developed by google deepmind. It was able to beat the a professional Go player in 2015 and in 2017 was able to beat Ke Jie, the world champion player at the time.
-		\cite{silver2016mastering}. AlphaGo used a combination of neural networks and tree search algorithms to achieve a 99.8\% win rate against other Go programs.
-		Monte Carlo Tree Search (MCTS) has had spectacular success in the game Go \cite{browne2012survey}, 
+		There have been more recent breakthroughs within AI, such as AlphaGo \cite{silver2016mastering} which was developed by google deepmind. It was able to beat the a professional Go player in 2015 and in 2017 was able to beat Ke Jie, the world champion player at the time\cite{silver2016mastering}.
+		AlphaGo combined neural networks with MCTS to achieve a 99.8\% win rate against other Go programs. The program used a supervised learning policy network that was trained directly from expert human players, then a reinforcement learning policy network was used to improve the supervised learning policy by optimising the final outcome of self played games. Further information on how this works is described in \cite{silver2016mastering}.
+		Monte Carlo Tree Search (MCTS) has had spectacular success in the game Go \cite{browne2012survey}, and is implemented in the top rated go programs.
+
+		During the match against Fan Hui, AlphaGo evaluated thousands of times fewer positions than Deep blue did against Kasparov. It did this by selecting those positions more intelligently using the policy network then evaluating them more precisely using the value network, where as Deep blue used a more brute force approach \cite{silver2016mastering, DeepBlue}.
 
 		%Other
 		Other notable AI's are IBM's Watson, which won against a human player in the game \textit{Jeopardy!}. This used natural language processing and information retrieval combined with machine-learning. These systems analyse an input question and generate and evaluate candidate answers using a variety of techniques \cite{ferrucci2013watson}.
@@ -153,9 +156,9 @@ Where does tree search algorithms out perform EA?
 		The framework contains a library of 2D Java based video games some of which are based of classic arcade games, there are currently as of writing this, 62 games that AI controllers can be tested on.
 
 		%ALE
-		The Arcade Learning Enviroment \cite{bellemare2013arcade} provides an interface to hundreds of Artari 2600 game enviroments. ALE is similar to GVG-AI in a couple of ways; firstly it provides a testbed for benchmarking AI techniques within video games and secondly it is focused around creating agents within video games, as opposed to the GGP competition \cite{GGP2005general}.
+		The Arcade Learning Environment \cite{bellemare2013arcade} provides an interface to hundreds of Atari 2600 game environments. ALE is similar to GVG-AI in a couple of ways; firstly it provides a testbed for benchmarking AI techniques within video games and secondly it is focused around creating agents within video games, as opposed to the GGP competition \cite{GGP2005general}.
 		The Atari 2600 is a video game console developed in 1977 , it has had over 500 original games released for the console, and nearly all popular arcade games at the time were pored to the console such as; \textit{PAC-MAN} and \textit{SPACE INVADERS} \cite{bellemare2013arcade}. This provides a large test-bed for AI agents.
-		The hardware for the Atari 2600 is very limited compared to todays standards, it had a 1.19Mhz CPU and 128 Bytes of RAM. These hardware specs limit the complexity of the games that can be played on it, which strikes a balance of challenging but allowing search algorithms to have a small enough search space as to not have a large horizon effect \cite{MCTS}.
+		The hardware for the Atari 2600 is very limited compared to today's standards, it had a 1.19Mhz CPU and 128 Bytes of RAM. These hardware specs limit the complexity of the games that can be played on it, which strikes a balance of challenging but allowing search algorithms to have a small enough search space as to not have a large horizon effect \cite{bellemare2013arcade}.
 		
 		%Summary
 		The growing interest in competitions such as the ones mentioned above clearly reflects a desire for general competency for AI within games.
@@ -182,7 +185,7 @@ Where does tree search algorithms out perform EA?
 	
 	\subsubsection{The GVGAI Framework}
 		%Limits of the framework
-		The Framework is developed in the Java Environment
+		The Framework is developed in the Java Environment 
 		The controllers are allowed upto 40ms to compute the agents action(s) \cite{perez2016GVGAICompetition, GVGAI}.
 		
 		The GVGAI framework comes with quite a few sample agents;
@@ -208,8 +211,8 @@ Where does tree search algorithms out perform EA?
 
 		%Sample MCTS
 		The GVG-AI framework proves a sample MCTS controller, this controller has received considerable interest due to it's success in the competition. 
-		The Sample MCTS controller is an implementation of the vanilla MCTS algorithm, this is described in section \ref{sssec:MCTS}. 
-		The sample MCTS controller uses a playout depth of 10moves
+		The sample MCTS controller is an implementation of the vanilla MCTS algorithm, this is described in section \ref{sssec:MCTS}. 
+		The sample MCTS controller uses a payout depth of 10moves
 		%Sample FlatMCTS
 		%Sample OLMCTS
 
@@ -255,15 +258,11 @@ Where does tree search algorithms out perform EA?
 		
 		minimax
 		
-		Breath First Search
+		\subsubsection{Breadth First Search (BFS) }\label{sssec:BFS}
+		This paper proposes an efficient implementation of BFS for GVGP \cite{EfficientBFS} uses a hash function.
 		
 		Depth First Search
 		
-		MCTS
-		%Ranked 3rd in GVGAI comp
-		%Devided into four steps, selection, expansions playout, backpropigation
-		
-		Because of vanilla MCTS's success in the GVGAI competition there have been quite a few papers that propose modifications to the vanilla MCTS to try and improve the successfulness of the algorithm.
 		
 		OLETS
 		
