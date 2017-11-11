@@ -129,10 +129,10 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		AlphaGo combined neural networks with MCTS to achieve a 99.8\% win rate against other Go programs. The program used a supervised learning policy network that was trained directly from expert human players, then a reinforcement learning policy network was used to improve the supervised learning policy by optimising the final outcome of self played games. Further information on how this works is described in \cite{silver2016mastering}.
 		Monte Carlo Tree Search (MCTS) has had spectacular success in the game Go \cite{browne2012survey}, and is implemented in the top rated go programs.
 
-		During the match against Fan Hui, AlphaGo evaluated thousands of times fewer positions than Deep blue did against Kasparov. It did this by selecting those positions more intelligently using the policy network then evaluating them more precisely using the value network, where as Deep blue used a more brute force approach \cite{silver2016mastering, DeepBlue}.
-
+		During the match against Fan Hui, AlphaGo evaluated thousands of times fewer positions than Deep blue did against Kasparov. It did this by selecting those positions more intelligently using the policy network, then evaluating them more precisely using the value network, where as Deep blue used a more brute force approach \cite{silver2016mastering, DeepBlue}.
+		
 		%Other
-		Other notable AI's are IBM's Watson, which won against a human player in the game \textit{Jeopardy!}. This used natural language processing and information retrieval combined with machine-learning. These systems analyse an input question and generate and evaluate candidate answers using a variety of techniques \cite{ferrucci2013watson}.
+		Other notable game AI's are IBM's Watson, which won against a human player in the game \textit{Jeopardy!}. This used natural language processing and information retrieval combined with machine-learning. These systems analyse an input question and generate and evaluate candidate answers using a variety of techniques \cite{ferrucci2013watson}.
 
 		The reason for these AI's success are often as a result of very domain specific knowledge about the game it is playing and it means they become highly specialized and cannot be ported to other games.
 		
@@ -261,7 +261,9 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		\subsubsection{Breadth First Search (BFS) }\label{sssec:BFS}
 		This paper proposes an efficient implementation of BFS for GVGP \cite{EfficientBFS} uses a hash function.
 		
-		Depth First Search
+		\subsubsection{Depth First Search}
+
+		Depth First search with alpha-beta pruning \cite{knuth1975analysis} has achived superhuman performace in chess, checkers and orthello. However it has not been effective in Go \cite{silver2016mastering}.
 		
 		
 		OLETS
