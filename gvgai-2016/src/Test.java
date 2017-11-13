@@ -54,13 +54,13 @@ public class Test
                 "surround", "survivezombies", "tercio", "thecitadel", "thesnowman",           //70-74
                 "waitforbreakfast", "watergame", "waves", "whackamole", "witnessprotection",  //75-79
                 "zelda", "zenpuzzle" };                                                       //80, 81
-
+// 1, 11,
         //Other settings
         boolean visuals = true;
         int seed = new Random().nextInt();
 
         //Game and level to play
-        int gameIdx = 11;
+        int gameIdx = 9;
         int levelIdx = 0; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
@@ -72,7 +72,7 @@ public class Test
         //ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
 
         // 2. This plays a game in a level by the controller.
-        ArcadeMachine.runOneGame(game, level1, visuals, sampleMCTSController, recordActionsFile, seed, 0);
+        ArcadeMachine.runOneGame(game, level1, visuals, sampleGAController, recordActionsFile, seed, 0);
 
         // 3. This replays a game from an action file previously recorded
         //String readActionsFile = recordActionsFile;

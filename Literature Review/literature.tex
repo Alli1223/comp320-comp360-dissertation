@@ -168,6 +168,12 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		ALE has been used deep reinforcement learning techniques, that have been able to reach human level of play \cite{mnih2015human, gaina2017rolling}.
 		
 
+		\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{VGDL2}
+		    \caption{angelsdemons, butterflies, pacman, . Image sourced from \cite{gaina2016general}. }
+		    \label{fig:VGDL}
+		\end{figure}
 		%VGDL
 		Games in the GVG-AI competition are written using the Video Game Description Language \cite{schaul2014extensible}, which is a high level description language designed to be able to create a wide variety of arcade style games, where the rules take the form of sprite movement and interaction on a 2D grid \cite{nelson2016investigating}.
 		The amount of games in the competition has been steadily growing, but there are currently (Enter Current Number Of levels Here). VGDL in GVG-AI is a JAVA port from pyVGDL which was programmed in python. The VGDL is a powerful tool for conducting research on computational intelligence and games \cite{schaul2014extensible, love2008general}.
@@ -289,6 +295,7 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 			
 			%UCT	
 			A common enhancement for selection is Upper Confidence Bounds for Trees (UCT) \cite{bravi2017evolving}, which is used by the sample MCTS controller, as described in section \ref{sssec:sampleMCTS}. 
+			UCT was first mentioned in \cite{kocsis2006bandit}
 			The main idea of UCT is to use information gathered during previous iterations of MCTS to decide whether to explore a new child or exploit a promising child. Then the child with the highest UCT value is selected. 
 		
 		\textbf{Expansion}
@@ -339,9 +346,25 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 
 
 		\subsubsection{Evolutionary Algorithms} \label{sssec:EA}
-			Rolling Horizon Evolution is one of the options avaliable to evolve sequences of actions for planning in GVGP.
+			Rolling Horizon Evolutionary Algorithms are one of the options available to evolve sequences of actions for planning in GVGP.
+			Perez et al. in \cite{perez2013rolling} compared MCTS with RHEA on the Physical Traveling Salesman Problem (PTSP) and their results show that RHEA is a promising competitor to MCTS.
+			
 
 			\cite{gaina2017analysis, gaina2017rolling}
+
+			\begin{figure}[h]
+		   		 \centering
+		   		 \includegraphics[width=0.5\textwidth]{RHEArollout}
+		    		 \caption{RHEA statistical tree steps. Image sourced from \cite{gaina2017rolling}. }
+		  		 \label{fig:RHEArollout}
+			\end{figure}
+
+			Evolutionary algorithms are often used 
+			The figure \ref{RHEArollout} shows the steps of RHEA, 
+
+			%Combination of RHEA AND MCTS
+			Recent literature on AGI have been combining evolution and tree search in interesting ways in order to combine the benefits of both methods, such as Licas et al. \cite{lucas2014fast} applied an EA process to guide the simulation step of MCTS and improve the random default policy. Their results show a significant increase in performace in the game \textit{Space Invaders} and the Mountain Car Problem.
+			
 
 		\subsubsection{Rolling Horizon} \label{sssec:RH}
 			A popular 
