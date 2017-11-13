@@ -85,11 +85,11 @@ The abstract goes here.
 
 \section{Introduction}
 \IEEEPARstart{T}{his} paper will compare the tree search techniques used in the General Video Game AI (GVG-AI) competition. 
+Games play an important role in the development and bench-marking of Artificial Intelligence (AI). This literature review will cover the existing work around the general video game artificial intelligence competition and the different solutions that are available.
 The GVG-AI competition is a recurring videogame-playing competition designed to simulate and benchmark general artificial intelligence. For an AI agent to be tested, they are submitted to the competition site, then they are tested against previously unseen arcade-style video games. The games that the agents are tested against change every year to stop them form becoming too domain specific.
 
-There is a large amount of tree search techniques used within the GVG-AI competition, many of them are based around MCTS.This project will compare the success rates of each of the different methods, as well as an in depth comparison as to where each tree search technique succeeds in a set of existing games.
+There is a large amount of tree search techniques used within the GVG-AI competition, many of them are based around Monte-Carlo Tree Search (MCTS).This project will compare the success rates of each of the different methods, as well as an in depth comparison as to where each tree search technique succeeds in a set of existing games.
 
-\subsection{Hypothesis}
 
 
 %NOTES
@@ -105,7 +105,7 @@ There is a large amount of tree search techniques used within the GVG-AI competi
 %compare and contrast ALE vs GVGAI
 
 
-\section{Research Questions}
+\section{Research Questions \& Hypothesis}
 
 %TODO: Simplify research questions
 \begin{itemize}
@@ -114,15 +114,15 @@ There is a large amount of tree search techniques used within the GVG-AI competi
     \item What are the strengths and weaknesses of different search techniques and how can they be improved? 
 \end{itemize}
 
-\section{Hypothesis}
-In progress (will deffo change) \par
+\textbf{Hypothesis}
+
 Does tree search algorithms perform better than Evolutionary Algorithms?
 Where does tree search algorithms out perform Evolutionary Algorithms?
 
 \section{Literature Review}
 
-	\subsection{General Artificial Intelligence in games}
-		Games play an important role in the development and bench-marking of Artificial Intelligence (AI). This literature review will cover the existing work around the general video game artificial intelligence competition and the different solutions that are available.
+	\subsection{Artificial General Intelligence in games}
+		
 		There have been a lot of popular games that have been used to benchmark AI, for example games such as chess, or Go. Some of these AI programs have been improved upon until they can defeat the world champion players, such as Deep Blue which defeated Gary Kasparov in 1997 \cite{DeepBlue, shannon1988programming, DeepBlueOverview}. 
 		
 		A long standing goal of AI is to develop algorithms capable of completing various tasks without any need to create domain specific tailoring.
@@ -148,7 +148,7 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		%General Video Game AI
 		In most modern video games the AI is tailored specifically for that game and can't easily be modified for use in a different game type. However this is what GVG-AI aims to solve, by creating an AI that can play any game. 
 		
-		There have been quite a few AI competitions before in video games, such as Unreal Tournament \cite{hingston2010new}, Super Mario Bros \cite{citationNeeded}, Starcraft \cite{ontanon2013survey}. 
+		There have been quite a few AI competitions before in video games, such as Unreal Tournament \cite{hingston2010new}, Super Mario Bros \cite{shaker2013turing}, Starcraft \cite{ontanon2013survey}. 
 		However most of the winning AI strategies used in those games are very domain specific and it is often more about knowing the game than developing good general AI \cite{perez20162014}. 
 		 \par
 		
@@ -165,6 +165,7 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		The Arcade Learning Environment \cite{bellemare2013arcade} provides an interface to hundreds of Atari 2600 game environments. ALE is similar to GVG-AI in a couple of ways; firstly it provides a testbed for benchmarking AI techniques within video games and secondly it is focused around creating agents within video games, as opposed to the GGP competition \cite{GGP2005general}.
 		The Atari 2600 is a video game console developed in 1977 , it has had over 500 original games released for the console, and nearly all popular arcade games at the time were pored to the console such as; \textit{PAC-MAN} and \textit{SPACE INVADERS} \cite{bellemare2013arcade}. This provides a large test-bed for AI agents.
 		The hardware for the Atari 2600 is very limited compared to today's standards, it had a 1.19Mhz CPU and 128 Bytes of RAM. These hardware specs limit the complexity of the games that can be played on it, which strikes a balance of challenging but allowing search algorithms to have a small enough search space as to not have a large horizon effect \cite{bellemare2013arcade}.
+		ALE has been used deep reinforcement learning techniques, that have been able to reach human level of play \cite{mnih2015human, gaina2017rolling}.
 		
 
 		%VGDL
@@ -179,7 +180,7 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		During the tournament a completely new set of games are used, to avoid the agents becoming too deomain specific.
 		Another challenge is the time limit that an agent can choose an action, this avoids the agent spending too long deciding a task and not making an action. \cite{schuster2015mcts}.
 
-		The competition does now allow multithreading that is used by some MCTS enhancements, some MCTS enhancements that are used are discussed in section \ref{sssec:MCTSvariations}.
+		
 		
 		
 	\subsubsection{Competition \& Rules}
@@ -191,14 +192,13 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		    \item Total time spent
 		\end{itemize}
 		The fist objective to be considered is the number of victories, however in case of a tie, the next objective is the number of points. Then if those two are a tie then the final decider is the total time spent before the win \cite{perez20162014}.
-		
 		In the competition the agent will play 10 unknown games and 5 levels per game. Furthermore each level is played ten times, so each agent plays roughly 500 total games in the tournament \cite{schuster2015mcts}.
-		
+		The competition does now allow multithreading that is used by some MCTS enhancements, some MCTS enhancements that are used are discussed in section \ref{sssec:MCTSvariations}.
 	
 	
-	\subsubsection{The GVGAI Framework}
+	\subsubsection{The GVGAI Framework \& Sample Controllers}
 		%Limits of the framework
-		The Framework is developed in the Java Environment 
+		The Framework is developed in the Java Environment and has a few differnet tracks that you can submit AI for, these are; Single Player Planning Track, 2-Player Planning Track and Level Generation Track \cite{gaina2016general}.
 		The controllers are allowed upto 40ms to compute the agents action(s) \cite{perez2016GVGAICompetition, GVGAI}.
 		
 		The GVGAI framework comes with quite a few sample agents;
@@ -225,22 +225,23 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		
 		\textbf{Sample MCTS} \label{sssec:sampleMCTS}
 			The GVG-AI framework proves a sample MCTS controller, this controller has received considerable interest due to it's success in the competition. 
-			The sample MCTS controller is an implementation of the vanilla MCTS algorithm, this is described in section \ref{sssec:MCTS}. 
-			The full description of MCTS algorithm is described by Browne et al. \cite{browne2012survey}.
+			The sample MCTS controller is an implementation of the vanilla MCTS algorithm, this is described in section \ref{sssec:MCTS}, and the full description of MCTS algorithm is described by Browne et al. \cite{browne2012survey}.
 			The sample MCTS controller uses a payout depth of 10 moves and an exploration-exploitation constant value of $\sqrt{2}$ and selects the most visited action from the root to pick a move to return for each game cycle \cite{perez20162014}.
 			However MCTS isn't the sole answer to the GVG-AI competition, as it has been shown that even with a 30x computational budget, it fails to master games. However it does manage to avoid to explicitly loosing games, but does not win a lot of them either. This shows that for the AI it finds not losing is significantly easier than winning \cite{nelson2016investigating}.
 
 		\textbf{sample GA}
 			The sample Genetic Algorithm(GA) controller is a rolling horizon open loop implementation for a minimalistic steady state genetic algorithm, known as microbial GA \cite{harvey2009microbial}.
 			A tournament takes place between two players and the loser of the tournament is mutated randomly, with the probability of 1/7. Then certain parts of it's genome are recombined with parts from the winners genome, with the probability of 0.1 \cite{perez20162014}. 
-			This repeats until the time budget has been used. The evaluation function is the same as the sampleMCTS controller.
+			This repeats until the time budget has been used. The evaluation function is the same as the sampleMCTS controller. 
 			The sample GA controller came 12th in the competition \cite{perez20162014}.
+			
 
 		\textbf{Random}
 			This is a very simple controller that is provided with the GVG-AI framework, it simply returns a random action at each game cycle.
-			The random controller came 12th in the competition, which is quite surprising as it managed to beat quite a few of the other, rather complicated controllers.
+			The random controller came 14th in the competition, which is quite surprising as it managed to beat quite a few of the other, more complicated controllers.
 
 		\textbf{OSLA}
+			One Step Look Ahead is another rather simple controller, it evaluates the position using the same heuristic as Sample MCTS and selects the action with the highest evaluation score, then moves the model one step ahead. This controller came in 16th place.
 
 
 
@@ -269,7 +270,7 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 
 		Monte Carlo Tree Search is a method for finding the optimal decisions in a specified domain by taking random samples in the search space and building a search tree according the the results \cite{browne2012survey}. 
 		
-		MCTS has been demonstrated to work effectively with classic board games, modern board-games and video games \cite{chaslot2008monte}.
+		MCTS has been demonstrated to work effectively with classic board games, modern board-games and video games \cite{chaslot2008monte, pepels2014real}.
 
 		\begin{figure}[h]
 		    \centering
@@ -287,8 +288,8 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 			The next action is chosen in a way that balances between exploitation and exploration. For most of the tasks, the option is to choose exploitation, which leads to the best results so far. However there may still be actions that have not been explored that could lead to good results, thus exploration is used to try and find any promising actions \cite{chaslot2008monte}.
 			
 			%UCT	
-			A common enhancement for selection is Upper Confidence Bounds for Trees (UCT), which is used by the sample MCTS controller, as described in section \ref{sssec:sampleMCTS}. 
-			The main idea of UCT is to use information gathered during previous iterations of MCTS to decide whether to explore a new child or exploit a promising child. Then the child with the highest UCT value is selected.
+			A common enhancement for selection is Upper Confidence Bounds for Trees (UCT) \cite{bravi2017evolving}, which is used by the sample MCTS controller, as described in section \ref{sssec:sampleMCTS}. 
+			The main idea of UCT is to use information gathered during previous iterations of MCTS to decide whether to explore a new child or exploit a promising child. Then the child with the highest UCT value is selected. 
 		
 		\textbf{Expansion}
 			When the selection strategy returns a node, there are a few different ways to expand the node. This step is similar to the selection step, however this step has no information available from previous iterations of MCTS for a specific child \cite{schuster2015mcts}. 
@@ -337,13 +338,13 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 
 
 
+		\subsubsection{Evolutionary Algorithms} \label{sssec:EA}
+			Rolling Horizon Evolution is one of the options avaliable to evolve sequences of actions for planning in GVGP.
 
+			\cite{gaina2017analysis, gaina2017rolling}
 
-
-
-
-		\subsubsection{Evolutionary Algorithms} \label{sssec:num2}
-
+		\subsubsection{Rolling Horizon} \label{sssec:RH}
+			A popular 
 		
 		
 		Alpha beta pruning
@@ -367,7 +368,7 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		
 	
 \section{Research Methodologies}	
-
+Research Methodologies go here...
 	
 		
 		
