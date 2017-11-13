@@ -333,6 +333,7 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 
 			\textbf{Bandit Based Methods}
 				Bandit based problems are popular class of sequential decision problems, in which one needs to choose among a set of actions (e.g. the arms of a multiarmed bandit slot machine) in order to maximize the cumulative reward by consistently taking the optimal action \cite{kocsis2006bandit, coquelin2007bandit}.
+				Each bandit slot machine produces a random reward from a specific probability distribution, the goal of the gambler is to maximize the rewards obtained through subsequent plays \cite{berry1985bandit, gaina2017rolling}.
 
 				The difficulty arises because the underlying reward distributions are unknown, and potential rewards must be estimated based on past observations.
 			
@@ -346,13 +347,12 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 
 
 		\subsubsection{Evolutionary Algorithms} \label{sssec:EA}
+			Evolutionary Algorithms are largely inspired from the biological sciences. They encode solutions to problems as individuals, part of a population which evolves over generations, until a solution is found or execution limit is reached.The figure \ref{fig:RHEArollout} shows the stages of how Evolutionary Algorithms work.
 			Rolling Horizon Evolutionary Algorithms are one of the options available to evolve sequences of actions for planning in GVGP.
 			Perez et al. in \cite{perez2013rolling} compared MCTS with RHEA on the game Physical Traveling Salesman Problem (PTSP). The game is a modification of the popular optimization problem, the Traveling Salesman Problem \cite{citationNeeded} where the player must visit a series of way points in a 2d map and the agent must execute an action in no more than 40ms \cite{perez2013rolling} which is similar to the GVG-AI competition.  The results rom that paper show that RHEA is a promising competitor to MCTS.
 			Their approach is used in the same manner as MCTS uses roll-outs and the generative model (i.e. a simulator). Thus an agent will evolve a plan in an imaginary model for some milliseconds, then evolves a new plan repeatedly in a simulation manner, until the game is over.
-			The term Rolling Horizon comes from the fact  that the planning happens until a limited look-ahead in the game (The Horizon). 
+			The term Rolling Horizon comes from the fact  that the planning happens until a limited look-ahead in the game (the horizon) \cite{gaina2017analysis, gaina2017rolling}.
 			
-
-			\cite{gaina2017analysis, gaina2017rolling}
 
 			\begin{figure}[h]
 		   		 \centering
@@ -361,46 +361,42 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		  		 \label{fig:RHEArollout}
 			\end{figure}
 
-			
-			The figure \ref{fig:RHEArollout} shows the steps of RHEA, 
 
 			%Combination of RHEA AND MCTS
-			Recent literature on AGI have been combining evolution and tree search in interesting ways in order to combine the benefits of both methods, such as Licas et al. \cite{lucas2014fast} applied an EA process to guide the simulation step of MCTS and improve the random default policy. Their results show a significant increase in performace in the game \textit{Space Invaders} and the Mountain Car Problem.
+			Recent literature on AGI have been combining evolution and tree search in interesting ways in order to combine the benefits of both methods, such as Licas et al. \cite{lucas2014fast} applied an EA process to guide the simulation step of MCTS and improve the random default policy. Their results show a significant increase in performance in the game \textit{Space Invaders} and the Mountain Car Problem.
 			
-
-		\subsubsection{Rolling Horizon} \label{sssec:RH}
-			A popular 
 		
 		
-		Alpha beta pruning
+		\subsubsection{Alpha Beta Pruning}
+			TODO: Alpha beta pruning
 		
-		minimax
+		\subsubsection{Minimax}
+			TODO: Minimax
+		
 		
 		\subsubsection{Breadth First Search (BFS) }\label{sssec:BFS}
-		This paper proposes an efficient implementation of BFS for GVGP \cite{EfficientBFS} uses a hash function.
+			This paper proposes an efficient implementation of BFS for GVGP \cite{EfficientBFS} uses a hash function.
 		
 		\subsubsection{Depth First Search}
 
-		Depth First search with alpha-beta pruning \cite{knuth1975analysis} has achieved superhuman performance in chess, checkers and orthello. However it has not been effective in Go \cite{silver2016mastering}.
+			Depth First search with alpha-beta pruning \cite{knuth1975analysis} has achieved superhuman performance in chess, checkers and orthello. However it has not been effective in Go \cite{silver2016mastering}.
 		
-		
-		OLETS
-		
-		
-		Evolutionary Algorithms
-		(RHEA)
 		
 		
 	
 \section{Research Methodologies}	
-Research Methodologies go here...
+	Research Methodology go here.
+
+%How I aim to carry out the research
+
+%Research Justification
 	
-		
-		
+\section{Preliminary results}
+	Preliminary results go here.
 
 
 \section{Conclusion}
-The conclusion goes here.
+	The conclusion goes here.
 
 % references section
 
