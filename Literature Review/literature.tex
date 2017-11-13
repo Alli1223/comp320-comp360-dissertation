@@ -84,7 +84,12 @@ The abstract goes here.
 \end{abstract}
 
 \section{Introduction}
-\IEEEPARstart{T}{his} Literature review will cover what questions I will be asking for my dissertation topic as well all the literature I have found that is related to my research questions.
+\IEEEPARstart{T}{his} paper will compare the tree search techniques used in the General Video Game AI (GVG-AI) competition. 
+The GVG-AI competition is a recurring videogame-playing competition designed to simulate and benchmark general artificial intelligence. For an AI agent to be tested, they are submitted to the competition site, then they are tested against previously unseen arcade-style video games. The games that the agents are tested against change every year to stop them form becoming too domain specific.
+
+There is a large amount of tree search techniques used within the GVG-AI competition, many of them are based around MCTS.This project will compare the success rates of each of the different methods, as well as an in depth comparison as to where each tree search technique succeeds in a set of existing games.
+
+\subsection{Hypothesis}
 
 
 %NOTES
@@ -149,10 +154,10 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		
 		
 		%GGP
-		Another competition that was similar to GVG-AI was the General Game Playing (GGP) competition \cite{GGP2005general}. However almost all of the games in the GGP are board games, and the Game Description Language (GDL) used is not designed for video games.
+		Another competition that was similar to GVG-AI was the General Game Playing (GGP) competition \cite{GGP2005general, love2008general}. However almost all of the games in the GGP are board games, and the Game Description Language (GDL) used is not designed for video games.
 		
 		%GVGAI Competiton
-		The GVG-AI Competition is a competition framework that proposes the challenge of creating controllers for general video game playing. The controllers must be able to play a wide variety of video games, many of them will be completetly unknown to the controller. This means the controller must have some general AI to discover the mechanics and goal of the game, so it can increase it's score and win the game. \cite{GVGAI, perez20162014}
+		The GVG-AI Competition is a competition framework that proposes the challenge of creating controllers for general video game playing. The controllers must be able to play a wide variety of video games, many of them will be completely unknown to the controller. This means the controller must have some general AI to discover the mechanics and goal of the game, so it can increase it's score and win the game. \cite{GVGAI, perez20162014}
 		
 		The framework contains a library of 2D Java based video games some of which are based of classic arcade games, there are currently as of writing this, 62 games that AI controllers can be tested on.
 
@@ -161,13 +166,20 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		The Atari 2600 is a video game console developed in 1977 , it has had over 500 original games released for the console, and nearly all popular arcade games at the time were pored to the console such as; \textit{PAC-MAN} and \textit{SPACE INVADERS} \cite{bellemare2013arcade}. This provides a large test-bed for AI agents.
 		The hardware for the Atari 2600 is very limited compared to today's standards, it had a 1.19Mhz CPU and 128 Bytes of RAM. These hardware specs limit the complexity of the games that can be played on it, which strikes a balance of challenging but allowing search algorithms to have a small enough search space as to not have a large horizon effect \cite{bellemare2013arcade}.
 		
+
+		%VGDL
+		Games in the GVG-AI competition are written using the Video Game Description Language \cite{schaul2014extensible}, which is a high level description language designed to be able to create a wide variety of arcade style games, where the rules take the form of sprite movement and interaction on a 2D grid \cite{nelson2016investigating}.
+		The amount of games in the competition has been steadily growing, but there are currently (Enter Current Number Of levels Here). VGDL in GVG-AI is a JAVA port from pyVGDL which was programmed in python. The VGDL is a powerful tool for conducting research on computational intelligence and games \cite{schaul2014extensible, love2008general}.
+		
 		%Summary
 		The growing interest in competitions such as the ones mentioned above clearly reflects a desire for general competency for AI within games.
 
 	\subsubsection{Challenges and Goals of GVGAI}
 		The goal of GVGAI is to create a generally intelligent agent that is able to win any game it is placed in, when it doesn't know the game.
 		During the tournament a completely new set of games are used, to avoid the agents becoming too deomain specific.
-		Another challenge is the time limit that an agent can choose an action, this avoids the agent spending too long deciding a task and not making an action. \cite{schuster2015mcts}
+		Another challenge is the time limit that an agent can choose an action, this avoids the agent spending too long deciding a task and not making an action. \cite{schuster2015mcts}.
+
+		The competition does now allow multithreading that is used by some MCTS enhancements, some MCTS enhancements that are used are discussed in section \ref{sssec:MCTSvariations}.
 		
 		
 	\subsubsection{Competition \& Rules}
@@ -216,6 +228,7 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 			The sample MCTS controller is an implementation of the vanilla MCTS algorithm, this is described in section \ref{sssec:MCTS}. 
 			The full description of MCTS algorithm is described by Browne et al. \cite{browne2012survey}.
 			The sample MCTS controller uses a payout depth of 10 moves and an exploration-exploitation constant value of $\sqrt{2}$ and selects the most visited action from the root to pick a move to return for each game cycle \cite{perez20162014}.
+			However MCTS isn't the sole answer to the GVG-AI competition, as it has been shown that even with a 30x computational budget, it fails to master games. However it does manage to avoid to explicitly loosing games, but does not win a lot of them either. This shows that for the AI it finds not losing is significantly easier than winning \cite{nelson2016investigating}.
 
 		\textbf{sample GA}
 			The sample Genetic Algorithm(GA) controller is a rolling horizon open loop implementation for a minimalistic steady state genetic algorithm, known as microbial GA \cite{harvey2009microbial}.
@@ -297,26 +310,26 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		\begin{figure}[h]
 		    \centering
 		    \includegraphics[width=0.5\textwidth]{MCTSasymmetry}
-		    \caption{Overview of Monte-Carlo Tree Search Asymmetry. Image sourced from \cite{coquelin2007bandit}. }
+		    \caption{An Exmple of an Asymmetric Tree Created by MCTS. Image sourced from \cite{coquelin2007bandit}. }
 		    \label{fig:MCTS1}
 		\end{figure}
-		
 
 
 
-		\subsubsection{MCTS variations}
+
+		\subsubsection{MCTS variations} \label{sssec:MCTSvariations}
 			MCTS is one of the most promising baseline approaches in the  literature.
 			There has been a good deal of research on MCTS variants, each providing better results according to different domains \cite{browne2012survey, park2015mcts, perez2014knowledge, ilhan2017monte, de2016monte, frydenberg2015investigating}.
 
-			While MCTS has been extensively applied to zero-sum games, with two players that alternate terns in discrete action spaces, it has also been aplied to orther domain types, such as single and multiplayer games, RTS and games with lots of uncertainty \cite{browne2012survey, de2016monte, frydenberg2015investigating}.
+			While MCTS has been extensively applied to zero-sum games, with two players that alternate terns in discrete action spaces, it has also been applied to other domain types, such as single and multiplayer games, RTS and games with lots of uncertainty \cite{browne2012survey, de2016monte, frydenberg2015investigating}.
 
 			\textbf{Bandit Based Methods}
-				Bandit based problems are popular class of sequential decision problems, in which one needs to choose among a set of actions (e.g. the arms of a multiarmed bandit slot machine) in order to maximize the cumulative reward by consistently taking the optimal action \cite{kocsis2006bandit}.
+				Bandit based problems are popular class of sequential decision problems, in which one needs to choose among a set of actions (e.g. the arms of a multiarmed bandit slot machine) in order to maximize the cumulative reward by consistently taking the optimal action \cite{kocsis2006bandit, coquelin2007bandit}.
 
 				The difficulty arises because the underlying reward distributions are unknown, and potential rewards must be estimated based on past observations.
 			
 			\textbf{Flat UCB}
-				Coquelin and Munos propose a technique called Flat UCB, which treats the leaves of the search tree as a single multiarmed bandit problem, as described below \ref{refNeeded} .
+				Coquelin and Munos propose a technique called Flat Upper confidence Bounds (Flat UCB), which treats the leaves of the search tree as a single multiarmed bandit problem, as described by Kocsis et al. \ref{kocsis2006bandit} .
 
 			
 
@@ -342,7 +355,7 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		
 		\subsubsection{Depth First Search}
 
-		Depth First search with alpha-beta pruning \cite{knuth1975analysis} has achived superhuman performace in chess, checkers and orthello. However it has not been effective in Go \cite{silver2016mastering}.
+		Depth First search with alpha-beta pruning \cite{knuth1975analysis} has achieved superhuman performance in chess, checkers and orthello. However it has not been effective in Go \cite{silver2016mastering}.
 		
 		
 		OLETS
@@ -353,7 +366,9 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		
 		
 	
-\section{Methodologies}	
+\section{Research Methodologies}	
+
+	
 		
 		
 
