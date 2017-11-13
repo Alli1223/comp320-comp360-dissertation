@@ -86,7 +86,7 @@ The abstract goes here.
 \section{Introduction}
 \IEEEPARstart{T}{his} paper will compare the tree search techniques used in the General Video Game AI (GVG-AI) competition. 
 Games play an important role in the development and bench-marking of Artificial Intelligence (AI). This literature review will cover the existing work around the general video game artificial intelligence competition and the different solutions that are available.
-The GVG-AI competition is a recurring videogame-playing competition designed to simulate and benchmark general artificial intelligence. For an AI agent to be tested, they are submitted to the competition site, then they are tested against previously unseen arcade-style video games. The games that the agents are tested against change every year to stop them form becoming too domain specific.
+The GVG-AI competition is a recurring videogame-playing competition designed to simulate and benchmark general artificial intelligence. For an AI agent to be tested, they are submitted to the competition site, then they are tested against previously unseen arcade-style video games like the ones shown in figure \ref{fig:VGDL}. The games that the agents are tested against change every year to stop them form becoming too domain specific.
 
 There is a large amount of tree search techniques used within the GVG-AI competition, many of them are based around Monte-Carlo Tree Search (MCTS).This project will compare the success rates of each of the different methods, as well as an in depth comparison as to where each tree search technique succeeds in a set of existing games.
 
@@ -171,7 +171,7 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		\begin{figure}[h]
 		    \centering
 		    \includegraphics[width=0.5\textwidth]{VGDL2}
-		    \caption{angelsdemons, butterflies, pacman, . Image sourced from \cite{gaina2016general}. }
+		    \caption{Example of games in GVG-AI Framework: angelsdemons (Top Left), boulderdash (Top Right), frogs (Bottom Right), Zelda (Bottom Left). }
 		    \label{fig:VGDL}
 		\end{figure}
 		%VGDL
@@ -337,7 +337,7 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 				The difficulty arises because the underlying reward distributions are unknown, and potential rewards must be estimated based on past observations.
 			
 			\textbf{Flat UCB}
-				Coquelin and Munos propose a technique called Flat Upper confidence Bounds (Flat UCB), which treats the leaves of the search tree as a single multiarmed bandit problem, as described by Kocsis et al. \ref{kocsis2006bandit} .
+				Coquelin and Munos propose a technique called Flat Upper confidence Bounds (Flat UCB), which treats the leaves of the search tree as a single multiarmed bandit problem, as described by Kocsis et al. \cite{kocsis2006bandit}.
 
 			
 
@@ -347,7 +347,9 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 
 		\subsubsection{Evolutionary Algorithms} \label{sssec:EA}
 			Rolling Horizon Evolutionary Algorithms are one of the options available to evolve sequences of actions for planning in GVGP.
-			Perez et al. in \cite{perez2013rolling} compared MCTS with RHEA on the Physical Traveling Salesman Problem (PTSP) and their results show that RHEA is a promising competitor to MCTS.
+			Perez et al. in \cite{perez2013rolling} compared MCTS with RHEA on the game Physical Traveling Salesman Problem (PTSP). The game is a modification of the popular optimization problem, the Traveling Salesman Problem \cite{citationNeeded} where the player must visit a series of way points in a 2d map and the agent must execute an action in no more than 40ms \cite{perez2013rolling} which is similar to the GVG-AI competition.  The results rom that paper show that RHEA is a promising competitor to MCTS.
+			Their approach is used in the same manner as MCTS uses roll-outs and the generative model (i.e. a simulator). Thus an agent will evolve a plan in an imaginary model for some milliseconds, then evolves a new plan repeatedly in a simulation manner, until the game is over.
+			The term Rolling Horizon comes from the fact  that the planning happens until a limited look-ahead in the game (The Horizon). 
 			
 
 			\cite{gaina2017analysis, gaina2017rolling}
@@ -359,8 +361,8 @@ Where does tree search algorithms out perform Evolutionary Algorithms?
 		  		 \label{fig:RHEArollout}
 			\end{figure}
 
-			Evolutionary algorithms are often used 
-			The figure \ref{RHEArollout} shows the steps of RHEA, 
+			
+			The figure \ref{fig:RHEArollout} shows the steps of RHEA, 
 
 			%Combination of RHEA AND MCTS
 			Recent literature on AGI have been combining evolution and tree search in interesting ways in order to combine the benefits of both methods, such as Licas et al. \cite{lucas2014fast} applied an EA process to guide the simulation step of MCTS and improve the random default policy. Their results show a significant increase in performace in the game \textit{Space Invaders} and the Mountain Car Problem.
