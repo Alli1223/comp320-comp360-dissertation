@@ -347,11 +347,12 @@ There is a large amount of tree search techniques used within the GVG-AI competi
 
 
 		\subsubsection{Evolutionary Algorithms} \label{sssec:EA}
-			Evolutionary Algorithms are largely inspired from the biological sciences. They encode solutions to problems as individuals, part of a population which evolves over generations, until a solution is found or execution limit is reached.The figure \ref{fig:RHEArollout} shows the stages of how Evolutionary Algorithms work.
+			Evolutionary Algorithms are largely inspired from the biological sciences. They encode solutions to problems as individuals, part of a population which evolves over generations, until a solution is found or execution limit is reached.Figure \ref{fig:RHEArollout} shows the stages of how Evolutionary Algorithms work.
 			Rolling Horizon Evolutionary Algorithms are one of the options available to evolve sequences of actions for planning in GVGP.
-			Perez et al. in \cite{perez2013rolling} compared MCTS with RHEA on the game Physical Traveling Salesman Problem (PTSP). The game is a modification of the popular optimization problem, the Traveling Salesman Problem \cite{citationNeeded} where the player must visit a series of way points in a 2d map and the agent must execute an action in no more than 40ms \cite{perez2013rolling} which is similar to the GVG-AI competition.  The results rom that paper show that RHEA is a promising competitor to MCTS.
+
+			Perez et al. in \cite{perez2013rolling} compared MCTS with RHEA on the game Physical Traveling Salesman Problem (PTSP). The game is a modification of the popular optimization problem, the Traveling Salesman Problem \cite{flood1956traveling} where the player must visit a series of way points in a 2 dimensional level and the agent has up to 40ms to execute an action \cite{perez2013rolling}, which is similar to the GVG-AI competition.  The results from that paper show that RHEA is a promising competitor to MCTS.
 			Their approach is used in the same manner as MCTS uses roll-outs and the generative model (i.e. a simulator). Thus an agent will evolve a plan in an imaginary model for some milliseconds, then evolves a new plan repeatedly in a simulation manner, until the game is over.
-			The term Rolling Horizon comes from the fact  that the planning happens until a limited look-ahead in the game (the horizon) \cite{gaina2017analysis, gaina2017rolling}.
+			The term Rolling Horizon comes from the fact  that the planning has a certain depth that it can search within a game space  (i.e. the horizon) \cite{gaina2017analysis, gaina2017rolling}.
 			
 
 			\begin{figure}[h]
@@ -379,7 +380,7 @@ There is a large amount of tree search techniques used within the GVG-AI competi
 		
 		\subsubsection{Depth First Search}
 
-			Depth First search with alpha-beta pruning \cite{knuth1975analysis} has achieved superhuman performance in chess, checkers and orthello. However it has not been effective in Go \cite{silver2016mastering}.
+			Depth First search with alpha-beta pruning \cite{knuth1975analysis} has achieved superhuman performance in chess, checkers and orthello. However it has not been effective in the game Go \cite{silver2016mastering}.
 		
 		
 		
