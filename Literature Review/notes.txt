@@ -1,0 +1,35 @@
+Move Figure 1 to where it is referenced
+Don't hypen monte carlo
+define MCTS only in introduction and the MCTS section
+Dont put research questions in bullet points and motivate why they are important
+put hypothesis in methodology section
+Define AGI for games
+Capetilise game names or be consistant
+Garry Kasperov is spelt with two r's
+Combine the deep blue section to flow better.
+Define branching factor and evaluation function.
+Reference big terms that are explained later on, or define the terms later on.
+Remove the secion on IBM watson, not relevat to vido games - Look at the starcraft stuff instead
+Look at earlier exaples of games, such as checkers
+Parrallel between board games and video games, where there were very domain specfic things before the need for general ai came along.
+Say the games are made with VGDL instead of JAVA
+Have a section on common terms used in tree search algorithms
+Cite horizon effect more
+Mention that AI cant play all games to human standard.
+The time limit is what seprates video games from board games
+Mention that the brabching factor is small compared to board games
+Desctibe the search techniques before the sample agents
+Include the UCT formula which balances exploitation and exporation
+Most urgent reference the one with hightst UCT
+Expand on expansion stategy in expansion section
+Reference Simulation stage in MCTS
+Look at simulation balancing Described by silver. (in Eds survey paper)
+Move bandit based methods and Flat UCB to selection
+More depth with mutatuion, crossover ect with evolutionary algorithms
+Do Minimax instead of depth first search
+Combine Minimax and alphabeta pruning
+
+
+
+
+TODO notes package in latex
