@@ -196,24 +196,30 @@ Email: AR185160@falmouth.ac.uk\\}
 			The main idea of UCT is to use information gathered during previous iterations of MCTS to decide what the best child node is at each level when traversing the tree. Then the child with the highest UCT value is selected. 
 			
 			%The UCT is calculated by \( j \) being the node that is selected, and \( n \) is the number of times the parent (current) node has been visited, \( n _j \) is the number of times child \( j \) has been visited, and \( c \) is the constant.
-			The UCT value is calculated by \( \overline{X} _j\)   being the average score of child \( j \), and \( n \) is the number of times the parent node was visited and \(n _j \) is the number of times this particular child was visited. \( C _P \) is the constant value which adjusts the contribution of the second term. 
+			
 
 			\begin{equation} \label{eqUCT}
 				 UCT  = \overline{X} _j + 2C _p \sqrt{\frac{ 2 \ln n}{n _j}}
 			\end{equation} 
-
+			
+			The UCT value is calculated by \( \overline{X} _j\)   being the average score of child \( j \), and \( n \) is the number of times the parent node was visited and \(n _j \) is the number of times this particular child was visited. \( C _P \) is the constant value which adjusts the contribution of the second term. 
 			The second term \( \sqrt{\frac{ 2 \ln n}{n _j}} \)  increases each time the parent node has been visited, but a different child was chosen.
 			
 		
 		\textbf{Expansion}
+		
+			The major task for an expansion strategy is to choose which children should be added to the search tree.
+			
 			When the selection strategy returns a node, there are a few different ways to expand the node. This step is similar to the selection step, however this step has no information available from previous iterations of MCTS for a specific child \cite{schuster2015mcts}. 
-			Typically only one child is added to the tree by many MCTS based agents after selection and before the simulation \cite{chaslot2008monte, schuster2015mcts}. However in the context of the GVG-AI competition where the number of possible actions is limited to a maximum of seven (i.e. right, use etc.) using the all children expansion strategy, where all actions provided by the forward model are used to expand the search tree. Thus, the time necessary for expansion is less than in other domains, where the number of actions is much higher(i.e. chess).
+			Typically only one child is added to the tree by many MCTS based agents after selection and before the simulation \cite{chaslot2008monte, schuster2015mcts}. 
 			
 
 		\textbf{Simulation}
+		
 			For the rest of the game, actions are selected at random until the end of the game. This means that the weighting of action selection probabilities has a significant effect on the level of play. For example if the game played with equal probability between exploration and exploitation, this will often lead to sub-optimal play \cite{chaslot2008monte}. To look for more promising plays, MCTS can use heuristic knowledge to give weights to actions that look more promising.
 
 		\textbf{Backpropagation}
+		
 			When the simulated game has played out, the tree is updated and each node in the tree that was visited is modified with the win loss ratio of that game. This informs future tree policy decisions.
 			
 			The expansion and simulation stages are commonly collectively referred to as the \textit{playout} \cite{powley2014information}.
@@ -246,7 +252,7 @@ Email: AR185160@falmouth.ac.uk\\}
 			Evolutionary Algorithms are largely inspired from the biological sciences. They encode solutions to problems as individuals, part of a population which evolves over generations, until a solution is found or execution limit is reached.Figure \ref{fig:RHEArollout} shows the stages of how Evolutionary Algorithms work.
 			Rolling Horizon Evolutionary Algorithms are one of the options available to evolve sequences of actions for planning in GVGP.
 
-			Perez et al. in \cite{perez2013rolling} compared MCTS with RHEA on the game Physical Traveling Salesman Problem (PTSP). The game is a modification of the popular optimization problem, the Traveling Salesman Problem \cite{flood1956traveling} where the player must visit a series of way points in a 2 dimensional level and the agent has up to 40ms to execute an action \cite{perez2013rolling}, which is similar to the GVG-AI competition.  The results from that paper show that RHEA is a promising competitor to MCTS.
+			Perez et al. in \cite{perez2013rolling} compared MCTS with RHEA on the game Physical Traveling Salesman Problem (PTSP). The game is a modification of the popular optimization problem, the Traveling Salesman Problem \cite{perez2014solving, flood1956traveling} where the player must visit a series of way points in a 2 dimensional level and the agent has up to 40ms to execute an action \cite{perez2013rolling}, which is similar to the GVG-AI competition.  The results from that paper show that RHEA is a promising competitor to MCTS.
 			Their approach is used in the same manner as MCTS uses roll-outs and the generative model (i.e. a simulator). Thus an agent will evolve a plan in an imaginary model for some milliseconds, then evolves a new plan repeatedly in a simulation manner, until the game is over.
 			The term Rolling Horizon comes from the fact  that the planning has a certain depth that it can search within a game space  (i.e. the horizon) \cite{gaina2017analysis, gaina2017rolling}.
 			
@@ -266,10 +272,10 @@ Email: AR185160@falmouth.ac.uk\\}
 		
 		\subsubsection{Minimax}
 			\textbf{Minimax}
-				
-			\textbf{Alpha beta pruning}
-				Alpha Beta pruning tries to minimax the search space \cite{knuth1975analysis}
+				Minimax attempts to minimize the opponent's maximum reward at each state. The tree search is often stopped prematurely and a value function is used to estimate the outcome of the game, then the Alpha-Beta heuristic is used to prune the search tree \cite{browne2012survey, knuth1975analysis}.
+			
 			\textbf{Depth First Search}
+				Depth first search (DFS) is a tree search algorithm that iteratively expands each unvisited child node of the tree until a non-expandable node is reached. The search then navigates back up the tree until it finds the next unvisited node to expand and continues the search until all the nodes have been visited \cite{perez2014solving}.
 				Depth First search with alpha-beta pruning \cite{knuth1975analysis} has achieved superhuman performance in chess, checkers and orthello. However it has not been effective in the game Go \cite{silver2016mastering}.
 			
 		
