@@ -162,7 +162,7 @@ Email: AR185160@falmouth.ac.uk\\}
 			 is the problem where only a small portion of the search tree can be searched, i.e. the AI can search 4 moves ahead, but the 5th move could be a detrimental move, but the AI doesn't know that because of its "\textit{horizon}".
 
 		\textbf{Evaluation Function}
-			is used to estimate the value of a position.
+			is used to estimate the value of a position or the current game state, i.e. is the agent winning or loosing the game.
 
 		
 		
@@ -190,6 +190,8 @@ Email: AR185160@falmouth.ac.uk\\}
 		    \caption{An Example of an Asymmetric Tree Created by MCTS. Image sourced from \cite{coquelin2007bandit}. }
 		    \label{fig:MCTS2}
 		\end{figure}
+
+
 		\textbf{Selection}
 			Starting at the root node, a selection policy is recursively applied to descend the tree until the most urgent \footnote{Most urgent most commonly means the node with the highest UCT value.} node is reached. 
 			The next action is chosen in a way that balances between exploitation and exploration. For most of the tasks, the option is to choose exploitation, which leads to the best results so far. However there may still be actions that have not been explored that could lead to good results, thus exploration is used to try and find any promising actions \cite{chaslot2008monte}.
@@ -198,7 +200,7 @@ Email: AR185160@falmouth.ac.uk\\}
 			Upper Confidence Bound (UCB) is often a common enhancement for MCTS and is often referred to as Upper Confidence Bounds for Trees (UCT) \cite{bravi2017evolving}, which is used by the sample MCTS controller, as described in section \ref{sssec:sampleMCTS}. 
 			UCT uses UCB1 to build a potentially asymmetric tree that grows towards the more promising parts of the search space as shown in figure \ref{fig:MCTS2}. 
 
-			UCB is based on the multi-armed bandit problem, in which it selects the optimal arm to pull in order to maximize rewards \cite{kocsis2006bandit, browne2012survey}.
+			UCB is based on the multi-armed bandit problem, in which it selects the optimal arm to pull in order to maximize rewards \cite{kocsis2006bandit, browne2012survey, gelly2006modification}.
 			The main idea of UCT is to use information gathered during previous iterations of MCTS to decide what the best child node is at each level when traversing the tree. Then the child with the highest UCT value is selected. 
 			
 			%The UCT is calculated by \( j \) being the node that is selected, and \( n \) is the number of times the parent (current) node has been visited, \( n _j \) is the number of times child \( j \) has been visited, and \( c \) is the constant.
@@ -238,9 +240,6 @@ Email: AR185160@falmouth.ac.uk\\}
 		
 
 
-
-
-
 		\subsubsection{MCTS variations} \label{sssec:MCTSvariations}
 			MCTS is one of the most promising baseline approaches in the  literature.
 			There has been a good deal of research on MCTS variants, each providing better results according to different domains \cite{browne2012survey, park2015mcts, perez2014knowledge, ilhan2017monte, de2016monte, frydenberg2015investigating}.
@@ -252,14 +251,16 @@ Email: AR185160@falmouth.ac.uk\\}
 
 
 		\subsubsection{Evolutionary Algorithms} \label{sssec:EA}
-			Evolutionary Algorithms are largely inspired from the biological sciences. They encode solutions to problems as individuals, part of a population which evolves over generations, until a solution is found or execution limit is reached.Figure \ref{fig:RHEArollout} shows the stages of how Evolutionary Algorithms work.
-			Rolling Horizon Evolutionary Algorithms are one of the options available to evolve sequences of actions for planning in GVGP.
+			% EA Background
+			Evolutionary Algorithms are largely inspired from the biological sciences. They encode solutions to problems as individuals, part of a population which evolves over generations, until a solution is found or execution limit is reached.Figure \ref{fig:RHEArollout} shows the stages of how Evolutionary Algorithms work \cite{gaina2017rolling}.
+			Rolling Horizon Evolutionary Algorithms are one of the options available to evolve sequences of actions for planning in GVGP \cite{perez2013rolling}.
 
-			Perez et al. in \cite{perez2013rolling} compared MCTS with RHEA on the game Physical Traveling Salesman Problem (PTSP). The game is a modification of the popular optimization problem, the Traveling Salesman Problem \cite{perez2014solving, flood1956traveling} where the player must visit a series of way points in a 2 dimensional level and the agent has up to 40ms to execute an action \cite{perez2013rolling}, which is similar to the GVG-AI competition.  The results from that paper show that RHEA is a promising competitor to MCTS.
-			Their approach is used in the same manner as MCTS uses roll-outs and the generative model (i.e. a simulator). Thus an agent will evolve a plan in an imaginary model for some milliseconds, then evolves a new plan repeatedly in a simulation manner, until the game is over.
+			Perez et al. in \cite{perez2013rolling} compared MCTS with RHEA on the game Physical Traveling Salesman Problem (PTSP). 
+			The game is a modification of the popular optimization problem, the Traveling Salesman Problem \cite{perez2014solving, flood1956traveling} where the player must visit a series of way points in a 2 dimensional level and the agent has up to 40ms to execute an action \cite{perez2013rolling}, which is similar to the GVG-AI competition.  The results from that paper show that RHEA is a promising competitor to MCTS.
+			Their approach is used in the same manner as MCTS uses roll-outs and the generative model (i.e. a simulator). Thus an agent will evolve a plan in an imaginary model for some milliseconds, then evolves a new plan repeatedly in a simulation manner, until the game is over \cite{perez2013rolling}.
 			The term Rolling Horizon comes from the fact  that the planning has a certain depth that it can search within a game space  (i.e. the horizon) \cite{gaina2017analysis, gaina2017rolling}.
 			
-
+			
 			\begin{figure}[h]
 		   		 \centering
 		   		 \includegraphics[width=0.5\textwidth]{RHEArollout}
@@ -267,6 +268,8 @@ Email: AR185160@falmouth.ac.uk\\}
 		  		 \label{fig:RHEArollout}
 			\end{figure}
 
+			% Stages of Evilutionary algorithms
+			
 
 			%Combination of RHEA AND MCTS
 			Recent literature on AGI have been combining evolution and tree search in interesting ways in order to combine the benefits of both methods, such as Licas et al. \cite{lucas2014fast} applied an EA process to guide the simulation step of MCTS and improve the random default policy. Their results show a significant increase in performance in the game \textit{Space Invaders} and the Mountain Car Problem.
@@ -284,7 +287,7 @@ Email: AR185160@falmouth.ac.uk\\}
 		
 		
 		\subsubsection{Breadth First Search (BFS) }\label{sssec:BFS}
-			This paper proposes an efficient implementation of BFS for GVGP \cite{EfficientBFS} uses a hash function.
+			This paper proposes an efficient implementation of BFS for GVGP \cite{EfficientBFS} which uses a hash function.
 
 	\subsection{Hyper-Heuristics}
 		During the 2015 competition, the three winning controllers had one thing in common, they were all a combination of techniques that were selected depending on certain characteristics observed in the game state \cite{horn2016mcts}.
@@ -333,6 +336,7 @@ Email: AR185160@falmouth.ac.uk\\}
 		The growing interest in competitions such as the ones mentioned above clearly reflects a desire for general competency for AI within games.
 
 	\subsubsection{Challenges and Goals of GVGAI}
+
 		The goal of GVGAI is to create a generally intelligent agent that is able to win any game it is placed in, when it doesn't know the game.
 		During the tournament a completely new set of games are used, to avoid the agents becoming too deomain specific.
 		Another challenge is the time limit that an agent can choose an action, this avoids the agent spending too long deciding a task and not making an action. \cite{schuster2015mcts}.
@@ -384,28 +388,11 @@ Email: AR185160@falmouth.ac.uk\\}
 
 		\textbf{Random}
 			This is a very simple controller that is provided with the GVG-AI framework, it simply returns a random action at each game cycle.
-			The random controller came 14th in the competition, which is quite surprising as it managed to beat quite a few of the other, more complicated controllers. \footnote{The reason for this may be due to more complicated controllers not choosing an action because it isn't able to search the game space, so making a random action is better than no action.}
+			The random controller came 14th in the competition, which is quite surprising as it managed to beat quite a few of the other, more complicated controllers. \footnote{The reason for this may be due to more complicated controllers not choosing an action because it isn't able to search the game space, so making a random action is often better than no action.}
 
 		\textbf{OSLA}
 			One Step Look Ahead is another rather simple controller, it evaluates the position using the same heuristic as Sample MCTS and selects the action with the highest evaluation score, then moves the model one step ahead. This controller came in 16th place.
 
-
-
-
-
-
-		
-		%Sample FlatMCTS
-		%Sample OLMCTS
-
-		%Sample Genetic Algorithm (GA)
-		
-
-		%Sample OLETS
-
-		%Sample Random
-
-		%
 
 	
 	
