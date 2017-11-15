@@ -159,16 +159,16 @@ Email: AR185160@falmouth.ac.uk\\}
 			Branching factor is the number of children at each node of a tree.
 
 		\textbf{Horizon Effect}
-			The horizon effect is the problem where only a small portion of the search tree can be searched, i.e. the AI can search 4 moves ahead, but the 5th move could be a detrimental move, but the AI doesn't know that because of its "\textit{horizon}".
+			 is the problem where only a small portion of the search tree can be searched, i.e. the AI can search 4 moves ahead, but the 5th move could be a detrimental move, but the AI doesn't know that because of its "\textit{horizon}".
 
 		\textbf{Evaluation Function}
-			Evaluation function is used to estimate the value of a position.
+			is used to estimate the value of a position.
 
 		
 		
 		\subsubsection{Monte Carlo Tree Search (MCTS) }\label{sssec:MCTS}
 
-		Monte Carlo Tree Search is a method for finding the optimal decisions in a specified domain by taking random samples in the search space and building a search tree according the the results \cite{browne2012survey}. 
+		Monte Carlo Tree Search is a method for finding the optimal decisions in a specified domain by performing Monte Carlo simulations (taking random samples in the search space and building a search tree according the the results) \cite{browne2012survey}. 
 
 		MCTS is a class of decision tree search algorithms discovered independently by several authors \cite{coulom2006efficient, kocsis2006bandit, chaslot2006monte}.
 		
@@ -184,13 +184,19 @@ Email: AR185160@falmouth.ac.uk\\}
 
 		% Explination of MCTS stages
 		The basis of MCTS is the simulation of games where both the player controller and the opponent play pseudo-random moves. From playing a single game consisting of random moves, very little can be learnt about the game. However when simulating a multitude of random games, a good strategy can be inferred. This is what MCTS does, it builds a tree of possible future game states. This can described in four stages, as shown in figure \ref{fig:MCTS1}.
-		
+				\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{MCTSasymmetry}
+		    \caption{An Example of an Asymmetric Tree Created by MCTS. Image sourced from \cite{coquelin2007bandit}. }
+		    \label{fig:MCTS2}
+		\end{figure}
 		\textbf{Selection}
 			Starting at the root node, a selection policy is recursively applied to descend the tree until the most urgent \footnote{Most urgent most commonly means the node with the highest UCT value.} node is reached. 
 			The next action is chosen in a way that balances between exploitation and exploration. For most of the tasks, the option is to choose exploitation, which leads to the best results so far. However there may still be actions that have not been explored that could lead to good results, thus exploration is used to try and find any promising actions \cite{chaslot2008monte}.
 			
 			%UCT	
 			Upper Confidence Bound (UCB) is often a common enhancement for MCTS and is often referred to as Upper Confidence Bounds for Trees (UCT) \cite{bravi2017evolving}, which is used by the sample MCTS controller, as described in section \ref{sssec:sampleMCTS}. 
+			UCT uses UCB1 to build a potentially asymmetric tree that grows towards the more promising parts of the search space as shown in figure \ref{fig:MCTS2}. 
 
 			UCB is based on the multi-armed bandit problem, in which it selects the optimal arm to pull in order to maximize rewards \cite{kocsis2006bandit, browne2012survey}.
 			The main idea of UCT is to use information gathered during previous iterations of MCTS to decide what the best child node is at each level when traversing the tree. Then the child with the highest UCT value is selected. 
@@ -216,7 +222,9 @@ Email: AR185160@falmouth.ac.uk\\}
 
 		\textbf{Simulation}
 		
-			For the rest of the game, actions are selected at random until the end of the game. This means that the weighting of action selection probabilities has a significant effect on the level of play. For example if the game played with equal probability between exploration and exploitation, this will often lead to sub-optimal play \cite{chaslot2008monte}. To look for more promising plays, MCTS can use heuristic knowledge to give weights to actions that look more promising.
+			An Monte Carlo simulation is carried out until a pre-determined depth or the end of a game.
+			For the rest of the game, actions are selected at random until the end of the game. This means that the weighting of action selection probabilities has a significant effect on the level of play. For example if the game played with equal probability between exploration and exploitation, this will often lead to sub-optimal play \cite{chaslot2008monte}. 
+			To look for more promising plays, MCTS can use heuristic knowledge to give weights to actions that look more promising \cite{perez2014solving}.
 
 		\textbf{Backpropagation}
 		
@@ -228,12 +236,7 @@ Email: AR185160@falmouth.ac.uk\\}
 
 		%The MCTS process is done in several stages, firstly a tree is built in an asymmetric and incremental way. Then for each iteration of the algorithm, a tree policy is used to fine the most urgent node of the current tree. The tree policy will then attempt to look in areas that have not been well sampled yet and areas which appear to be promising. A simulation is then run from the selected node and the tree is updated according to the result.
 		
-		\begin{figure}[h]
-		    \centering
-		    \includegraphics[width=0.5\textwidth]{MCTSasymmetry}
-		    \caption{An Exmple of an Asymmetric Tree Created by MCTS. Image sourced from \cite{coquelin2007bandit}. }
-		    \label{fig:MCTS2}
-		\end{figure}
+
 
 
 
