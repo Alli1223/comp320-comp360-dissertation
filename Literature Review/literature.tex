@@ -170,7 +170,7 @@ Email: AR185160@falmouth.ac.uk\\}
 
 		Monte Carlo Tree Search is a method for finding the optimal decisions in a specified domain by taking random samples in the search space and building a search tree according the the results \cite{browne2012survey}. 
 
-		MCTS is a class of decision tree search algorithms discovered independently by several authors \cite{28, 7, 29}
+		MCTS is a class of decision tree search algorithms discovered independently by several authors \cite{coulom2006efficient, kocsis2006bandit, chaslot2006monte}.
 		
 		MCTS has been demonstrated to work effectively with classic board games, modern board-games and video games \cite{chaslot2008monte, pepels2014real}.
 
@@ -186,7 +186,7 @@ Email: AR185160@falmouth.ac.uk\\}
 		The basis of MCTS is the simulation of games where both the player controller and the opponent play pseudo-random moves. From playing a single game consisting of random moves, very little can be learnt about the game. However when simulating a multitude of random games, a good strategy can be inferred. This is what MCTS does, it builds a tree of possible future game states. This can described in four stages, as shown in figure \ref{fig:MCTS1}.
 		
 		\textbf{Selection}
-			Starting at the root node, a selection policy is recursively applied to descend the tree until the most urgent \footnote{Most urgent meaning the node with the highest UCT value.} node is reached. 
+			Starting at the root node, a selection policy is recursively applied to descend the tree until the most urgent \footnote{Most urgent most commonly means the node with the highest UCT value.} node is reached. 
 			The next action is chosen in a way that balances between exploitation and exploration. For most of the tasks, the option is to choose exploitation, which leads to the best results so far. However there may still be actions that have not been explored that could lead to good results, thus exploration is used to try and find any promising actions \cite{chaslot2008monte}.
 			
 			%UCT	
@@ -216,6 +216,7 @@ Email: AR185160@falmouth.ac.uk\\}
 		\textbf{Backpropagation}
 			When the simulated game has played out, the tree is updated and each node in the tree that was visited is modified with the win loss ratio of that game. This informs future tree policy decisions.
 			
+			The expansion and simulation stages are commonly collectively referred to as the \textit{playout} \cite{powley2014information}.
 			These steps are then repeated until some predefined computational budget is reached, which most commonly are; time, memory or iteration constraint \cite{browne2012survey}. At which point the process is halted and the best performing root action is returned. This is the action that the agent will take in the game.
 
 
