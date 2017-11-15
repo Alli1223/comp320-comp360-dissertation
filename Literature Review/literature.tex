@@ -169,6 +169,8 @@ Email: AR185160@falmouth.ac.uk\\}
 		\subsubsection{Monte Carlo Tree Search (MCTS) }\label{sssec:MCTS}
 
 		Monte Carlo Tree Search is a method for finding the optimal decisions in a specified domain by taking random samples in the search space and building a search tree according the the results \cite{browne2012survey}. 
+
+		MCTS is a class of decision tree search algorithms discovered independently by several authors \cite{28, 7, 29}
 		
 		MCTS has been demonstrated to work effectively with classic board games, modern board-games and video games \cite{chaslot2008monte, pepels2014real}.
 
@@ -184,20 +186,23 @@ Email: AR185160@falmouth.ac.uk\\}
 		The basis of MCTS is the simulation of games where both the player controller and the opponent play pseudo-random moves. From playing a single game consisting of random moves, very little can be learnt about the game. However when simulating a multitude of random games, a good strategy can be inferred. This is what MCTS does, it builds a tree of possible future game states. This can described in four stages, as shown in figure \ref{fig:MCTS1}.
 		
 		\textbf{Selection}
-			Starting at the root node, a selection policy is recursively applied to descend the tree until the most urgent node is reached. 
+			Starting at the root node, a selection policy is recursively applied to descend the tree until the most urgent \footnote{Most urgent meaning the node with the highest UCT value.} node is reached. 
 			The next action is chosen in a way that balances between exploitation and exploration. For most of the tasks, the option is to choose exploitation, which leads to the best results so far. However there may still be actions that have not been explored that could lead to good results, thus exploration is used to try and find any promising actions \cite{chaslot2008monte}.
 			
 			%UCT	
-			A common enhancement for selection is Upper Confidence Bounds for Trees (UCT) \cite{bravi2017evolving}, which is used by the sample MCTS controller, as described in section \ref{sssec:sampleMCTS}. 
-			UCT was first mentioned in \cite{kocsis2006bandit}.
-			The main idea of UCT is to use information gathered during previous iterations of MCTS to decide whether to explore a new child or exploit a promising child. Then the child with the highest UCT value is selected. 
+			Upper Confidence Bound (UCB) is often a common enhancement for MCTS and is often referred to as Upper Confidence Bounds for Trees (UCT) \cite{bravi2017evolving}, which is used by the sample MCTS controller, as described in section \ref{sssec:sampleMCTS}. 
+
+			UCB is based on the multi-armed bandit problem, in which it selects the optimal arm to pull in order to maximize rewards \cite{kocsis2006bandit, browne2012survey}.
+			The main idea of UCT is to use information gathered during previous iterations of MCTS to decide what the best child node is at each level when traversing the tree. Then the child with the highest UCT value is selected. 
 			
-			The UCT is calculated by \( j \) being the node that is selected, and \( n \) is the number of times the parent (current) node has been visited, \( n _j \) is the number of times child \( j \) has been visited, and \( c \) is the constant.
+			%The UCT is calculated by \( j \) being the node that is selected, and \( n \) is the number of times the parent (current) node has been visited, \( n _j \) is the number of times child \( j \) has been visited, and \( c \) is the constant.
+			The UCT value is calculated by \( \overline{X} _j\)   being the average score of child \( j \), and \( n \) is the number of times the parent node was visited and \(n _j \) is the number of times this particular child was visited. \( C _P \) is the constant value which adjusts the contribution of the second term. 
 
 			\begin{equation} \label{eqUCT}
-				 UCT _i = \overline{X} _i + C \cdot \sqrt{\frac{\ln (n _p)}{n _i}}
+				 UCT  = \overline{X} _j + 2C _p \sqrt{\frac{ 2 \ln n}{n _j}}
 			\end{equation} 
 
+			The second term \( \sqrt{\frac{ 2 \ln n}{n _j}} \)  increases each time the parent node has been visited, but a different child was chosen.
 			
 		
 		\textbf{Expansion}
@@ -232,17 +237,6 @@ Email: AR185160@falmouth.ac.uk\\}
 
 			While MCTS has been extensively applied to zero-sum games, with two players that alternate terns in discrete action spaces, it has also been applied to other domain types, such as single and multiplayer games, RTS and games with lots of uncertainty \cite{browne2012survey, de2016monte, frydenberg2015investigating}.
 
-			\textbf{Bandit Based Methods}
-				Bandit based problems are popular class of sequential decision problems, in which one needs to choose among a set of actions (e.g. the arms of a multiarmed bandit slot machine) in order to maximize the cumulative reward by consistently taking the optimal action \cite{kocsis2006bandit, coquelin2007bandit}.
-				Each bandit slot machine produces a random reward from a specific probability distribution, the goal of the gambler is to maximize the rewards obtained through subsequent plays \cite{berry1985bandit, gaina2017rolling}.
-
-				The difficulty arises because the underlying reward distributions are unknown, and potential rewards must be estimated based on past observations.
-			
-			\textbf{Flat UCB}
-				Coquelin and Munos propose a technique called Flat Upper confidence Bounds (Flat UCB), which treats the leaves of the search tree as a single multiarmed bandit problem, as described by Kocsis et al. \cite{kocsis2006bandit}.
-
-			
-
 		
 
 
@@ -271,9 +265,11 @@ Email: AR185160@falmouth.ac.uk\\}
 		
 		\subsubsection{Minimax}
 			\textbf{Minimax}
+				
 			\textbf{Alpha beta pruning}
+				Alpha Beta pruning tries to minimax the search space \cite{knuth1975analysis}
 			\textbf{Depth First Search}
-			Depth First search with alpha-beta pruning \cite{knuth1975analysis} has achieved superhuman performance in chess, checkers and orthello. However it has not been effective in the game Go \cite{silver2016mastering}.
+				Depth First search with alpha-beta pruning \cite{knuth1975analysis} has achieved superhuman performance in chess, checkers and orthello. However it has not been effective in the game Go \cite{silver2016mastering}.
 			
 		
 		
