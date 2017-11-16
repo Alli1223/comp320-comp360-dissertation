@@ -356,7 +356,7 @@ Email: AR185160@falmouth.ac.uk\\}
 		The controllers can also use up to 1 second of CPU time for initialization and 40ms to compute an action each game tick. However if the controller takes between 40ms and 50ms, the action return will be \textit{NIL}(Where no movement will be applied), anymore than 50ms will result in the controller automatically loosing \cite{horn2016mcts, perez20162014}.
 	
 	
-	\subsubsection{The GVGAI Framework \& Sample Controllers}
+	\subsubsection{The GVGAI Framework \& Sample Controllers} \label{Framework}
 		%Limits of the framework
 		The Framework is developed in the Java Environment and has a few differnet tracks that you can submit AI for, these are; Single Player Planning Track, 2-Player Planning Track and Level Generation Track \cite{gaina2016general}.
 		The controllers are allowed upto 40ms to compute the agents action(s) \cite{perez2016GVGAICompetition, GVGAI}.
@@ -402,13 +402,16 @@ Email: AR185160@falmouth.ac.uk\\}
 	The data of the GVG-AI sample controllers as well as the controllers submitted for the competitions over the last few years will be gathered. 
 
 	% What data will be collected:
-	Examples of the type of metrics that will be gathered are:
+	Examples of the type of metrics that will be gathered from this comparative study:
 	\begin{itemize}
 		\item Success rate in a particular game.
 		\item Where the agent was when it lost or won the game
-		\item How far down the search tree each different search techniques got
+		\item How much of the search space was the method able to search
 		\item The amount of moves that controller made in each type of game
 	\end{itemize}
+
+	%How will the data be collected
+	The data will be collected within the GVG-AI framework ( as mentioned in section \ref{Framework}, which is programmed in Java.
 
 	%What I will create
 	There will be thousands of different simulations to run to gather the required data, so this paper will propose an automated test software which will be able to run tests the majority of controllers and games. This will decrease the chance of human error interfering with the results.
@@ -422,15 +425,20 @@ Email: AR185160@falmouth.ac.uk\\}
 
 	%
 	
-\textbf{Hypothesis}
-	In progress..
+\subsection{Hypothesis}
+	\textbf{Null Hypothesis:}
+		The different search trees methods have no significant differences in strength in the competition.
+	\textbf{Hypothesis One:}
+		There is a clear weakness in one of the search techniques when trying to complete a specified type of game.
+	\textbf{Hypothesis Two:}
+		There is a clear Strength in one of
 
 %How I aim to carry out the research
 
 %Research Justification
 	
-\section{Preliminary results}
-	Preliminary results go here.
+%\section{Preliminary results}
+	%Preliminary results go here.
 
 
 \section{Conclusion}
