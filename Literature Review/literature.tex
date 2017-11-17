@@ -91,7 +91,6 @@ Email: AR185160@falmouth.ac.uk\\}
 	The General Video Game AI (GVG-AI) competition aims to address the issue of creating an Artificial General Intelligence (AGI) which in this context means to create an AI that is able to complete video games albeit not up to a human skill level. The games within the GVG-AI competition are all arcade style game, such as \textit{Pac-Man} and \textit{Zelda}. 
 	This paper describes the goals of GVG-AI as well as its rules and challenges, it also covers the different types of tree search techniques used in General Game Playing (GGP) as well as other game search techniques for AGI.
 	
-	\todo{Finish Abstract}
 \end{abstract}
 
 \section{Introduction}
@@ -112,7 +111,7 @@ Email: AR185160@falmouth.ac.uk\\}
 	%Another question this paper will aim to answer is; \textit{What games have too large of a search space for what techniques?}.
 	
 	%Importance
-	The research gathered from this could lead to a Hyper-Heuristic \footnote{A Hyper-Heuristic contains a portfolio of algorithms and is able to select the most apropriate algorithm to use depending on the game state \cite{hyperHeurisicMendes, horn2016mcts}.}  that can be implemented into a controller for the competition. 
+	The research gathered from this could lead to a Hyper-Heuristic \footnote{A Hyper-Heuristic contains a portfolio of algorithms and is able to select the most appropriate algorithm to use depending on the game state \cite{hyperHeurisicMendes, horn2016mcts}.}  that can be implemented into a controller for the competition. 
 	Furthermore this paper will outline the challenges of using the different search techniques, such as issues of games that have a large search space, or multiple objectives.
 	
 
@@ -155,14 +154,14 @@ Email: AR185160@falmouth.ac.uk\\}
 	\subsection{Game Search Techniques} \label{ssec:GST}
 		\subsubsection{Common Terms Used in Tree Search Algorithms} \label{sssec:Common}
 
-		\textbf{Branching Factor}
-			Branching factor is the number of children at each node of a tree.
+		\textbf{Branching Factor:}
+			This is the number of children at each node of a tree.
 
-		\textbf{Horizon Effect}
-			 is the problem where only a small portion of the search tree can be searched, i.e. the AI can search 4 moves ahead, but the 5th move could be a detrimental move, but the AI doesn't know that because of its "\textit{horizon}".
+		\textbf{Horizon Effect:}
+			This is the problem where only a small portion of the search tree can be searched, i.e. the AI can search 4 moves ahead, but the 5th move could be a detrimental move, but the AI doesn't know that because of its "\textit{horizon}".
 
-		\textbf{Evaluation Function}
-			is used to estimate the value of a position or the current game state, i.e. is the agent winning or loosing the game.
+		\textbf{Evaluation Function:}
+			This is used to estimate the value of a position or the current game state, i.e. is the agent winning or loosing the game.
 
 		
 		
@@ -240,7 +239,7 @@ Email: AR185160@falmouth.ac.uk\\}
 		
 
 
-		\subsubsection{MCTS variations} \label{sssec:MCTSvariations}
+		\subsubsection{MCTS Variations} \label{sssec:MCTSvariations}
 			MCTS is one of the most promising baseline approaches in the  literature.
 			There has been a good deal of research on MCTS variants, each providing better results according to different domains \cite{browne2012survey, park2015mcts, perez2014knowledge, ilhan2017monte, de2016monte, frydenberg2015investigating}.
 
@@ -252,8 +251,8 @@ Email: AR185160@falmouth.ac.uk\\}
 
 		\subsubsection{Evolutionary Algorithms} \label{sssec:EA}
 			% EA Background
-			Evolutionary Algorithms are largely inspired from the biological sciences. They encode solutions to problems as individuals, part of a population which evolves over generations, until a solution is found or execution limit is reached.Figure \ref{fig:RHEArollout} shows the stages of how Evolutionary Algorithms work \cite{gaina2017rolling}.
-			Rolling Horizon Evolutionary Algorithms are one of the options available to evolve sequences of actions for planning in GVGP \cite{perez2013rolling}.
+			Evolutionary Algorithms (EA) are largely inspired from the biological sciences. They encode solutions to problems as individuals, part of a population which evolves over generations, until a solution is found or execution limit is reached. Figure \ref{fig:RHEArollout} shows the stages of how Evolutionary Algorithms work \cite{gaina2017rolling}.
+			Rolling Horizon Evolutionary Algorithms are one of the options available to evolve sequences of actions for planning in GVGP \cite{perez2013rolling}. Furthermore within the GVG-AI competition the sampleGA controller, as described in section \ref{sssec:sampleGA} uses a rolling horizon open loop algorithm \cite{perez20162014}.
 
 			Perez et al. in \cite{perez2013rolling} compared MCTS with RHEA on the game Physical Traveling Salesman Problem (PTSP). 
 			The game is a modification of the popular optimization problem, the Traveling Salesman Problem \cite{perez2014solving, flood1956traveling} where the player must visit a series of way points in a 2 dimensional level and the agent has up to 40ms to execute an action \cite{perez2013rolling}, which is similar to the GVG-AI competition.  The results from that paper show that RHEA is a promising competitor to MCTS.
@@ -267,22 +266,30 @@ Email: AR185160@falmouth.ac.uk\\}
 		    		 \caption{RHEA statistical tree steps. Image sourced from \cite{gaina2017rolling}. }
 		  		 \label{fig:RHEArollout}
 			\end{figure}
-
+			
 			% Stages of Evilutionary algorithms
 			
+			
+			A Typical genetic algorithm is composed of several stages;
+			First the algorithm creates a population of random individuals, then it will iteratively go though the sample and calculate the fitness (i.e. the evaluation function as described in \ref{sssec:Common}) of every individual in the population. 
+			The most fit individuals are then used to form a new generation, and each individual is modified with a combination of crossover and mutation. 
+			Crossover is representative of biological reproduction where a child is produced based of the parents properties. Mutation is where a random value is changed to explore the search space and is analogous to biological mutation \cite{back1996evolutionary, vcrepinvsek2013exploration, perez2013rolling, gaina2017rolling, gaina2017analysis}.
+			This process can be shown in figure \ref{fig:RHEArollout}.
+			
+
 
 			%Combination of RHEA AND MCTS
-			Recent literature on AGI have been combining evolution and tree search in interesting ways in order to combine the benefits of both methods, such as Licas et al. \cite{lucas2014fast} applied an EA process to guide the simulation step of MCTS and improve the random default policy. Their results show a significant increase in performance in the game \textit{Space Invaders} and the Mountain Car Problem.
+			Recent literature on AGI have been combining evolution and tree search in interesting ways in order to combine the benefits of both methods, such as Lucas et al. \cite{lucas2014fast} applied an EA process to guide the simulation step of MCTS and improve the random default policy. Their results show a significant increase in performance in the game \textit{Space Invaders} and the Mountain Car Problem.
 			
 		
 		
 		\subsubsection{Minimax}
-			\textbf{Minimax}
+
 				Minimax attempts to minimize the opponent's maximum reward at each state. The tree search is often stopped prematurely and a value function is used to estimate the outcome of the game, then the Alpha-Beta heuristic is used to prune the search tree \cite{browne2012survey, knuth1975analysis}.
 			
-			\textbf{Depth First Search}
-				Depth first search (DFS) is a tree search algorithm that iteratively expands each unvisited child node of the tree until a non-expandable node is reached. The search then navigates back up the tree until it finds the next unvisited node to expand and continues the search until all the nodes have been visited \cite{perez2014solving}.
-				Depth First search with alpha-beta pruning \cite{knuth1975analysis} has achieved superhuman performance in chess, checkers and orthello. However it has not been effective in the game Go \cite{silver2016mastering}.
+		\subsubsection{Depth First Search}
+				Depth First Search (DFS) is a tree search algorithm that iteratively expands each unvisited child node of the tree until a non-expandable node is reached. The search then navigates back up the tree until it finds the next unvisited node to expand and continues the search until all the nodes have been visited \cite{perez2014solving}.
+				Depth first search with alpha-beta pruning \cite{knuth1975analysis} has achieved superhuman performance in chess, checkers and orthello. However it has not been effective in the game Go \cite{silver2016mastering}.
 			
 		
 		
@@ -290,7 +297,9 @@ Email: AR185160@falmouth.ac.uk\\}
 			This paper proposes an efficient implementation of BFS for GVGP \cite{EfficientBFS} which uses a hash function.
 
 	\subsection{Hyper-Heuristics}
-		During the 2015 competition, the three winning controllers had one thing in common, they were all a combination of techniques that were selected depending on certain characteristics observed in the game state \cite{horn2016mcts}.
+		A hyper-heuristic approach typically combines several AI methods and automate them to be able to choose the best solution for that situation, a term used to describe them is `\textit{heuristics to choose heuristics}' \cite{burke2013hyper, burke2010classification}.
+		During the 2015 competition, the three winning controllers all were a type of hyper-heuristic \cite{horn2016mcts}.
+		
 		
 
 			
@@ -314,11 +323,15 @@ Email: AR185160@falmouth.ac.uk\\}
 		The GVG-AI Competition is a competition framework that proposes the challenge of creating controllers for general video game playing. The controllers must be able to play a wide variety of video games, many of them will be completely unknown to the controller. This means the controller must have some general AI to discover the mechanics and goal of the game, so it can increase its score and win the game. \cite{GVGAI, perez20162014}
 		
 		The framework contains a library of 2D video games some of which are based of classic arcade games, there are currently as of writing this, 82 different singleplayer games and 20 multiplayer games that AI controllers can be tested on.
+		
+		%VGDL
+		Games in the GVG-AI competition are written using the Video Game Description Language \cite{schaul2014extensible}, which is a high level description language designed to be able to create a wide variety of arcade style games, where the rules take the form of sprite movement and interaction on a 2D grid \cite{nelson2016investigating}.
+		VGDL in GVG-AI is a JAVA port from pyVGDL which was programmed in python. The VGDL is a powerful tool for conducting research on computational intelligence and games \cite{schaul2014extensible, love2008general}.
 
 		%ALE
 		The Arcade Learning Environment \cite{bellemare2013arcade} provides an interface to hundreds of Atari 2600 game environments. ALE is similar to GVG-AI in a couple of ways; firstly it provides a testbed for benchmarking AI techniques within video games and secondly it is focused around creating agents within video games, as opposed to the GGP competition \cite{GGP2005general}.
 		The Atari 2600 is a video game console developed in 1977 , it has had over 500 original games released for the console, and nearly all popular arcade games at the time were pored to the console such as; \textit{PAC-MAN} and \textit{SPACE INVADERS} \cite{bellemare2013arcade}. This provides a large test-bed for AI agents.
-		The hardware for the Atari 2600 is very limited compared to today's standards, it had a 1.19Mhz CPU and 128 Bytes of RAM. These hardware specs limit the complexity of the games that can be played on it, which strikes a balance of challenging but allowing search algorithms to have a small enough search space as to not have a large horizon effect \cite{bellemare2013arcade}.
+		The hardware for the Atari 2600 is very limited compared to today's standards, it had a 1.19Mhz CPU and 128 Bytes of RAM. These hardware specifications limit the complexity of the games that can be played on it, which strikes a balance of challenging but allowing search algorithms to have a small enough search space as to not have a large horizon effect \cite{bellemare2013arcade}.
 		ALE has been used deep reinforcement learning techniques, that have been able to reach human level of play \cite{mnih2015human, gaina2017rolling}.
 		
 
@@ -328,17 +341,15 @@ Email: AR185160@falmouth.ac.uk\\}
 		    \caption{Example of games in GVG-AI Framework: angelsdemons (Top Left), boulderdash (Top Right), frogs (Bottom Right), Zelda (Bottom Left). }
 		    \label{fig:VGDL}
 		\end{figure}
-		%VGDL
-		Games in the GVG-AI competition are written using the Video Game Description Language \cite{schaul2014extensible}, which is a high level description language designed to be able to create a wide variety of arcade style games, where the rules take the form of sprite movement and interaction on a 2D grid \cite{nelson2016investigating}.
-		VGDL in GVG-AI is a JAVA port from pyVGDL which was programmed in python. The VGDL is a powerful tool for conducting research on computational intelligence and games \cite{schaul2014extensible, love2008general}.
+		
 		
 		%Summary
 		The growing interest in competitions such as the ones mentioned above clearly reflects a desire for general competency for AI within games.
 
-	\subsubsection{Challenges and Goals of GVGAI}
+	\subsubsection{Challenges and Goals of GVG-AI}
 
-		The goal of GVGAI is to create a generally intelligent agent that is able to win any game it is placed in, when it doesn't know the game.
-		During the tournament a completely new set of games are used, to avoid the agents becoming too deomain specific.
+		The goal of GVG-AI is to create a generally intelligent agent that is able to win any game it is placed in, when it doesn't know the game.
+		During the tournament a completely new set of games are used, to avoid the agents becoming too domain specific.
 		Another challenge is the time limit that an agent can choose an action, this avoids the agent spending too long deciding a task and not making an action. \cite{schuster2015mcts}.
 		
 		
@@ -356,7 +367,8 @@ Email: AR185160@falmouth.ac.uk\\}
 		The controllers can also use up to 1 second of CPU time for initialization and 40ms to compute an action each game tick. However if the controller takes between 40ms and 50ms, the action return will be \textit{NIL}(Where no movement will be applied), anymore than 50ms will result in the controller automatically loosing \cite{horn2016mcts, perez20162014}.
 	
 	
-	\subsubsection{The GVGAI Framework \& Sample Controllers} \label{Framework}
+	\subsubsection{The GVG-AI Framework \& Sample Controllers} \label{Framework}
+	
 		%Limits of the framework
 		The Framework is developed in the Java Environment and has a few differnet tracks that you can submit AI for, these are; Single Player Planning Track, 2-Player Planning Track and Level Generation Track \cite{gaina2016general}.
 		The controllers are allowed upto 40ms to compute the agents action(s) \cite{perez2016GVGAICompetition, GVGAI}.
@@ -371,7 +383,7 @@ Email: AR185160@falmouth.ac.uk\\}
 		
 		The framework has an StateObservation object that has an interaction set that consists of \textit{up, down, left, right, nil, escape} and \textit{use}.
 
-		The GVGAI framework comes with quite a few sample agents;
+		The GVG-AI framework comes with quite a few sample agents;
 		
 		\textbf{Sample MCTS} \label{sssec:sampleMCTS}
 			The GVG-AI framework proves a sample MCTS controller, this controller has received considerable interest due to its success in the competition. 
@@ -379,8 +391,8 @@ Email: AR185160@falmouth.ac.uk\\}
 			The sample MCTS controller uses a payout depth of 10 moves and an exploration-exploitation constant value of $\sqrt{2}$ (from equation \ref{eqUCT}) and selects the most visited action from the root to pick a move to return for each game cycle \cite{perez20162014}.
 			However MCTS isn't the sole answer to the GVG-AI competition, as it has been shown that even with a 30x computational budget, it fails to master games. However it does manage to avoid to explicitly loosing games, but does not win a lot of them either. This shows that for the AI it finds not losing is significantly easier than winning \cite{nelson2016investigating}.
 
-		\textbf{sample GA}
-			The sample Genetic Algorithm(GA) controller is a rolling horizon open loop implementation for a minimalistic steady state genetic algorithm, known as microbial GA \cite{harvey2009microbial}.
+		\textbf{sample GA} \label{sssec:sampleGA}
+			The sample Genetic Algorithm(GA) controller is a rolling horizon open loop implementation for a minimalistic steady state genetic algorithm, known as microbial GA \cite{harvey2009microbial, perez20162014}.
 			A tournament takes place between two players and the loser of the tournament is mutated randomly, with the probability of 1/7. Then certain parts of its genome are recombined with parts from the winners genome, with the probability of 0.1 \cite{perez20162014}. 
 			This repeats until the time budget has been used. The evaluation function is the same as the sampleMCTS controller. 
 			The sample GA controller came 12th in the competition \cite{perez20162014}.
@@ -388,7 +400,7 @@ Email: AR185160@falmouth.ac.uk\\}
 
 		\textbf{Random}
 			This is a very simple controller that is provided with the GVG-AI framework, it simply returns a random action at each game cycle.
-			The random controller came 14th in the competition, which is quite surprising as it managed to beat quite a few of the other, more complicated controllers. \footnote{The reason for this may be due to more complicated controllers not choosing an action because it isn't able to search the game space, so making a random action is often better than no action.}
+			The random controller came 14th in the competition, which is quite surprising as it managed to beat quite a few of the other, more complicated controllers \footnote{The reason for this may be due to more complicated controllers not choosing an action because it isn't able to search enough of the game space, so making a random action is often better than no action.}.
 
 		\textbf{OSLA}
 			One Step Look Ahead is another rather simple controller, it evaluates the position using the same heuristic as Sample MCTS and selects the action with the highest evaluation score, then moves the model one step ahead. This controller came in 16th place.
@@ -410,11 +422,10 @@ Email: AR185160@falmouth.ac.uk\\}
 		\item The amount of moves that controller made in each type of game
 	\end{itemize}
 
-	%How will the data be collected
-	The data will be collected within the GVG-AI framework ( as mentioned in section \ref{Framework}, which is programmed in Java.
-
 	%What I will create
 	There will be thousands of different simulations to run to gather the required data, so this paper will propose an automated test software which will be able to run tests the majority of controllers and games. This will decrease the chance of human error interfering with the results.
+	
+	From this data I will aim to create an AI controller that will either use hyper-heuristics to improve its performance, or a combination of different methods.
 	
 	
 
@@ -423,26 +434,24 @@ Email: AR185160@falmouth.ac.uk\\}
 	From this data conclusions can be drawn out as to the limitations of different search techniques and potentially any areas in which they could be improved.
 	Further research could include feeding this data back into the search algorithms or level generators to develop levels that the search techniques will be able to navigate.
 
-	%
 	
 \subsection{Hypothesis}
+
 	\textbf{Null Hypothesis:}
-		The different search trees methods have no significant differences in strength in the competition.
-	\textbf{Hypothesis One:}
-		There is a clear weakness in one of the search techniques when trying to complete a specified type of game.
-	\textbf{Hypothesis Two:}
-		There is a clear Strength in one of
-
-%How I aim to carry out the research
-
-%Research Justification
 	
-%\section{Preliminary results}
-	%Preliminary results go here.
-
+		The different search trees methods have no significant differences in strength in the competition.
+		
+	\textbf{Hypothesis:}
+	
+		There is a clear strength or weakness in one of the search techniques when trying to complete a specified type of game.
+	
 
 \section{Conclusion}
-	The conclusion goes here.
+	In conclusion, the literature covered in this review provides an overview of a few of the current algorithms in use in the GVG-AI competition.
+	Based on the performance of the different search algorithms within the framework, a conclusion will be drawn between the superior algorithms for certain games.
+	The GVG-AI competition provides a good framework to compare different tree search algorithms. 
+	The aim of this paper will be to create an agent for the GVG-AI competition based of the strengths and limitations of tree search algorithms.
+	 
 
 % references section
 
@@ -451,9 +460,9 @@ Email: AR185160@falmouth.ac.uk\\}
 
 % Appendices
 
-\appendices
-\section{First appendix}
-Appendices are optional. Delete or comment out this part if you do not need them.
+%\appendices
+%\section{First appendix}
+%Appendices are optional. Delete or comment out this part if you do not need them.
 
 % that's all folks
 \end{document}
