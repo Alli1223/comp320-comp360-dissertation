@@ -100,7 +100,13 @@ Email: AR185160@falmouth.ac.uk\\}
 
 	There is a large amount of tree search techniques used within the GVG-AI competition, many of them are based around Monte Carlo Tree Search (MCTS).This project will compare the success rates of each of the different methods, as well as an in depth comparison as to where each tree search technique succeeds in a set of existing games.
 
-
+\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{VGDL2}
+		    \caption{Example of games in GVG-AI Framework: angelsdemons (Top Left), boulderdash (Top Right), frogs (Bottom Right), Zelda (Bottom Left). }
+		    \label{fig:VGDL}
+		\end{figure}
+		
 \section{Research Questions}
 
 	%Motivation
@@ -108,11 +114,12 @@ Email: AR185160@falmouth.ac.uk\\}
 
 	Furthermore within the GVG-AI competition there are a few different tree search techniques used, a few of which are mentioned in section \ref{ssec:GST}. 
 	These techniques perform quite differently within the competition, this paper will aim to answer \textit{What are the strengths and weaknesses of different search techniques} as well as \textit{What type of game does each search technique succeed at?}
-	%Another question this paper will aim to answer is; \textit{What games have too large of a search space for what techniques?}.
+
+	%
 	
 	%Importance
 	The research gathered from this could lead to a Hyper-Heuristic \footnote{A Hyper-Heuristic contains a portfolio of algorithms and is able to select the most appropriate algorithm to use depending on the game state \cite{hyperHeurisicMendes, horn2016mcts}.}  that can be implemented into a controller for the competition. 
-	Furthermore this paper will outline the challenges of using the different search techniques, such as issues of games that have a large search space, or multiple objectives.
+	Furthermore this paper will outline the challenges of using the different search techniques, such as issues of games that have a large search space, or multiple objectives and show what are the most challenging areas for AI within the GVG-AI competition.
 	
 
 
@@ -133,14 +140,12 @@ Email: AR185160@falmouth.ac.uk\\}
 	\subsection{Artificial General Intelligence in games}
 		
 		There have been a lot of popular games that have been used to benchmark AI, for example games such as Chess, or Go. Some of these AI programs have been improved upon until they can defeat the world champion players, such as Deep Blue which defeated Garry Kasparov in 1997 \cite{DeepBlue, shannon1988programming, DeepBlueOverview}. 
-		
-		A long standing goal of AI is to develop algorithms capable of completing various tasks without any need to create domain specific tailoring.
 
 		%Programming Chess
 		Deep Blue was developed at IBM during the mid-1990s. It was able to beat the world chess champion by having a massively parallel system that was able to search a very large search space concurrently \cite{DeepBlue}.
 
 		%Programming Go
-		The challenge of creating an AI for the game Go is that it has a huge branching factor and it lacks a good evaluation function (these terms are described in section \ref{sssec:Common}).
+		The challenge of creating an AI for the game Go is that it has a huge branching factor and it lacks a good evaluation function (these terms are described in section \ref{sssec:Common}). 
 		There have been more recent breakthroughs within AI, such as AlphaGo \cite{silver2016mastering} which was developed by Google Deepmind. It was able to beat the a professional Go player in 2015 and in 2017 was able to beat Ke Jie, the world champion player at the time\cite{silver2016mastering}.
 		AlphaGo combined neural networks with MCTS to achieve a 99.8\% win rate against other Go programs. The program used a supervised learning policy network that was trained directly from expert human players, then a reinforcement learning policy network was used to improve the supervised learning policy by optimising the final outcome of self played games. Further information on how this works is described in \cite{silver2016mastering}.
 		Monte Carlo Tree Search (MCTS) has had spectacular success in the game Go \cite{browne2012survey}, and is implemented in the top rated go programs.
@@ -151,18 +156,24 @@ Email: AR185160@falmouth.ac.uk\\}
 		This is what started the General Game Playing (GGP) competition (described in section \ref{ssec:GVGAIC}) which was to create general AI for board games, this is similar to what happened with GVG-AI where there was lots of specialized AI for games, which were all very domain specficic, such as Starcraft AI \cite{ontanon2013survey, hingston2010new}.
 		This lead to the need for general AI for games, hence GVG-AI and Arcade Learning Environment which is described in section \ref{ssec:GVGAIC}.
 		
+		A long standing goal of AI is to develop algorithms capable of completing various tasks without any need to create domain specific tailoring.
+		
 	\subsection{Game Search Techniques} \label{ssec:GST}
 		\subsubsection{Common Terms Used in Tree Search Algorithms} \label{sssec:Common}
 
 		\textbf{Branching Factor:}
-			This is the number of children at each node of a tree.
+			Branching Factor is the number of children at each node of a tree. This is a large factor as to what algorithms can be used to play certain types of games, for example; the GVG-AI competition has a maximum branching factor of 7, where as the game Go has a maximum branching factor of 250 \cite{silver2016mastering, perez20162014}.
 
 		\textbf{Horizon Effect:}
-			This is the problem where only a small portion of the search tree can be searched, i.e. the AI can search 4 moves ahead, but the 5th move could be a detrimental move, but the AI doesn't know that because of its "\textit{horizon}".
+			This is the problem where only a small portion of the search tree can be searched, i.e. the AI can search 4 moves ahead, but the 5th move could be a detrimental move, but the AI doesn't know that because its search "\textit{horizon}" is limited \cite{joppen2017informed}.
 
 		\textbf{Evaluation Function:}
 			This is used to estimate the value of a position or the current game state, i.e. is the agent winning or loosing the game.
-
+			
+		\textbf{Open Loop \& Closed Loop:}
+			In the closed loop MCTS the algorithm assumes it is stable to store game sates on the nodes of the tree when expansion is performed, which means that selection can navigate the tree without having to calculate new states.
+			In Open Loop MCTS (OLMCTS) the algorithm only stores the statistics on the tree nodes and then generates the next states using the forward model \cite{perez2016analyzing, perez2015open}.
+			
 		
 		
 		\subsubsection{Monte Carlo Tree Search (MCTS) }\label{sssec:MCTS}
@@ -218,7 +229,7 @@ Email: AR185160@falmouth.ac.uk\\}
 			The major task for an expansion strategy is to choose which children should be added to the search tree.
 			
 			When the selection strategy returns a node, there are a few different ways to expand the node. This step is similar to the selection step, however this step has no information available from previous iterations of MCTS for a specific child \cite{schuster2015mcts}. 
-			Typically only one child is added to the tree by many MCTS based agents after selection and before the simulation \cite{chaslot2008monte, schuster2015mcts}. 
+			Typically only one child is added to the tree by many MCTS based agents \cite{chaslot2008monte, schuster2015mcts}. 
 			
 
 		\textbf{Simulation}
@@ -226,6 +237,7 @@ Email: AR185160@falmouth.ac.uk\\}
 			An Monte Carlo simulation is carried out until a pre-determined depth or the end of a game.
 			For the rest of the game, actions are selected at random until the end of the game. This means that the weighting of action selection probabilities has a significant effect on the level of play. For example if the game played with equal probability between exploration and exploitation, this will often lead to sub-optimal play \cite{chaslot2008monte}. 
 			To look for more promising plays, MCTS can use heuristic knowledge to give weights to actions that look more promising \cite{perez2014solving}.
+			Silver et al. \cite{silver2009monte} describes the technique of simulation balancing using a gradient decent to bias the policy during the simulation, this aims to provide a more accurate spread of simulation outcomes.
 
 		\textbf{Backpropagation}
 		
@@ -246,7 +258,6 @@ Email: AR185160@falmouth.ac.uk\\}
 			While MCTS has been extensively applied to zero-sum games, with two players that alternate terns in discrete action spaces, it has also been applied to other domain types, such as single and multiplayer games, RTS and games with lots of uncertainty \cite{browne2012survey, de2016monte, frydenberg2015investigating}.
 
 		
-
 
 
 		\subsubsection{Evolutionary Algorithms} \label{sssec:EA}
@@ -329,18 +340,13 @@ Email: AR185160@falmouth.ac.uk\\}
 		VGDL in GVG-AI is a JAVA port from pyVGDL which was programmed in python. The VGDL is a powerful tool for conducting research on computational intelligence and games \cite{schaul2014extensible, love2008general}.
 
 		%ALE
-		The Arcade Learning Environment \cite{bellemare2013arcade} provides an interface to hundreds of Atari 2600 game environments. ALE is similar to GVG-AI in a couple of ways; firstly it provides a testbed for benchmarking AI techniques within video games and secondly it is focused around creating agents within video games, as opposed to the GGP competition \cite{GGP2005general}.
+		The Arcade Learning Environment \cite{bellemare2013arcade} provides an interface to hundreds of Atari 2600 game environments. ALE is similar to GVG-AI in a couple of ways; firstly it provides a test bed for benchmarking AI techniques within video games and secondly it is focused around creating agents within video games, as opposed to the GGP competition \cite{GGP2005general}.
 		The Atari 2600 is a video game console developed in 1977 , it has had over 500 original games released for the console, and nearly all popular arcade games at the time were pored to the console such as; \textit{PAC-MAN} and \textit{SPACE INVADERS} \cite{bellemare2013arcade}. This provides a large test-bed for AI agents.
 		The hardware for the Atari 2600 is very limited compared to today's standards, it had a 1.19Mhz CPU and 128 Bytes of RAM. These hardware specifications limit the complexity of the games that can be played on it, which strikes a balance of challenging but allowing search algorithms to have a small enough search space as to not have a large horizon effect \cite{bellemare2013arcade}.
 		ALE has been used deep reinforcement learning techniques, that have been able to reach human level of play \cite{mnih2015human, gaina2017rolling}.
 		
 
-		\begin{figure}[h]
-		    \centering
-		    \includegraphics[width=0.5\textwidth]{VGDL2}
-		    \caption{Example of games in GVG-AI Framework: angelsdemons (Top Left), boulderdash (Top Right), frogs (Bottom Right), Zelda (Bottom Left). }
-		    \label{fig:VGDL}
-		\end{figure}
+		
 		
 		
 		%Summary
@@ -350,7 +356,8 @@ Email: AR185160@falmouth.ac.uk\\}
 
 		The goal of GVG-AI is to create a generally intelligent agent that is able to win any game it is placed in, when it doesn't know the game.
 		During the tournament a completely new set of games are used, to avoid the agents becoming too domain specific.
-		Another challenge is the time limit that an agent can choose an action, this avoids the agent spending too long deciding a task and not making an action. \cite{schuster2015mcts}.
+		Another challenge is the time limit that an agent can choose an action, this avoids the agent spending too long deciding a task and not making an action \cite{schuster2015mcts}. 
+		Furthermore this also is what defines the difference between GVG-AI and GGP, because having such a short amount of time to compute an action is what makes the competition such a challenge, otherwise the agent will be able to brute force the search space to find the best possible solution, which may take minutes or hours to compute each game tick.
 		
 		
 	\subsubsection{Competition \& Rules}
@@ -403,35 +410,31 @@ Email: AR185160@falmouth.ac.uk\\}
 			The random controller came 14th in the competition, which is quite surprising as it managed to beat quite a few of the other, more complicated controllers \footnote{The reason for this may be due to more complicated controllers not choosing an action because it isn't able to search enough of the game space, so making a random action is often better than no action.}.
 
 		\textbf{OSLA}
-			One Step Look Ahead is another rather simple controller, it evaluates the position using the same heuristic as Sample MCTS and selects the action with the highest evaluation score, then moves the model one step ahead. This controller came in 16th place.
+			One Step Look Ahead is another rather simple controller, it evaluates the position using the same heuristic as Sample MCTS and selects the action with the highest evaluation score, then moves the model one step ahead. This controller came in 16th place zcite{perez20162014}.
 
-
-	
 	
 		
 	
 \section{Research Methodologies}	
-	The data of the GVG-AI sample controllers as well as the controllers submitted for the competitions over the last few years will be gathered. 
+	The data of the GVG-AI sample controllers as well as the controllers submitted for the competitions in previous years will be gathered. 
 
 	% What data will be collected:
-	Examples of the type of metrics that will be gathered from this comparative study:
+	These are a few of the type of metrics that will be gathered from the controllers:
 	\begin{itemize}
 		\item Success rate in a particular game.
 		\item Where the agent was when it lost or won the game
-		\item How much of the search space was the method able to search
+		\item How much of the search space was the controller able to search
 		\item The amount of moves that controller made in each type of game
 	\end{itemize}
 
 	%What I will create
-	There will be thousands of different simulations to run to gather the required data, so this paper will propose an automated test software which will be able to run tests the majority of controllers and games. This will decrease the chance of human error interfering with the results.
-	
-	From this data I will aim to create an AI controller that will either use hyper-heuristics to improve its performance, or a combination of different methods.
+	There will be thousands of different simulations to run to gather the required data, this will be done by modifications to the GVG-AI framework to gather the extra information needed.
+	From this data this paper will aim to create an AI controller that will either use hyper-heuristics to improve its performance. Furthermore conclusions can be drawn out as to the limitations of different search techniques and potentially any areas in which they could be improved.
 	
 	
 
 	%Justification of research
 	This software will provide an in depth insight into the challenges faced by each tree search algorithm.
-	From this data conclusions can be drawn out as to the limitations of different search techniques and potentially any areas in which they could be improved.
 	Further research could include feeding this data back into the search algorithms or level generators to develop levels that the search techniques will be able to navigate.
 
 	
@@ -443,7 +446,8 @@ Email: AR185160@falmouth.ac.uk\\}
 		
 	\textbf{Hypothesis:}
 	
-		There is a clear strength or weakness in one of the search techniques when trying to complete a specified type of game.
+		Combining different search techniques with different strengths and weaknesses lead to a better AI agent.
+
 	
 
 \section{Conclusion}
