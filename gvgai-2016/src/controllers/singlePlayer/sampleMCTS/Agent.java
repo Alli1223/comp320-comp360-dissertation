@@ -1,5 +1,6 @@
 package controllers.singlePlayer.sampleMCTS;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -16,12 +17,14 @@ import tools.ElapsedCpuTimer;
  * Time: 21:45
  * This is a Java port from Tom Schaul's VGDL - https://github.com/schaul/py-vgdl
  */
-public class Agent extends AbstractPlayer {
+public class Agent extends AbstractPlayer
+{
 
     public static int NUM_ACTIONS;
-    public static int ROLLOUT_DEPTH = 10;
+    public static int ROLLOUT_DEPTH = 50;
     public static double K = Math.sqrt(2);
     public static Types.ACTIONS[] actions;
+    private StateObservation SO;
 
     /**
      * Random generator for the agent.
@@ -35,6 +38,7 @@ public class Agent extends AbstractPlayer {
      */
     public Agent(StateObservation so, ElapsedCpuTimer elapsedTimer)
     {
+
         //Get the actions in a static array.
         ArrayList<Types.ACTIONS> act = so.getAvailableActions();
         actions = new Types.ACTIONS[act.size()];
@@ -48,7 +52,6 @@ public class Agent extends AbstractPlayer {
         mctsPlayer = new SingleMCTSPlayer(new Random());
     }
 
-
     /**
      * Picks an action. This function is called every game step to request an
      * action from the player.
@@ -56,8 +59,10 @@ public class Agent extends AbstractPlayer {
      * @param elapsedTimer Timer when the action returned is due.
      * @return An action for the current state
      */
-    public Types.ACTIONS act(StateObservation stateObs, ElapsedCpuTimer elapsedTimer) {
-
+    public Types.ACTIONS act(StateObservation stateObs, ElapsedCpuTimer elapsedTimer)
+    {
+        // StateObservation set for draw function
+        SO = stateObs;
         ArrayList<Observation> obs[] = stateObs.getFromAvatarSpritesPositions();
         ArrayList<Observation> grid[][] = stateObs.getObservationGrid();
 
@@ -79,10 +84,18 @@ public class Agent extends AbstractPlayer {
      */
     public void result(StateObservation stateObservation, ElapsedCpuTimer elapsedCpuTimer)
     {
-//        System.out.println("MCTS avg iters: " + SingleMCTSPlayer.iters / SingleMCTSPlayer.num);
+        System.out.println("MCTS avg iters: " + SingleMCTSPlayer.iters / SingleMCTSPlayer.num);
         //Include your code here to know how it all ended.
-        //System.out.println("Game over? " + stateObservation.isGameOver());
+        System.out.println("Game over? " + stateObservation.isGameOver());
+        //stateObservation.getAvatarPosition().x;
     }
+
+    public void draw(Graphics2D g)
+    {
+        g.drawLine((int) SO.getAvatarPosition().x,(int) SO.getAvatarPosition().y,300,300);
+
+    }
+
 
 
 }

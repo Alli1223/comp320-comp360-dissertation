@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.awt.geom.Line2D;
 
 /**
  * Created by Raluca on 07-Apr-16.
@@ -188,7 +189,10 @@ public abstract class Player {
      */
     public void draw(Graphics2D g)
     {
+
+;
         //Overwrite this method in your controller to draw on the screen.
         //This method should be left empty in this class.
+
     }
 }

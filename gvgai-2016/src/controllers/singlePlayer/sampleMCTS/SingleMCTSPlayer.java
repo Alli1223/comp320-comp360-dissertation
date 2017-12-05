@@ -1,5 +1,6 @@
 package controllers.singlePlayer.sampleMCTS;
 
+import java.awt.*;
 import java.util.Random;
 
 import core.game.StateObservation;
