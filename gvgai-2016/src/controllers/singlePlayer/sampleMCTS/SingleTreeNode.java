@@ -62,7 +62,7 @@ public class SingleTreeNode
             remaining = elapsedTimer.remainingTimeMillis();
             //System.out.println(elapsedTimerIteration.elapsedMillis() + " --> " + acumTimeTaken + " (" + remaining + ")");
         }
-        //System.out.println("-- " + numIters + " -- ( " + avgTimeTaken + ")");
+        System.out.println("-- " + numIters + " -- ( " + avgTimeTaken + ")");
         totalIters = numIters;
 
         //ArcadeMachine.performance.add(numIters);

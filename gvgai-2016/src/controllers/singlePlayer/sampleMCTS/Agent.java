@@ -2,6 +2,7 @@ package controllers.singlePlayer.sampleMCTS;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import core.game.Observation;
@@ -9,6 +10,7 @@ import core.game.StateObservation;
 import core.player.AbstractPlayer;
 import ontology.Types;
 import tools.ElapsedCpuTimer;
+import tools.Vector2d;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,7 +26,12 @@ public class Agent extends AbstractPlayer
     public static int ROLLOUT_DEPTH = 50;
     public static double K = Math.sqrt(2);
     public static Types.ACTIONS[] actions;
+
+    //! Edited by Alli 05/12/2017
+    // List of variables for storing and rendering MCTS information
     private StateObservation SO;
+    private HashMap<Vector2d, Vector2d> listOfPos = new HashMap<Vector2d, Vector2d>();
+
 
     /**
      * Random generator for the agent.
@@ -90,9 +97,28 @@ public class Agent extends AbstractPlayer
         //stateObservation.getAvatarPosition().x;
     }
 
+
+    //! Edited by Alli 05/12/2017
+    // Draws graphics to the screen
     public void draw(Graphics2D g)
     {
-        g.drawLine((int) SO.getAvatarPosition().x,(int) SO.getAvatarPosition().y,300,300);
+        //g.drawLine((int) SO.getAvatarPosition().x,(int) SO.getAvatarPosition().y, (int)SO.getEventsHistory().last().position.x,(int)SO.getAvatarLastAction().getKey()[1]);
+
+        //if(SO.getAvatarPosition() != SO.getEventsHistory().last().position)
+            //listOfPos.put(SO.getAvatarPosition(), SO.getEventsHistory().last().position);
+
+
+        //listOfPos.forEach((k,v) -> g.drawLine((int)k.x, (int)v.y, (int) k.x ,(int) v.y));
+
+
+
+
+        /*
+        for( int i = 0; i < SO.getEventsHistory().size(); i++)
+        {
+            g.drawLine((int) SO.getEventsHistory().last().position.x, (int) SO.getEventsHistory().last().position.y, (int) SO.getEventsHistory()., (int) SO.getEventsHistory().last().position.x);
+        }
+        */
 
     }
 
