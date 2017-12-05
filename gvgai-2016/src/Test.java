@@ -25,7 +25,6 @@ public class Test
         String sampleOLETSController = "controllers.singlePlayer.olets.Agent";
         String repeatOLETS = "controllers.singlePlayer.repeatOLETS.Agent";
 
-
         //Available Generators
         String randomLevelGenerator = "levelGenerators.randomLevelGenerator.LevelGenerator";
         String geneticGenerator = "levelGenerators.geneticLevelGenerator.LevelGenerator";
@@ -54,28 +53,28 @@ public class Test
                 "surround", "survivezombies", "tercio", "thecitadel", "thesnowman",           //70-74
                 "waitforbreakfast", "watergame", "waves", "whackamole", "witnessprotection",  //75-79
                 "zelda", "zenpuzzle" };                                                       //80, 81
-// 1, 11,
+
         //Other settings
         boolean visuals = true;
         int seed = new Random().nextInt();
 
         //Game and level to play
-        int gameIdx = 9;
-        int levelIdx = 0; //level names from 0 to 4 (game_lvlN.txt).
+        int gameIdx = 43;
+        int levelIdx = 1; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
 
         String recordLevelFile = generateLevelPath + games[gameIdx] + "_glvl.txt";
-        String recordActionsFile = null;//"actions_" + games[gameIdx] + "_lvl" + levelIdx + "_" + seed + ".txt"; //where to record the actions executed. null if not to save.
+        String recordActionsFile = "actions_" + games[gameIdx] + "_lvl" + levelIdx + "_" + seed + ".txt"; //where to record the actions executed. null if not to save.
 
         // 1. This starts a game, in a level, played by a human.
         //ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
 
         // 2. This plays a game in a level by the controller.
-        ArcadeMachine.runOneGame(game, level1, visuals, sampleGAController, recordActionsFile, seed, 0);
+        ArcadeMachine.runOneGame(game, level1, visuals, sampleMCTSController, recordActionsFile, seed, 0);
 
         // 3. This replays a game from an action file previously recorded
-        //String readActionsFile = recordActionsFile;
+        //String readActionsFile = "actions_pacman_lvl1_-1877682670.txt";
         //ArcadeMachine.replayGame(game, level1, visuals, readActionsFile);
 
         // 4. This plays a single game, in N levels, M times :

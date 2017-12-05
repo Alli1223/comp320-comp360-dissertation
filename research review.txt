@@ -1,0 +1,10 @@
+State different hypthessis:
+Tree search technqiue xyz will prove better than abc
+
+Research question:
+How to define type of game and genre for research question, sinleplayer, multiplayer etc
+Don't use footnotes, use footnotes for grey literature
+Justification of methodolgies
+
+Null hypothesis for each hypothesis
+Give flow of related works under section heading

@@ -59,13 +59,14 @@ public class Agent extends AbstractPlayer {
         Types.ACTIONS action = actions.get(actionIdx);
         actionIdx++;
 
+        /*
         long remaining = elapsedTimer.remainingTimeMillis();
-        while(remaining > 1)
+        while(remaining > 10)
         {
             //This allows visualization of the replay.
             remaining = elapsedTimer.remainingTimeMillis();
         }
-
+        */
         return action;
     }
 }
