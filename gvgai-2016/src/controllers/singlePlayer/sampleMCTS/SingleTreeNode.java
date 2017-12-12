@@ -7,6 +7,7 @@ import core.game.StateObservation;
 import ontology.Types;
 import tools.ElapsedCpuTimer;
 import tools.Utils;
+import tools.Vector2d;
 
 public class SingleTreeNode
 {
@@ -26,9 +27,14 @@ public class SingleTreeNode
         this(null, null, rnd);
     }
 
+    //public int mctsIterations;
+
+
+
     public static int totalIters = 0;
 
-    public SingleTreeNode(StateObservation state, SingleTreeNode parent, Random rnd) {
+    public SingleTreeNode(StateObservation state, SingleTreeNode parent, Random rnd)
+    {
         this.state = state;
         this.parent = parent;
         this.m_rnd = rnd;
@@ -41,7 +47,8 @@ public class SingleTreeNode
     }
 
 
-    public void mctsSearch(ElapsedCpuTimer elapsedTimer) {
+    public void mctsSearch(ElapsedCpuTimer elapsedTimer)
+    {
 
         double avgTimeTaken = 0;
         double acumTimeTaken = 0;
@@ -49,26 +56,31 @@ public class SingleTreeNode
         int numIters = 0;
 
         int remainingLimit = 10;
-        while(remaining > 2*avgTimeTaken && remaining > remainingLimit){
+        while(remaining > 2*avgTimeTaken && remaining > remainingLimit)
+        {
             ElapsedCpuTimer elapsedTimerIteration = new ElapsedCpuTimer();
             SingleTreeNode selected = treePolicy();
             double delta = selected.rollOut();
             backUp(selected, delta);
 
             numIters++;
-            acumTimeTaken += (elapsedTimerIteration.elapsedMillis()) ;
+            acumTimeTaken += (elapsedTimerIteration.elapsedMillis());
 
             avgTimeTaken  = acumTimeTaken/numIters;
             remaining = elapsedTimer.remainingTimeMillis();
             //System.out.println(elapsedTimerIteration.elapsedMillis() + " --> " + acumTimeTaken + " (" + remaining + ")");
         }
-        System.out.println("-- " + numIters + " -- ( " + avgTimeTaken + ")");
+        //System.out.println("-- " + numIters + " -- ( " + avgTimeTaken + ")");
         totalIters = numIters;
+
+        //! Edited Alli - 11/12/2017
+        //mctsIterations = numIters;
 
         //ArcadeMachine.performance.add(numIters);
     }
 
-    public SingleTreeNode treePolicy() {
+    public SingleTreeNode treePolicy()
+    {
 
         SingleTreeNode cur = this;
 
@@ -76,6 +88,7 @@ public class SingleTreeNode
         {
             if (cur.notFullyExpanded()) {
                 return cur.expand();
+
 
             } else {
                 SingleTreeNode next = cur.uct();
@@ -88,7 +101,8 @@ public class SingleTreeNode
     }
 
 
-    public SingleTreeNode expand() {
+    public SingleTreeNode expand()
+    {
 
         int bestAction = 0;
         double bestValue = -1;
@@ -107,7 +121,6 @@ public class SingleTreeNode
         SingleTreeNode tn = new SingleTreeNode(nextState, this, this.m_rnd);
         children[bestAction] = tn;
         return tn;
-
     }
 
     public SingleTreeNode uct() {

@@ -26,11 +26,11 @@ public class Agent extends AbstractPlayer
     public static int ROLLOUT_DEPTH = 50;
     public static double K = Math.sqrt(2);
     public static Types.ACTIONS[] actions;
+    private int action = 0;
 
     //! Edited by Alli 05/12/2017
     // List of variables for storing and rendering MCTS information
     private StateObservation SO;
-    private HashMap<Vector2d, Vector2d> listOfPos = new HashMap<Vector2d, Vector2d>();
 
 
     /**
@@ -77,7 +77,7 @@ public class Agent extends AbstractPlayer
         mctsPlayer.init(stateObs);
 
         //Determine the action using MCTS...
-        int action = mctsPlayer.run(elapsedTimer);
+        action = mctsPlayer.run(elapsedTimer);
 
         //... and return it.
         return actions[action];
@@ -93,7 +93,7 @@ public class Agent extends AbstractPlayer
     {
         System.out.println("MCTS avg iters: " + SingleMCTSPlayer.iters / SingleMCTSPlayer.num);
         //Include your code here to know how it all ended.
-        System.out.println("Game over? " + stateObservation.isGameOver());
+        //System.out.println("Game over? " + stateObservation.isGameOver());
         //stateObservation.getAvatarPosition().x;
     }
 
@@ -104,24 +104,48 @@ public class Agent extends AbstractPlayer
     {
         //g.drawLine((int) SO.getAvatarPosition().x,(int) SO.getAvatarPosition().y, (int)SO.getEventsHistory().last().position.x,(int)SO.getAvatarLastAction().getKey()[1]);
 
-        //if(SO.getAvatarPosition() != SO.getEventsHistory().last().position)
-            //listOfPos.put(SO.getAvatarPosition(), SO.getEventsHistory().last().position);
+
+        //System.out.println(mctsPlayer.m_root.bestAction());
+
+        //g.draw3DRect((int) SO.getAvatarPosition().x, (int) SO.getAvatarPosition().y, 50,50, false);
 
 
-        //listOfPos.forEach((k,v) -> g.drawLine((int)k.x, (int)v.y, (int) k.x ,(int) v.y));
+        
+        for(int i = 0; i < mctsPlayer.m_root.children.length; i++)
+        {
+            int x = (int) mctsPlayer.m_root.children[i].state.getAvatarPosition().x;
+            int y = (int) mctsPlayer.m_root.children[i].state.getAvatarPosition().y;
+            for(int j = 0; j < mctsPlayer.m_root.children.length; j++)
+            {
+                int x1 = (int) mctsPlayer.m_root.children[i].children[j].state.getAvatarPosition().x;
+                int y1 = (int) mctsPlayer.m_root.children[i].children[j].state.getAvatarPosition().y;
 
+                g.drawLine((int) (int) SO.getAvatarPosition().x + 25, (int) SO.getAvatarPosition().y + 25, x + 25, y + 25);
+                g.drawLine((int) (int) SO.getAvatarPosition().x + 25, (int) SO.getAvatarPosition().y + 25, x1 + 25, y1 + 25);
+            }
+        }
 
 
 
         /*
-        for( int i = 0; i < SO.getEventsHistory().size(); i++)
+        for(int i = 0; i < mctsPlayer.m_root.children.length; i++)
         {
-            g.drawLine((int) SO.getEventsHistory().last().position.x, (int) SO.getEventsHistory().last().position.y, (int) SO.getEventsHistory()., (int) SO.getEventsHistory().last().position.x);
+            for(int j = 0; j < mctsPlayer.m_root.children[i].children.length; j++)
+            {
+                if(mctsPlayer.m_root.children[i].children[j].nVisits > 0)
+                {
+                    int x = (int) mctsPlayer.m_root.children[i].children[j].state.getAvatarPosition().x;
+                    int y = (int) mctsPlayer.m_root.children[i].children[j].state.getAvatarPosition().y;
+                    g.drawLine((int) (int) SO.getAvatarPosition().x, (int) SO.getAvatarPosition().y, x, y);
+                }
+
+
+                //g.draw3DRect(x, (int) y, 25,25, true);
+
+
+            }
         }
         */
 
     }
-
-
-
 }
