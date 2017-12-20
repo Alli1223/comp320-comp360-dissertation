@@ -35,7 +35,7 @@ public class Agent extends AbstractPlayer
     //! Edited by Alli 05/12/2017
     // List of variables for storing and rendering MCTS information
     private StateObservation SO;
-    private Visualisations vis;
+    private  Visualisations vis;
 
     /**
      * Random generator for the agent.
@@ -61,6 +61,7 @@ public class Agent extends AbstractPlayer
 
         //Create the player.
         mctsPlayer = new SingleMCTSPlayer(new Random());
+        vis = new Visualisations();
     }
 
     /**
@@ -115,12 +116,12 @@ public class Agent extends AbstractPlayer
         //g.draw3DRect((int) SO.getAvatarPosition().x, (int) SO.getAvatarPosition().y, SO.getBlockSize(), SO.getBlockSize(), false);
 
 
+        vis.renderSearchSpace(SO.copy(), mctsPlayer, g);
 
 
-        vis.renderSearchSpace(SO, mctsPlayer.m_root, g);
 
 
-
+        /*
         for(int i = 0; i < mctsPlayer.m_root.children.length; i++) {
             if (mctsPlayer.m_root.children[i] != null) {
                 StateObservation SOChild = mctsPlayer.m_root.children[i].state;
@@ -145,5 +146,6 @@ public class Agent extends AbstractPlayer
                 }
             }
         }
+        */
     }
 }
