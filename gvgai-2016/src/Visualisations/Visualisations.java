@@ -12,15 +12,30 @@ public class Visualisations
 {
     private HashMap searchPoints = new HashMap<Vector2d, Vector2d>();
 
+    private SingleTreeNode rootNode;
+
     public void renderSearchSpace(StateObservation SO, SingleMCTSPlayer MCTSPlayer, Graphics2D g)
     {
-        if(SO != null)
-            g.draw3DRect((int) SO.getAvatarPosition().x, (int) SO.getAvatarPosition().y, SO.getBlockSize(), SO.getBlockSize(), false);
+        rootNode = MCTSPlayer.m_root;
+        recursivelySearchTheTree(rootNode);
+
+        recursivelySearchTheTree(rootNode);
     }
 
-    private void recursivelySearchTheTree()
+    private SingleTreeNode recursivelySearchTheTree(SingleTreeNode rootNode)
     {
 
-        
+        SingleTreeNode node = rootNode;
+        for(int i = 0; i < node.children.length; i++)
+        {
+            node = recursivelySearchTheTree(node.children[i]);
+        }
+
+        return node;
+    }
+
+    private void searchChildren(SingleTreeNode STN)
+    {
+
     }
 }
