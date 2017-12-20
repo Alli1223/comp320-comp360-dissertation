@@ -12,7 +12,7 @@ import tools.ElapsedCpuTimer;
 public class CompetitionParameters
 {
     /**
-     * Milliseconds allowed per controller action.
+     * Milliseconds allowed per controller action.  40MS for ACT_TIME and 50MS for ACT_TIME_DISQ
      */
     public static int ACTION_TIME = 40;
 

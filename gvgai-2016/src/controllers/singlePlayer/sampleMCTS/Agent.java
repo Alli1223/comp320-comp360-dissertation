@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import Visualisations.Visualisations;
 import core.game.Observation;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
@@ -28,10 +29,13 @@ public class Agent extends AbstractPlayer
     public static Types.ACTIONS[] actions;
     private int action = 0;
 
+
+
+
     //! Edited by Alli 05/12/2017
     // List of variables for storing and rendering MCTS information
     private StateObservation SO;
-
+    private Visualisations vis;
 
     /**
      * Random generator for the agent.
@@ -91,7 +95,7 @@ public class Agent extends AbstractPlayer
      */
     public void result(StateObservation stateObservation, ElapsedCpuTimer elapsedCpuTimer)
     {
-        System.out.println("MCTS avg iters: " + SingleMCTSPlayer.iters / SingleMCTSPlayer.num);
+        //System.out.println("MCTS avg iters: " + SingleMCTSPlayer.iters / SingleMCTSPlayer.num);
         //Include your code here to know how it all ended.
         //System.out.println("Game over? " + stateObservation.isGameOver());
         //stateObservation.getAvatarPosition().x;
@@ -105,47 +109,41 @@ public class Agent extends AbstractPlayer
         //g.drawLine((int) SO.getAvatarPosition().x,(int) SO.getAvatarPosition().y, (int)SO.getEventsHistory().last().position.x,(int)SO.getAvatarLastAction().getKey()[1]);
 
 
+
         //System.out.println(mctsPlayer.m_root.bestAction());
 
-        //g.draw3DRect((int) SO.getAvatarPosition().x, (int) SO.getAvatarPosition().y, 50,50, false);
-
-
-        
-        for(int i = 0; i < mctsPlayer.m_root.children.length; i++)
-        {
-            int x = (int) mctsPlayer.m_root.children[i].state.getAvatarPosition().x;
-            int y = (int) mctsPlayer.m_root.children[i].state.getAvatarPosition().y;
-            for(int j = 0; j < mctsPlayer.m_root.children.length; j++)
-            {
-                int x1 = (int) mctsPlayer.m_root.children[i].children[j].state.getAvatarPosition().x;
-                int y1 = (int) mctsPlayer.m_root.children[i].children[j].state.getAvatarPosition().y;
-
-                g.drawLine((int) (int) SO.getAvatarPosition().x + 25, (int) SO.getAvatarPosition().y + 25, x + 25, y + 25);
-                g.drawLine((int) (int) SO.getAvatarPosition().x + 25, (int) SO.getAvatarPosition().y + 25, x1 + 25, y1 + 25);
-            }
-        }
+        //g.draw3DRect((int) SO.getAvatarPosition().x, (int) SO.getAvatarPosition().y, SO.getBlockSize(), SO.getBlockSize(), false);
 
 
 
-        /*
-        for(int i = 0; i < mctsPlayer.m_root.children.length; i++)
-        {
-            for(int j = 0; j < mctsPlayer.m_root.children[i].children.length; j++)
-            {
-                if(mctsPlayer.m_root.children[i].children[j].nVisits > 0)
-                {
-                    int x = (int) mctsPlayer.m_root.children[i].children[j].state.getAvatarPosition().x;
-                    int y = (int) mctsPlayer.m_root.children[i].children[j].state.getAvatarPosition().y;
-                    g.drawLine((int) (int) SO.getAvatarPosition().x, (int) SO.getAvatarPosition().y, x, y);
+
+        vis.renderSearchSpace(SO, mctsPlayer.m_root, g);
+
+
+
+        for(int i = 0; i < mctsPlayer.m_root.children.length; i++) {
+            if (mctsPlayer.m_root.children[i] != null) {
+                StateObservation SOChild = mctsPlayer.m_root.children[i].state;
+                if (SOChild != null) {
+                    int x = (int) SOChild.getAvatarPosition().x;
+                    int y = (int) SOChild.getAvatarPosition().y;
+
+
+                    if (mctsPlayer.m_root.children[i].children != null) {
+                        for (int j = 0; j < mctsPlayer.m_root.children[i].children.length; j++) {
+                            SingleTreeNode grandchild = mctsPlayer.m_root.children[i].children[j];
+                            if (grandchild != null) {
+                                StateObservation SOGrandchild = grandchild.state;
+                                int x1 = (int) SOGrandchild.getAvatarPosition().x;
+                                int y1 = (int) SOGrandchild.getAvatarPosition().y;
+
+                                g.drawLine((int) SO.getAvatarPosition().x + 25, (int) SO.getAvatarPosition().y + 25, x + 25, y + 25);
+                                g.drawLine((int) SO.getAvatarPosition().x + 25, (int) SO.getAvatarPosition().y + 25, x1 + 25, y1 + 25);
+                            }
+                        }
+                    }
                 }
-
-
-                //g.draw3DRect(x, (int) y, 25,25, true);
-
-
             }
         }
-        */
-
     }
 }
