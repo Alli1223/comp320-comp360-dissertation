@@ -11,47 +11,71 @@ import java.util.Vector;
 
 public class Visualisations
 {
-    //private HashMap searchPoints = new HashMap<Vector2d, StateObservation>();
+    private HashMap NumSearchTimes = new HashMap<Vector2d, Integer>();
     private Vector<Vector2d> searchPoints = new Vector<Vector2d>();
     private int nodesInTree = 0;
+    public boolean drawAreaSearched = true;
+    public boolean drawBestActionPath = false;
+
 
     public void renderSearchSpace(StateObservation SO, SingleMCTSPlayer MCTSPlayer, Graphics2D g)
     {
-        SingleTreeNode rootNode = MCTSPlayer.m_root;
-        recursivelySearchTheTree(MCTSPlayer.m_root);
 
-        for(int i = 0; i < searchPoints.size(); i++)
-        {
-            int x = (int) searchPoints.get(i).x;
-            int y = (int) searchPoints.get(i).y;
-            g.draw3DRect((int) x, (int) y, SO.getBlockSize(), SO.getBlockSize(), false);
+        recursivelySearchTree(MCTSPlayer.m_root);
+
+        if(drawAreaSearched) {
+            for (int i = 0; i < searchPoints.size(); i++) {
+                int x = (int) searchPoints.get(i).x;
+                int y = (int) searchPoints.get(i).y;
+                g.draw3DRect((int) x, (int) y, SO.getBlockSize(), SO.getBlockSize(), false);
+            }
         }
+
+        if(drawBestActionPath)
+        {
+            for (int i = 0; i < searchPoints.size(); i++)
+            {
+                if(i + 1 < searchPoints.size())
+                    g.drawLine((int) searchPoints.elementAt(i).x,(int)  searchPoints.elementAt(i).y,(int) searchPoints.elementAt(i + 1).x, (int) searchPoints.elementAt(i + 1).y);
+            }
+        }
+
+        //System.out.println(nodesInTree + " : " + searchPoints.size() + " : " + NumSearchTimes.size());
         searchPoints.clear();
-        System.out.println(nodesInTree);
+
         nodesInTree = 0;
 
     }
 
-    private SingleTreeNode recursivelySearchTheTree(SingleTreeNode node)
+    private SingleTreeNode recursivelySearchTree(SingleTreeNode node)
     {
 
-        for(int i = 0; i < node.children.length; i++)
-        {
-            if(node.children[i] != null)
-            {
-                Vector2d pos = new Vector2d();
+        // IF the node has a state
+        if (node.state != null) {
 
-                pos.x = (int) node.state.getAvatarPosition().x;
-                pos.y = (int) node.state.getAvatarPosition().y;
+            searchPoints.add(node.state.getAvatarPosition());
+            nodesInTree++;
 
-                searchPoints.add(pos);
-                nodesInTree++;
-                node = recursivelySearchTheTree(node.children[i]);
+            //if(node != null)
+                //System.out.println(node.nVisits + "     " + node.bestAction());
+        }
+
+
+
+
+        // Search the nodes children
+        for(int i = 0; i < node.children.length ; i++) {
+
+            if(node.children[i] != null) {
+                node = recursivelySearchTree(node.children[i]);
             }
+
 
         }
 
+        // Return the node after searching its children
         return node;
+
     }
 
 }
