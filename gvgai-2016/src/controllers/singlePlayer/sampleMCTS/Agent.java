@@ -96,7 +96,7 @@ public class Agent extends AbstractPlayer
      */
     public void result(StateObservation stateObservation, ElapsedCpuTimer elapsedCpuTimer)
     {
-        //System.out.println("MCTS avg iters: " + SingleMCTSPlayer.iters / SingleMCTSPlayer.num);
+        System.out.println("MCTS avg iters: " + SingleMCTSPlayer.iters / SingleMCTSPlayer.num);
         //Include your code here to know how it all ended.
         //System.out.println("Game over? " + stateObservation.isGameOver());
         //stateObservation.getAvatarPosition().x;
@@ -116,7 +116,8 @@ public class Agent extends AbstractPlayer
         //g.draw3DRect((int) SO.getAvatarPosition().x, (int) SO.getAvatarPosition().y, SO.getBlockSize(), SO.getBlockSize(), false);
 
 
-        vis.renderSearchSpace(SO.copy(), mctsPlayer, g);
+
+        vis.renderSearchSpace(SO, mctsPlayer, g);
 
 
 
