@@ -16,14 +16,14 @@ public class Visualisations
     private Vector<Vector2d> searchPoints = new Vector<Vector2d>();
     private Vector<Vector2d> bestPath = new Vector<Vector2d>();
     private int nodesInTree = 0;
-    public boolean drawAreaSearched = true;
+    public boolean drawAreaSearched = false;
     public boolean drawBestActionPath = true;
     private int blockOffset = 0;
 
 
     public void renderSearchSpace(SingleMCTSPlayer MCTSPlayer, Graphics2D g)
     {
-        blockOffset = MCTSPlayer.m_root.state.getBlockSize();
+        blockOffset = MCTSPlayer.m_root.state.getBlockSize() / 2;
 
         // Search the tree starting at the root
         recursivelySearchTree(MCTSPlayer.m_root);
@@ -38,34 +38,37 @@ public class Visualisations
         }
 
         // Draw the path that is the best action to take
-        if(drawBestActionPath)
-        {
+        if(drawBestActionPath) {
             Vector2d oldPos = new Vector2d();
             Vector2d originPoint = new Vector2d();
             originPoint.x = 0.0;
             originPoint.y = 0.0;
-            for(Map.Entry<Vector2d, Integer> entry : timesPointVisited.entrySet()) {
+
+
+            // Loop through the hashmap and draw the lines between the most visited points
+            for (Map.Entry<Vector2d, Integer> entry : timesPointVisited.entrySet()) {
                 Vector2d pos = entry.getKey();
                 Integer visits = entry.getValue();
 
-
-                if(pos != oldPos && oldPos != null && oldPos != originPoint)
+                // If the oldPoint isnt null then draw it
+                if (!oldPos.equals(originPoint))
                 {
                     g.setStroke(new BasicStroke(visits));
-                    g.drawLine((int) oldPos.x, (int)oldPos.y, (int) pos.x, (int) pos.y);
+                    g.drawLine((int) oldPos.x + blockOffset, (int) oldPos.y+ blockOffset, (int) pos.x+ blockOffset, (int) pos.y+ blockOffset);
                 }
-
 
                 oldPos = pos;
             }
+
         }
 
         //System.out.println(nodesInTree + " : " + searchPoints.size());
-        g.drawString(String.valueOf(nodesInTree), 100, 50);
+        g.drawString(String.valueOf(timesPointVisited.size()), 100, 50);
         //System.out.println(MCTSPlayer.num);
         //Reset the values for next search
         searchPoints.clear();
-        //timesPointVisited.clear();
+        //if(timesPointVisited.size() > 10)
+        timesPointVisited.clear();
         nodesInTree = 0;
 
 
@@ -80,20 +83,18 @@ public class Visualisations
             nodesInTree++;
             timesPointVisited.put(node.state.getAvatarPosition(), node.nVisits);
         }
-        else
-            return null;
 
-        int nodesChildren = 0;
+
         // Search the nodes children
         for(int i = 0; i < node.children.length; i++) {
 
             if(node.children[i] != null) {
 
                 node = recursivelySearchTree(node.children[i]);
-                nodesChildren++;
+
             }
         }
-        System.out.println(nodesChildren);
+        //System.out.println(nodesChildren);
 
         // Return the node after searching its children
         return node;
