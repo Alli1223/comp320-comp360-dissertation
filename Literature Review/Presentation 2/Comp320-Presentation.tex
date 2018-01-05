@@ -1,0 +1,109 @@
+\documentclass{beamer}
+\usepackage{etoolbox}\newtoggle{printable}\togglefalse{printable}
+\usetheme{default}
+\usecolortheme{beaver}
+\usepackage{listings}
+\usepackage{algpseudocode}
+\pdfmapfile{+sansmathaccent.map}
+
+
+\title{Comp320 Literature Review}
+\author{Alastair Rayner}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{frame}{About GVGAI}
+	  What is the General Video Game AI (GVG-AI) Competition? \pause
+	  \begin{itemize}
+	      \item The GVG-AI is an AI competition that aims to create an AI that is able to play any game. \pause
+	      \item There have been a few different AI competitions in the past. \pause
+	      \item However most of the winning AI strategies used in those games are very domain specific and it is often more about knowing the game than developing good general AI. \pause
+	  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Similar competitions}	
+	\textbf{Similar competitions for general game intelligence} \pause
+		\begin{itemize}
+			\item General Game Playing (GGP) has held competitions in AI for games since 2005. \pause
+			\begin{itemize}
+				\item GGP is similar to GVGAI as the competitior does not know which games their agent will be playing. \pause
+				\item The games used in GGP are usually variants of existing board games. \pause
+			\end{itemize}
+			\item Arcade Learning Environment (ALE) is based of the Atari 2600. \pause
+			\begin{itemize}
+				\item In ALE the controller is presented with the raw screen capture of the game. \pause
+				\item As well as a score counter.
+				\item ALE provides an interface for domain-independent agents to try hundreds of Atari 2600 game environments. \pause
+			\end{itemize}
+		\end{itemize}
+\end{frame}
+
+\begin{frame}{Challenges and goals}		
+			\begin{itemize}
+			\item The goal of GVG-AI is to create a generally intelligent agent that is able to win any game it is placed in, even when it doesn't know the game. \pause
+			\item During the tournament a completely new set of games are used. \pause
+			\item This is done to avoid the agents becoming too domain specific. \pause
+			\item Another challenge is the time limit that an agent can choose an action \pause
+			\item This is because one of the goals is to make a real time agent, and this makes the competition more challenging. \pause
+		\end{itemize}
+\end{frame}
+	
+\begin{frame}{Competition \& Rules}		
+			\begin{itemize}
+			\item A competition approach to this AI problem is a common way to motivate research in a certain field of AI. \pause
+			\item The controllers are allowed up to 40ms to compute the agents action(s)  \pause
+		\end{itemize}
+\end{frame}
+
+
+\begin{frame}{The GVGAI Framework}		
+			\begin{itemize}
+			\item The Framework is developed in the Java Environment \pause
+			\item The framework uses a Video Game Description Language (VGDL) to describe a wide variety of video games. \pause
+			\item The VGDL is based on a python version developed by Schaul (2014) called PyVGDL \pause
+			\item  Furthermore in the GVG-AI Competition the AI agent does not have access to the whole games description, where as in GGP the agent was able to see the whole game description. \pause
+			\item  This means that the agent has to analyze and simulate the game in order to figure out the rules and goal of the game. \pause
+		\end{itemize}
+\end{frame}
+
+\begin{frame}{Game Search Techniques}
+		There are a lot of game tree search techniques used in AI such as; 
+			\begin{itemize}
+			\item Alpha beta pruning \pause
+			\item Minimax \pause
+			\item Breath First Search \pause
+			\item Depth First Search \pause
+			\item MCTS \pause
+			\item Evolutionary Algorithms \pause
+		\end{itemize}
+		Most of these techniques are provided in the GVG-AI framework as sample agents. Some of them actually did quite well in the competition. \pause
+		For example the sample MCTS agent came 3rd in one of the competitions. 
+\end{frame}
+
+
+\begin{frame}{Key results}
+	\textbf{What research will my project will be built upon?}
+	\begin{itemize}
+		\item	The 2014 General Video Game Playing Competition paper by Diego Perez et. al. covers how each different agent in the submission compares them by victories and points. \pause
+		
+		\item	The potential of finding out where each AI algorithm succeeds best in what situation, could lead to the development of a hyper/meta heuristic that is able to select what algorithm to use when it gets into a certain situation.
+		\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Research Questions}
+	\textbf{My Research questions I aim to answer}
+	\begin{itemize}
+    \item How does game tree search techniques compare for GVGAI? \pause
+    \item Where does each tree search technique do well in each game? \pause 
+    \item What are the strengths and weaknesses of different search techniques and how can they be improved? \pause
+	\end{itemize}
+\end{frame}
+
+
+\end{document}

@@ -110,6 +110,14 @@ public class Agent extends AbstractPlayer
     public void draw(Graphics2D g)
     {
 
+        for(int i = 0; i < mctsPlayer.m_root.children.length; i++) {
+            if (mctsPlayer.m_root.children[i] != null) {
+               // if(mctsPlayer.m_root.children[mctsPlayer.m_root.bestAction()].children[mctsPlayer.m_root.children[mctsPlayer.m_root.bestAction()].children[mctsPlayer.m_root.children[mctsPlayer.m_root.bestAction()].bestAction()] != null);
+                //Vector2d linePos = mctsPlayer.m_root.children[mctsPlayer.m_root.bestAction()].children[mctsPlayer.m_root.children[mctsPlayer.m_root.bestAction()].children[mctsPlayer.m_root.children[mctsPlayer.m_root.bestAction()].bestAction()].state.getAvatarPosition();
+                //g.drawLine();
+            }
+        }
+
 
         vis.renderSearchSpace(visPlayerCopy, g);
 
