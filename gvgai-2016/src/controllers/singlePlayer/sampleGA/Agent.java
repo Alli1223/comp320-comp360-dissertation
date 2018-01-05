@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
+import Visualisations.Visualisations;
 import controllers.singlePlayer.Heuristics.StateHeuristic;
 import controllers.singlePlayer.Heuristics.WinScoreHeuristic;
 import core.game.StateObservation;
@@ -40,6 +41,9 @@ public class Agent extends AbstractPlayer {
     protected Random randomGenerator;
 
     private int numSimulations;
+
+    //! Alli code
+    private Visualisations vis;
 
     /**
      * Public constructor with state observation and time due.
@@ -213,6 +217,8 @@ public class Agent extends AbstractPlayer {
     @Override
     public void draw(Graphics2D g)
     {
-        //g.drawString("Num Simulations: " + numSimulations, 10, 20);
+        g.drawString("Num Simulations: " + numSimulations, 10, 20);
+
+        //vis.renderSearchSpace(this);
     }
 }

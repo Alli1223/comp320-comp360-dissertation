@@ -36,6 +36,7 @@ public class Agent extends AbstractPlayer
     // List of variables for storing and rendering MCTS information
     private StateObservation SO;
     private  Visualisations vis;
+    private SingleMCTSPlayer visPlayerCopy;
 
     /**
      * Random generator for the agent.
@@ -83,6 +84,7 @@ public class Agent extends AbstractPlayer
 
         //Determine the action using MCTS...
         action = mctsPlayer.run(elapsedTimer);
+        visPlayerCopy = mctsPlayer;
 
         //... and return it.
         return actions[action];
@@ -107,21 +109,13 @@ public class Agent extends AbstractPlayer
     // Draws graphics to the screen
     public void draw(Graphics2D g)
     {
-        //g.drawLine((int) SO.getAvatarPosition().x,(int) SO.getAvatarPosition().y, (int)SO.getEventsHistory().last().position.x,(int)SO.getAvatarLastAction().getKey()[1]);
+
+
+        vis.renderSearchSpace(visPlayerCopy, g);
 
 
 
-        //System.out.println(mctsPlayer.m_root.bestAction());
-
-        //g.draw3DRect((int) SO.getAvatarPosition().x, (int) SO.getAvatarPosition().y, SO.getBlockSize(), SO.getBlockSize(), false);
-
-
-
-        vis.renderSearchSpace(SO, mctsPlayer, g);
-
-
-
-
+        //OLD CODE
         /*
         for(int i = 0; i < mctsPlayer.m_root.children.length; i++) {
             if (mctsPlayer.m_root.children[i] != null) {

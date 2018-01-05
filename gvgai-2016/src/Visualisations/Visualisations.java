@@ -19,7 +19,7 @@ public class Visualisations
     public boolean drawBestActionPath = true;
 
 
-    public void renderSearchSpace(StateObservation SO, SingleMCTSPlayer MCTSPlayer, Graphics2D g)
+    public void renderSearchSpace(SingleMCTSPlayer MCTSPlayer, Graphics2D g)
     {
 
         // Search the tree starting at the root
@@ -30,7 +30,7 @@ public class Visualisations
             for (int i = 0; i < searchPoints.size(); i++) {
                 int x = (int) searchPoints.get(i).x;
                 int y = (int) searchPoints.get(i).y;
-                g.draw3DRect((int) x, (int) y, SO.getBlockSize(), SO.getBlockSize(), false);
+                g.draw3DRect((int) x, (int) y, MCTSPlayer.m_root.state.getBlockSize(), MCTSPlayer.m_root.state.getBlockSize(), false);
             }
         }
 
@@ -45,7 +45,7 @@ public class Visualisations
             }
         }
 
-        //System.out.println(nodesInTree + " : " + searchPoints.size() + " : " + NumSearchTimes.size());
+        //System.out.println(nodesInTree + " : " + searchPoints.size());
         g.drawString(String.valueOf(nodesInTree), 100, 50);
         //System.out.println(MCTSPlayer.num);
         //Reset the values for next search
@@ -62,18 +62,21 @@ public class Visualisations
 
             searchPoints.add(node.state.getAvatarPosition());
             nodesInTree++;
-
-
         }
+        else
+            return null;
 
+        int nodesChildren = 0;
         // Search the nodes children
-        for(int i = 0; i < node.children.length ; i++) {
+        for(int i = 0; i < node.children.length; i++) {
 
             if(node.children[i] != null) {
 
                 node = recursivelySearchTree(node.children[i]);
+                nodesChildren++;
             }
         }
+        System.out.println(nodesChildren);
 
         // Return the node after searching its children
         return node;
