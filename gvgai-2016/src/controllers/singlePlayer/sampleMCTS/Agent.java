@@ -34,9 +34,7 @@ public class Agent extends AbstractPlayer
 
     //! Edited by Alli 05/12/2017
     // List of variables for storing and rendering MCTS information
-    private StateObservation SO;
     private  Visualisations vis;
-    private SingleMCTSPlayer visPlayerCopy;
 
     /**
      * Random generator for the agent.
@@ -74,8 +72,6 @@ public class Agent extends AbstractPlayer
      */
     public Types.ACTIONS act(StateObservation stateObs, ElapsedCpuTimer elapsedTimer)
     {
-        // StateObservation set for draw function
-        SO = stateObs;
         ArrayList<Observation> obs[] = stateObs.getFromAvatarSpritesPositions();
         ArrayList<Observation> grid[][] = stateObs.getObservationGrid();
 
@@ -84,7 +80,7 @@ public class Agent extends AbstractPlayer
 
         //Determine the action using MCTS...
         action = mctsPlayer.run(elapsedTimer);
-        visPlayerCopy = mctsPlayer;
+
 
         //... and return it.
         return actions[action];
@@ -111,7 +107,7 @@ public class Agent extends AbstractPlayer
     {
 
 
-        vis.renderSearchSpace(visPlayerCopy, g);
+        vis.renderSearchSpace(mctsPlayer, g);
 
 
 
