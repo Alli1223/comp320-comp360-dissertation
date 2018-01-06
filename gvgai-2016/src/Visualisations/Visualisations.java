@@ -68,7 +68,7 @@ public class Visualisations
         //Reset the values for next search
         searchPoints.clear();
         //if(timesPointVisited.size() > 10)
-        timesPointVisited.clear();
+        //timesPointVisited.clear();
         nodesInTree = 0;
 
 
