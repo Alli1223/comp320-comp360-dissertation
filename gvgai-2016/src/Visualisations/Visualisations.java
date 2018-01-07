@@ -3,6 +3,7 @@ package Visualisations;
 import controllers.singlePlayer.sampleMCTS.SingleMCTSPlayer;
 import controllers.singlePlayer.sampleMCTS.SingleTreeNode;
 import core.game.StateObservation;
+import tools.Utils;
 import tools.Vector2d;
 
 import java.awt.*;
@@ -14,20 +15,26 @@ import java.util.stream.Collectors;
 
 public class Visualisations
 {
+    //! A Hashmap that stores the times a pont was visisted as well as the location of that point
     private HashMap<Vector2d, Integer> timesPointVisited = new HashMap<Vector2d, Integer>();
+    //! A list of points used for drawing the search space
     private Vector<Vector2d> searchPoints = new Vector<Vector2d>();
-    private Vector<Vector2d> bestPath = new Vector<Vector2d>();
-    private int nodesInTree = 0;
+
+    //! Booleans for choosing what should be rendered over the game
     public boolean drawAreaSearched = true;
-    public boolean drawBestActionPath = false;
+    public boolean drawBestActionPath = true;
+
+    //! Block offset for drawing in the center of the cells
     private int blockOffset = 0;
 
-    //! Depth search testing
+    //! Depth search testing variables
     private int searchDepthLevel = 0;
     private int deepestSearchLevel = 0;
+    private int nodesInTree = 0;
     private SingleTreeNode deepestNode = null;
 
 
+    //! Renders the tree searches over the search space
     public void renderSearchSpace(SingleMCTSPlayer MCTSPlayer, Graphics2D g)
     {
         if(MCTSPlayer.m_root.state != null)
@@ -52,47 +59,36 @@ public class Visualisations
 
                 g.draw3DRect((int) pos.x, (int) pos.y, MCTSPlayer.m_root.state.getBlockSize(), MCTSPlayer.m_root.state.getBlockSize(), false);
             }
-            /*
-            for (int i = 0; i < searchPoints.size(); i++) {
-                int x = (int) searchPoints.get(i).x;
-                int y = (int) searchPoints.get(i).y;
-                g.draw3DRect((int) x, (int) y, MCTSPlayer.m_root.state.getBlockSize(), MCTSPlayer.m_root.state.getBlockSize(), false);
-            }
-            */
-
         }
 
         // Draw the path that is the best action to take
         if(drawBestActionPath)
         {
-
             Vector2d oldPos = new Vector2d();
             Vector2d originPoint = new Vector2d();
             originPoint.x = 0.0;
             originPoint.y = 0.0;
 
+            // Get the path of nodes that were most visited
+            Vector2d[] points = GetPathFromNode(MCTSPlayer.m_root);
 
-            Vector2d[] points = GetPathFromNode(deepestNode);
+            // Loop through the points and draw lines between them
+            if(points.length > 1)
+                for (int i = 0; i < points.length; i++) {
+                    if (points[i] != null)
+                        // If the point does not equal 0,0
+                        if (!oldPos.equals(originPoint)) {
+                            g.setStroke(new BasicStroke(10));
+                            g.setPaint(new Color(200, 100, 0));
+                            g.drawLine((int) oldPos.x + blockOffset, (int) oldPos.y + blockOffset, (int) points[i].x + blockOffset, (int) points[i].y + blockOffset);
 
-
-            /*
-            for (int i = 0; i < points.length; i++) {
-                if (points[i] != null)
-                    if (!points[0].equals(originPoint)) {
-                        g.setStroke(new BasicStroke(10));
-                        g.setPaint(new Color(200, 100, 0));
-                        g.drawLine((int) oldPos.x + blockOffset, (int) oldPos.y + blockOffset, (int) points[i].x + blockOffset, (int) points[i].y + blockOffset);
-
-                    }
-                oldPos = points[i];
-            }
-            */
-
-
+                        }
+                    oldPos = points[i];
+                }
 
 
 
-
+            /* OLD CODE (TO BE REMOVED)
             // Loop through the hashmap and draw the lines between the most visited points
             for (Map.Entry<Vector2d, Integer> entry : timesPointVisited.entrySet()) {
                 Vector2d pos = entry.getKey();
@@ -108,7 +104,7 @@ public class Visualisations
 
                 oldPos = pos;
             }
-
+            */
         }
 
         //System.out.println(nodesInTree + " : " + searchPoints.size());
@@ -118,7 +114,6 @@ public class Visualisations
 
         //Reset the values for next search
         searchPoints.clear();
-
         timesPointVisited.clear();
         nodesInTree = 0;
         deepestSearchLevel = 0;
@@ -129,14 +124,12 @@ public class Visualisations
     //! This function will run until it has searched the whole tree
     private SingleTreeNode recursivelySearchTree(SingleTreeNode node)
     {
-        // IF the node has a state
+
+        // IF the node has a state, get its values
         if (node.state != null) {
-            //System.out.println(node.children.length);
             searchPoints.add(node.state.getAvatarPosition());
             nodesInTree++;
-
             timesPointVisited.put(node.state.getAvatarPosition(), (int) node.totValue);
-
 
 
             // Create a copy of node and reset depthLevel
@@ -148,18 +141,11 @@ public class Visualisations
                 if (searchDepthLevel >= deepestSearchLevel) {
                     deepestSearchLevel = searchDepthLevel;
                     deepestNode = depthTest;
-
-
-
                 }
 
-
-
                 depthTest = depthTest.parent;
-
                 searchDepthLevel++;
             }
-
         }
 
 
@@ -175,29 +161,34 @@ public class Visualisations
     }
 
 
-    private Vector2d[] GetPathFromNode(SingleTreeNode node)
-    {
+    //! Returns a list of points that the most visited nodes are
+    private Vector2d[] GetPathFromNode(SingleTreeNode node) {
         // Create an array of points to return
-        Vector2d[] res = new Vector2d[searchDepthLevel];
+        Vector2d[] res = new Vector2d[100];
 
-        int i = 0;
-        while (node.parent != null) {
-            if (node.state != null) {
-                res[i] = node.state.getAvatarPosition();
-                i++;
+        int j = 0;
+        while (node != null) {
+
+            int best = node.bestAction();
+
+            if(node.children[best] != null) {
+                res[j] = node.children[best].state.getAvatarPosition();
+
+                // Temp test code
+                if(node.children[best].children[node.children[best].bestAction()] != null)
+                    res[j + 1] = node.children[best].children[node.children[best].bestAction()].state.getAvatarPosition();
+
+                node = node.children[best];
+
+                j++;
             }
-
-
-            node = node.parent;
-
-
+            else
+                break;
         }
 
-        res = Arrays.stream(res)
-                .filter(s -> (s != null))
-                .toArray( Vector2d[]::new);
+        //Remove any empty values from the array
+        res = Arrays.stream(res).filter(s -> (s != null)).toArray( Vector2d[]::new);
 
         return res;
     }
-
 }
