@@ -23,6 +23,7 @@ public class Visualisations
     //! Depth search testing
     private int searchDepthLevel = 0;
     private int deepestSearchLevel = 0;
+    private SingleTreeNode deepestNode = null;
 
 
     public void renderSearchSpace(SingleMCTSPlayer MCTSPlayer, Graphics2D g)
@@ -47,13 +48,35 @@ public class Visualisations
         }
 
         // Draw the path that is the best action to take
-        if(drawBestActionPath) {
+        if(drawBestActionPath)
+        {
+
             Vector2d oldPos = new Vector2d();
             Vector2d originPoint = new Vector2d();
             originPoint.x = 0.0;
             originPoint.y = 0.0;
 
 
+            Vector2d[] points = GetPathFromNode(deepestNode);
+
+
+            for (int i = 0; i < points.length; i++)
+            {
+                if(points[i] != null)
+                if (!oldPos.equals(originPoint)) {
+                    //g.setStroke(new BasicStroke(10));
+                    g.setPaint(new Color(200,100,0));
+                    g.drawLine((int) oldPos.x + blockOffset, (int) oldPos.y + blockOffset, (int) points[i].x + blockOffset, (int) points[i].y + blockOffset);
+
+                }
+                oldPos = points[i];
+            }
+
+
+
+
+
+            /*
             // Loop through the hashmap and draw the lines between the most visited points
             for (Map.Entry<Vector2d, Integer> entry : timesPointVisited.entrySet()) {
                 Vector2d pos = entry.getKey();
@@ -69,12 +92,12 @@ public class Visualisations
 
                 oldPos = pos;
             }
-
+            */
         }
 
         //System.out.println(nodesInTree + " : " + searchPoints.size());
-        g.drawString(String.valueOf(timesPointVisited.size()), 100, 50);
-        System.out.println(searchDepthLevel);
+        g.drawString(String.valueOf("Current Search Depth Level: " + searchDepthLevel + ". Max Depth: " + deepestSearchLevel), 100, 50);
+
 
 
         //Reset the values for next search
@@ -82,7 +105,7 @@ public class Visualisations
 
         timesPointVisited.clear();
         nodesInTree = 0;
-        deepestSearchLevel = 0;
+        //deepestSearchLevel = 0;
     }
 
 
@@ -91,20 +114,31 @@ public class Visualisations
     private SingleTreeNode recursivelySearchTree(SingleTreeNode node)
     {
         // IF the node has a state
-        if (node.state != null)
-        {
+        if (node.state != null) {
             //System.out.println(node.children.length);
             searchPoints.add(node.state.getAvatarPosition());
             nodesInTree++;
             timesPointVisited.put(node.state.getAvatarPosition(), node.nVisits);
 
+
+
+            // Create a copy of node and reset depthLevel
             SingleTreeNode depthTest = node;
             searchDepthLevel = 0;
-            while(depthTest.parent != null)
+            // If the node has a parent then check to see if it is the deepest node in the tree
+            while (depthTest != null)
             {
-                depthTest = depthTest.parent;
-                if(searchDepthLevel >= deepestSearchLevel)
+                if (searchDepthLevel >= deepestSearchLevel) {
                     deepestSearchLevel = searchDepthLevel;
+                    deepestNode = depthTest;
+                    System.out.println(deepestSearchLevel);
+                }
+
+                if (depthTest.parent == null)
+                    break;
+
+                depthTest = depthTest.parent;
+
                 searchDepthLevel++;
             }
         }
@@ -113,14 +147,34 @@ public class Visualisations
         // Search the nodes children
         SingleTreeNode reNode = null;
         for(int i = 0; i < node.children.length; i++) {
-            if(node.children[i] != null) {
+            if (node.children[i] != null)
                 reNode = recursivelySearchTree(node.children[i]);
-
-            }
         }
 
         // Return the node after searching its children
         return reNode;
+    }
+
+
+    private Vector2d[] GetPathFromNode(SingleTreeNode node)
+    {
+        // Create an array of points to return
+        Vector2d[] res = new Vector2d[deepestSearchLevel + 1];
+
+        int i = 0;
+        while (node != null)
+        {
+            if(node.state != null)
+                res[i] = node.state.getAvatarPosition();
+            if(node.parent == null)
+                break;
+            else {
+                node = node.parent;
+                i++;
+            }
+        }
+
+        return res;
     }
 
 }
