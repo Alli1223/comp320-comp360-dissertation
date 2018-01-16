@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
-import Visualisations.Visualisations;
+import DissertationFiles.Visualisations;
 import controllers.singlePlayer.Heuristics.StateHeuristic;
 import controllers.singlePlayer.Heuristics.WinScoreHeuristic;
 import core.game.StateObservation;

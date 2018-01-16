@@ -2,16 +2,15 @@ package controllers.singlePlayer.sampleMCTS;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
-import Visualisations.Visualisations;
+import DissertationFiles.DataCollection;
+import DissertationFiles.Visualisations;
 import core.game.Observation;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
 import ontology.Types;
 import tools.ElapsedCpuTimer;
-import tools.Vector2d;
 
 /**
  * Created with IntelliJ IDEA.
@@ -34,7 +33,9 @@ public class Agent extends AbstractPlayer
 
     //! Edited by Alli 05/12/2017
     // List of variables for storing and rendering MCTS information
-    private  Visualisations vis;
+    private  Visualisations vis = new Visualisations();
+    private DataCollection dataCollection = new DataCollection();;
+    private StateObservation SO;
 
     /**
      * Random generator for the agent.
@@ -60,7 +61,7 @@ public class Agent extends AbstractPlayer
 
         //Create the player.
         mctsPlayer = new SingleMCTSPlayer(new Random());
-        vis = new Visualisations();
+
     }
 
     /**
@@ -72,6 +73,10 @@ public class Agent extends AbstractPlayer
      */
     public Types.ACTIONS act(StateObservation stateObs, ElapsedCpuTimer elapsedTimer)
     {
+        //! Edited Alli - 16/01/2018
+        SO = stateObs;
+        // Edit End
+
         ArrayList<Observation> obs[] = stateObs.getFromAvatarSpritesPositions();
         ArrayList<Observation> grid[][] = stateObs.getObservationGrid();
 
@@ -106,37 +111,13 @@ public class Agent extends AbstractPlayer
     public void draw(Graphics2D g)
     {
 
+        //! Visualise the trees search space
+        //vis.renderSearchSpace(mctsPlayer, g);
 
-        vis.renderSearchSpace(mctsPlayer, g);
-
-
-
-        //OLD CODE
-        /*
-        for(int i = 0; i < mctsPlayer.m_root.children.length; i++) {
-            if (mctsPlayer.m_root.children[i] != null) {
-                StateObservation SOChild = mctsPlayer.m_root.children[i].state;
-                if (SOChild != null) {
-                    int x = (int) SOChild.getAvatarPosition().x;
-                    int y = (int) SOChild.getAvatarPosition().y;
+        //! Add game state to be collected
+        dataCollection.AddGameStateToCollection(SO);
 
 
-                    if (mctsPlayer.m_root.children[i].children != null) {
-                        for (int j = 0; j < mctsPlayer.m_root.children[i].children.length; j++) {
-                            SingleTreeNode grandchild = mctsPlayer.m_root.children[i].children[j];
-                            if (grandchild != null) {
-                                StateObservation SOGrandchild = grandchild.state;
-                                int x1 = (int) SOGrandchild.getAvatarPosition().x;
-                                int y1 = (int) SOGrandchild.getAvatarPosition().y;
 
-                                g.drawLine((int) SO.getAvatarPosition().x + 25, (int) SO.getAvatarPosition().y + 25, x + 25, y + 25);
-                                g.drawLine((int) SO.getAvatarPosition().x + 25, (int) SO.getAvatarPosition().y + 25, x1 + 25, y1 + 25);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        */
     }
 }

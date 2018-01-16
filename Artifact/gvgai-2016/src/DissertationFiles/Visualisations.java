@@ -1,9 +1,7 @@
-package Visualisations;
+package DissertationFiles;
 
 import controllers.singlePlayer.sampleMCTS.SingleMCTSPlayer;
 import controllers.singlePlayer.sampleMCTS.SingleTreeNode;
-import core.game.StateObservation;
-import tools.Utils;
 import tools.Vector2d;
 
 import java.awt.*;
@@ -11,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class Visualisations
 {
