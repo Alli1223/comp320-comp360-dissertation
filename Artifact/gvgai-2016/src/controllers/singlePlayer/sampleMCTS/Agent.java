@@ -35,7 +35,6 @@ public class Agent extends AbstractPlayer
     // List of variables for storing and rendering MCTS information
     private  Visualisations vis = new Visualisations();
     private DataCollection dataCollection = new DataCollection();;
-    private StateObservation SO;
 
     /**
      * Random generator for the agent.
@@ -74,7 +73,8 @@ public class Agent extends AbstractPlayer
     public Types.ACTIONS act(StateObservation stateObs, ElapsedCpuTimer elapsedTimer)
     {
         //! Edited Alli - 16/01/2018
-        SO = stateObs;
+        // Add game state to be collected
+        dataCollection.AddGameStateToCollection(stateObs);
         // Edit End
 
         ArrayList<Observation> obs[] = stateObs.getFromAvatarSpritesPositions();
@@ -102,7 +102,7 @@ public class Agent extends AbstractPlayer
         System.out.println("MCTS avg iters: " + SingleMCTSPlayer.iters / SingleMCTSPlayer.num);
         //Include your code here to know how it all ended.
         //System.out.println("Game over? " + stateObservation.isGameOver());
-        //stateObservation.getAvatarPosition().x;
+        dataCollection.AddGameEndStats(stateObservation);
     }
 
 
@@ -113,10 +113,6 @@ public class Agent extends AbstractPlayer
 
         //! Visualise the trees search space
         //vis.renderSearchSpace(mctsPlayer, g);
-
-        //! Add game state to be collected
-        dataCollection.AddGameStateToCollection(SO);
-
 
 
     }
