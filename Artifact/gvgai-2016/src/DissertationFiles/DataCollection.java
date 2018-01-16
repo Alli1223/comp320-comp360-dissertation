@@ -17,11 +17,6 @@ public class DataCollection
     public JSONObject GameData = new JSONObject();
     public JSONArray PlayerPositions = new JSONArray();
 
-    public void InitalizeDataCollection()
-    {
-
-    }
-
 
     public void AddGameStateToCollection(StateObservation SO)
     {
@@ -36,11 +31,17 @@ public class DataCollection
     // GameScore, Death location, Win location
     public void AddGameEndStats(StateObservation SO)
     {
+        // IF the
         if(SO.isAvatarAlive())
-            AllData.put("LastLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
+            GameData.put("LastLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
         else
-            AllData.put("DeathLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
-        AllData.put("GameScore", SO.getGameScore());
+            GameData.put("DeathLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
+        GameData.put("GameScore", SO.getGameScore());
+        GameData.put("GameTick", SO.getGameTick());
+        //GameData.put(SO.toString())
+        AllData.put("GameData", GameData);
+
+        //Write the data
         System.out.println(AllData.toString());
         SaveDataToFile(AllData);
     }
@@ -48,6 +49,7 @@ public class DataCollection
 
     public void AddPlayerPosition(StateObservation SO)
     {
+        System.out.println(SO.toString());
         try
         {
             // Add player positions to the pos object
@@ -90,8 +92,5 @@ public class DataCollection
         ret.put("Pos", pos);
         return ret;
     }
-
-
-
 
 }
