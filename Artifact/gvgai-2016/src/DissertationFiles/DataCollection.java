@@ -38,7 +38,7 @@ public class DataCollection
             GameData.put("DeathLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
         GameData.put("GameScore", SO.getGameScore());
         GameData.put("GameTick", SO.getGameTick());
-        //GameData.put(SO.toString())
+        GameData.put("AvatarType", SO.getAvatarType());
         AllData.put("GameData", GameData);
 
         //Write the data
