@@ -11,6 +11,8 @@
 *.cb
 *.cb2
 
+/Artifact/gvgai-2016/libs/*
+
 ## Intermediate documents:
 *.dvi
 *-converted-to.*
