@@ -2,12 +2,9 @@ package DissertationFiles;
 
 import core.game.Observation;
 import core.game.StateObservation;
-import levelGenerators.constructiveLevelGenerator.LevelData;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
-import tools.GameAnalyzer;
-import tools.LevelMapping;
 import tools.Vector2d;
 
 import java.io.PrintWriter;
@@ -23,7 +20,7 @@ public class DataCollection
     public JSONArray PlayerPositions = new JSONArray();
 
     private int posIterator = 0;
-    private ArrayList<Vector2d> _listOfPlayerLccations = new ArrayList<Vector2d>();
+    private Vector2d[] listOfAgentLccations = new Vector2d[2002]; //Max game time is 2000 ticks
 
 
     // Run this function every frame to get the players position and other data
@@ -33,11 +30,11 @@ public class DataCollection
             AddPlayerPosition(SO);
 
             // Add to list of positions
-            for(int i = 0; i < _listOfPlayerLccations.size(); i++)
+            for(int i = 0; i < listOfAgentLccations.length; i++)
             {
-                if(SO.getAvatarPosition() != _listOfPlayerLccations.get(i))
+                if(SO.getAvatarPosition() != listOfAgentLccations[i])
                 {
-                    _listOfPlayerLccations.set(i,  SO.getAvatarPosition());
+                    listOfAgentLccations[i] = SO.getAvatarPosition();
                     posIterator++;
                 }
             }
@@ -109,6 +106,9 @@ public class DataCollection
         return ret;
     }
 
+
+    //! This function calculates the area in which the controller explored
+    //TODO: Remove the imovable cells from the equation
     private int calculatePercentageOfExploredLevel(StateObservation SO)
     {
         ArrayList<Observation> grid[][] = SO.getObservationGrid();
@@ -117,7 +117,7 @@ public class DataCollection
 
         int cellsExplored = 0;
         int cellsUnexplored = 0;
-        int ret;
+        int percent = 0;
 
         // Loop through the grid and check each cell to see if the player has been there
         for(int x = 0; x < grid.length; x++)
@@ -125,10 +125,10 @@ public class DataCollection
             for(int y = 0; y < grid[x].length; y++)
             {
 
-                for(int i = 0; i < _listOfPlayerLccations.size(); i++)
+                for(int i = 0; i < listOfAgentLccations.length; i++)
                 {
-                    if(grid[x][y].get(i).category != 6)  // Catagory 6 is static (wall) -- See Types.java class
-                    if(_listOfPlayerLccations.get(i).x == x && _listOfPlayerLccations.get(i).y == y)
+                    //if(grid[x][y].get(i).category != 6)  // Catagory 6 is static (wall) -- See Types.java class
+                    if(listOfAgentLccations[x].x == x && listOfAgentLccations[y].y == y)
                     {
                         cellsExplored++;
                     }
@@ -138,7 +138,7 @@ public class DataCollection
         }
 
         int mapSize = grid.length * grid[0].length;
-        ret = mapSize - cellsExplored;
-        return ret;
+        percent = cellsExplored / mapSize;
+        return percent;
     }
 }
