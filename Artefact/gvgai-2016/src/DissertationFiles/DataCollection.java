@@ -1,12 +1,17 @@
 package DissertationFiles;
 
+import core.game.Observation;
 import core.game.StateObservation;
+import levelGenerators.constructiveLevelGenerator.LevelData;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
+import tools.GameAnalyzer;
+import tools.LevelMapping;
 import tools.Vector2d;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 //! The goal of this class is to gather the interesting data of a game
 public class DataCollection
@@ -17,21 +22,33 @@ public class DataCollection
     public JSONObject GameData = new JSONObject();
     public JSONArray PlayerPositions = new JSONArray();
 
+    private int posIterator = 0;
+    private ArrayList<Vector2d> _listOfPlayerLccations = new ArrayList<Vector2d>();
 
+
+    // Run this function every frame to get the players position and other data
     public void AddGameStateToCollection(StateObservation SO)
     {
         //! Add player position to all data
             AddPlayerPosition(SO);
 
-
-
+            // Add to list of positions
+            for(int i = 0; i < _listOfPlayerLccations.size(); i++)
+            {
+                if(SO.getAvatarPosition() != _listOfPlayerLccations.get(i))
+                {
+                    _listOfPlayerLccations.set(i,  SO.getAvatarPosition());
+                    posIterator++;
+                }
+            }
     }
 
     //! Run this function at the end of the game to record the end game stats
     // GameScore, Death location, Win location
     public void AddGameEndStats(StateObservation SO)
     {
-        // IF the
+        calculatePercentageOfExploredLevel(SO);
+
         if(SO.isAvatarAlive())
             GameData.put("LastLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
         else
@@ -49,7 +66,6 @@ public class DataCollection
 
     public void AddPlayerPosition(StateObservation SO)
     {
-
         try
         {
             // Add player positions to the pos object
@@ -93,4 +109,36 @@ public class DataCollection
         return ret;
     }
 
+    private int calculatePercentageOfExploredLevel(StateObservation SO)
+    {
+        ArrayList<Observation> grid[][] = SO.getObservationGrid();
+        ArrayList<Observation> obs[] = SO.getFromAvatarSpritesPositions();
+
+
+        int cellsExplored = 0;
+        int cellsUnexplored = 0;
+        int ret;
+
+        // Loop through the grid and check each cell to see if the player has been there
+        for(int x = 0; x < grid.length; x++)
+        {
+            for(int y = 0; y < grid[x].length; y++)
+            {
+
+                for(int i = 0; i < _listOfPlayerLccations.size(); i++)
+                {
+                    if(grid[x][y].get(i).category != 6)  // Catagory 6 is static (wall) -- See Types.java class
+                    if(_listOfPlayerLccations.get(i).x == x && _listOfPlayerLccations.get(i).y == y)
+                    {
+                        cellsExplored++;
+                    }
+
+                }
+            }
+        }
+
+        int mapSize = grid.length * grid[0].length;
+        ret = mapSize - cellsExplored;
+        return ret;
+    }
 }
