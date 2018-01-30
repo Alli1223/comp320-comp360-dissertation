@@ -19,26 +19,25 @@ public class DataCollection
     public JSONObject GameData = new JSONObject();
     public JSONArray PlayerPositions = new JSONArray();
 
-    private int posIterator = 0;
-    private Vector2d[] listOfAgentLccations = new Vector2d[2002]; //Max game time is 2000 ticks
+    private int cellsExplored = 0;
+    private ArrayList<Vector2d> listOfAgentLccations = new ArrayList<Vector2d>(); //Max game time is 2000 ticks
 
 
     // Run this function every frame to get the players position and other data
     public void AddGameStateToCollection(StateObservation SO)
     {
         //! Add player position to all data
-            AddPlayerPosition(SO);
+        AddPlayerPosition(SO);
 
-            // Add to list of positions
-            for(int i = 0; i < listOfAgentLccations.length; i++)
-            {
-                if(SO.getAvatarPosition() != listOfAgentLccations[i])
-                {
-                    listOfAgentLccations[i] = SO.getAvatarPosition();
-                    posIterator++;
-                }
-            }
+        // Add to list of positions if it doesnt exist
+        if(!listOfAgentLccations.contains(SO.getAvatarPosition()))
+        {
+            cellsExplored++;
+            listOfAgentLccations.add(SO.getAvatarPosition());
+            System.out.println(SO.getAvatarPosition().x);
+        }
     }
+
 
     //! Run this function at the end of the game to record the end game stats
     // GameScore, Death location, Win location
@@ -46,7 +45,7 @@ public class DataCollection
     {
         calculatePercentageOfExploredLevel(SO);
 
-        if(SO.isAvatarAlive())
+        if (SO.isAvatarAlive())
             GameData.put("LastLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
         else
             GameData.put("DeathLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
@@ -83,8 +82,7 @@ public class DataCollection
             PrintWriter writer = new PrintWriter(outputLocation, "UTF-8");
             writer.println(AllData.toString());
             writer.close();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
 
         }
@@ -109,36 +107,29 @@ public class DataCollection
 
     //! This function calculates the area in which the controller explored
     //TODO: Remove the imovable cells from the equation
-    private int calculatePercentageOfExploredLevel(StateObservation SO)
+    private double calculatePercentageOfExploredLevel(StateObservation SO)
     {
         ArrayList<Observation> grid[][] = SO.getObservationGrid();
         ArrayList<Observation> obs[] = SO.getFromAvatarSpritesPositions();
 
 
-        int cellsExplored = 0;
         int cellsUnexplored = 0;
-        int percent = 0;
+        double percent = 0;
 
         // Loop through the grid and check each cell to see if the player has been there
-        for(int x = 0; x < grid.length; x++)
+        //for(int i = 0; i < listOfAgentLccations.length; i++)
         {
-            for(int y = 0; y < grid[x].length; y++)
-            {
+            //if(grid[x][y].get(i).category != 6)  // Catagory 6 is static (wall) -- See Types.java class
+            //if (listOfAgentLccations[x].x != x && listOfAgentLccations[y].y != y)
 
-                for(int i = 0; i < listOfAgentLccations.length; i++)
-                {
-                    //if(grid[x][y].get(i).category != 6)  // Catagory 6 is static (wall) -- See Types.java class
-                    if(listOfAgentLccations[x].x == x && listOfAgentLccations[y].y == y)
-                    {
-                        cellsExplored++;
-                    }
 
-                }
-            }
         }
 
         int mapSize = grid.length * grid[0].length;
-        percent = cellsExplored / mapSize;
+        percent = (double) cellsExplored / (double) mapSize;
+        System.out.println("Percentage of level explored: " + percent * 100.0);
         return percent;
     }
+
+
 }
