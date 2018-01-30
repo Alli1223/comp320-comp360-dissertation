@@ -43,13 +43,12 @@ public class DataCollection
     // GameScore, Death location, Win location
     public void AddGameEndStats(StateObservation SO)
     {
-        calculatePercentageOfExploredLevel(SO);
-
         if (SO.isAvatarAlive())
             GameData.put("LastLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
         else
             GameData.put("DeathLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
         GameData.put("GameScore", SO.getGameScore());
+        GameData.put("GameSpaceSearched", calculatePercentageOfExploredLevel(SO));                                      // Calculate search space
         GameData.put("GameTick", SO.getGameTick());
         GameData.put("AvatarType", SO.getAvatarType());
         AllData.put("GameData", GameData);
