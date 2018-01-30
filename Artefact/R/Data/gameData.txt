@@ -1,0 +1,1 @@
+{"GameData":{"DeathLocation":{"Pos":[{"X":-1},{"Y":-1}]},"GameTick":3,"AvatarType":1,"GameScore":0},"PlayerPositions":[{"Pos":[{"X":224},{"Y":252}]},{"Pos":[{"X":252},{"Y":252}]},{"Pos":[{"X":224},{"Y":252}]},{"Pos":[{"X":224},{"Y":224}]}]}

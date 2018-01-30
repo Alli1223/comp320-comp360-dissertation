@@ -102,6 +102,8 @@ public class Agent extends AbstractPlayer
         System.out.println("MCTS avg iters: " + SingleMCTSPlayer.iters / SingleMCTSPlayer.num);
         //Include your code here to know how it all ended.
         //System.out.println("Game over? " + stateObservation.isGameOver());
+
+        //Collect data at end game state
         dataCollection.AddGameEndStats(stateObservation);
     }
 

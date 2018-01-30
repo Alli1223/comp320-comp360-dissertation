@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 public class DataCollection
 {
     //
-    private String outputLocation = "./gameLogs/JSONData/gameData.txt";
+    private String outputLocation = "../R/Data/gameData.txt";
     public JSONObject AllData = new JSONObject();
     public JSONObject GameData = new JSONObject();
     public JSONArray PlayerPositions = new JSONArray();
@@ -49,7 +49,7 @@ public class DataCollection
 
     public void AddPlayerPosition(StateObservation SO)
     {
-        System.out.println(SO.toString());
+
         try
         {
             // Add player positions to the pos object
