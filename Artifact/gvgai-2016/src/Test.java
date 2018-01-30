@@ -65,8 +65,8 @@ public class Test
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
 
         String recordLevelFile = generateLevelPath + games[gameIdx] + "_glvl.txt";
-        String recordActionsFile = "gameLogs/actions_" + games[gameIdx] + "_lvl" + levelIdx + "_" + seed + ".txt"; //where to record the actions executed. null if not to save.
-
+        //String recordActionsFile = "gameLogs/actions_" + games[gameIdx] + "_lvl" + levelIdx + "_" + seed + ".txt"; //where to record the actions executed. null if not to save.
+        String recordActionsFile = "";
         // 1. This starts a game, in a level, played by a human.
          //ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
 
