@@ -13,14 +13,23 @@ import java.util.ArrayList;
 //! The goal of this class is to gather the interesting data of a game
 public class DataCollection
 {
-    //
+    // Singleton
+    private static DataCollection dataCollection = new DataCollection();
+    public static DataCollection getInstance() {return dataCollection;}
+    // Output location
     private String outputLocation = "../R/Data/gameData.txt";
+    // Json object containing all the data
     public JSONObject AllData = new JSONObject();
+    // The game data to be inserted into AllData
     public JSONObject GameData = new JSONObject();
+    // The Player Positions to be inserted into GameData
     public JSONArray PlayerPositions = new JSONArray();
 
+    // An Int to store the number of cells that have been explored
     private int cellsExplored = 0;
-    private ArrayList<Vector2d> listOfAgentLccations = new ArrayList<Vector2d>(); //Max game time is 2000 ticks
+    // A vector of positions that the agent has been at
+    public ArrayList<Vector2d> listOfAgentLccations = new ArrayList<Vector2d>(); //Max game time is 2000 ticks
+
 
 
     // Run this function every frame to get the players position and other data
@@ -34,7 +43,7 @@ public class DataCollection
         {
             cellsExplored++;
             listOfAgentLccations.add(SO.getAvatarPosition());
-            System.out.println(SO.getAvatarPosition().x);
+            //System.out.println(SO.getAvatarPosition().x);
         }
     }
 

@@ -5,10 +5,7 @@ import controllers.singlePlayer.sampleMCTS.SingleTreeNode;
 import tools.Vector2d;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
-import java.util.Arrays;
+import java.util.*;
 
 public class Visualisations
 {
@@ -20,6 +17,7 @@ public class Visualisations
     //! Booleans for choosing what should be rendered over the game
     public boolean drawAreaSearched = true;
     public boolean drawBestActionPath = true;
+    public boolean drawPreviousLocations = true;
 
     //! Block offset for drawing in the center of the cells
     private int blockOffset = 0;
@@ -37,6 +35,8 @@ public class Visualisations
         if(MCTSPlayer.m_root.state != null)
             blockOffset = MCTSPlayer.m_root.state.getBlockSize() / 2;
 
+        // Get the cellSize
+        int cellSize = MCTSPlayer.m_root.state.getBlockSize();
 
         // Search the tree starting at the root
         recursivelySearchTree(MCTSPlayer.m_root);
@@ -54,7 +54,7 @@ public class Visualisations
                     g.setPaint(new Color(255, 20, 58));
 
 
-                g.draw3DRect((int) pos.x, (int) pos.y, MCTSPlayer.m_root.state.getBlockSize(), MCTSPlayer.m_root.state.getBlockSize(), false);
+                g.draw3DRect((int) pos.x, (int) pos.y, cellSize, cellSize, false);
             }
         }
 
@@ -104,6 +104,14 @@ public class Visualisations
             */
         }
 
+        if(drawPreviousLocations)
+        {
+            ArrayList<Vector2d> AgentLocations = DataCollection.getInstance().listOfAgentLccations;
+            for(int i = 0; i < AgentLocations.size(); i++ )
+            {
+                g.draw3DRect((int) AgentLocations.get(i).x, (int) AgentLocations.get(i).y, cellSize, cellSize, false);
+            }
+        }
         //System.out.println(nodesInTree + " : " + searchPoints.size());
         g.drawString(String.valueOf("Current Search Depth Level: " + searchDepthLevel + ". Max Depth: " + deepestSearchLevel), 100, 50);
 
