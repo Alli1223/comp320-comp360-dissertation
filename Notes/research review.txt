@@ -7,6 +7,7 @@ Don't use footnotes, use footnotes for grey literature
 Justification of methodolgies
 
 Null hypothesis for each hypothesis
+hypothesies that can be expressed using mathmatical notation
 Give flow of related works under section heading
 
 
@@ -14,5 +15,9 @@ Further dissertation notes:
 
 Unit testing
 Use version numbers of the tools i used, i.e. Intellij Idea
-hypothesies that can be expressed using mathmatical notation
 say ethics approvial was obtained
+
+
+Justification of my choise of research method
+Deduction, Induction Abduction
+

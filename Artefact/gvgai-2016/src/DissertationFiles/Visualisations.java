@@ -15,8 +15,8 @@ public class Visualisations
     private Vector<Vector2d> searchPoints = new Vector<Vector2d>();
 
     //! Booleans for choosing what should be rendered over the game
-    public boolean drawAreaSearched = true;
-    public boolean drawBestActionPath = true;
+    public boolean drawAreaSearched = false;
+    public boolean drawBestActionPath = false;
     public boolean drawPreviousLocations = true;
 
     //! Block offset for drawing in the center of the cells
@@ -129,7 +129,6 @@ public class Visualisations
     //! This function will run until it has searched the whole tree
     private SingleTreeNode recursivelySearchTree(SingleTreeNode node)
     {
-
         // IF the node has a state, get its values
         if (node.state != null) {
             searchPoints.add(node.state.getAvatarPosition());
@@ -191,7 +190,7 @@ public class Visualisations
                 break;
         }
 
-        //Remove any empty values from the array
+        // Remove any empty values from the array
         res = Arrays.stream(res).filter(s -> (s != null)).toArray( Vector2d[]::new);
 
         return res;

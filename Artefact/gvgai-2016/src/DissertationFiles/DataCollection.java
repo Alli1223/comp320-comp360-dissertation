@@ -39,10 +39,10 @@ public class DataCollection
         AddPlayerPosition(SO);
 
         // Add to list of positions if it doesnt exist
-        if(!listOfAgentLccations.contains(SO.getAvatarPosition()))
+        if(!dataCollection.listOfAgentLccations.contains(SO.getAvatarPosition()))
         {
             cellsExplored++;
-            listOfAgentLccations.add(SO.getAvatarPosition());
+            dataCollection.listOfAgentLccations.add(SO.getAvatarPosition());
             //System.out.println(SO.getAvatarPosition().x);
         }
     }
@@ -138,6 +138,5 @@ public class DataCollection
         System.out.println("Percentage of level explored: " + percent * 100.0);
         return percent;
     }
-
 
 }
