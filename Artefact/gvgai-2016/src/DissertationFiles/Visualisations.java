@@ -17,7 +17,7 @@ public class Visualisations
     //! Booleans for choosing what should be rendered over the game
     public boolean drawAreaSearched = false;
     public boolean drawBestActionPath = false;
-    public boolean drawPreviousLocations = true;
+    public boolean drawPreviousLocations = false;
 
     //! Block offset for drawing in the center of the cells
     private int blockOffset = 0;
@@ -109,6 +109,7 @@ public class Visualisations
             ArrayList<Vector2d> AgentLocations = DataCollection.getInstance().listOfAgentLccations;
             for(int i = 0; i < AgentLocations.size(); i++ )
             {
+                g.setPaint(new Color(255,10, 10));
                 g.draw3DRect((int) AgentLocations.get(i).x, (int) AgentLocations.get(i).y, cellSize, cellSize, false);
             }
         }

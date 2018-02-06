@@ -1,5 +1,7 @@
+import java.io.PrintWriter;
 import java.util.Random;
 
+import DissertationFiles.DataCollection;
 import core.ArcadeMachine;
 
 /**
@@ -58,7 +60,7 @@ public class Test
         int seed = new Random().nextInt();
 
         //Game and level to play
-        int gameIdx = 11;
+        int gameIdx = 0;
         int levelIdx = 1; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
@@ -70,20 +72,21 @@ public class Test
          //ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
 
         // 2. This plays a game in a level by the controller.
-        ArcadeMachine.runOneGame(game, level1, visuals, sampleMCTSController, recordActionsFile, seed, 0);
+        //ArcadeMachine.runOneGame(game, level1, visuals, sampleMCTSController, recordActionsFile, seed, 0);
 
         // 3. This replays a game from an action file previously recorded
         //String readActionsFile = "actions_pacman_lvl1_-1877682670.txt";
         //ArcadeMachine.replayGame(game, level1, visuals, readActionsFile);
 
-        // 4. This plays a single game, in N levels, M times :
-//        String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
-//        int M = 10;
-//        for(int i=0; i<games.length; i++){
-//        	game = gamesPath + games[i] + ".txt";
-//        	level1 = gamesPath + games[i] + "_lvl" + levelIdx +".txt";
-//        	ArcadeMachine.runGames(game, new String[]{level1}, M, sampleMCTSController, null);
-//        }
+        // 4. This plays a single game, in N levels, M times :  Use games.length for all games
+        String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
+        int M = 3;
+        for(int i=0; i < 1; i++){
+        	game = gamesPath + games[i] + ".txt";
+        	level1 = gamesPath + games[i] + "_lvl" + levelIdx +".txt";
+        	ArcadeMachine.runGames(game, new String[]{level1}, M, sampleMCTSController, null);
+        }
+        DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData);
         
         //5. This starts a game, in a generated level created by a specific level generator
 

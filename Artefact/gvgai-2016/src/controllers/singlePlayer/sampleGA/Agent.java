@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
+import DissertationFiles.DataCollection;
 import DissertationFiles.Visualisations;
 import controllers.singlePlayer.Heuristics.StateHeuristic;
 import controllers.singlePlayer.Heuristics.WinScoreHeuristic;
@@ -42,8 +43,10 @@ public class Agent extends AbstractPlayer {
 
     private int numSimulations;
 
-    //! Alli code
-    private Visualisations vis;
+    //! Edited by Alli 05/12/2017
+    // List of variables for storing and rendering MCTS information
+    private  Visualisations vis = new Visualisations();
+    private DataCollection dataCollection = new DataCollection();
 
     /**
      * Public constructor with state observation and time due.
@@ -218,6 +221,7 @@ public class Agent extends AbstractPlayer {
     public void draw(Graphics2D g)
     {
         g.drawString("Num Simulations: " + numSimulations, 10, 20);
+
 
         //vis.renderSearchSpace(this);
     }
