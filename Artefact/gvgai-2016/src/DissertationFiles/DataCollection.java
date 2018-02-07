@@ -10,6 +10,7 @@ import tools.Vector2d;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 //! The goal of this class is to gather the interesting data of a game
 public class DataCollection
@@ -32,6 +33,8 @@ public class DataCollection
     private int cellsExplored = 0;
     // A vector of positions that the agent has been at
     public ArrayList<Vector2d> listOfAgentLccations = new ArrayList<Vector2d>(); //Max game time is 2000 ticks
+    // A Hashmap of positions and number of times it was visited
+    private HashMap<Vector2d, Integer> pointsVisited = new HashMap<>();
 
     // Run this function every frame to get the players position and other data
     public void AddGameStateToCollection(StateObservation SO)
@@ -44,7 +47,11 @@ public class DataCollection
         {
             cellsExplored++;
             dataCollection.listOfAgentLccations.add(SO.getAvatarPosition());
-            //System.out.println(SO.getAvatarPosition().x);
+
+            // Increment times visited
+            int timesVisisted = dataCollection.pointsVisited.get(SO.getAvatarPosition());
+            dataCollection.pointsVisited.put(SO.getAvatarPosition(), timesVisisted++);
+
         }
     }
 
@@ -78,7 +85,8 @@ public class DataCollection
             // Add player positions to the pos object
             dataCollection.PlayerPositions.put(ConvertPositionToJSON(SO.getAvatarPosition()));
             // Add that to the list of positions
-            dataCollection.AllData.put("PlayerPositions" + dataCollection.levelIteration, dataCollection.PlayerPositions);
+            //dataCollection.AllData.put("PlayerPositions" dataCollection.levelIteration, dataCollection.PlayerPositions);
+            dataCollection.AllData.put("PlayerPositions", dataCollection.PlayerPositions);
             if(SO.getGameTick() == 0) {
                 dataCollection.levelIteration++;
             }
@@ -131,7 +139,6 @@ public class DataCollection
         int cellsUnexplored = 0;
 
         double percent = 0;
-
 
         int mapSize = grid.length * grid[0].length;
         percent = (double) cellsExplored / (double) mapSize;
