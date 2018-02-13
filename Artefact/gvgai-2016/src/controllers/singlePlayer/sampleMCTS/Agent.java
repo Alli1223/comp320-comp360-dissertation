@@ -105,6 +105,7 @@ public class Agent extends AbstractPlayer
 
         //Collect data at end game state
         dataCollection.AddGameEndStats(stateObservation);
+
     }
 
 

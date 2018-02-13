@@ -39,13 +39,14 @@ public class DataCollection
     // A vector of positions that the agent has been at
     public ArrayList<Vector2d> listOfAgentLccations = new ArrayList<Vector2d>(); //Max game time is 2000 ticks
     // A Hashmap of positions and number of times it was visited
-    private HashMap<Vector2d, Integer> pointsVisited = new HashMap<>();
+    private HashMap<Vector2d, Integer> pointsVisited = new HashMap<Vector2d, Integer>();
 
     // Run this function every frame to get the players position and other data
     public void AddGameStateToCollection(StateObservation SO)
     {
         //! Add player position to all data
-        AddPlayerPosition(SO);
+        if(SO.getAvatarPosition() != null)
+            AddPlayerPosition(SO);
 
         // Add to list of positions if it doesnt exist
         if (!dataCollection.listOfAgentLccations.contains(SO.getAvatarPosition()))
@@ -54,8 +55,8 @@ public class DataCollection
             dataCollection.listOfAgentLccations.add(SO.getAvatarPosition());
 
             // Increment times visited
-            int timesVisisted = dataCollection.pointsVisited.get(SO.getAvatarPosition());
-            dataCollection.pointsVisited.put(SO.getAvatarPosition(), timesVisisted++);
+           // int timesVisisted = dataCollection.pointsVisited.get(SO.getAvatarPosition());
+            //dataCollection.pointsVisited.put(SO.getAvatarPosition(), timesVisisted++);
         }
     }
 
@@ -64,14 +65,14 @@ public class DataCollection
     // GameScore, Death location, Win location
     public void AddGameEndStats(StateObservation SO)
     {
-        //       if (SO.isAvatarAlive())
-        //           GameData.put("LastLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
-        //       else
-        //           GameData.put("DeathLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
-        //       GameData.put("GameScore", SO.getGameScore());
-        //       GameData.put("GameSpaceSearched", calculatePercentageOfExploredLevel(SO));                                      // Calculate search space
-        //       GameData.put("GameTick", SO.getGameTick());
-        //       GameData.put("AvatarType", SO.getAvatarType());
+        if (SO.isAvatarAlive())
+            GameData.put("LastLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
+        else
+            GameData.put("DeathLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
+        GameData.put("GameScore", SO.getGameScore());
+        GameData.put("GameSpaceSearched", calculatePercentageOfExploredLevel(SO));                                      // Calculate search space
+        GameData.put("GameTick", SO.getGameTick());
+        GameData.put("AvatarType", SO.getAvatarType());
 
         // Add the values to allData json object
         dataCollection.AllData.put("GameData", GameData);
@@ -90,8 +91,10 @@ public class DataCollection
             // Add player positions to the pos object
             dataCollection.PlayerPositions.put(ConvertPositionToJSON(SO.getAvatarPosition()));
             // Add that to the list of positions
-            //dataCollection.AllData.put("PlayerPositions" dataCollection.levelIteration, dataCollection.PlayerPositions);
-            dataCollection.AllData.put("PlayerPositions", dataCollection.PlayerPositions);
+            dataCollection.AllData.put("PlayerPositions" + dataCollection.levelIteration, dataCollection.PlayerPositions);
+            //dataCollection.AllData.put("PlayerPositions", dataCollection.PlayerPositions);
+
+            // IF the game tick is 0 then increment the game counter
             if (SO.getGameTick() == 0)
             {
                 dataCollection.levelIteration++;
