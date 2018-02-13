@@ -458,6 +458,53 @@ Email: AR185160@falmouth.ac.uk\\}
 
 %%%%%%%%%%% Requirements analysis and specification %%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Experemental Setup}
+
+	% Choosing what games to test the tree search algorithms on
+	\subsection{Choosing the Games}
+	
+	There are hundreds of games within the GVG-AI framework, and most have multiple levels, so testing with all the different possible configurations is prohibitively expensive, thus a subset of games within the framework will be selected in a way that will best represent the framework as a whole.
+	
+	%Other authors that have chosen the best games tio test
+	There are papers by previous authors that looked into finding a good selection of games that can be used for benchmarking the framework. \cite{gaina2017population}
+	
+	In Mark Nelsons paper \cite{nelson2016investigating}, he presented a large scale analysis of MCTS with 62 games in the framework, which were sorted based on performance. Bontrager et al. \cite{bontrager2016matching} used clustering techniques on 49 games in the goal to obtain rough groups of similar games.
+	The final 20 games that will be used in this paper are based of the paper by Gaina et al. \cite{gaina2017population} where they uniformly sampled from both Mark Nelson and Bontrager et al. papers and balanced a set of 10 stochastic and 10 deterministic games, which can be shown in figure \ref{GamesTable}.
+	
+	
+	% Table of games
+	\begin{table}[h!]
+	\centering
+	\begin{tabular} { |c||c|} 
+		 \hline
+		 \bf{Deterministic Games} & \bf{Stochastic Games} \\
+		 \hline
+		 Bait & Aliens  \\
+		 \hline
+ 		Chase  & Chopper   \\
+		\hline
+		Hungry Birds  & Digdug   \\
+		\hline
+		Missile Command  & Intersection   \\
+		\hline
+		Plaque Attack  & Seaquest   \\
+		\hline
+		Camel Race  & Butterflies   \\
+		\hline
+		Escape  & Crossfire   \\
+		\hline
+		Lemmings  & Infection   \\
+		\hline
+		Modality  & Roguelike   \\
+		\hline
+		Wait For Breakfast  & Survive Zombies   \\
+		\hline
+
+	\end{tabular}
+	\caption{Table of games selected based of \cite{guerrero2017beyond, gaina2017population}.}
+	\label{GamesTable}
+	\end{table}
+	
 
 %%%%%%%%%%% Design of research artifact %%%%%%%%%%%%%%%%%%%%%%%
 

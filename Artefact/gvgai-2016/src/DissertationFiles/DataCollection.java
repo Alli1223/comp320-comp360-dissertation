@@ -17,7 +17,12 @@ public class DataCollection
 {
     // Singleton
     private static DataCollection dataCollection = new DataCollection();
-    public static DataCollection getInstance() { return dataCollection; }
+
+    public static DataCollection getInstance()
+    {
+        return dataCollection;
+    }
+
     // Output location
     private String outputLocation = "../R/Data/gameData.txt";
     // Json object containing all the data
@@ -43,7 +48,7 @@ public class DataCollection
         AddPlayerPosition(SO);
 
         // Add to list of positions if it doesnt exist
-        if(!dataCollection.listOfAgentLccations.contains(SO.getAvatarPosition()))
+        if (!dataCollection.listOfAgentLccations.contains(SO.getAvatarPosition()))
         {
             cellsExplored++;
             dataCollection.listOfAgentLccations.add(SO.getAvatarPosition());
@@ -51,7 +56,6 @@ public class DataCollection
             // Increment times visited
             int timesVisisted = dataCollection.pointsVisited.get(SO.getAvatarPosition());
             dataCollection.pointsVisited.put(SO.getAvatarPosition(), timesVisisted++);
-
         }
     }
 
@@ -60,14 +64,14 @@ public class DataCollection
     // GameScore, Death location, Win location
     public void AddGameEndStats(StateObservation SO)
     {
- //       if (SO.isAvatarAlive())
- //           GameData.put("LastLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
- //       else
- //           GameData.put("DeathLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
- //       GameData.put("GameScore", SO.getGameScore());
- //       GameData.put("GameSpaceSearched", calculatePercentageOfExploredLevel(SO));                                      // Calculate search space
- //       GameData.put("GameTick", SO.getGameTick());
- //       GameData.put("AvatarType", SO.getAvatarType());
+        //       if (SO.isAvatarAlive())
+        //           GameData.put("LastLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
+        //       else
+        //           GameData.put("DeathLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
+        //       GameData.put("GameScore", SO.getGameScore());
+        //       GameData.put("GameSpaceSearched", calculatePercentageOfExploredLevel(SO));                                      // Calculate search space
+        //       GameData.put("GameTick", SO.getGameTick());
+        //       GameData.put("AvatarType", SO.getAvatarType());
 
         // Add the values to allData json object
         dataCollection.AllData.put("GameData", GameData);
@@ -78,6 +82,7 @@ public class DataCollection
     }
 
 
+    // Add player positions to the state observation
     public void AddPlayerPosition(StateObservation SO)
     {
         try
@@ -87,7 +92,8 @@ public class DataCollection
             // Add that to the list of positions
             //dataCollection.AllData.put("PlayerPositions" dataCollection.levelIteration, dataCollection.PlayerPositions);
             dataCollection.AllData.put("PlayerPositions", dataCollection.PlayerPositions);
-            if(SO.getGameTick() == 0) {
+            if (SO.getGameTick() == 0)
+            {
                 dataCollection.levelIteration++;
             }
         } catch (JSONException e)
@@ -145,5 +151,4 @@ public class DataCollection
         System.out.println("Percentage of level explored: " + percent * 100.0);
         return percent;
     }
-
 }
