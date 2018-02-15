@@ -10,6 +10,9 @@ Null hypothesis for each hypothesis
 hypothesies that can be expressed using mathmatical notation
 Give flow of related works under section heading
 
+Create good hyphothesis before doing the research
+JUnit for unit testing in java
+
 
 Further dissertation notes:
 
@@ -20,4 +23,6 @@ say ethics approvial was obtained
 
 Justification of my choise of research method
 Deduction, Induction Abduction
+
+
 
