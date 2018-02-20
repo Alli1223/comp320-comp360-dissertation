@@ -121,7 +121,7 @@ public class Visualisations
                 {
                     Vector2d pos = entry.getKey();
                     Integer value = entry.getValue();
-                    g.setPaint(new Color(value, 0, 0));
+                    g.setPaint(new Color(value *10, 10, 10));
                     g.drawRect((int) pos.x, (int) pos.y, cellSize, cellSize);
                 }
             }

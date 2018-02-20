@@ -53,7 +53,7 @@ public class DataCollection
     public void AddGameStateToCollection(StateObservation SO)
     {
         //! Add player position to all data
-        if(SO.getAvatarPosition() != null)
+        if (SO.getAvatarPosition() != null)
             AddPlayerPosition(SO);
 
         // Add to list of positions if it doesnt exist
@@ -61,18 +61,25 @@ public class DataCollection
         {
             cellsExplored++;
             dataCollection.listOfAgentLccations.add(SO.getAvatarPosition());
+            dataCollection.pointsVisited.put(SO.getAvatarPosition(), 0);
         }
 
         // Increment times visited
 
-        int timesVisisted = 0;
-        if(dataCollection.pointsVisited.get(SO.getAvatarPosition()) != null)
-        {
-            timesVisisted = dataCollection.pointsVisited.get(SO.getAvatarPosition());
-        }
-        timesVisisted++;
-            dataCollection.pointsVisited.put(SO.getAvatarPosition(), timesVisisted);
 
+        if (dataCollection.pointsVisited != null)
+        {
+            int timesVisisted = dataCollection.pointsVisited.getOrDefault(SO.getAvatarPosition(), 0);
+            if (timesVisisted > 0)
+            {
+                timesVisisted++;
+                dataCollection.pointsVisited.put(SO.getAvatarPosition(), timesVisisted);
+            }
+            else
+            {
+                dataCollection.pointsVisited.put(SO.getAvatarPosition(), 1);
+            }
+        }
     }
 
 
