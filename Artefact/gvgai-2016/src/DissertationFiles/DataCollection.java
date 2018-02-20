@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 //! The goal of this class is to gather the interesting data of a game
 public class DataCollection
@@ -43,7 +44,10 @@ public class DataCollection
     // A vector of positions that the agent has been at
     public ArrayList<Vector2d> listOfAgentLccations = new ArrayList<Vector2d>(); //Max game time is 2000 ticks
     // A Hashmap of positions and number of times it was visited
-    private HashMap<Vector2d, Integer> pointsVisited = new HashMap<Vector2d, Integer>();
+    private ConcurrentHashMap<Vector2d, Integer> pointsVisited = new ConcurrentHashMap<Vector2d, Integer>();
+
+    // Get hasmap of pl;aye
+    public ConcurrentHashMap<Vector2d, Integer> getPointsVisited() { return pointsVisited; }
 
     // Run this function every frame to get the players position and other data
     public void AddGameStateToCollection(StateObservation SO)
@@ -59,6 +63,15 @@ public class DataCollection
             dataCollection.listOfAgentLccations.add(SO.getAvatarPosition());
         }
 
+        // Increment times visited
+
+        int timesVisisted = 0;
+        if(dataCollection.pointsVisited.get(SO.getAvatarPosition()) != null)
+        {
+            timesVisisted = dataCollection.pointsVisited.get(SO.getAvatarPosition());
+        }
+        timesVisisted++;
+            dataCollection.pointsVisited.put(SO.getAvatarPosition(), timesVisisted);
 
     }
 
@@ -80,7 +93,7 @@ public class DataCollection
         dataCollection.AllData.put("GameData", GameData);
 
         // Save game points visted to file
-        RecordAndSaveNodesVisited();
+        CaptureScreen(SO);
 
         //Write the data
         System.out.println(AllData.toString());
@@ -161,11 +174,11 @@ public class DataCollection
         return percent;
     }
 
-    private void RecordAndSaveNodesVisited()
+    private void CaptureScreen(StateObservation SO)
     {
         try
         {
-            Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+            Rectangle screenRect = new Rectangle(SO.getWorldDimension());
             BufferedImage capture = new Robot().createScreenCapture(screenRect);
             ImageIO.write(capture, "bmp", new File("TestIamge.jpg"));
         }

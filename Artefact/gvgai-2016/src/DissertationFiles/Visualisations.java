@@ -17,7 +17,7 @@ public class Visualisations
     //! Booleans for choosing what should be rendered over the game
     public boolean drawAreaSearched = false;
     public boolean drawBestActionPath = false;
-    public boolean drawPreviousLocations = false;
+    public boolean drawPreviousLocations = true;
 
     //! Block offset for drawing in the center of the cells
     private int blockOffset = 0;
@@ -106,11 +106,24 @@ public class Visualisations
 
         if(drawPreviousLocations)
         {
+            /* DRAWS ONLY THE CELLS THE AGENT HAS VISITED
             ArrayList<Vector2d> AgentLocations = DataCollection.getInstance().listOfAgentLccations;
             for(int i = 0; i < AgentLocations.size(); i++ )
             {
                 g.setPaint(new Color(255,10, 10));
                 g.draw3DRect((int) AgentLocations.get(i).x, (int) AgentLocations.get(i).y, cellSize, cellSize, false);
+            }
+            */
+
+            if(DataCollection.getInstance().getPointsVisited() != null)
+            {
+                for (Map.Entry<Vector2d, Integer> entry : DataCollection.getInstance().getPointsVisited().entrySet())
+                {
+                    Vector2d pos = entry.getKey();
+                    Integer value = entry.getValue();
+                    g.setPaint(new Color(value, 0, 0));
+                    g.drawRect((int) pos.x, (int) pos.y, cellSize, cellSize);
+                }
             }
         }
         //System.out.println(nodesInTree + " : " + searchPoints.size());
