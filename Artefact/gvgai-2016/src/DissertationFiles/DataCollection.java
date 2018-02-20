@@ -7,6 +7,9 @@ import org.json.JSONObject;
 import org.json.JSONException;
 import tools.Vector2d;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -34,6 +37,7 @@ public class DataCollection
     // iteration is incremented when the game tick is 0, and used to record the level that is being run
     private int levelIteration = 0;
 
+
     // An Int to store the number of cells that have been explored
     private int cellsExplored = 0;
     // A vector of positions that the agent has been at
@@ -53,11 +57,9 @@ public class DataCollection
         {
             cellsExplored++;
             dataCollection.listOfAgentLccations.add(SO.getAvatarPosition());
-
-            // Increment times visited
-           // int timesVisisted = dataCollection.pointsVisited.get(SO.getAvatarPosition());
-            //dataCollection.pointsVisited.put(SO.getAvatarPosition(), timesVisisted++);
         }
+
+
     }
 
 
@@ -76,6 +78,9 @@ public class DataCollection
 
         // Add the values to allData json object
         dataCollection.AllData.put("GameData", GameData);
+
+        // Save game points visted to file
+        RecordAndSaveNodesVisited();
 
         //Write the data
         System.out.println(AllData.toString());
@@ -145,6 +150,7 @@ public class DataCollection
         ArrayList<Observation> grid[][] = SO.getObservationGrid();
         ArrayList<Observation> obs[] = SO.getFromAvatarSpritesPositions();
 
+
         int cellsUnexplored = 0;
 
         double percent = 0;
@@ -153,5 +159,19 @@ public class DataCollection
         percent = (double) cellsExplored / (double) mapSize;
         System.out.println("Percentage of level explored: " + percent * 100.0);
         return percent;
+    }
+
+    private void RecordAndSaveNodesVisited()
+    {
+        try
+        {
+            Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+            BufferedImage capture = new Robot().createScreenCapture(screenRect);
+            ImageIO.write(capture, "bmp", new File("TestIamge.jpg"));
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error in saving image to file: " + e);
+        }
     }
 }
