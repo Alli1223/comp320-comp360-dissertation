@@ -5,6 +5,7 @@ import core.game.StateObservation;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
+import tools.Pair;
 import tools.Vector2d;
 
 import javax.imageio.ImageIO;
@@ -15,6 +16,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
+
 
 //! The goal of this class is to gather the interesting data of a game
 public class DataCollection
@@ -44,10 +46,10 @@ public class DataCollection
     // A vector of positions that the agent has been at
     public ArrayList<Vector2d> listOfAgentLccations = new ArrayList<Vector2d>(); //Max game time is 2000 ticks
     // A Hashmap of positions and number of times it was visited
-    private ConcurrentHashMap<Vector2d, Integer> pointsVisited = new ConcurrentHashMap<Vector2d, Integer>();
+    private ConcurrentHashMap<Pair, Integer> pointsVisited = new ConcurrentHashMap<Pair, Integer>();
 
     // Get hasmap of pl;aye
-    public ConcurrentHashMap<Vector2d, Integer> getPointsVisited() { return pointsVisited; }
+    public ConcurrentHashMap<Pair, Integer> getPointsVisited() { return pointsVisited; }
 
     // Run this function every frame to get the players position and other data
     public void AddGameStateToCollection(StateObservation SO)
@@ -61,25 +63,26 @@ public class DataCollection
         {
             cellsExplored++;
             dataCollection.listOfAgentLccations.add(SO.getAvatarPosition());
-            dataCollection.pointsVisited.put(SO.getAvatarPosition(), 0);
+            Pair posPair = new Pair(SO.getAvatarPosition().x, SO.getAvatarPosition().y);
+            dataCollection.pointsVisited.put(posPair, 0);
         }
 
         // Increment times visited
 
 
-        if (dataCollection.pointsVisited != null)
+
+        Pair pos = new Pair(SO.getAvatarPosition().x, SO.getAvatarPosition().y);
+
+        if(!dataCollection.pointsVisited.contains(pos))
         {
-            int timesVisisted = dataCollection.pointsVisited.getOrDefault(SO.getAvatarPosition(), 0);
-            if (timesVisisted > 0)
-            {
-                timesVisisted++;
-                dataCollection.pointsVisited.put(SO.getAvatarPosition(), timesVisisted);
-            }
-            else
-            {
-                dataCollection.pointsVisited.put(SO.getAvatarPosition(), 1);
-            }
+            dataCollection.pointsVisited.put(pos, 1);
         }
+        else
+        {
+            int timesVisisted = dataCollection.pointsVisited.get(pos);
+            dataCollection.pointsVisited.put(pos, timesVisisted += 1);
+        }
+
     }
 
 

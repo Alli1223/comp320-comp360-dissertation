@@ -2,6 +2,7 @@ package DissertationFiles;
 
 import controllers.singlePlayer.sampleMCTS.SingleMCTSPlayer;
 import controllers.singlePlayer.sampleMCTS.SingleTreeNode;
+import tools.Pair;
 import tools.Vector2d;
 
 import java.awt.*;
@@ -117,12 +118,12 @@ public class Visualisations
 
             if(DataCollection.getInstance().getPointsVisited() != null)
             {
-                for (Map.Entry<Vector2d, Integer> entry : DataCollection.getInstance().getPointsVisited().entrySet())
+                for (Map.Entry<Pair, Integer> entry : DataCollection.getInstance().getPointsVisited().entrySet())
                 {
-                    Vector2d pos = entry.getKey();
+                    Pair pos = entry.getKey();
                     Integer value = entry.getValue();
                     g.setPaint(new Color(value *10, 10, 10));
-                    g.drawRect((int) pos.x, (int) pos.y, cellSize, cellSize);
+                    g.drawRect((int) pos.first, (int) pos.second, cellSize, cellSize);
                 }
             }
         }

@@ -428,8 +428,11 @@ Email: AR185160@falmouth.ac.uk\\}
 
 	%What I will create
 	There will be thousands of different simulations to run to gather the required data, this will be done by modifications to the GVG-AI framework to gather the extra information needed.
-	From this data this paper will aim to create an AI controller that will either use hyper-heuristics to improve its performance. Furthermore conclusions can be drawn out as to the limitations of different search techniques and potentially any areas in which they could be improved.
+	From this data this paper will aim to create an AI controller that will use hyper-heuristics to improve its performance. Furthermore conclusions can be drawn out as to the limitations of different search techniques and potentially any areas in which they could be improved.
 	
+	Limitations of different search tree techniques within the competition.
+	
+
 	
 
 	%Justification of research
@@ -475,7 +478,7 @@ Email: AR185160@falmouth.ac.uk\\}
 	There are papers by previous authors that looked into finding a good selection of games that can be used for benchmarking the framework. \cite{gaina2017population}
 	
 	In Mark Nelsons paper \cite{nelson2016investigating}, he presented a large scale analysis of MCTS with 62 games in the framework, which were sorted based on performance. Bontrager et al. \cite{bontrager2016matching} used clustering techniques on 49 games in the goal to obtain rough groups of similar games.
-	The final 20 games that will be used in this paper are based of the paper by Gaina et al. \cite{gaina2017population} where they uniformly sampled from both Mark Nelson and Bontrager et al. papers and balanced a set of 10 stochastic and 10 deterministic games, which can be shown in figure \ref{GamesTable}.
+	The final 20 games that will be used in this paper are based of the paper by Gaina et al. \cite{gaina2017population} where they uniformly sampled from both Mark Nelson and Bontrager et al. papers and balanced a set of 10 stochastic and 10 deterministic games, which can be shown in table \ref{GamesTable}.
 	
 	
 	% Table of games
@@ -508,6 +511,7 @@ Email: AR185160@falmouth.ac.uk\\}
 	\subsection{Design of data collection}
 	
 	\subsection{Design of hyper-heuristic}
+	How I tried to avoid the MCTS locality limitation
 	
 	Burke et al. propose two different categories of hyper heuristics; heuristic selection and heuristic generation\cite{burke2010classification}.
 
@@ -515,6 +519,8 @@ Email: AR185160@falmouth.ac.uk\\}
 
 
 %%%%%%%%%%% Research Methodology %%%%%%%%%%%%%%%%%%%%%%%
+
+which techniques 
 
 
 %%%%%%%%%%% Method of evaluation the research artifact (Unit Testing) and findings %%%%%%%%%%%%%%%%%%%%%%%
