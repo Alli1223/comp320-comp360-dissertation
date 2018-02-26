@@ -63,25 +63,27 @@ public class DataCollection
         {
             cellsExplored++;
             dataCollection.listOfAgentLccations.add(SO.getAvatarPosition());
-            Pair posPair = new Pair(SO.getAvatarPosition().x, SO.getAvatarPosition().y);
-            dataCollection.pointsVisited.put(posPair, 0);
+            //Pair posPair = new Pair(SO.getAvatarPosition().x, SO.getAvatarPosition().y);
+            //dataCollection.pointsVisited.put(posPair, 0);
         }
-
-        // Increment times visited
-
 
 
         Pair pos = new Pair(SO.getAvatarPosition().x, SO.getAvatarPosition().y);
 
-        if(!dataCollection.pointsVisited.contains(pos))
+
+        //dataCollection.pointsVisited.put(pos, 1);
+
+        int timesVisisted = 0;
+        try
         {
-            dataCollection.pointsVisited.put(pos, 1);
+            timesVisisted = dataCollection.pointsVisited.get(pos).intValue();
         }
-        else
+        catch (Exception e)
         {
-            int timesVisisted = dataCollection.pointsVisited.get(pos);
-            dataCollection.pointsVisited.put(pos, timesVisisted += 1);
+            System.out.println("Errorh");
         }
+        dataCollection.pointsVisited.put(pos, timesVisisted += 1);
+
 
     }
 

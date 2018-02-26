@@ -121,12 +121,16 @@ public class Visualisations
                 for (Map.Entry<Pair, Integer> entry : DataCollection.getInstance().getPointsVisited().entrySet())
                 {
                     Pair pos = entry.getKey();
+                    double x = (double) pos.first;
+                    double y = (double) pos.second;
                     Integer value = entry.getValue();
                     g.setPaint(new Color(value *10, 10, 10));
-                    g.drawRect((int) pos.first, (int) pos.second, cellSize, cellSize);
+                    g.drawRect((int) x, (int) y, cellSize, cellSize);
                 }
             }
         }
+
+
         //System.out.println(nodesInTree + " : " + searchPoints.size());
         g.drawString(String.valueOf("Current Search Depth Level: " + searchDepthLevel + ". Max Depth: " + deepestSearchLevel), 100, 50);
 

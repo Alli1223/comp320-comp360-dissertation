@@ -1,0 +1,6 @@
+MCTS locality - Use other search techqiues to address this issue.
+
+Not sure about the direction to take the paper.
+
+Do I write about the code ive done to collect the data?
+
