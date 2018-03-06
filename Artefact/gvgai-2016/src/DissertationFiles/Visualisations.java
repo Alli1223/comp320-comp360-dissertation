@@ -16,7 +16,7 @@ public class Visualisations
     private Vector<Vector2d> searchPoints = new Vector<Vector2d>();
 
     //! Booleans for choosing what should be rendered over the game
-    public boolean drawAreaSearched = false;
+    public boolean drawAreaSearched = true;
     public boolean drawBestActionPath = false;
     public boolean drawPreviousLocations = true;
 
@@ -28,7 +28,6 @@ public class Visualisations
     private int deepestSearchLevel = 0;
     private int nodesInTree = 0;
     private SingleTreeNode deepestNode = null;
-
 
     //! Renders the tree searches over the search space
     public void renderSearchSpace(SingleMCTSPlayer MCTSPlayer, Graphics2D g)

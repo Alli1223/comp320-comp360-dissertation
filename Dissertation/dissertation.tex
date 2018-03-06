@@ -113,6 +113,8 @@ Email: AR185160@falmouth.ac.uk\\}
 	There has been considerable literature on GVG-AI and individual AI techniques within the competition, and very little covering an in depth look into the comparison of the different search algorithms.
 
 	Furthermore within the GVG-AI competition there are a few different tree search techniques used, a few of which are mentioned in section \ref{ssec:GST}. 
+	
+	%Questions to answer with paper
 	These techniques perform quite differently within the competition, this paper will aim to answer \textit{What are the strengths and weaknesses of different search techniques} as well as \textit{What type of game does each search technique succeed at?}
 
 
@@ -475,7 +477,7 @@ Email: AR185160@falmouth.ac.uk\\}
 	
 	There are hundreds of games within the GVG-AI framework, and most have multiple levels, so testing with all the different possible configurations is prohibitively expensive, thus a subset of games within the framework will be selected in a way that will best represent the framework as a whole.
 	
-	%Other authors that have chosen the best games tio test
+	%Other authors that have chosen the best games to test
 	There are papers by previous authors that looked into finding a good selection of games that can be used for benchmarking the framework. \cite{gaina2017population}
 	
 	In Mark Nelsons paper \cite{nelson2016investigating}, he presented a large scale analysis of MCTS with 62 games in the framework, which were sorted based on performance. Bontrager et al. \cite{bontrager2016matching} used clustering techniques on 49 games in the goal to obtain rough groups of similar games.
@@ -510,6 +512,12 @@ Email: AR185160@falmouth.ac.uk\\}
 %%%%%%%%%%% Design of research artifact %%%%%%%%%%%%%%%%%%%%%%%
 
 	\subsection{Design of data collection}
+	
+	%%Visualising the limitations of the search trees within the competition
+	To gather the data about the different search trees, I implemented a class that would visualise the time an agent spent in each cell. 
+	From this I was able to get an insight the movement patterns within the game, as shown in IMAGE HERE.
+	
+	One of the big limitations for the sampleMCTS agent within GVG-AI is it's locality limitation, which was...
 	
 	\subsection{Design of hyper-heuristic}
 	How I tried to avoid the MCTS locality limitation

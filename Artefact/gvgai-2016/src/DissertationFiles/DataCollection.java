@@ -1,5 +1,4 @@
 package DissertationFiles;
-
 import core.game.Observation;
 import core.game.StateObservation;
 import org.json.JSONArray;
@@ -13,8 +12,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -37,19 +35,15 @@ public class DataCollection
     public JSONObject GameData = new JSONObject();
     // The Player Positions to be inserted into GameData
     public JSONArray PlayerPositions = new JSONArray();
-    // iteration is incremented when the game tick is 0, and used to record the level that is being run
-    private int levelIteration = 0;
-
-
-    // An Int to store the number of cells that have been explored
-    private int cellsExplored = 0;
     // A vector of positions that the agent has been at
     public ArrayList<Vector2d> listOfAgentLccations = new ArrayList<Vector2d>(); //Max game time is 2000 ticks
-    // A Hashmap of positions and number of times it was visited
-    private ConcurrentHashMap<Pair, Integer> pointsVisited = new ConcurrentHashMap<Pair, Integer>();
+    // iteration is incremented when the game tick is 0, and used to record the level that is being run
+    private int levelIteration = 0;
+    // An Int to store the number of cells that have been explored
+    private int cellsExplored = 0;
 
-    // Get hasmap of pl;aye
-    public ConcurrentHashMap<Pair, Integer> getPointsVisited() { return pointsVisited; }
+    private HashMap<JSONObject, Integer> PositionHistory = new HashMap<JSONObject, Integer>();
+
 
     // Run this function every frame to get the players position and other data
     public void AddGameStateToCollection(StateObservation SO)
@@ -63,28 +57,20 @@ public class DataCollection
         {
             cellsExplored++;
             dataCollection.listOfAgentLccations.add(SO.getAvatarPosition());
-            //Pair posPair = new Pair(SO.getAvatarPosition().x, SO.getAvatarPosition().y);
-            //dataCollection.pointsVisited.put(posPair, 0);
+            JSONObject newJson = new JSONObject(ConvertPositionToJSON(SO.getAvatarPosition()));
+            PositionHistory.put(newJson, 0);
         }
-
-
-        Pair pos = new Pair(SO.getAvatarPosition().x, SO.getAvatarPosition().y);
-
-
-        //dataCollection.pointsVisited.put(pos, 1);
-
-        int timesVisisted = 0;
-        try
+        else
         {
-            timesVisisted = dataCollection.pointsVisited.get(pos).intValue();
+            if(PositionHistory.get(ConvertPositionToJSON(SO.getAvatarPosition())) != null)
+            {
+                int test = PositionHistory.get(ConvertPositionToJSON(SO.getAvatarPosition()));
+            }
+
         }
-        catch (Exception e)
-        {
-            System.out.println("Errorh");
-        }
-        dataCollection.pointsVisited.put(pos, timesVisisted += 1);
 
 
+        Vector2d pos = new Vector2d(SO.getAvatarPosition());
     }
 
 
@@ -120,6 +106,9 @@ public class DataCollection
         {
             // Add player positions to the pos object
             dataCollection.PlayerPositions.put(ConvertPositionToJSON(SO.getAvatarPosition()));
+
+            //int timesVisited = PositionHistory.get(ConvertPositionToJSON(SO.getAvatarPosition()));
+            PositionHistory.put(ConvertPositionToJSON(SO.getAvatarPosition()), 1);
             // Add that to the list of positions
             dataCollection.AllData.put("PlayerPositions" + dataCollection.levelIteration, dataCollection.PlayerPositions);
             //dataCollection.AllData.put("PlayerPositions", dataCollection.PlayerPositions);
