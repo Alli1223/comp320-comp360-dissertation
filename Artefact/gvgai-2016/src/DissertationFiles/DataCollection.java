@@ -42,14 +42,15 @@ public class DataCollection
     // An Int to store the number of cells that have been explored
     private int cellsExplored = 0;
 
-    private HashMap<JSONObject, Integer> PositionHistory = new HashMap<JSONObject, Integer>();
+    private HashMap<Pair, Integer> PositionHistory = new HashMap<Pair, Integer>();
 
 
     // Run this function every frame to get the players position and other data
     public void AddGameStateToCollection(StateObservation SO)
     {
+        Vector2d playerPosition = SO.getAvatarPosition();
         //! Add player position to all data
-        if (SO.getAvatarPosition() != null)
+        if (playerPosition != null)
             AddPlayerPosition(SO);
 
         // Add to list of positions if it doesnt exist
@@ -58,17 +59,17 @@ public class DataCollection
             cellsExplored++;
             dataCollection.listOfAgentLccations.add(SO.getAvatarPosition());
             JSONObject newJson = new JSONObject(ConvertPositionToJSON(SO.getAvatarPosition()));
-            PositionHistory.put(newJson, 0);
+
         }
-        else
+
+        Pair p = new Pair(playerPosition.x, playerPosition.y);
+
+
+        if(PositionHistory.containsKey(p))
         {
-            if(PositionHistory.get(ConvertPositionToJSON(SO.getAvatarPosition())) != null)
-            {
-                int test = PositionHistory.get(ConvertPositionToJSON(SO.getAvatarPosition()));
-            }
-
+            int test = PositionHistory.get(p);
+            PositionHistory.replace(p, test++);
         }
-
 
         Vector2d pos = new Vector2d(SO.getAvatarPosition());
     }
@@ -108,7 +109,7 @@ public class DataCollection
             dataCollection.PlayerPositions.put(ConvertPositionToJSON(SO.getAvatarPosition()));
 
             //int timesVisited = PositionHistory.get(ConvertPositionToJSON(SO.getAvatarPosition()));
-            PositionHistory.put(ConvertPositionToJSON(SO.getAvatarPosition()), 1);
+            //PositionHistory.put(ConvertPositionToJSON(SO.getAvatarPosition()), 1);
             // Add that to the list of positions
             dataCollection.AllData.put("PlayerPositions" + dataCollection.levelIteration, dataCollection.PlayerPositions);
             //dataCollection.AllData.put("PlayerPositions", dataCollection.PlayerPositions);
