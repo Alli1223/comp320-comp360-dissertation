@@ -398,6 +398,11 @@ Email: AR185160@falmouth.ac.uk\\}
 			The sample MCTS controller is an implementation of the vanilla MCTS algorithm, this is described in section \ref{sssec:MCTS}, and the full description of MCTS algorithm is described by Browne et al. \cite{browne2012survey}.
 			The sample MCTS controller uses a payout depth of 10 moves and an exploration-exploitation constant value of $\sqrt{2}$ (from equation \ref{eqUCT}) and selects the most visited action from the root to pick a move to return for each game cycle \cite{perez20162014}.
 			However MCTS isn't the sole answer to the GVG-AI competition, as it has been shown that even with a 30x computational budget, it fails to master games. However it does manage to avoid to explicitly loosing games, but does not win a lot of them either. This shows that for the AI it finds not losing is significantly easier than winning \cite{nelson2016investigating}.
+			
+		\textbf{sample OLMCTS} \label{sssec:sampleOLMCTS}
+			The Open Loop Monte Carlo Tree Search uses the same techniques as the sampleMCTS, however it does not store the game state within the nodes of the tree search. 
+			This is because with non-deterministic games, that contain random elements (i.e. random enemies), the states in the tree will change every frame, so the outcome of the random action will be different on every search.
+			
 
 		\textbf{sample GA} \label{sssec:sampleGA}
 			The sample Genetic Algorithm(GA) controller is a rolling horizon open loop implementation for a minimalistic steady state genetic algorithm, known as microbial GA \cite{harvey2009microbial, perez20162014}.
@@ -408,10 +413,11 @@ Email: AR185160@falmouth.ac.uk\\}
 
 		\textbf{Random}
 			This is a very simple controller that is provided with the GVG-AI framework, it simply returns a random action at each game cycle.
-			The random controller came 14th in the competition, which is quite surprising as it managed to beat quite a few of the other, more complicated controllers \footnote{The reason for this may be due to more complicated controllers not choosing an action because it isn't able to search enough of the game space, so making a random action is often better than no action.}.
+			The random controller came 14th in the competition, which is quite surprising as it managed to beat quite a few of the other, more complicated controllers. 
+			The reason for this may be due to more complicated controllers not choosing an action because it isn't able to search enough of the game space, so making a random action is often better than no action.
 
 		\textbf{OSLA}
-			One Step Look Ahead is another rather simple controller, it evaluates the position using the same heuristic as Sample MCTS and selects the action with the highest evaluation score, then moves the model one step ahead. This controller came in 16th place zcite{perez20162014}.
+			One Step Look Ahead is another rather simple controller, it evaluates the position using the same heuristic as Sample MCTS and selects the action with the highest evaluation score, then moves the model one step ahead. This controller came in 16th place \cite{perez20162014}.
 
 	
 		
@@ -442,13 +448,15 @@ Email: AR185160@falmouth.ac.uk\\}
 	This software will provide an in depth insight into the challenges faced by each tree search algorithm.
 	Further research could include feeding this data back into the search algorithms or level generators to develop levels that the search techniques will be able to navigate.
 
-	
+	%Hypothesis
 \subsection{Hypothesis}
-	\textbf{Null Hypothesis:}
-		The different search trees methods have no significant differences in strength in the competition.
+
+	\textbf{Hypothesis One:}
+		MCTS modification A will prove better than MCTS modification B
 		
-	\textbf{Hypothesis:}
-		Combining different search techniques with different strengths and weaknesses lead to a better AI agent.
+	\textbf{Hypothesis Two:}
+		MCTS modification B will prove better than MCTS modification A
+		%Combining different search techniques with different strengths and weaknesses lead to a better AI agent.
 
 \section{Conclusion}
 	In conclusion, the literature covered in this review provides an overview of a few of the current algorithms in use in the GVG-AI competition.

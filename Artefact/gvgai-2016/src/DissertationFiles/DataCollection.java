@@ -10,7 +10,9 @@ import tools.Vector2d;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -42,7 +44,9 @@ public class DataCollection
     // An Int to store the number of cells that have been explored
     private int cellsExplored = 0;
 
-    private HashMap<Pair, Integer> PositionHistory = new HashMap<Pair, Integer>();
+    private String point = "NULL";
+
+    public ConcurrentHashMap<String, Integer> PositionHistory = new ConcurrentHashMap<String, Integer>();
 
 
     // Run this function every frame to get the players position and other data
@@ -59,19 +63,19 @@ public class DataCollection
             cellsExplored++;
             dataCollection.listOfAgentLccations.add(SO.getAvatarPosition());
             JSONObject newJson = new JSONObject(ConvertPositionToJSON(SO.getAvatarPosition()));
-
+            point = playerPosition.toString();
+            dataCollection.PositionHistory.put(point, 0);
         }
 
-        Pair p = new Pair(playerPosition.x, playerPosition.y);
 
-
-        if(PositionHistory.containsKey(p))
+        // Update points visited
+        point = playerPosition.toString();
+        if(dataCollection.PositionHistory.containsKey(point))
         {
-            int test = PositionHistory.get(p);
-            PositionHistory.replace(p, test++);
+            int test = dataCollection.PositionHistory.get(point);
+            test++;
+            dataCollection.PositionHistory.replace(point, test);
         }
-
-        Vector2d pos = new Vector2d(SO.getAvatarPosition());
     }
 
 
@@ -79,17 +83,21 @@ public class DataCollection
     // GameScore, Death location, Win location
     public void AddGameEndStats(StateObservation SO)
     {
-        if (SO.isAvatarAlive())
-            GameData.put("LastLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
-        else
-            GameData.put("DeathLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
+       // if (SO.isAvatarAlive())
+       //     GameData.put("LastLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
+       // else
+       //     GameData.put("DeathLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
         GameData.put("GameScore", SO.getGameScore());
         GameData.put("GameSpaceSearched", calculatePercentageOfExploredLevel(SO));                                      // Calculate search space
-        GameData.put("GameTick", SO.getGameTick());
         GameData.put("AvatarType", SO.getAvatarType());
 
+        if(SO.getGameTick() >= 2000)
+            GameData.put("TimeOut", 1);
+        else
+            GameData.put("TimeOut", 0);
+
         // Add the values to allData json object
-        dataCollection.AllData.put("GameData", GameData);
+        dataCollection.AllData.put("GameData" + dataCollection.levelIteration, GameData);
 
         // Save game points visted to file
         CaptureScreen(SO);
@@ -108,17 +116,14 @@ public class DataCollection
             // Add player positions to the pos object
             dataCollection.PlayerPositions.put(ConvertPositionToJSON(SO.getAvatarPosition()));
 
-            //int timesVisited = PositionHistory.get(ConvertPositionToJSON(SO.getAvatarPosition()));
-            //PositionHistory.put(ConvertPositionToJSON(SO.getAvatarPosition()), 1);
-            // Add that to the list of positions
-            dataCollection.AllData.put("PlayerPositions" + dataCollection.levelIteration, dataCollection.PlayerPositions);
+
+            //dataCollection.AllData.put("PlayerPositions" + dataCollection.levelIteration, dataCollection.PlayerPositions);
             //dataCollection.AllData.put("PlayerPositions", dataCollection.PlayerPositions);
 
             // IF the game tick is 0 then increment the game counter
             if (SO.getGameTick() == 0)
-            {
                 dataCollection.levelIteration++;
-            }
+
         } catch (JSONException e)
         {
             System.out.println("Error adding to player positions");
@@ -157,6 +162,27 @@ public class DataCollection
         return ret;
     }
 
+    // Seralise the string
+    private String serializeString(String str)
+    {
+
+        String returnString = "NULL";
+        try
+        {
+            ByteArrayOutputStream bo = new ByteArrayOutputStream();
+            ObjectOutputStream so = new ObjectOutputStream(bo);
+            so.writeObject(str);
+            //so.flush();
+            return bo.toString();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error serializingString: " + e);
+        }
+
+        return returnString;
+    }
+
 
     //! This function calculates the area in which the controller explored
     //TODO: Remove the imovable cells from the equation
@@ -170,10 +196,12 @@ public class DataCollection
 
         double percent = 0;
 
-        int mapSize = grid.length * grid[0].length;
+        double test = SO.getImmovablePositions().length;
+        // Get the map size negative the immovable positions
+        int mapSize = grid.length * grid[0].length - SO.getImmovablePositions().length;
         percent = (double) cellsExplored / (double) mapSize;
         System.out.println("Percentage of level explored: " + percent * 100.0);
-        return percent;
+        return percent * 100;
     }
 
     private void CaptureScreen(StateObservation SO)

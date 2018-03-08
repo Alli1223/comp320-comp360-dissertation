@@ -6,6 +6,10 @@ import tools.Pair;
 import tools.Vector2d;
 
 import java.awt.*;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.nio.charset.Charset;
 import java.util.*;
 
 public class Visualisations
@@ -115,16 +119,25 @@ public class Visualisations
             }
             */
 
-            if(DataCollection.getInstance().getPointsVisited() != null)
+            // Loop through the hashMap and get the positions
+            if(DataCollection.getInstance().PositionHistory != null)
             {
-                for (Map.Entry<Pair, Integer> entry : DataCollection.getInstance().getPointsVisited().entrySet())
+                for (Map.Entry<String, Integer> entry : DataCollection.getInstance().PositionHistory.entrySet())
                 {
-                    Pair pos = entry.getKey();
-                    double x = (double) pos.first;
-                    double y = (double) pos.second;
-                    Integer value = entry.getValue();
-                    g.setPaint(new Color(value *10, 10, 10));
-                    g.drawRect((int) x, (int) y, cellSize, cellSize);
+                    String posString = entry.getKey();
+
+                    String[] parts = posString.split(":");
+
+                    int x1 = (int)Double.parseDouble(parts[0].trim());
+                    int y1 = (int)Double.parseDouble(parts[1].trim());
+
+
+                    Integer value = entry.getValue() * 20;
+                    if(value > 254)
+                        value = 254;
+                    g.setPaint(new Color(value, 50, 50, 150));
+                    g.fillRect((int) x1, (int) y1, cellSize, cellSize);
+
                 }
             }
         }
