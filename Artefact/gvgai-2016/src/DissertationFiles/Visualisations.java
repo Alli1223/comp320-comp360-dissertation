@@ -132,7 +132,7 @@ public class Visualisations
                     int y1 = (int)Double.parseDouble(parts[1].trim());
 
 
-                    Integer value = entry.getValue() * 20;
+                    Integer value = entry.getValue();
                     if(value > 254)
                         value = 254;
                     g.setPaint(new Color(value, 50, 50, 150));

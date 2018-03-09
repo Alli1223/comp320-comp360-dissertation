@@ -30,7 +30,7 @@ public class DataCollection
     }
 
     // Output location
-    private String outputLocation = "../R/Data/gameData.txt";
+    private String outputLocation = "../R/Data/";
     // Json object containing all the data
     public JSONObject AllData = new JSONObject();
     // The game data to be inserted into AllData
@@ -136,7 +136,7 @@ public class DataCollection
     {
         try
         {
-            PrintWriter writer = new PrintWriter(outputLocation, "UTF-8");
+            PrintWriter writer = new PrintWriter(outputLocation + "gameData.txt", "UTF-8");
             writer.println(AllData.toString());
             writer.close();
         } catch (Exception e)
@@ -210,7 +210,7 @@ public class DataCollection
         {
             Rectangle screenRect = new Rectangle(SO.getWorldDimension());
             BufferedImage capture = new Robot().createScreenCapture(screenRect);
-            ImageIO.write(capture, "bmp", new File("TestIamge.jpg"));
+            ImageIO.write(capture, "bmp", new File("../R/Data/FinalGameRender" + levelIteration + ".jpg"));
         }
         catch (Exception e)
         {

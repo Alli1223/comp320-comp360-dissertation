@@ -567,8 +567,8 @@ public class ArcadeMachine
                 //Play the game if at least 2 players in multiplayer games or at least 1 in single player.
                 //Get array of scores back.
                 if ((no_players - disqCount) >= toPlay.no_players) {
-                    score = toPlay.runGame(players, randomSeed);
-                    //score = toPlay.playGame(players, randomSeed, false, 0);
+                    //score = toPlay.runGame(players, randomSeed); // WITHOUT GUI
+                    score = toPlay.playGame(players, randomSeed, false, 0); // WITH GUI
                     toPlay.printResult();
                 }
                 else {

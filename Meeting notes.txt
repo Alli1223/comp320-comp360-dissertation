@@ -1,6 +1,5 @@
 MCTS locality - Use other search techqiues to address this issue.
 
-Not sure about the direction to take the paper.
-
-Do I write about the code ive done to collect the data?
+Move the paper away from tree search techniques, and focus towards MCTS and it's variants.
+Focus on a paper that compares the MCTS variants and then possibly create a hyper heuristic of MCTS variants
 
