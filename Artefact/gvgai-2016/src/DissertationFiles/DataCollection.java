@@ -4,7 +4,6 @@ import core.game.StateObservation;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
-import tools.Pair;
 import tools.Vector2d;
 
 import javax.imageio.ImageIO;
@@ -44,9 +43,9 @@ public class DataCollection
     // An Int to store the number of cells that have been explored
     private int cellsExplored = 0;
     // Game name for saving the data correctly
-    public String GameName;
+    public int GameNum;
     // History of points and how many times they were visited
-    public ConcurrentHashMap<String, Integer> PositionHistory = new ConcurrentHashMap<String, Integer>();
+    public ConcurrentHashMap<String, Integer> cellsVisited = new ConcurrentHashMap<String, Integer>();
 
 
     // Run this function every frame to get the players position and other data
@@ -64,17 +63,17 @@ public class DataCollection
             cellsExplored++;
             dataCollection.listOfAgentLccations.add(playerPosition);
             point = playerPosition.toString();
-            dataCollection.PositionHistory.put(point, 0);
+            dataCollection.cellsVisited.put(point, 0);
         }
 
         // Update points visited
         point = playerPosition.toString();
-        if(dataCollection.PositionHistory.containsKey(point))
+        if(dataCollection.cellsVisited.containsKey(point))
         {
             // Get and update the position history of that element
-            int test = dataCollection.PositionHistory.get(point);
+            int test = dataCollection.cellsVisited.get(point);
             test++;
-            dataCollection.PositionHistory.replace(point, test);
+            dataCollection.cellsVisited.replace(point, test);
         }
     }
 
@@ -104,7 +103,8 @@ public class DataCollection
 
         //Write the data
         System.out.println(AllData.toString());
-        //SaveDataToFile(AllData);
+        // Clear the game position history
+        dataCollection.cellsVisited.clear();
     }
 
 
@@ -117,6 +117,7 @@ public class DataCollection
             dataCollection.PlayerPositions.put(ConvertPositionToJSON(SO.getAvatarPosition()));
 
 
+            // Add playerPosition objects
             //dataCollection.AllData.put("PlayerPositions" + dataCollection.levelIteration, dataCollection.PlayerPositions);
             //dataCollection.AllData.put("PlayerPositions", dataCollection.PlayerPositions);
 

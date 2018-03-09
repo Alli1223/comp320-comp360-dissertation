@@ -1,4 +1,3 @@
-import java.io.PrintWriter;
 import java.util.Random;
 
 import DissertationFiles.DataCollection;
@@ -92,13 +91,15 @@ public class Test
         // 4. This plays a single game, in N levels, M times :  Use games.length for all games
         //String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
         int M = 1;
-        for(int i=0; i < 10; i++)
+        for(int i=0; i < games.length; i++)
         {
         	game = gamesPath + games[i] + ".txt";
-        	DataCollection.getInstance().GameName = game;
+        	DataCollection.getInstance().GameNum = i;
         	level1 = gamesPath + games[i] + "_lvl" + levelIdx +".txt";
         	ArcadeMachine.runGames(game, new String[]{level1}, M, sampleMCTSController, null);
         }
+
+        // Save all game data
         DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData);
         
         //5. This starts a game, in a generated level created by a specific level generator

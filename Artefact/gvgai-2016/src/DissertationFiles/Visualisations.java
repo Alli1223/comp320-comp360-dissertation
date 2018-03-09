@@ -2,14 +2,9 @@ package DissertationFiles;
 
 import controllers.singlePlayer.sampleMCTS.SingleMCTSPlayer;
 import controllers.singlePlayer.sampleMCTS.SingleTreeNode;
-import tools.Pair;
 import tools.Vector2d;
 
 import java.awt.*;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.nio.charset.Charset;
 import java.util.*;
 
 public class Visualisations
@@ -106,9 +101,9 @@ public class Visualisations
             */
 
             // Loop through the hashMap and get the positions
-            if(DataCollection.getInstance().PositionHistory != null)
+            if(DataCollection.getInstance().cellsVisited != null)
             {
-                for (Map.Entry<String, Integer> entry : DataCollection.getInstance().PositionHistory.entrySet())
+                for (Map.Entry<String, Integer> entry : DataCollection.getInstance().cellsVisited.entrySet())
                 {
                     String posString = entry.getKey();
 
