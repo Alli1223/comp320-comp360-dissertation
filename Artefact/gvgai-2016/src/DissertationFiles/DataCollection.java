@@ -43,9 +43,9 @@ public class DataCollection
     private int levelIteration = 0;
     // An Int to store the number of cells that have been explored
     private int cellsExplored = 0;
-
-    private String point = "NULL";
-
+    // Game name for saving the data correctly
+    public String GameName;
+    // History of points and how many times they were visited
     public ConcurrentHashMap<String, Integer> PositionHistory = new ConcurrentHashMap<String, Integer>();
 
 
@@ -57,21 +57,21 @@ public class DataCollection
         if (playerPosition != null)
             AddPlayerPosition(SO);
 
-        // Add to list of positions if it doesnt exist
-        if (!dataCollection.listOfAgentLccations.contains(SO.getAvatarPosition()))
+        String point = "NULL";
+        // Add to list of positions if it doesnt exist (new position)
+        if (!dataCollection.listOfAgentLccations.contains(playerPosition))
         {
             cellsExplored++;
-            dataCollection.listOfAgentLccations.add(SO.getAvatarPosition());
-            JSONObject newJson = new JSONObject(ConvertPositionToJSON(SO.getAvatarPosition()));
+            dataCollection.listOfAgentLccations.add(playerPosition);
             point = playerPosition.toString();
             dataCollection.PositionHistory.put(point, 0);
         }
-
 
         // Update points visited
         point = playerPosition.toString();
         if(dataCollection.PositionHistory.containsKey(point))
         {
+            // Get and update the position history of that element
             int test = dataCollection.PositionHistory.get(point);
             test++;
             dataCollection.PositionHistory.replace(point, test);
@@ -109,7 +109,7 @@ public class DataCollection
 
 
     // Add player positions to the state observation
-    public void AddPlayerPosition(StateObservation SO)
+    private void AddPlayerPosition(StateObservation SO)
     {
         try
         {
@@ -162,7 +162,7 @@ public class DataCollection
         return ret;
     }
 
-    // Seralise the string
+    //! Seralise the string (NOT USED)
     private String serializeString(String str)
     {
 
@@ -185,7 +185,6 @@ public class DataCollection
 
 
     //! This function calculates the area in which the controller explored
-    //TODO: Remove the imovable cells from the equation
     private double calculatePercentageOfExploredLevel(StateObservation SO)
     {
         ArrayList<Observation> grid[][] = SO.getObservationGrid();
@@ -195,22 +194,34 @@ public class DataCollection
         int cellsUnexplored = 0;
 
         double percent = 0;
+        int immovablePositions = 0;
+        if(SO.getImmovablePositions() != null)
+        {
+            immovablePositions = SO.getImmovablePositions().length;
+        }
 
-        double test = SO.getImmovablePositions().length;
         // Get the map size negative the immovable positions
-        int mapSize = grid.length * grid[0].length - SO.getImmovablePositions().length;
+        int mapSize = grid.length * grid[0].length - immovablePositions;
         percent = (double) cellsExplored / (double) mapSize;
         System.out.println("Percentage of level explored: " + percent * 100.0);
         return percent * 100;
     }
 
+    //! Capture the screen
     private void CaptureScreen(StateObservation SO)
     {
         try
         {
+            //Create a rect to capture
             Rectangle screenRect = new Rectangle(SO.getWorldDimension());
+            // Set the position of the capture position to cut out the window headder bar
+            screenRect.y +=30;
+            screenRect.x +=10;
+
+
+            //Save and write image
             BufferedImage capture = new Robot().createScreenCapture(screenRect);
-            ImageIO.write(capture, "bmp", new File("../R/Data/FinalGameRender" + levelIteration + ".jpg"));
+            ImageIO.write(capture, "bmp", new File("../R/Data/ScreenCapture/FinalGameRender_" + dataCollection.levelIteration + ".jpg"));
         }
         catch (Exception e)
         {

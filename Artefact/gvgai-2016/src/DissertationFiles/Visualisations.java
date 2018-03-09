@@ -20,9 +20,9 @@ public class Visualisations
     private Vector<Vector2d> searchPoints = new Vector<Vector2d>();
 
     //! Booleans for choosing what should be rendered over the game
-    public boolean drawAreaSearched = true;
-    public boolean drawBestActionPath = false;
-    public boolean drawPreviousLocations = true;
+    private boolean drawAreaSearched = true;
+    private boolean drawBestActionPath = false;
+    private boolean drawPreviousLocations = true;
 
     //! Block offset for drawing in the center of the cells
     private int blockOffset = 0;
@@ -36,11 +36,15 @@ public class Visualisations
     //! Renders the tree searches over the search space
     public void renderSearchSpace(SingleMCTSPlayer MCTSPlayer, Graphics2D g)
     {
+        int cellSize = 0;
         if(MCTSPlayer.m_root.state != null)
+        {
+            // Get the cellSize
             blockOffset = MCTSPlayer.m_root.state.getBlockSize() / 2;
+            cellSize = MCTSPlayer.m_root.state.getBlockSize();
+        }
 
-        // Get the cellSize
-        int cellSize = MCTSPlayer.m_root.state.getBlockSize();
+
 
         // Search the tree starting at the root
         recursivelySearchTree(MCTSPlayer.m_root);
@@ -74,11 +78,13 @@ public class Visualisations
             Vector2d[] points = GetPathFromNode(MCTSPlayer.m_root);
 
             // Loop through the points and draw lines between them
-            if(points.length > 1)
-                for (int i = 0; i < points.length; i++) {
+            if (points.length > 1)
+                for (int i = 0; i < points.length; i++)
+                {
                     if (points[i] != null)
                         // If the point does not equal 0,0
-                        if (!oldPos.equals(originPoint)) {
+                        if (!oldPos.equals(originPoint))
+                        {
                             g.setStroke(new BasicStroke(10));
                             g.setPaint(new Color(200, 100, 0));
                             g.drawLine((int) oldPos.x + blockOffset, (int) oldPos.y + blockOffset, (int) points[i].x + blockOffset, (int) points[i].y + blockOffset);
@@ -86,26 +92,6 @@ public class Visualisations
                         }
                     oldPos = points[i];
                 }
-
-
-
-            /* OLD CODE (TO BE REMOVED)
-            // Loop through the hashmap and draw the lines between the most visited points
-            for (Map.Entry<Vector2d, Integer> entry : timesPointVisited.entrySet()) {
-                Vector2d pos = entry.getKey();
-                Integer visits = entry.getValue();
-
-                // If the oldPoint isn't null then draw it
-                if (!oldPos.equals(originPoint))
-                {
-                    g.setStroke(new BasicStroke(visits));
-                    g.setPaint(new Color(visits,visits / 2, visits * 2));
-                    g.drawLine((int) oldPos.x + blockOffset, (int) oldPos.y+ blockOffset, (int) pos.x+ blockOffset, (int) pos.y+ blockOffset);
-                }
-
-                oldPos = pos;
-            }
-            */
         }
 
         if(drawPreviousLocations)
@@ -197,13 +183,15 @@ public class Visualisations
 
 
     //! Returns a list of points that the most visited nodes are
-    private Vector2d[] GetPathFromNode(SingleTreeNode node) {
+    private Vector2d[] GetPathFromNode(SingleTreeNode node)
+    {
         // Create an array of points to return
         Vector2d[] res = new Vector2d[100];
 
         int j = 0;
-        while (node != null) {
-
+        // Loop until there are no more nodes
+        while (node != null)
+        {
             int best = node.bestAction();
 
             if(node.children[best] != null) {
