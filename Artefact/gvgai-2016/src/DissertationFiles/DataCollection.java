@@ -131,17 +131,20 @@ public class DataCollection
     //! Covert the JSON to a CSV file
     public void JSONARRAYToCSV(JSONArray jsonArray)
     {
-        JSONObject output;
-        try
-        {
-            output = new JSONObject(jsonArray.toString());
+        String jsonString = jsonArray.toString();
 
-            JSONArray docs = output.getJSONArray("Score");
+        JSONObject output;
+        try {
+            output = new JSONObject(jsonString);
+
+
+            JSONArray docs = output.getJSONArray("infile");
+
+            File file=new File(outputLocation + "fromJSON.csv");
             String csv = CDL.toString(docs);
-            SaveDataToFile(csv, true);
-        } catch (JSONException e)
-        {
-            System.out.println("Error converting to CSV: " + e);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

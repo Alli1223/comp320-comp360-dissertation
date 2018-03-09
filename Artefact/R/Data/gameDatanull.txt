@@ -1,0 +1,1 @@
+{"GameData1":{"TimeOut":0,"GameSpaceSearched":29.73856209150327,"AvatarType":1,"GameScore":30}}
