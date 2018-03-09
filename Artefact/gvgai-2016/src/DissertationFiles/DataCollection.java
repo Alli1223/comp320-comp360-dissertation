@@ -22,7 +22,7 @@ public class DataCollection
 {
     // Singleton
     private static DataCollection dataCollection = new DataCollection();
-
+    // Get the data collection instance
     public static DataCollection getInstance()
     {
         return dataCollection;
@@ -43,7 +43,10 @@ public class DataCollection
     // An Int to store the number of cells that have been explored
     private int cellsExplored = 0;
     // Game name for saving the data correctly
-    public int GameNum;
+    public String ControllerName;
+    //Set the block size for the game
+    private int blockSize;
+    public int getBlockSize() { return  blockSize; }
     // History of points and how many times they were visited
     public ConcurrentHashMap<String, Integer> cellsVisited = new ConcurrentHashMap<String, Integer>();
 
@@ -51,6 +54,7 @@ public class DataCollection
     // Run this function every frame to get the players position and other data
     public void AddGameStateToCollection(StateObservation SO)
     {
+        dataCollection.blockSize = SO.getBlockSize();
         Vector2d playerPosition = SO.getAvatarPosition();
         //! Add player position to all data
         if (playerPosition != null)
@@ -188,14 +192,12 @@ public class DataCollection
     //! This function calculates the area in which the controller explored
     private double calculatePercentageOfExploredLevel(StateObservation SO)
     {
+        //Get the grid to calcualate map size
         ArrayList<Observation> grid[][] = SO.getObservationGrid();
-        ArrayList<Observation> obs[] = SO.getFromAvatarSpritesPositions();
-
-
-        int cellsUnexplored = 0;
 
         double percent = 0;
         int immovablePositions = 0;
+        // Get the list of immovable positions in the game
         if(SO.getImmovablePositions() != null)
         {
             immovablePositions = SO.getImmovablePositions().length;
@@ -219,10 +221,9 @@ public class DataCollection
             screenRect.y +=30;
             screenRect.x +=10;
 
-
             //Save and write image
             BufferedImage capture = new Robot().createScreenCapture(screenRect);
-            ImageIO.write(capture, "bmp", new File("../R/Data/ScreenCapture/FinalGameRender_" + dataCollection.levelIteration + ".jpg"));
+            ImageIO.write(capture, "bmp", new File("../R/Data/ScreenCapture/LastFrame_" + dataCollection.ControllerName + "_" + dataCollection.levelIteration + ".jpg"));
         }
         catch (Exception e)
         {

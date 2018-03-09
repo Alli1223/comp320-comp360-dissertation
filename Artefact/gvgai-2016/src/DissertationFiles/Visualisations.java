@@ -125,15 +125,41 @@ public class Visualisations
 
 
         //System.out.println(nodesInTree + " : " + searchPoints.size());
-        g.drawString(String.valueOf("Current Search Depth Level: " + searchDepthLevel + ". Max Depth: " + deepestSearchLevel), 100, 50);
-
-
-
         //Reset the values for next search
         searchPoints.clear();
         timesPointVisited.clear();
         nodesInTree = 0;
         deepestSearchLevel = 0;
+    }
+
+    //Overloaded function to just render the overlay, for any game
+    public void renderSearchSpace(Graphics2D g)
+    {
+        int cellSize = DataCollection.getInstance().getBlockSize();
+        if (drawPreviousLocations)
+        {
+            // Loop through the hashMap and get the positions
+            if (DataCollection.getInstance().cellsVisited != null)
+            {
+                for (Map.Entry<String, Integer> entry : DataCollection.getInstance().cellsVisited.entrySet())
+                {
+                    String posString = entry.getKey();
+
+                    String[] parts = posString.split(":");
+
+                    int x1 = (int) Double.parseDouble(parts[0].trim());
+                    int y1 = (int) Double.parseDouble(parts[1].trim());
+
+
+                    Integer value = entry.getValue();
+                    if (value > 254)
+                        value = 254;
+                    g.setPaint(new Color(value, 50, 50, 150));
+                    g.fillRect((int) x1, (int) y1, cellSize, cellSize);
+
+                }
+            }
+        }
     }
 
 

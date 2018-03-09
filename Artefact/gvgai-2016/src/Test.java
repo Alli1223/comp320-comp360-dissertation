@@ -82,7 +82,7 @@ public class Test
 
 
         // 2. This plays a game in a level by the controller.
-        //.runOneGame(game, level1, visuals, sampleMCTSController, recordActionsFile, seed, 0);
+        //ArcadeMachine.runOneGame(game, level1, visuals, sampleOLMCTSController, recordActionsFile, seed, 0);
 
         // 3. This replays a game from an action file previously recorded
         //String readActionsFile = "actions_pacman_lvl1_-1877682670.txt";
@@ -94,12 +94,12 @@ public class Test
         for(int i=0; i < games.length; i++)
         {
         	game = gamesPath + games[i] + ".txt";
-        	DataCollection.getInstance().GameNum = i;
+            DataCollection.getInstance().ControllerName = sampleOLMCTSController;
         	level1 = gamesPath + games[i] + "_lvl" + levelIdx +".txt";
         	ArcadeMachine.runGames(game, new String[]{level1}, M, sampleMCTSController, null);
         }
 
-        // Save all game data
+        //// Save all game data
         DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData);
         
         //5. This starts a game, in a generated level created by a specific level generator

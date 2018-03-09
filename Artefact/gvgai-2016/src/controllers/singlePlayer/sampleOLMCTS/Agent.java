@@ -1,8 +1,11 @@
 package controllers.singlePlayer.sampleOLMCTS;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+import DissertationFiles.DataCollection;
+import DissertationFiles.Visualisations;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
 import ontology.Types;
@@ -26,6 +29,11 @@ public class Agent extends AbstractPlayer {
 
     protected SingleMCTSPlayer mctsPlayer;
 
+    //! Edited by Alli 09/03/2018
+    // List of variables for storing and rendering MCTS information
+    private Visualisations vis = new Visualisations();
+    private DataCollection dataCollection = new DataCollection();;
+    //! Edit End
     /**
      * Public constructor with state observation and time due.
      * @param so state observation of the current game.
@@ -61,6 +69,11 @@ public class Agent extends AbstractPlayer {
      */
     public Types.ACTIONS act(StateObservation stateObs, ElapsedCpuTimer elapsedTimer) {
 
+        //! Edited Alli - 09/03/2018
+        // Add game state to be collected
+        dataCollection.AddGameStateToCollection(stateObs);
+        // Edit End
+
         //Set the state observation object as the new root of the tree.
         mctsPlayer.init(stateObs);
 
@@ -70,5 +83,33 @@ public class Agent extends AbstractPlayer {
         //... and return it.
         return actions[action];
     }
+
+    /**
+     * Function called when the game is over. This method must finish before CompetitionParameters.TEAR_DOWN_TIME,
+     *  or the agent will be DISQUALIFIED
+     * @param stateObservation the game state at the end of the game
+     * @param elapsedCpuTimer timer when this method is meant to finish.
+     */
+    public void result(StateObservation stateObservation, ElapsedCpuTimer elapsedCpuTimer)
+    {
+        //Include your code here to know how it all ended.
+
+        //Collect data at end game state
+        dataCollection.AddGameEndStats(stateObservation);
+
+    }
+
+    //! Edited by Alli 05/12/2017
+    // Draws graphics to the screen
+    public void draw(Graphics2D g)
+    {
+
+        //! Visualise the trees search space
+        vis.renderSearchSpace(g);
+
+
+
+    }
+
 
 }
