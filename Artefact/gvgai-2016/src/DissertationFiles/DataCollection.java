@@ -1,6 +1,7 @@
 package DissertationFiles;
 import core.game.Observation;
 import core.game.StateObservation;
+import org.json.CDL;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
@@ -22,6 +23,7 @@ public class DataCollection
 {
     // Singleton
     private static DataCollection dataCollection = new DataCollection();
+
     // Get the data collection instance
     public static DataCollection getInstance()
     {
@@ -35,7 +37,9 @@ public class DataCollection
     // The game data to be inserted into AllData
     public JSONObject GameData = new JSONObject();
     // The Player Positions to be inserted into GameData
-    public JSONArray PlayerPositions = new JSONArray();
+    public JSONArray AvatarPositions = new JSONArray();
+    // The Player Positions to be inserted into GameData
+    public JSONArray AgentScore = new JSONArray();
     // A vector of positions that the agent has been at
     public ArrayList<Vector2d> listOfAgentLccations = new ArrayList<Vector2d>(); //Max game time is 2000 ticks
     // iteration is incremented when the game tick is 0, and used to record the level that is being run
@@ -46,7 +50,12 @@ public class DataCollection
     public String ControllerName;
     //Set the block size for the game
     private int blockSize;
-    public int getBlockSize() { return  blockSize; }
+
+    public int getBlockSize()
+    {
+        return blockSize;
+    }
+
     // History of points and how many times they were visited
     public ConcurrentHashMap<String, Integer> cellsVisited = new ConcurrentHashMap<String, Integer>();
 
@@ -60,7 +69,7 @@ public class DataCollection
         if (playerPosition != null)
             AddPlayerPosition(SO);
 
-        String point = "NULL";
+        String point;
         // Add to list of positions if it doesnt exist (new position)
         if (!dataCollection.listOfAgentLccations.contains(playerPosition))
         {
@@ -72,13 +81,18 @@ public class DataCollection
 
         // Update points visited
         point = playerPosition.toString();
-        if(dataCollection.cellsVisited.containsKey(point))
+        if (dataCollection.cellsVisited.containsKey(point) && point != null)
         {
             // Get and update the position history of that element
             int test = dataCollection.cellsVisited.get(point);
             test++;
             dataCollection.cellsVisited.replace(point, test);
         }
+
+        // Add score to list
+        JSONObject scoreJson = new JSONObject();
+        scoreJson.put("Score", SO.getGameScore());
+        dataCollection.AgentScore.put(scoreJson);
     }
 
 
@@ -86,15 +100,15 @@ public class DataCollection
     // GameScore, Death location, Win location
     public void AddGameEndStats(StateObservation SO)
     {
-       // if (SO.isAvatarAlive())
-       //     GameData.put("LastLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
-       // else
-       //     GameData.put("DeathLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
+        // if (SO.isAvatarAlive())
+        //     GameData.put("LastLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
+        // else
+        //     GameData.put("DeathLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
         GameData.put("GameScore", SO.getGameScore());
         GameData.put("GameSpaceSearched", calculatePercentageOfExploredLevel(SO));                                      // Calculate search space
         GameData.put("AvatarType", SO.getAvatarType());
 
-        if(SO.getGameTick() >= 2000)
+        if (SO.getGameTick() >= 2000)
             GameData.put("TimeOut", 1);
         else
             GameData.put("TimeOut", 0);
@@ -105,10 +119,30 @@ public class DataCollection
         // Save game points visted to file
         CaptureScreen(SO);
 
+        // Save Score to CSV
+        JSONARRAYToCSV(dataCollection.AgentScore);
+
         //Write the data
         System.out.println(AllData.toString());
         // Clear the game position history
         dataCollection.cellsVisited.clear();
+    }
+
+    //! Covert the JSON to a CSV file
+    public void JSONARRAYToCSV(JSONArray jsonArray)
+    {
+        JSONObject output;
+        try
+        {
+            output = new JSONObject(jsonArray.toString());
+
+            JSONArray docs = output.getJSONArray("Score");
+            String csv = CDL.toString(docs);
+            SaveDataToFile(csv, true);
+        } catch (JSONException e)
+        {
+            System.out.println("Error converting to CSV: " + e);
+        }
     }
 
 
@@ -118,12 +152,12 @@ public class DataCollection
         try
         {
             // Add player positions to the pos object
-            dataCollection.PlayerPositions.put(ConvertPositionToJSON(SO.getAvatarPosition()));
+            dataCollection.AvatarPositions.put(ConvertPositionToJSON(SO.getAvatarPosition()));
 
 
             // Add playerPosition objects
-            //dataCollection.AllData.put("PlayerPositions" + dataCollection.levelIteration, dataCollection.PlayerPositions);
-            //dataCollection.AllData.put("PlayerPositions", dataCollection.PlayerPositions);
+            //dataCollection.AllData.put("AvatarPositions" + dataCollection.levelIteration, dataCollection.AvatarPositions);
+            //dataCollection.AllData.put("AvatarPositions", dataCollection.AvatarPositions);
 
             // IF the game tick is 0 then increment the game counter
             if (SO.getGameTick() == 0)
@@ -137,16 +171,26 @@ public class DataCollection
 
 
     //! This code writes the JSON data to a text file in the gameLogs Directory
-    public void SaveDataToFile(JSONObject gameData)
+    public void SaveDataToFile(String data, boolean isCSVFile)
     {
         try
         {
-            PrintWriter writer = new PrintWriter(outputLocation + "gameData.txt", "UTF-8");
-            writer.println(AllData.toString());
-            writer.close();
+            if(isCSVFile)
+            {
+                PrintWriter writer = new PrintWriter(outputLocation + "gameData" + dataCollection.ControllerName + ".csv", "UTF-8");
+                writer.println(data);
+                writer.close();
+            }
+            else
+            {
+                PrintWriter writer = new PrintWriter(outputLocation + "gameData" + dataCollection.ControllerName + ".txt", "UTF-8");
+                writer.println(data);
+                writer.close();
+            }
+
         } catch (Exception e)
         {
-            System.out.println("Error writing json file: " + e);
+            System.out.println("Error writing data file: " + e);
         }
     }
 
@@ -167,27 +211,6 @@ public class DataCollection
         return ret;
     }
 
-    //! Seralise the string (NOT USED)
-    private String serializeString(String str)
-    {
-
-        String returnString = "NULL";
-        try
-        {
-            ByteArrayOutputStream bo = new ByteArrayOutputStream();
-            ObjectOutputStream so = new ObjectOutputStream(bo);
-            so.writeObject(str);
-            //so.flush();
-            return bo.toString();
-        }
-        catch(Exception e)
-        {
-            System.out.println("Error serializingString: " + e);
-        }
-
-        return returnString;
-    }
-
 
     //! This function calculates the area in which the controller explored
     private double calculatePercentageOfExploredLevel(StateObservation SO)
@@ -198,7 +221,7 @@ public class DataCollection
         double percent = 0;
         int immovablePositions = 0;
         // Get the list of immovable positions in the game
-        if(SO.getImmovablePositions() != null)
+        if (SO.getImmovablePositions() != null)
         {
             immovablePositions = SO.getImmovablePositions().length;
         }
@@ -218,16 +241,34 @@ public class DataCollection
             //Create a rect to capture
             Rectangle screenRect = new Rectangle(SO.getWorldDimension());
             // Set the position of the capture position to cut out the window headder bar
-            screenRect.y +=30;
-            screenRect.x +=10;
+            screenRect.y += 30;
+            screenRect.x += 10;
 
             //Save and write image
             BufferedImage capture = new Robot().createScreenCapture(screenRect);
             ImageIO.write(capture, "bmp", new File("../R/Data/ScreenCapture/LastFrame_" + dataCollection.ControllerName + "_" + dataCollection.levelIteration + ".jpg"));
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             System.out.println("Error in saving image to file: " + e);
         }
+    }
+
+    //! Seralise the string (NOT USED)
+    private String serializeString(String str)
+    {
+
+        String returnString = "NULL";
+        try
+        {
+            ByteArrayOutputStream bo = new ByteArrayOutputStream();
+            ObjectOutputStream so = new ObjectOutputStream(bo);
+            so.writeObject(str);
+            //so.flush();
+            return bo.toString();
+        } catch (Exception e)
+        {
+            System.out.println("Error serializingString: " + e);
+        }
+        return returnString;
     }
 }

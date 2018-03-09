@@ -69,7 +69,7 @@ public class Test
 
         //Game and level to play
 
-        int gameIdx = 12;
+        int gameIdx = 11;
         int levelIdx = 1; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
@@ -82,7 +82,7 @@ public class Test
 
 
         // 2. This plays a game in a level by the controller.
-        //ArcadeMachine.runOneGame(game, level1, visuals, sampleOLMCTSController, recordActionsFile, seed, 0);
+        ArcadeMachine.runOneGame(game, level1, visuals, sampleOLMCTSController, recordActionsFile, seed, 0);
 
         // 3. This replays a game from an action file previously recorded
         //String readActionsFile = "actions_pacman_lvl1_-1877682670.txt";
@@ -90,17 +90,17 @@ public class Test
 
         // 4. This plays a single game, in N levels, M times :  Use games.length for all games
         //String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
-        int M = 1;
-        for(int i=0; i < games.length; i++)
-        {
-        	game = gamesPath + games[i] + ".txt";
-            DataCollection.getInstance().ControllerName = sampleOLMCTSController;
-        	level1 = gamesPath + games[i] + "_lvl" + levelIdx +".txt";
-        	ArcadeMachine.runGames(game, new String[]{level1}, M, sampleMCTSController, null);
-        }
+        //int M = 1;
+        //for(int i=0; i < games.length; i++)
+        //{
+        //	game = gamesPath + games[i] + ".txt";
+        //    DataCollection.getInstance().ControllerName = sampleOLMCTSController;
+        //	level1 = gamesPath + games[i] + "_lvl" + levelIdx +".txt";
+        //	ArcadeMachine.runGames(game, new String[]{level1}, M, sampleMCTSController, null);
+        //}
 
         //// Save all game data
-        DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData);
+        DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), false);
         
         //5. This starts a game, in a generated level created by a specific level generator
 

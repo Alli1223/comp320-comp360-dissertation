@@ -164,7 +164,7 @@ public class Visualisations
 
 
 
-    //! This function will run until it has searched the whole tree
+    //! This function will run until it has searched the whole tree (Depth first search of the tree search)
     private SingleTreeNode recursivelySearchTree(SingleTreeNode node)
     {
         // IF the node has a state, get its values
