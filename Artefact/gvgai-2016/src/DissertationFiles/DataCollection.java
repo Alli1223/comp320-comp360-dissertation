@@ -90,9 +90,8 @@ public class DataCollection
         }
 
         // Add score to list
-        JSONObject scoreJson = new JSONObject();
-        scoreJson.put("Score", SO.getGameScore());
-        dataCollection.AgentScore.put(scoreJson);
+
+        dataCollection.AgentScore.put(SO.getGameScore());
     }
 
 
@@ -107,6 +106,7 @@ public class DataCollection
         GameData.put("GameScore", SO.getGameScore());
         GameData.put("GameSpaceSearched", calculatePercentageOfExploredLevel(SO));                                      // Calculate search space
         GameData.put("AvatarType", SO.getAvatarType());
+        GameData.put("Score", dataCollection.AgentScore);
 
         if (SO.getGameTick() >= 2000)
             GameData.put("TimeOut", 1);
@@ -129,23 +129,28 @@ public class DataCollection
     }
 
     //! Covert the JSON to a CSV file
+    // //TODO:FIX THIS
     public void JSONARRAYToCSV(JSONArray jsonArray)
     {
-        String jsonString = jsonArray.toString();
+        /*
+        JSONObject scores = new JSONObject();
+        scores.put("Scores", jsonArray);
+        String jsonString = scores.toString();
 
         JSONObject output;
         try {
-            output = new JSONObject(jsonString);
+            output = new JSONObject(jsonArray.toString());
 
 
-            JSONArray docs = output.getJSONArray("infile");
+            JSONArray docs = output.getJSONArray("Scores");
 
-            File file=new File(outputLocation + "fromJSON.csv");
             String csv = CDL.toString(docs);
 
+            SaveDataToFile(csv, true);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        */
     }
 
 
@@ -156,8 +161,6 @@ public class DataCollection
         {
             // Add player positions to the pos object
             dataCollection.AvatarPositions.put(ConvertPositionToJSON(SO.getAvatarPosition()));
-
-
             // Add playerPosition objects
             //dataCollection.AllData.put("AvatarPositions" + dataCollection.levelIteration, dataCollection.AvatarPositions);
             //dataCollection.AllData.put("AvatarPositions", dataCollection.AvatarPositions);
