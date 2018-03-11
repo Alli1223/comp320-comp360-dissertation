@@ -69,7 +69,7 @@ public class Test
 
         //Game and level to play
 
-        int gameIdx = 1;
+        int gameIdx = 0;
         int levelIdx = 1; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
@@ -92,12 +92,11 @@ public class Test
         // 4. This plays a single game, in N levels, M times :  Use games.length for all games
         //String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
         int M = 10;
-        for(int i=0; i < games.length; i++)
+        for(int i = gameIdx; i < games.length; i++)
         {
         	game = gamesPath + games[i] + ".txt";
             DataCollection.getInstance().ControllerName = sampleOLMCTSController;
             DataCollection.getInstance().gameIteration = i;
-            DataCollection.getInstance().levelIteration = M;
         	level1 = gamesPath + games[i] + "_lvl" + levelIdx +".txt";
         	ArcadeMachine.runGames(game, new String[]{level1}, M, sampleMCTSController, null);
         }

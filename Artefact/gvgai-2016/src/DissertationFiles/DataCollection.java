@@ -137,10 +137,11 @@ public class DataCollection
             dataCollection.cellsVisited.clear();
             dataCollection.listOfAgentLccations.clear();
             dataCollection.totalCellsExplored = 0;
+            dataCollection.levelIteration = 0;
         }
         else
         {
-
+            dataCollection.levelIteration++;
         }
 
 
@@ -148,7 +149,7 @@ public class DataCollection
     }
 
     //! Covert the JSON to a CSV file
-    // //TODO:FIX THIS
+    // TODO:FIX THIS
     public void JSONARRAYToCSV(JSONArray jsonArray)
     {
         /*
@@ -220,6 +221,7 @@ public class DataCollection
     //! Retrun a json object containing the x and y from a vector2D position
     private JSONObject ConvertPositionToJSON(Vector2d position)
     {
+        // Create an json object and put two new json objects within that
         JSONObject ret = new JSONObject();
         JSONObject XPos = new JSONObject();
         JSONObject YPos = new JSONObject();
@@ -230,7 +232,7 @@ public class DataCollection
         YPos.put("Y", position.y);
         pos.put(XPos);
         pos.put(YPos);
-        ret.put("Pos", pos);
+        ret.put("Pos", position.toString()); // old: ret.put("Pos", pos);
         return ret;
     }
 
@@ -269,7 +271,7 @@ public class DataCollection
 
             //Save and write image
             BufferedImage capture = new Robot().createScreenCapture(screenRect);
-            ImageIO.write(capture, "bmp", new File("../R/Data/ScreenCapture/LastFrame_" + dataCollection.ControllerName + "_" + dataCollection.levelIteration + "_" + dataCollection.gameIteration + ".jpg"));
+            ImageIO.write(capture, "bmp", new File("../R/Data/ScreenCapture/LastFrame_" + dataCollection.ControllerName + "_" + dataCollection.gameIteration + "_" + dataCollection.levelIteration + ".jpg"));
         } catch (Exception e)
         {
             System.out.println("Error in saving image to file: " + e);

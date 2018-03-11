@@ -130,17 +130,26 @@ public class Visualisations
                 int x = (int) Double.parseDouble(parts[0].trim());
                 int y = (int) Double.parseDouble(parts[1].trim());
 
-
+                // Devide the value by the total cells explored
                 Double value = Double.parseDouble(entry.getValue().toString());
                 value /= DataCollection.getInstance().totalCellsExplored;
                 value *= 1000;
 
-                Integer intValue = value.intValue() / 10;
-                g.setPaint(new Color(200, 200, 200));
-                g.drawString(intValue.toString(), x + (cellSize / 2),y + (cellSize /2));
+                // Draw the percent string on the cell
+                String result = String.format("%.2f", value);
 
+
+                g.setPaint(new Color(255, 255, 255));
+                g.drawString(result, x + (cellSize / 2),y + (cellSize /2));
+
+                // Double value for better highlights on large maps
+                value*= 2;
+
+                //Make sure value doesnt go above 255
                 if (value > 254.0)
                     value = 254.0;
+
+                // Draw the square
                 g.setPaint(new Color(value.intValue(), 50, 50, 150));
                 g.fillRect((int) x, (int) y, cellSize, cellSize);
 
