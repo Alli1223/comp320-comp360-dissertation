@@ -127,20 +127,23 @@ public class Visualisations
 
                 String[] parts = posString.split(":");
 
-                int x1 = (int) Double.parseDouble(parts[0].trim());
-                int y1 = (int) Double.parseDouble(parts[1].trim());
+                int x = (int) Double.parseDouble(parts[0].trim());
+                int y = (int) Double.parseDouble(parts[1].trim());
 
 
                 Double value = Double.parseDouble(entry.getValue().toString());
                 value /= DataCollection.getInstance().totalCellsExplored;
                 value *= 1000;
+
+                Integer intValue = value.intValue() / 10;
+                g.setPaint(new Color(200, 200, 200));
+                g.drawString(intValue.toString(), x + (cellSize / 2),y + (cellSize /2));
+
                 if (value > 254.0)
                     value = 254.0;
-
                 g.setPaint(new Color(value.intValue(), 50, 50, 150));
-                g.fillRect((int) x1, (int) y1, cellSize, cellSize);
+                g.fillRect((int) x, (int) y, cellSize, cellSize);
 
-                g.;
 
             }
         }
