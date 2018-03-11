@@ -1,7 +1,6 @@
 package DissertationFiles;
 import core.game.Observation;
 import core.game.StateObservation;
-import org.json.CDL;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
@@ -43,7 +42,11 @@ public class DataCollection
     // A vector of positions that the agent has been at
     public ArrayList<Vector2d> listOfAgentLccations = new ArrayList<Vector2d>(); //Max game time is 2000 ticks
     // iteration is incremented when the game tick is 0, and used to record the level that is being run
-    private int levelIteration = 0;
+    public int gameIteration = 0;
+    public int levelIteration = 0;
+    private int localGameIterator = -1;
+    private boolean recordPositionsOverMultipleGames = true;
+    public int totalCellsExplored = 0;
     // An Int to store the number of cells that have been explored
     private int cellsExplored = 0;
     // Game name for saving the data correctly
@@ -78,6 +81,7 @@ public class DataCollection
             point = playerPosition.toString();
             dataCollection.cellsVisited.put(point, 0);
         }
+        dataCollection.totalCellsExplored++;
 
         // Update points visited
         point = playerPosition.toString();
@@ -114,7 +118,7 @@ public class DataCollection
             GameData.put("TimeOut", 0);
 
         // Add the values to allData json object
-        dataCollection.AllData.put("GameData" + dataCollection.levelIteration, GameData);
+        dataCollection.AllData.put("GameData" + dataCollection.gameIteration, GameData);
 
         // Save game points visted to file
         CaptureScreen(SO);
@@ -124,8 +128,23 @@ public class DataCollection
 
         //Write the data
         System.out.println(AllData.toString());
-        // Clear the game position history
-        dataCollection.cellsVisited.clear();
+
+        // If the level has changed
+        if(dataCollection.localGameIterator != dataCollection.gameIteration && recordPositionsOverMultipleGames)
+        {
+            // Reset the necessary data
+            dataCollection.localGameIterator = dataCollection.gameIteration;
+            dataCollection.cellsVisited.clear();
+            dataCollection.listOfAgentLccations.clear();
+            dataCollection.totalCellsExplored = 0;
+        }
+        else
+        {
+
+        }
+
+
+
     }
 
     //! Covert the JSON to a CSV file
@@ -161,13 +180,11 @@ public class DataCollection
         {
             // Add player positions to the pos object
             dataCollection.AvatarPositions.put(ConvertPositionToJSON(SO.getAvatarPosition()));
-            // Add playerPosition objects
-            //dataCollection.AllData.put("AvatarPositions" + dataCollection.levelIteration, dataCollection.AvatarPositions);
-            //dataCollection.AllData.put("AvatarPositions", dataCollection.AvatarPositions);
 
-            // IF the game tick is 0 then increment the game counter
-            if (SO.getGameTick() == 0)
-                dataCollection.levelIteration++;
+
+            // Add playerPosition objects
+            //dataCollection.AllData.put("AvatarPositions" + dataCollection.gameIteration, dataCollection.AvatarPositions);
+            //dataCollection.AllData.put("AvatarPositions", dataCollection.AvatarPositions);
 
         } catch (JSONException e)
         {
@@ -252,7 +269,7 @@ public class DataCollection
 
             //Save and write image
             BufferedImage capture = new Robot().createScreenCapture(screenRect);
-            ImageIO.write(capture, "bmp", new File("../R/Data/ScreenCapture/LastFrame_" + dataCollection.ControllerName + "_" + dataCollection.levelIteration + ".jpg"));
+            ImageIO.write(capture, "bmp", new File("../R/Data/ScreenCapture/LastFrame_" + dataCollection.ControllerName + "_" + dataCollection.levelIteration + "_" + dataCollection.gameIteration + ".jpg"));
         } catch (Exception e)
         {
             System.out.println("Error in saving image to file: " + e);

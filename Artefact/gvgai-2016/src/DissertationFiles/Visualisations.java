@@ -15,7 +15,7 @@ public class Visualisations
     private Vector<Vector2d> searchPoints = new Vector<Vector2d>();
 
     //! Booleans for choosing what should be rendered over the game
-    private boolean drawAreaSearched = true;
+    private boolean drawAreaSearched = false;
     private boolean drawBestActionPath = false;
     private boolean drawPreviousLocations = true;
 
@@ -32,7 +32,7 @@ public class Visualisations
     public void renderSearchSpace(SingleMCTSPlayer MCTSPlayer, Graphics2D g)
     {
         int cellSize = 0;
-        if(MCTSPlayer.m_root.state != null)
+        if (MCTSPlayer.m_root.state != null)
         {
             // Get the cellSize
             blockOffset = MCTSPlayer.m_root.state.getBlockSize() / 2;
@@ -40,20 +40,21 @@ public class Visualisations
         }
 
 
-
         // Search the tree starting at the root
         recursivelySearchTree(MCTSPlayer.m_root);
 
         // Draw the area that is being searched
-        if(drawAreaSearched) {
-            for (Map.Entry<Vector2d, Integer> entry : timesPointVisited.entrySet()) {
+        if (drawAreaSearched)
+        {
+            for (Map.Entry<Vector2d, Integer> entry : timesPointVisited.entrySet())
+            {
                 Vector2d pos = entry.getKey();
                 Integer visits = entry.getValue();
-                if(visits < 3)
+                if (visits < 3)
                     g.setPaint(new Color(10, 100, 0));
-                if(visits >= 3 && visits <= 10)
+                if (visits >= 3 && visits <= 10)
                     g.setPaint(new Color(242, 233, 0));
-                if(visits > 10)
+                if (visits > 10)
                     g.setPaint(new Color(255, 20, 58));
 
 
@@ -62,7 +63,7 @@ public class Visualisations
         }
 
         // Draw the path that is the best action to take
-        if(drawBestActionPath)
+        if (drawBestActionPath)
         {
             Vector2d oldPos = new Vector2d();
             Vector2d originPoint = new Vector2d();
@@ -89,38 +90,9 @@ public class Visualisations
                 }
         }
 
-        if(drawPreviousLocations)
+        if (drawPreviousLocations)
         {
-            /* DRAWS ONLY THE CELLS THE AGENT HAS VISITED
-            ArrayList<Vector2d> AgentLocations = DataCollection.getInstance().listOfAgentLccations;
-            for(int i = 0; i < AgentLocations.size(); i++ )
-            {
-                g.setPaint(new Color(255,10, 10));
-                g.draw3DRect((int) AgentLocations.get(i).x, (int) AgentLocations.get(i).y, cellSize, cellSize, false);
-            }
-            */
-
-            // Loop through the hashMap and get the positions
-            if(DataCollection.getInstance().cellsVisited != null)
-            {
-                for (Map.Entry<String, Integer> entry : DataCollection.getInstance().cellsVisited.entrySet())
-                {
-                    String posString = entry.getKey();
-
-                    String[] parts = posString.split(":");
-
-                    int x1 = (int)Double.parseDouble(parts[0].trim());
-                    int y1 = (int)Double.parseDouble(parts[1].trim());
-
-
-                    Integer value = entry.getValue();
-                    if(value > 254)
-                        value = 254;
-                    g.setPaint(new Color(value, 50, 50, 150));
-                    g.fillRect((int) x1, (int) y1, cellSize, cellSize);
-
-                }
-            }
+            DrawPreviousLocations(g);
         }
 
 
@@ -135,31 +107,44 @@ public class Visualisations
     //Overloaded function to just render the overlay, for any game
     public void renderSearchSpace(Graphics2D g)
     {
-        int cellSize = DataCollection.getInstance().getBlockSize();
         if (drawPreviousLocations)
         {
-            // Loop through the hashMap and get the positions
-            if (DataCollection.getInstance().cellsVisited != null)
+            DrawPreviousLocations(g);
+        }
+        // Do other stuff here for other controllers
+    }
+
+    private void DrawPreviousLocations(Graphics2D g)
+    {
+        int cellSize = DataCollection.getInstance().getBlockSize();
+
+        // Loop through the hashMap and get the positions
+        if (DataCollection.getInstance().cellsVisited != null)
+        {
+            for (Map.Entry<String, Integer> entry : DataCollection.getInstance().cellsVisited.entrySet())
             {
-                for (Map.Entry<String, Integer> entry : DataCollection.getInstance().cellsVisited.entrySet())
-                {
-                    String posString = entry.getKey();
+                String posString = entry.getKey();
 
-                    String[] parts = posString.split(":");
+                String[] parts = posString.split(":");
 
-                    int x1 = (int) Double.parseDouble(parts[0].trim());
-                    int y1 = (int) Double.parseDouble(parts[1].trim());
+                int x1 = (int) Double.parseDouble(parts[0].trim());
+                int y1 = (int) Double.parseDouble(parts[1].trim());
 
 
-                    Integer value = entry.getValue();
-                    if (value > 254)
-                        value = 254;
-                    g.setPaint(new Color(value, 50, 50, 150));
-                    g.fillRect((int) x1, (int) y1, cellSize, cellSize);
+                Double value = Double.parseDouble(entry.getValue().toString());
+                value /= DataCollection.getInstance().totalCellsExplored;
+                value *= 1000;
+                if (value > 254.0)
+                    value = 254.0;
 
-                }
+                g.setPaint(new Color(value.intValue(), 50, 50, 150));
+                g.fillRect((int) x1, (int) y1, cellSize, cellSize);
+
+                g.;
+
             }
         }
+
     }
 
 
