@@ -1,7 +1,10 @@
 package controllers.singlePlayer.sampleFlatMCTS;
 
+import java.awt.*;
 import java.util.Random;
 
+import DissertationFiles.DataCollection;
+import DissertationFiles.Visualisations;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
 import ontology.Types.ACTIONS;
@@ -12,6 +15,12 @@ public class Agent extends AbstractPlayer {
 	public static Random random;
 	public static ACTIONS[] actions;
 	public static int MAX_DEPTH;
+
+	//! Edited by Alli 09/03/2018
+	// List of variables for storing and rendering MCTS information
+	private Visualisations vis = new Visualisations();
+	private DataCollection dataCollection = new DataCollection();;
+	//! Edit End
 	
 	public Agent(StateObservation so, ElapsedCpuTimer elapsedTimer) {
 		random = new Random();
@@ -21,6 +30,10 @@ public class Agent extends AbstractPlayer {
 	
 	@Override
 	public ACTIONS act(StateObservation stateObs, ElapsedCpuTimer elapsedTimer) {
+		//! Edited Alli - 09/03/2018
+		// Add game state to be collected
+		dataCollection.AddGameStateToCollection(stateObs);
+		// Edit End
 		
 		double worstCase = 10;
 		double avgTime = 10;
@@ -54,6 +67,19 @@ public class Agent extends AbstractPlayer {
 		}
 		
 		return actions[bestAction];
+	}
+
+	public void result(StateObservation stateObservation, ElapsedCpuTimer elapsedCpuTimer)
+	{
+		//Collect data at end game state
+		dataCollection.AddGameEndStats(stateObservation);
+	}
+	//! Edited by Alli 05/12/2017
+	// Draws graphics to the screen
+	public void draw(Graphics2D g)
+	{
+		//! Visualise the trees search space
+		vis.renderSearchSpace(g);
 	}
 
 }

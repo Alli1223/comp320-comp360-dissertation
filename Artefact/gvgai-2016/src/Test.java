@@ -24,6 +24,7 @@ public class Test
         String sampleGAController = "controllers.singlePlayer.sampleGA.Agent";
         String sampleOLETSController = "controllers.singlePlayer.olets.Agent";
         String repeatOLETS = "controllers.singlePlayer.repeatOLETS.Agent";
+        String YOLOBOT = "controllers.singlePlayer.YOLOBOT.Agent";
 
         //Available Generators
         String randomLevelGenerator = "levelGenerators.randomLevelGenerator.LevelGenerator";
@@ -82,8 +83,8 @@ public class Test
 
 
         // 2. This plays a game in a level by the controller.
-        DataCollection.getInstance().ControllerName = sampleOLMCTSController;
-        ArcadeMachine.runOneGame(game, level1, visuals, sampleOLMCTSController, recordActionsFile, seed, 0);
+        //DataCollection.getInstance().ControllerName = sampleOLMCTSController;
+        //ArcadeMachine.runOneGame(game, level1, visuals, sampleOLMCTSController, recordActionsFile, seed, 0);
 
         // 3. This replays a game from an action file previously recorded
         //String readActionsFile = "actions_pacman_lvl1_-1877682670.txt";
@@ -95,10 +96,10 @@ public class Test
         for(int i = gameIdx; i < games.length; i++)
         {
         	game = gamesPath + games[i] + ".txt";
-            DataCollection.getInstance().ControllerName = sampleOLMCTSController;
+            DataCollection.getInstance().ControllerName = YOLOBOT;
             DataCollection.getInstance().gameIteration = i;
         	level1 = gamesPath + games[i] + "_lvl" + levelIdx +".txt";
-        	ArcadeMachine.runGames(game, new String[]{level1}, M, sampleMCTSController, null);
+        	ArcadeMachine.runGames(game, new String[]{level1}, M, YOLOBOT, null);
         }
 
         //// Save all game data

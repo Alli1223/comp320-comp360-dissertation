@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
 
+import DissertationFiles.DataCollection;
+import DissertationFiles.Visualisations;
 import core.game.Observation;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
@@ -28,6 +30,12 @@ public class Agent extends AbstractPlayer {
      * Observation grid.
      */
     protected ArrayList<Observation> grid[][];
+
+    //! Edited by Alli 09/03/2018
+    // List of variables for storing and rendering MCTS information
+    private Visualisations vis = new Visualisations();
+    private DataCollection dataCollection = new DataCollection();;
+    //! Edit End
 
     /**
      * block size
@@ -71,6 +79,11 @@ public class Agent extends AbstractPlayer {
         printDebug(portalPositions,"por");
         System.out.println();               */
 
+        //! Edited Alli - 09/03/2018
+        // Add game state to be collected
+        dataCollection.AddGameStateToCollection(stateObs);
+        // Edit End
+
         Types.ACTIONS action = null;
         StateObservation stCopy = stateObs.copy();
 
@@ -79,7 +92,7 @@ public class Agent extends AbstractPlayer {
         long remaining = elapsedTimer.remainingTimeMillis();
         int numIters = 0;
 
-        int remainingLimit = 5;
+        int remainingLimit = 10;
         while(remaining > 2*avgTimeTaken && remaining > remainingLimit)
         {
             ElapsedCpuTimer elapsedTimerIteration = new ElapsedCpuTimer();
@@ -125,8 +138,19 @@ public class Agent extends AbstractPlayer {
      * It can be used for debug purposes.
      * @param g Graphics device to draw to.
      */
+
+    public void result(StateObservation stateObservation, ElapsedCpuTimer elapsedCpuTimer)
+    {
+        //Include your code here to know how it all ended.
+
+        //Collect data at end game state
+        dataCollection.AddGameEndStats(stateObservation);
+
+    }
+
     public void draw(Graphics2D g)
     {
+        /* Existing code
         int half_block = (int) (block_size*0.5);
         for(int j = 0; j < grid[0].length; ++j)
         {
@@ -141,5 +165,9 @@ public class Agent extends AbstractPlayer {
                 }
             }
         }
+        */
+
+        //! Visualise the trees search space
+        vis.renderSearchSpace(g);
     }
 }

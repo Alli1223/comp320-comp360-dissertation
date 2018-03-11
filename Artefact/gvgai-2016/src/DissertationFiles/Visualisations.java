@@ -114,6 +114,7 @@ public class Visualisations
         // Do other stuff here for other controllers
     }
 
+    // Draw the previous locations from dataCollection
     private void DrawPreviousLocations(Graphics2D g)
     {
         int cellSize = DataCollection.getInstance().getBlockSize();
@@ -136,7 +137,7 @@ public class Visualisations
                 value *= 1000;
 
                 // Draw the percent string on the cell
-                String result = String.format("%.2f", value);
+                String result = String.format("%.1f", value / 10);
 
 
                 g.setPaint(new Color(255, 255, 255));
@@ -152,11 +153,8 @@ public class Visualisations
                 // Draw the square
                 g.setPaint(new Color(value.intValue(), 50, 50, 150));
                 g.fillRect((int) x, (int) y, cellSize, cellSize);
-
-
             }
         }
-
     }
 
 
