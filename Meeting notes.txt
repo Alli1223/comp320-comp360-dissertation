@@ -1,5 +1,9 @@
 MCTS locality - Use other search techqiues to address this issue.
+Using a cell weighting/penalty system to avoid the MCTS locality limitiation
 
 Move the paper away from tree search techniques, and focus towards MCTS and it's variants.
-Focus on a paper that compares the MCTS variants and then possibly create a hyper heuristic of MCTS variants
+Then possibly create a hyper heuristic of MCTS variants
+
+Help importing other controllers into the framework
+
 

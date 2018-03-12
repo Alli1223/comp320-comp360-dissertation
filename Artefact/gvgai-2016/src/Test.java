@@ -34,6 +34,8 @@ public class Test
         //Available games:
         String gamesPath = "examples/gridphysics/";
         String games[] = new String[]{};
+        String deterministicGames[] = new String[]{};
+        String stochasticGames[] = new String[]{};
         String generateLevelPath = "examples/gridphysics/";
 
         //! Edited Alli - 12/02/2018
@@ -63,6 +65,9 @@ public class Test
             games = new String[]{"bait", "aliens", "chase", "chopper", "hungrybirds", "digdug", "missilecommand", "intersection", "plaqueattack",
             "seaquest", "camelRace", "butterflies", "escape", "crossfire", "lemmings", "infection", "modality", "roguelike", "waitforbreakfast",
             "survivezombies" };
+            // Specific games
+            deterministicGames = new String[]{"bait", "chase", "hungrybirds", "missilecommand", "plaqueattack", "camelRace", "escape", "lemmings", "modality", "waitforbreakfast" };
+            stochasticGames = new String[]{"aliens", "chopper", "digdug", "intersection", "seaquest", "butterflies", "crossfire", "infection", "roguelike", "survivezombies" };
         }
         //Other settings
         boolean visuals = true;
@@ -92,14 +97,14 @@ public class Test
 
         // 4. This plays a single game, in N levels, M times :  Use games.length for all games
         //String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
-        int M = 20;
-        for(int i = gameIdx; i < 1; i++)
+        int M = 1;
+        for(int i = gameIdx; i < 3; i++)
         {
         	game = gamesPath + games[i] + ".txt";
-            DataCollection.getInstance().ControllerName = sampleMCTSController;
+            DataCollection.getInstance().ControllerName = sampleOLMCTSController;
             DataCollection.getInstance().gameIteration = i;
         	level1 = gamesPath + games[i] + "_lvl" + levelIdx +".txt";
-        	ArcadeMachine.runGames(game, new String[]{level1}, M, sampleMCTSController, null);
+        	ArcadeMachine.runGames(game, new String[]{level1}, M, sampleOLMCTSController, null);
         }
 
         //// Save all game data

@@ -77,7 +77,7 @@ public class DataCollection
         // Add to list of positions if it doesnt exist (new position)
         if (!dataCollection.listOfAgentLccations.contains(playerPosition))
         {
-            cellsExplored++;
+            dataCollection.cellsExplored++;
             dataCollection.listOfAgentLccations.add(playerPosition);
             point = playerPosition.toString();
             dataCollection.cellsVisited.put(point, 0);
@@ -107,17 +107,12 @@ public class DataCollection
         //     GameData.put("LastLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
         // else
         //     GameData.put("DeathLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
-        GameData.put("GameID", dataCollection.gameIteration);
+        GameData.put("ControllerName", dataCollection.ControllerName);
         GameData.put("GameScore", SO.getGameScore());
         GameData.put("GameSpaceSearched", calculatePercentageOfExploredLevel(SO));                                      // Calculate search space
-        GameData.put("TotalCellsVisisted", cellsExplored);
-        GameData.put("Score", SO.getGameScore());
+        GameData.put("TotalCellsVisisted", dataCollection.cellsExplored);
         GameData.put("EndGameTick", SO.getGameTick());
-
-        if (SO.getGameTick() >= 2000)
-            GameData.put("TimeOut", 1);
-        else
-            GameData.put("TimeOut", 0);
+        GameData.put("levelSize", SO.getWorldDimension().width * SO.getWorldDimension().height);
 
         // Add the values to allData json object
         dataCollection.AllData.put("GameData_" + dataCollection.gameIteration + "_" + dataCollection.levelIteration, GameData);
@@ -134,6 +129,7 @@ public class DataCollection
             dataCollection.listOfAgentLccations.clear();
             dataCollection.totalCellsExplored = 0;
             dataCollection.levelIteration = 0;
+            dataCollection.cellsExplored = 0;
         }
         else
         {
