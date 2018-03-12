@@ -70,7 +70,7 @@ public class Test
 
         //Game and level to play
 
-        int gameIdx = 0;
+        int gameIdx = 7;
         int levelIdx = 1; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
@@ -96,10 +96,10 @@ public class Test
         for(int i = gameIdx; i < games.length; i++)
         {
         	game = gamesPath + games[i] + ".txt";
-            DataCollection.getInstance().ControllerName = YOLOBOT;
+            DataCollection.getInstance().ControllerName = sampleOLMCTSController;
             DataCollection.getInstance().gameIteration = i;
         	level1 = gamesPath + games[i] + "_lvl" + levelIdx +".txt";
-        	ArcadeMachine.runGames(game, new String[]{level1}, M, YOLOBOT, null);
+        	ArcadeMachine.runGames(game, new String[]{level1}, M, sampleOLMCTSController, null);
         }
 
         //// Save all game data

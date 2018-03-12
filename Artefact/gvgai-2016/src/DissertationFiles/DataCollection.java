@@ -94,8 +94,7 @@ public class DataCollection
         }
 
         // Add score to list
-
-        dataCollection.AgentScore.put(SO.getGameScore());
+        //dataCollection.AgentScore.put(SO.getGameScore());
     }
 
 

@@ -1,6 +1,8 @@
 package controllers.singlePlayer.sampleonesteplookahead;
 
 
+import DissertationFiles.DataCollection;
+import DissertationFiles.Visualisations;
 import controllers.singlePlayer.Heuristics.SimpleStateHeuristic;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
@@ -8,6 +10,7 @@ import ontology.Types;
 import tools.ElapsedCpuTimer;
 import tools.Utils;
 
+import java.awt.*;
 import java.util.Random;
 
 /**
@@ -21,6 +24,12 @@ public class Agent extends AbstractPlayer {
 
     public static double epsilon = 1e-6;
     public static Random m_rnd;
+
+    //! Edited by Alli 09/03/2018
+    // List of variables for storing and rendering MCTS information
+    private Visualisations vis = new Visualisations();
+    private DataCollection dataCollection = new DataCollection();;
+    //! Edit End
 
     public Agent(StateObservation stateObs, ElapsedCpuTimer elapsedTimer) {
 
@@ -38,7 +47,10 @@ public class Agent extends AbstractPlayer {
      * @return An action for the current state
      */
     public Types.ACTIONS act(StateObservation stateObs, ElapsedCpuTimer elapsedTimer) {
-
+        //! Edited Alli - 09/03/2018
+        // Add game state to be collected
+        dataCollection.AddGameStateToCollection(stateObs);
+        // Edit End
         Types.ACTIONS bestAction = null;
         double maxQ = Double.NEGATIVE_INFINITY;
         SimpleStateHeuristic heuristic =  new SimpleStateHeuristic(stateObs);
@@ -65,5 +77,17 @@ public class Agent extends AbstractPlayer {
 
     }
 
+    public void result(StateObservation stateObservation, ElapsedCpuTimer elapsedCpuTimer)
+    {
+        //Collect data at end game state
+        dataCollection.AddGameEndStats(stateObservation);
+    }
+    //! Edited by Alli 05/12/2017
+    // Draws graphics to the screen
+    public void draw(Graphics2D g)
+    {
+        //! Visualise the trees search space
+        vis.renderSearchSpace(g);
+    }
 
 }
