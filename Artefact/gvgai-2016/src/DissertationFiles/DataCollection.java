@@ -1,4 +1,5 @@
 package DissertationFiles;
+import core.game.Game;
 import core.game.Observation;
 import core.game.StateObservation;
 import org.json.JSONArray;
@@ -106,10 +107,12 @@ public class DataCollection
         //     GameData.put("LastLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
         // else
         //     GameData.put("DeathLocation", ConvertPositionToJSON(SO.getAvatarPosition()));
+        GameData.put("GameID", dataCollection.gameIteration);
         GameData.put("GameScore", SO.getGameScore());
         GameData.put("GameSpaceSearched", calculatePercentageOfExploredLevel(SO));                                      // Calculate search space
-        GameData.put("AvatarType", SO.getAvatarType());
-        GameData.put("Score", dataCollection.AgentScore);
+        GameData.put("TotalCellsVisisted", cellsExplored);
+        GameData.put("Score", SO.getGameScore());
+        GameData.put("EndGameTick", SO.getGameTick());
 
         if (SO.getGameTick() >= 2000)
             GameData.put("TimeOut", 1);
@@ -117,16 +120,10 @@ public class DataCollection
             GameData.put("TimeOut", 0);
 
         // Add the values to allData json object
-        dataCollection.AllData.put("GameData" + dataCollection.gameIteration, GameData);
+        dataCollection.AllData.put("GameData_" + dataCollection.gameIteration + "_" + dataCollection.levelIteration, GameData);
 
         // Save game points visted to file
         CaptureScreen(SO);
-
-        // Save Score to CSV
-        JSONARRAYToCSV(dataCollection.AgentScore);
-
-        //Write the data
-        System.out.println(AllData.toString());
 
         // If the level has changed
         if(dataCollection.localGameIterator != dataCollection.gameIteration && recordPositionsOverMultipleGames)
