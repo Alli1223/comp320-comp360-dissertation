@@ -7,3 +7,9 @@ Then possibly create a hyper heuristic of MCTS variants
 Help importing other controllers into the framework
 
 
+Summarise Hypothesis:
+
+Analysis of different MCTS improvements for GVG-AI
+What is the most effective modification to MCTS
+Benchmarking MCTS variants for GVG-AI
+Does any modifications to MCTS 

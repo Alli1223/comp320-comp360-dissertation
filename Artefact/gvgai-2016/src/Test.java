@@ -102,7 +102,7 @@ public class Test
         //String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
         int M = 10;
         //for(int j = 0; j < allMCTSControllers.length; j++) {
-            for (int i = gameIdx; i < games.length / 2; i++) {
+            for (int i = gameIdx; i < 1; i++) {
                 game = gamesPath + games[i] + ".txt";
                 DataCollection.getInstance().ControllerName = sampleMCTSController; //allMCTSControllers[j];
                 DataCollection.getInstance().gameIteration = i;
