@@ -110,6 +110,7 @@ public class Test
                 DataCollection.getInstance().ControllerName = allMCTSControllers[j];
                 DataCollection.getInstance().gameIteration = i;
                 level1 = gamesPath + games[i] + "_lvl" + levelIdx + ".txt";
+                System.out.println("Running Controller: " + j + " of " + allMCTSControllers.length + ". and game: " + i + " of " + games.length + ".");
                 ArcadeMachine.runGames(game, new String[]{level1}, M, allMCTSControllers[j], null, DataCollection.getInstance().renderGames);
             }
         }
