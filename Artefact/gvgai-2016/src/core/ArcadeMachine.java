@@ -487,7 +487,7 @@ public class ArcadeMachine
      */
     public static StatSummary performance;
     public static void runGames(String game_file, String[] level_files, int level_times,
-                                String agentName, String[] actionFiles)
+                                String agentName, String[] actionFiles, boolean renderGames)
     {
         VGDLFactory.GetInstance().init(); //This always first thing to do.
         VGDLRegistry.GetInstance().init();
@@ -566,9 +566,14 @@ public class ArcadeMachine
 
                 //Play the game if at least 2 players in multiplayer games or at least 1 in single player.
                 //Get array of scores back.
-                if ((no_players - disqCount) >= toPlay.no_players) {
-                    //score = toPlay.runGame(players, randomSeed); // WITHOUT GUI
-                    score = toPlay.playGame(players, randomSeed, false, 0); // WITH GUI
+                if ((no_players - disqCount) >= toPlay.no_players)
+                {
+                    if(renderGames)
+                        score = toPlay.playGame(players, randomSeed, false, 0); // WITH GUI
+
+                    else
+                        score = toPlay.runGame(players, randomSeed); // WITHOUT GUI
+
                     toPlay.printResult();
                 }
                 else {

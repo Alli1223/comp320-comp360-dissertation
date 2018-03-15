@@ -101,15 +101,15 @@ public class Test
         // 4. This plays a single game, in N levels, M times :  Use games.length for all games
         //String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
         int M = 10;
-        //for(int j = 0; j < allMCTSControllers.length; j++) {
-            for (int i = gameIdx; i < 1; i++) {
+        for(int j = 0; j < allMCTSControllers.length; j++) {
+            for (int i = gameIdx; i < games.length; i++) {
                 game = gamesPath + games[i] + ".txt";
                 DataCollection.getInstance().ControllerName = sampleMCTSController; //allMCTSControllers[j];
                 DataCollection.getInstance().gameIteration = i;
                 level1 = gamesPath + games[i] + "_lvl" + levelIdx + ".txt";
-                ArcadeMachine.runGames(game, new String[]{level1}, M, sampleMCTSController, null);//allMCTSControllers[j], null);
+                ArcadeMachine.runGames(game, new String[]{level1}, M, sampleMCTSController, null, DataCollection.getInstance().renderGames);//allMCTSControllers[j], null);
             }
-        //}
+        }
 
         //// Save all game data
         DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), false);

@@ -55,6 +55,9 @@ public class DataCollection
     //Set the block size for the game
     private int blockSize;
 
+    //! Save the final image
+    public Boolean renderGames = false;
+
     public int getBlockSize()
     {
         return blockSize;
@@ -253,20 +256,23 @@ public class DataCollection
     //! Capture the screen
     private void CaptureScreen(StateObservation SO)
     {
-        try
+        if(renderGames)
         {
-            //Create a rect to capture
-            Rectangle screenRect = new Rectangle(SO.getWorldDimension());
-            // Set the position of the capture position to cut out the window headder bar
-            screenRect.y += 30;
-            screenRect.x += 10;
+            try
+            {
+                //Create a rect to capture
+                Rectangle screenRect = new Rectangle(SO.getWorldDimension());
+                // Set the position of the capture position to cut out the window headder bar
+                screenRect.y += 30;
+                screenRect.x += 10;
 
-            //Save and write image
-            BufferedImage capture = new Robot().createScreenCapture(screenRect);
-            ImageIO.write(capture, "bmp", new File("../R/Data/ScreenCapture/LastFrame_" + dataCollection.ControllerName + "_" + dataCollection.gameIteration + "_" + dataCollection.levelIteration + ".jpg"));
-        } catch (Exception e)
-        {
-            System.out.println("Error in saving image to file: " + e);
+                //Save and write image
+                BufferedImage capture = new Robot().createScreenCapture(screenRect);
+                ImageIO.write(capture, "bmp", new File("../R/Data/ScreenCapture/LastFrame_" + dataCollection.ControllerName + "_" + dataCollection.gameIteration + "_" + dataCollection.levelIteration + ".jpg"));
+            } catch (Exception e)
+            {
+                System.out.println("Error in saving image to file: " + e);
+            }
         }
     }
 
