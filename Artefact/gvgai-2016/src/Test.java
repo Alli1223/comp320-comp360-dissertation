@@ -24,7 +24,7 @@ public class Test
         String sampleGAController = "controllers.singlePlayer.sampleGA.Agent";
         String sampleOLETSController = "controllers.singlePlayer.olets.Agent";
         String repeatOLETS = "controllers.singlePlayer.repeatOLETS.Agent";
-        String YOLOBOT = "controllers.singlePlayer.YOLOBOT.Agent";
+        String YOLOBOT = "YOLOBOT.Agent";
 
         String allMCTSControllers[] = new String[]{"controllers.singlePlayer.sampleRandom.Agent", "controllers.singlePlayer.sampleonesteplookahead.Agent",
                 "controllers.singlePlayer.sampleMCTS.Agent", "controllers.singlePlayer.sampleFlatMCTS.Agent", "controllers.singlePlayer.sampleOLMCTS.Agent"};
@@ -104,10 +104,10 @@ public class Test
         for(int j = 0; j < allMCTSControllers.length; j++) {
             for (int i = gameIdx; i < games.length; i++) {
                 game = gamesPath + games[i] + ".txt";
-                DataCollection.getInstance().ControllerName = sampleMCTSController; //allMCTSControllers[j];
+                DataCollection.getInstance().ControllerName = YOLOBOT; //allMCTSControllers[j];
                 DataCollection.getInstance().gameIteration = i;
                 level1 = gamesPath + games[i] + "_lvl" + levelIdx + ".txt";
-                ArcadeMachine.runGames(game, new String[]{level1}, M, sampleMCTSController, null, DataCollection.getInstance().renderGames);//allMCTSControllers[j], null);
+                ArcadeMachine.runGames(game, new String[]{level1}, M, YOLOBOT, null, DataCollection.getInstance().renderGames);//allMCTSControllers[j], null);
             }
         }
 

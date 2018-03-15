@@ -56,7 +56,7 @@ public class DataCollection
     private int blockSize;
 
     //! Save the final image
-    public Boolean renderGames = false;
+    public Boolean renderGames = true;
 
     public int getBlockSize()
     {
