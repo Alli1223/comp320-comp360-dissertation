@@ -29,8 +29,8 @@ public class Test
         String YOLOBOT = "YOLOBOT.Agent";
         //String MaastCTS2 = "controllers.singlePlayer.MaastCTS2.Agent";
 
-        String allMCTSControllers[] = new String[]{sampleRandomController, sampleOneStepController,
-                sampleMCTSController, sampleFlatMCTSController, sampleOLMCTSController, YOLOBOT};
+        String allMCTSControllers[] = new String[]{sampleRandomController,
+                sampleMCTSController, sampleFlatMCTSController, sampleOLMCTSController};
 
         //Available Generators
         String randomLevelGenerator = "levelGenerators.randomLevelGenerator.LevelGenerator";
@@ -113,6 +113,7 @@ public class Test
                 System.out.println("Running Controller: " + j + " of " + allMCTSControllers.length + ". and game: " + i + " of " + games.length + ".");
                 ArcadeMachine.runGames(game, new String[]{level1}, M, allMCTSControllers[j], null, DataCollection.getInstance().renderGames);
             }
+            DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), false);
         }
 
         //// Save all game data

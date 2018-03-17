@@ -248,7 +248,7 @@ public class DataCollection
 
         // Get the map size negative the immovable positions
         int mapSize = grid.length * grid[0].length - immovablePositions;
-        percent = (double) cellsExplored / (double) mapSize;
+        percent = (double) dataCollection.cellsExplored / (double) mapSize;
         System.out.println("Percentage of level explored: " + percent * 100.0);
         return percent * 100;
     }
