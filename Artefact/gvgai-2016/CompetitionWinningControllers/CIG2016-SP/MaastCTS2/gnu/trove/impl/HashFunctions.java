@@ -8,7 +8,7 @@
 // suitability of this software for any purpose. It is provided "as is"
 // without expressed or implied warranty.
 
-package MaastCTS2.gnu.trove.impl;
+package controllers.singlePlayer.MaastCTS2.gnu.trove.impl;
 
 /**
  * Provides various hash functions.

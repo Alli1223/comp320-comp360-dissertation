@@ -1,18 +1,18 @@
-package MaastCTS2.controller;
+package controllers.singlePlayer.MaastCTS2.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import MaastCTS2.Globals;
-import MaastCTS2.KnowledgeBase;
+import controllers.singlePlayer.MaastCTS2.Globals;
+import controllers.singlePlayer.MaastCTS2.KnowledgeBase;
 import MaastCTS2.gnu.trove.list.array.TIntArrayList;
-import MaastCTS2.heuristics.states.IPlayoutEvaluation;
+import controllers.singlePlayer.MaastCTS2.heuristics.states.IPlayoutEvaluation;
 import MaastCTS2.model.ActionLocation;
 import MaastCTS2.model.ActionNGram;
 import MaastCTS2.model.MctNode;
 import MaastCTS2.model.Score;
 import MaastCTS2.model.StateObs;
-import MaastCTS2.move_selection.IMoveSelectionStrategy;
+import controllers.singlePlayer.MaastCTS2.move_selection.IMoveSelectionStrategy;
 import MaastCTS2.playout.IPlayoutStrategy;
 import MaastCTS2.selection.ISelectionStrategy;
 //import MaastCTS2.utils.MctsVisualizer;

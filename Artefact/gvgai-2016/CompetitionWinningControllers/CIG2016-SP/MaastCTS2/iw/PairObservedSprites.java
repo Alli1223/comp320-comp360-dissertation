@@ -1,4 +1,4 @@
-package MaastCTS2.iw;
+package controllers.singlePlayer.MaastCTS2.iw;
 
 /**
  * A pair consisting of two ObservedSprite objects.

@@ -1,9 +1,9 @@
-package MaastCTS2.iw;
+package controllers.singlePlayer.MaastCTS2.iw;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import MaastCTS2.utils.OrderedIntPair;
+import controllers.singlePlayer.MaastCTS2.utils.OrderedIntPair;
 
 
 /**

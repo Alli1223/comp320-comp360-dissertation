@@ -1,4 +1,4 @@
-package MaastCTS2.model;
+package controllers.singlePlayer.MaastCTS2.model;
 
 public class Score {
 	public double timesVisited;

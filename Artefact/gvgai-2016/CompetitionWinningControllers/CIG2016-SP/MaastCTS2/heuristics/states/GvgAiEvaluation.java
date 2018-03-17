@@ -1,6 +1,6 @@
-package MaastCTS2.heuristics.states;
+package controllers.singlePlayer.MaastCTS2.heuristics.states;
 
-import MaastCTS2.Globals;
+import controllers.singlePlayer.MaastCTS2.Globals;
 import core.competition.CompetitionParameters;
 import core.game.StateObservation;
 import ontology.Types.WINNER;

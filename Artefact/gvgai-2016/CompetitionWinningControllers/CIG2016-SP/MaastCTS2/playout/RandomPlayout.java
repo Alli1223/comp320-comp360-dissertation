@@ -1,10 +1,10 @@
-package MaastCTS2.playout;
+package controllers.singlePlayer.MaastCTS2.playout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import MaastCTS2.Globals;
-import MaastCTS2.controller.MctsController;
+import controllers.singlePlayer.MaastCTS2.Globals;
+import controllers.singlePlayer.MaastCTS2.controller.MctsController;
 import MaastCTS2.model.MctNode;
 import MaastCTS2.model.StateObs;
 import core.game.StateObservation;

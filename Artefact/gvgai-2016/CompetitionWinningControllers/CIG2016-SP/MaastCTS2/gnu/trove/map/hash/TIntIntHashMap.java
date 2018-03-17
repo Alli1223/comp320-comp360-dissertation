@@ -18,7 +18,7 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ///////////////////////////////////////////////////////////////////////////////
 
-package MaastCTS2.gnu.trove.map.hash;
+package controllers.singlePlayer.MaastCTS2.gnu.trove.map.hash;
 
 
 //////////////////////////////////////////////////
@@ -36,18 +36,18 @@ import java.util.Collection;
 import java.util.ConcurrentModificationException;
 import java.util.Map;
 
-import MaastCTS2.gnu.trove.TIntCollection;
-import MaastCTS2.gnu.trove.function.TIntFunction;
-import MaastCTS2.gnu.trove.impl.HashFunctions;
-import MaastCTS2.gnu.trove.impl.hash.THashPrimitiveIterator;
-import MaastCTS2.gnu.trove.impl.hash.TIntIntHash;
-import MaastCTS2.gnu.trove.impl.hash.TPrimitiveHash;
-import MaastCTS2.gnu.trove.iterator.TIntIntIterator;
-import MaastCTS2.gnu.trove.iterator.TIntIterator;
-import MaastCTS2.gnu.trove.map.TIntIntMap;
-import MaastCTS2.gnu.trove.procedure.TIntIntProcedure;
-import MaastCTS2.gnu.trove.procedure.TIntProcedure;
-import MaastCTS2.gnu.trove.set.TIntSet;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.TIntCollection;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.function.TIntFunction;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.impl.HashFunctions;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.impl.hash.THashPrimitiveIterator;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.impl.hash.TIntIntHash;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.impl.hash.TPrimitiveHash;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.iterator.TIntIntIterator;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.iterator.TIntIterator;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.map.TIntIntMap;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.procedure.TIntIntProcedure;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.procedure.TIntProcedure;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.set.TIntSet;
 
 /**
  * An open addressed Map implementation for int keys and int values.

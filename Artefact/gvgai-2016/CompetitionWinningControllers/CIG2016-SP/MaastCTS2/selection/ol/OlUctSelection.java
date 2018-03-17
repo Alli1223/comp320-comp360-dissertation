@@ -1,14 +1,14 @@
-package MaastCTS2.selection.ol;
+package controllers.singlePlayer.MaastCTS2.selection.ol;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import MaastCTS2.Agent;
-import MaastCTS2.Globals;
-import MaastCTS2.controller.MctsController;
+import controllers.singlePlayer.MaastCTS2.Agent;
+import controllers.singlePlayer.MaastCTS2.Globals;
+import controllers.singlePlayer.MaastCTS2.controller.MctsController;
 import MaastCTS2.model.MctNode;
 import MaastCTS2.model.StateObs;
-import MaastCTS2.selection.ISelectionStrategy;
+import controllers.singlePlayer.MaastCTS2.selection.ISelectionStrategy;
 import core.game.StateObservation;
 import tools.ElapsedCpuTimer;
 import tools.Vector2d;

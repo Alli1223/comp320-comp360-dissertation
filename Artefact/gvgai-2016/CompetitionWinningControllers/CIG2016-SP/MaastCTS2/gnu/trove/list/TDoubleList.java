@@ -17,7 +17,7 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ///////////////////////////////////////////////////////////////////////////////
 
-package MaastCTS2.gnu.trove.list;
+package controllers.singlePlayer.MaastCTS2.gnu.trove.list;
 
 //////////////////////////////////////////////////
 // THIS IS A GENERATED CLASS. DO NOT HAND EDIT! //
@@ -26,9 +26,9 @@ package MaastCTS2.gnu.trove.list;
 
 import java.util.Random;
 
-import MaastCTS2.gnu.trove.TDoubleCollection;
-import MaastCTS2.gnu.trove.function.TDoubleFunction;
-import MaastCTS2.gnu.trove.procedure.TDoubleProcedure;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.TDoubleCollection;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.function.TDoubleFunction;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.procedure.TDoubleProcedure;
 
 
 

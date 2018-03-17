@@ -1,6 +1,6 @@
-package MaastCTS2.iw;
+package controllers.singlePlayer.MaastCTS2.iw;
 
-import MaastCTS2.Globals;
+import controllers.singlePlayer.MaastCTS2.Globals;
 import tools.Vector2d;
 
 /**

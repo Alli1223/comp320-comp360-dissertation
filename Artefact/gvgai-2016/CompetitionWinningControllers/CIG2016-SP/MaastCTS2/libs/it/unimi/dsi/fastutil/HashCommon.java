@@ -1,4 +1,4 @@
-package MaastCTS2.libs.it.unimi.dsi.fastutil;
+package controllers.singlePlayer.MaastCTS2.libs.it.unimi.dsi.fastutil;
 
 /*		 
  * Copyright (C) 2002-2015 Sebastiano Vigna

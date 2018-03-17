@@ -1,4 +1,4 @@
-package MaastCTS2.heuristics.events;
+package controllers.singlePlayer.MaastCTS2.heuristics.events;
 
 /**
  * Objects of this class encode knowledge obtained from observing collision events involving:

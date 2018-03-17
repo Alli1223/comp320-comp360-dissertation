@@ -1,13 +1,13 @@
-package MaastCTS2;
+package controllers.singlePlayer.MaastCTS2;
 
 import java.awt.Graphics2D;
 
-import MaastCTS2.controller.IController;
-import MaastCTS2.controller.MctsController;
-import MaastCTS2.heuristics.states.GvgAiEvaluation;
-import MaastCTS2.heuristics.states.IPlayoutEvaluation;
-import MaastCTS2.move_selection.IMoveSelectionStrategy;
-import MaastCTS2.move_selection.MaxAvgScore;
+import controllers.singlePlayer.MaastCTS2.controller.IController;
+import controllers.singlePlayer.MaastCTS2.controller.MctsController;
+import controllers.singlePlayer.MaastCTS2.heuristics.states.GvgAiEvaluation;
+import controllers.singlePlayer.MaastCTS2.heuristics.states.IPlayoutEvaluation;
+import controllers.singlePlayer.MaastCTS2.move_selection.IMoveSelectionStrategy;
+import controllers.singlePlayer.MaastCTS2.move_selection.MaxAvgScore;
 import MaastCTS2.playout.IPlayoutStrategy;
 import MaastCTS2.playout.NstPlayout;
 import MaastCTS2.selection.ISelectionStrategy;

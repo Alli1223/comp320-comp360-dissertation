@@ -1,11 +1,11 @@
-package MaastCTS2.iw;
+package controllers.singlePlayer.MaastCTS2.iw;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import MaastCTS2.Globals;
-import MaastCTS2.gnu.trove.impl.Constants;
-import MaastCTS2.gnu.trove.map.hash.TIntIntHashMap;
+import controllers.singlePlayer.MaastCTS2.Globals;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.impl.Constants;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.map.hash.TIntIntHashMap;
 import core.game.Observation;
 import core.game.StateObservation;
 

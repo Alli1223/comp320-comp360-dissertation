@@ -1,4 +1,4 @@
-package MaastCTS2.move_selection;
+package controllers.singlePlayer.MaastCTS2.move_selection;
 
 import ontology.Types.ACTIONS;
 import MaastCTS2.model.MctNode;

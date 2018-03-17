@@ -18,9 +18,9 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ///////////////////////////////////////////////////////////////////////////////
 
-package MaastCTS2.gnu.trove.impl.hash;
+package controllers.singlePlayer.MaastCTS2.gnu.trove.impl.hash;
 
-import MaastCTS2.gnu.trove.impl.HashFunctions;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.impl.HashFunctions;
 
 
 

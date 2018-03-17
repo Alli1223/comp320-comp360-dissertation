@@ -1,4 +1,4 @@
-package MaastCTS2;
+package controllers.singlePlayer.MaastCTS2;
 
 import MaastCTS2.libs.it.unimi.dsi.util.XorShift64StarRandom;
 import MaastCTS2.utils.OrderedIntPair;

@@ -7,7 +7,7 @@
 //   supporting documentation. CERN makes no representations about the
 //   suitability of this software for any purpose. It is provided "as is"
 //   without expressed or implied warranty.
-package MaastCTS2.gnu.trove.impl;
+package controllers.singlePlayer.MaastCTS2.gnu.trove.impl;
 
 import java.util.Arrays;
 

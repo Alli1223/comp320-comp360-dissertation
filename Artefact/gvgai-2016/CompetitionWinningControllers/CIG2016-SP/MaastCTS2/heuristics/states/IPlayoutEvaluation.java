@@ -1,4 +1,4 @@
-package MaastCTS2.heuristics.states;
+package controllers.singlePlayer.MaastCTS2.heuristics.states;
 
 import MaastCTS2.test.IPrintableConfig;
 import core.game.StateObservation;

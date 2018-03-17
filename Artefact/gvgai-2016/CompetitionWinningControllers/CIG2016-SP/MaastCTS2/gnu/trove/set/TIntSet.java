@@ -18,7 +18,7 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ///////////////////////////////////////////////////////////////////////////////
 
-package MaastCTS2.gnu.trove.set;
+package controllers.singlePlayer.MaastCTS2.gnu.trove.set;
 
 
 //////////////////////////////////////////////////
@@ -28,9 +28,9 @@ package MaastCTS2.gnu.trove.set;
 import java.util.Collection;
 import java.util.Set;
 
-import MaastCTS2.gnu.trove.TIntCollection;
-import MaastCTS2.gnu.trove.iterator.TIntIterator;
-import MaastCTS2.gnu.trove.procedure.TIntProcedure;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.TIntCollection;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.iterator.TIntIterator;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.procedure.TIntProcedure;
 
 /**
  * An implementation of the <tt>Set</tt> interface that uses an

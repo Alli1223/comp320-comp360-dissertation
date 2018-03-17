@@ -1,4 +1,4 @@
-package MaastCTS2;
+package controllers.singlePlayer.MaastCTS2;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;

@@ -1,4 +1,4 @@
-package MaastCTS2.libs.it.unimi.dsi;
+package controllers.singlePlayer.MaastCTS2.libs.it.unimi.dsi;
 
 /*		 
  * DSI utilities

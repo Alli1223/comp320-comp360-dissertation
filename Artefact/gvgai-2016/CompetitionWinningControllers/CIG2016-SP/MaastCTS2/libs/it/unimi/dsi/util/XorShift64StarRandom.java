@@ -1,4 +1,4 @@
-package MaastCTS2.libs.it.unimi.dsi.util;
+package controllers.singlePlayer.MaastCTS2.libs.it.unimi.dsi.util;
 
 /*		 
  * DSI utilities
@@ -22,8 +22,8 @@ package MaastCTS2.libs.it.unimi.dsi.util;
 
 import java.util.Random;
 
-import MaastCTS2.libs.it.unimi.dsi.Util;
-import MaastCTS2.libs.it.unimi.dsi.fastutil.HashCommon;
+import controllers.singlePlayer.MaastCTS2.libs.it.unimi.dsi.Util;
+import controllers.singlePlayer.MaastCTS2.libs.it.unimi.dsi.fastutil.HashCommon;
 
 /** A very fast, high-quality 64-bit {@linkplain Random pseudorandom number generator} 
  * that combines George Marsaglia's Xorshift

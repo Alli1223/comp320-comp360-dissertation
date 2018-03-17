@@ -1,4 +1,4 @@
-package MaastCTS2.move_selection;
+package controllers.singlePlayer.MaastCTS2.move_selection;
 
 import java.util.ArrayList;
 

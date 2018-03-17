@@ -18,7 +18,7 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ///////////////////////////////////////////////////////////////////////////////
 
-package MaastCTS2.gnu.trove.list.array;
+package controllers.singlePlayer.MaastCTS2.gnu.trove.list.array;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -30,13 +30,13 @@ import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
-import MaastCTS2.gnu.trove.TByteCollection;
-import MaastCTS2.gnu.trove.function.TByteFunction;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.TByteCollection;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.function.TByteFunction;
 import MaastCTS2.gnu.trove.impl.Constants;
 import MaastCTS2.gnu.trove.impl.HashFunctions;
-import MaastCTS2.gnu.trove.iterator.TByteIterator;
-import MaastCTS2.gnu.trove.list.TByteList;
-import MaastCTS2.gnu.trove.procedure.TByteProcedure;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.iterator.TByteIterator;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.list.TByteList;
+import controllers.singlePlayer.MaastCTS2.gnu.trove.procedure.TByteProcedure;
 
 
 //////////////////////////////////////////////////

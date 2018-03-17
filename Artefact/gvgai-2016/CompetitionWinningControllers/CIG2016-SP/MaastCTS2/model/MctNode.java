@@ -1,12 +1,12 @@
-package MaastCTS2.model;
+package controllers.singlePlayer.MaastCTS2.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import MaastCTS2.Agent;
-import MaastCTS2.Globals;
-import MaastCTS2.controller.MctsController;
+import controllers.singlePlayer.MaastCTS2.Agent;
+import controllers.singlePlayer.MaastCTS2.Globals;
+import controllers.singlePlayer.MaastCTS2.controller.MctsController;
 import MaastCTS2.iw.NoveltyTester;
 import MaastCTS2.iw.NoveltyTester.NOVELTY_LEVELS;
 import MaastCTS2.iw.NoveltyTester.NOVELTY_TEST_MODES;

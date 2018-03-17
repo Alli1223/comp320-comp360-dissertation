@@ -18,7 +18,7 @@
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ///////////////////////////////////////////////////////////////////////////////
 
-package MaastCTS2.gnu.trove.iterator;
+package controllers.singlePlayer.MaastCTS2.gnu.trove.iterator;
 
 /**
  * Implements all iterator functions for the hashed object set.

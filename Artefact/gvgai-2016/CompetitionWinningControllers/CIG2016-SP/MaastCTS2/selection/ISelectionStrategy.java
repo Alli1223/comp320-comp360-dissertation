@@ -1,4 +1,4 @@
-package MaastCTS2.selection;
+package controllers.singlePlayer.MaastCTS2.selection;
 
 import MaastCTS2.model.MctNode;
 import MaastCTS2.test.IPrintableConfig;

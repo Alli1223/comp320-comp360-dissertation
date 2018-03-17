@@ -1,4 +1,4 @@
-package MaastCTS2.utils;
+package controllers.singlePlayer.MaastCTS2.utils;
 
 public class MctsVisualizer{
 }

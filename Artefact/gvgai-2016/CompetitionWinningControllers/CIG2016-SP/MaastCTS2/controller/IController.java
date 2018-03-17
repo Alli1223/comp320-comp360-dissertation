@@ -1,4 +1,4 @@
-package MaastCTS2.controller;
+package controllers.singlePlayer.MaastCTS2.controller;
 
 import ontology.Types.ACTIONS;
 import tools.ElapsedCpuTimer;

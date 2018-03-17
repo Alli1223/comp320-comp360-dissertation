@@ -1,7 +1,7 @@
-package MaastCTS2.playout;
+package controllers.singlePlayer.MaastCTS2.playout;
 
 import tools.ElapsedCpuTimer;
-import MaastCTS2.controller.MctsController;
+import controllers.singlePlayer.MaastCTS2.controller.MctsController;
 import MaastCTS2.model.MctNode;
 import MaastCTS2.test.IPrintableConfig;
 import core.game.StateObservation;

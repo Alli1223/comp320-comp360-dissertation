@@ -1,9 +1,9 @@
-package MaastCTS2.utils;
+package controllers.singlePlayer.MaastCTS2.utils;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
-import MaastCTS2.Globals;
+import controllers.singlePlayer.MaastCTS2.Globals;
 import core.game.Observation;
 import core.game.StateObservation;
 
