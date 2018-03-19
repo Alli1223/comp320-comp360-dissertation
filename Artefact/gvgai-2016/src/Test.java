@@ -29,8 +29,7 @@ public class Test
         String YOLOBOT = "YOLOBOT.Agent";
         //String MaastCTS2 = "controllers.singlePlayer.MaastCTS2.Agent";
 
-        String allMCTSControllers[] = new String[]{sampleRandomController,
-                sampleMCTSController, sampleFlatMCTSController, sampleOLMCTSController};
+        String allMCTSControllers[] = new String[]{sampleRandomController, sampleMCTSController, sampleFlatMCTSController, sampleOLMCTSController};
 
         //Available Generators
         String randomLevelGenerator = "levelGenerators.randomLevelGenerator.LevelGenerator";
