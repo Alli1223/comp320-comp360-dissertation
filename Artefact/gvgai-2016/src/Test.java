@@ -103,9 +103,11 @@ public class Test
 
         // 4. This plays a single game, in N levels, M times :  Use games.length for all games
         //String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
-        int M = 10;
-        for(int j = 0; j < allMCTSControllers.length; j++) {
-            for (int i = gameIdx; i < games.length; i++) {
+        int M = 20;
+        for(int j = 0; j < allMCTSControllers.length; j++)
+        {
+            for (int i = gameIdx; i < games.length; i++)
+            {
                 game = gamesPath + games[i] + ".txt";
                 DataCollection.getInstance().ControllerName = allMCTSControllers[j];
                 DataCollection.getInstance().gameIteration = i;
