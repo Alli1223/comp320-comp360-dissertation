@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Artefact:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Artefact_jar</output-path>
+    <root id="archive" name="Artefact.jar">
+      <element id="module-output" name="Artefact" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/gvgai-2016/libs/json-20160810.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
