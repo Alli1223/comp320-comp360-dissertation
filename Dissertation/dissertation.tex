@@ -235,7 +235,7 @@ Email: AR185160@falmouth.ac.uk\\}
 
 		\textbf{Simulation}
 		
-			An Monte Carlo simulation is carried out until a pre-determined depth or the end of a game.
+			A Monte Carlo simulation is carried out until a pre-determined depth or the end of a game.
 			For the rest of the game, actions are selected at random until the end of the game. This means that the weighting of action selection probabilities has a significant effect on the level of play. For example if the game played with equal probability between exploration and exploitation, this will often lead to sub-optimal play \cite{chaslot2008monte}. 
 			To look for more promising plays, MCTS can use heuristic knowledge to give weights to actions that look more promising \cite{perez2014solving}.
 			Silver et al. \cite{silver2009monte} describes the technique of simulation balancing using a gradient decent to bias the policy during the simulation, this aims to provide a more accurate spread of simulation outcomes.
@@ -478,7 +478,7 @@ Email: AR185160@falmouth.ac.uk\\}
 	For carrying out the research on the gvg-AI competition, IntelliJ IDEA 2017.3 was used. RStudio Version 1.1.419.
 	
 	%PC Specs for simulations
-	The PC used to carry out the simulations had... % FILL OUT WHEN DONE
+	The computer used to carry out the simulations had Intel C2750 (8 Core \@ 2.4GHz), 16GB RAM, 1TBHDD.
 
 	% Choosing what games to test the tree search algorithms on
 	\subsection{Choosing the Games}
@@ -488,8 +488,8 @@ Email: AR185160@falmouth.ac.uk\\}
 	%Other authors that have chosen the best games to test
 	There are papers by previous authors that looked into finding a good selection of games that can be used for benchmarking the framework. \cite{gaina2017population}
 	
-	In Mark Nelsons paper \cite{nelson2016investigating}, he presented a large scale analysis of MCTS with 62 games in the framework, which were sorted based on performance. Bontrager et al. \cite{bontrager2016matching} used clustering techniques on 49 games in the goal to obtain rough groups of similar games.
-	The final 20 games that will be used in this paper are based of the paper by Gaina et al. \cite{gaina2017population} where they uniformly sampled from both Mark Nelson and Bontrager et al. papers and balanced a set of 10 stochastic and 10 deterministic games, which can be shown in table \ref{GamesTable}.
+	In Nelsons paper \cite{nelson2016investigating}, he presented a large scale analysis of MCTS with 62 games in the framework, which were sorted based on performance. Bontrager et al. \cite{bontrager2016matching} used clustering techniques on 49 games in the goal to obtain rough groups of similar games.
+	The final 20 games that will be used in this paper are based of the paper by Gaina et al. \cite{gaina2017population} where they uniformly sampled from both Nelson and Bontrager et al. papers and balanced a set of 10 stochastic and 10 deterministic games, which can be shown in table \ref{GamesTable}.
 	
 	
 	% Table of games
@@ -511,7 +511,7 @@ Email: AR185160@falmouth.ac.uk\\}
 		Wait For Breakfast  & Survive Zombies   \\
 		\hline
 	\end{tabular}
-	\caption{Table of games selected based of \cite{guerrero2017beyond, gaina2017population}.}
+	\caption{ Table of games selected based of \cite{guerrero2017beyond, gaina2017population}.}
 	\label{GamesTable}
 	\end{table}
 	
@@ -525,10 +525,10 @@ Email: AR185160@falmouth.ac.uk\\}
 	To gather the data about the different search trees, I implemented a class that would visualise the time an agent spent in each cell. 
 	From this I was able to get an insight the movement patterns within the game, as shown in IMAGE HERE.
 	
-	One of the big limitations for the sampleMCTS agent within GVG-AI is it's locality limitation, which was...
+	One of the big limitations for the sampleMCTS agent within GVG-AI is it's locality limitation, which can be shown in IMAGE GOES HERE
 	
 	\subsection{Design of hyper-heuristic}
-	How I tried to avoid the MCTS locality limitation
+	%How I tried to avoid the MCTS locality limitation
 	
 	Burke et al. propose two different categories of hyper heuristics; heuristic selection and heuristic generation\cite{burke2010classification}.
 
@@ -539,7 +539,7 @@ Email: AR185160@falmouth.ac.uk\\}
 
 %%%%%%%%%%% Research Methodology %%%%%%%%%%%%%%%%%%%%%%%
 
-which techniques 
+
 
 
 %%%%%%%%%%% Method of evaluation the research artifact (Unit Testing) and findings %%%%%%%%%%%%%%%%%%%%%%%
