@@ -28,6 +28,8 @@ public class Agent extends AbstractPlayer {
     private Visualisations vis = new Visualisations();
     private DataCollection dataCollection = new DataCollection();
     public double max_Score;
+    public LinkedList<Types.ACTIONS> path;
+    TreeNode bestNode;
     //! Edit End
 
     public Agent(StateObservation stateObs, ElapsedCpuTimer elapsedTimer)
@@ -56,9 +58,9 @@ public class Agent extends AbstractPlayer {
         // Edit End
 
 
-        //TreeNode node = new TreeNode(stateObs.copy());
-
-
+        TreeNode root = new TreeNode(stateObs, null);
+        root.isExplored = true;
+        traverse(elapsedTimer, root);
 
         Types.ACTIONS bestAction = null;
         //bestAction = traverse(elapsedTimer);
@@ -78,8 +80,8 @@ public class Agent extends AbstractPlayer {
 
         ((LinkedList<TreeNode>) queue).add(rootNode);
 
-        //TODO: also evaluate elapsed timer
-        while (queue.size() != 0)
+
+        while (queue.size() != 0 && timeElapsed.remainingTimeMillis() > 10)
         {
             TreeNode node = (TreeNode)queue.remove();
             TreeNode child = null;
@@ -88,10 +90,29 @@ public class Agent extends AbstractPlayer {
             {
                 child.isExplored = true;
                 queue.add(child);
+                if(child.score > bestNode.score)
+                {
+                    bestNode = child;
+                }
             }
         }
 
-            return bestAction;
+        if(bestNode != null)
+        {
+            GetPath(bestNode);
+            bestAction = path.getFirst();
+        }
+        return bestAction;
+    }
+
+    public void GetPath(TreeNode goal)
+    {
+        //visted.clear();
+        for (Types.ACTIONS act : goal.actions)
+        {
+            path.add(act);
+        }
+//		queue.clear();
     }
 
     private TreeNode getUnvisitedChild(TreeNode node)

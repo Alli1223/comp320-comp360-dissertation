@@ -1,0 +1,1 @@
+{"GameData_0_0":{"TotalCellsVisisted":1,"ControllerName":"controllers.singlePlayer.breadthFirstSearch.Agent","levelSize":292500,"GameSpaceSearched":0.8547008547008548,"GameScore":0,"EndGameTick":0}}

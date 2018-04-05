@@ -20,6 +20,9 @@ public class TreeNode
     private TreeNode parent;
     public TreeNode[] children = new TreeNode[8];
     private static double winScore = 100000.0;
+
+    //! Stores the actions
+	public LinkedList<Types.ACTIONS> actions;
 	
 	
 	public TreeNode(StateObservation stateObs, TreeNode parentNode)
