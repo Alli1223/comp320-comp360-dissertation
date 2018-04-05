@@ -196,13 +196,13 @@ public class DataCollection
         {
             if(isCSVFile)
             {
-                PrintWriter writer = new PrintWriter(outputLocation + "gameData" + dataCollection.ControllerName + ".csv", "UTF-8");
+                PrintWriter writer = new PrintWriter(outputLocation + "gameData_" + dataCollection.ControllerName + ".csv", "UTF-8");
                 writer.println(data);
                 writer.close();
             }
             else
             {
-                PrintWriter writer = new PrintWriter(outputLocation + "gameData" + dataCollection.ControllerName + ".txt", "UTF-8");
+                PrintWriter writer = new PrintWriter(outputLocation + "gameData_" + dataCollection.ControllerName + ".txt", "UTF-8");
                 writer.println(data);
                 writer.close();
             }
@@ -239,15 +239,9 @@ public class DataCollection
         ArrayList<Observation> grid[][] = SO.getObservationGrid();
 
         double percent = 0;
-        int immovablePositions = 0;
-        // Get the list of immovable positions in the game
-        if (SO.getImmovablePositions() != null)
-        {
-            immovablePositions = SO.getImmovablePositions().length;
-        }
 
         // Get the map size negative the immovable positions
-        int mapSize = grid.length * grid[0].length - immovablePositions;
+        int mapSize = grid.length * grid[0].length;
         percent = (double) dataCollection.cellsExplored / (double) mapSize;
         System.out.println("Percentage of level explored: " + percent * 100.0);
         return percent * 100;
