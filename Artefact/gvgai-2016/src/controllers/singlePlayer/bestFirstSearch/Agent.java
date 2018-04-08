@@ -37,7 +37,7 @@ public class Agent extends AbstractPlayer {
 
     /**
      *
-     * Depth First Search
+     * Best First Search
      *
      * @param stateObs Observation of the current state.
      * @param elapsedTimer Timer when the action returned is due.
@@ -49,94 +49,19 @@ public class Agent extends AbstractPlayer {
         //! Edited Alli - 09/03/2018
         // Add game state to be collected
         dataCollection.AddGameStateToCollection(stateObs);
-        // Edit End
-        long remaining;
-
-        /*
-        remaining = elapsedTimer.remainingTimeMillis();
-        while(remaining >= MIN_TIME)
-        {
-            expand();
-
-            if(actionQueue.size() == 0) {
-                break;
-            }
-
-            remaining = elapsedTimer.remainingTimeMillis();
-        } ;
-        */
 
 
 
-        //System.out.println("======== "  + maxQ + " " + bestAction + "============");
-        return getAction(stateObs);
+
+
+        return null;
 
 
 
     }
 
-    private void expand()
-    {/*
-        if(actionQueue.size() == 0) {
-            return;
-        }
 
-        TreeNode node = actionQueue.getFirst();
 
-        StateObservation state = node.getCurrentState();
-        int actionId = node.getUnexploredAction();
-
-        state = advanceState(state, actionId);
-
-        // Explored state
-        if(state == null) {
-            checkNode(node);
-        }
-        // Unexplored state
-        else {
-            // Create new node
-            LinkedList<Integer> actionHistory = cloneLinkedList(node.getActionHistory());
-            actionHistory.add(actionId);
-
-            TreeNode followingNode = new TreeNode(state, actionHistory, NUM_ACTIONS);
-
-            actionQueue.add(followingNode);
-
-            checkNode(node);
-
-            evaluate(state, followingNode);
-        }
-    */}
-
-    private Types.ACTIONS getAction(StateObservation stateObs)
-    {/*
-        if(calculatedActions.size() != 0) {
-            // Reached target score, no more progress from here on out
-            if(stateObs.getGameScore() == targetScore && (newNodeCount <= MAX_NEW_NODE_COUNT || calculatedActions.size() > 20)) {
-                calculatedActions.clear();
-                return Types.ACTIONS.ACTION_NIL;
-            }
-
-            Types.ACTIONS action = LOOKUP_INT_ACTION.get(calculatedActions.removeFirst());
-            moved = true;
-
-            stateObs = stateObs.copy();
-            stateObs.advance(action);
-            if(calculatedActions.size() != 0)
-            {
-                stateObs.advance(LOOKUP_INT_ACTION.get(calculatedActions.getFirst()));
-            }
-
-            if(stateObs.getGameWinner() == WINNER.PLAYER_LOSES) {
-                switchController = true;
-                return Types.ACTIONS.ACTION_NIL;
-            }
-
-            return action;
-        }
-*/
-        return Types.ACTIONS.ACTION_NIL;
-    }
 
     public void result(StateObservation stateObservation, ElapsedCpuTimer elapsedCpuTimer)
     {

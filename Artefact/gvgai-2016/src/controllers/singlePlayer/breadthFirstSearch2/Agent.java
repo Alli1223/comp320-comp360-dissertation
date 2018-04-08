@@ -51,8 +51,6 @@ public class Agent extends AbstractPlayer
 
     public Agent(StateObservation stateObs, ElapsedCpuTimer elapsedTimer)
     {
-
-
         NUM_ACTIONS = stateObs.getAvailableActions().size();
 
         actionQueue = new LinkedList<TreeNode>();
@@ -89,18 +87,20 @@ public class Agent extends AbstractPlayer
         currentScore = stateObs.getGameScore();
 
 
-        //checkForEnd(stateObs);
+        checkForEnd(stateObs);
 
-        do {
+        remaining = elapsedTimer.remainingTimeMillis();
+
+        while (remaining >= MIN_TIME)
+        {
             expand();
 
-            if(actionQueue.size() == 0)
-            {
+            if (actionQueue.size() == 0) {
                 break;
             }
 
             remaining = elapsedTimer.remainingTimeMillis();
-        } while(remaining >= MIN_TIME);
+        }
 
         return getAction(stateObs);
     }
@@ -118,7 +118,7 @@ public class Agent extends AbstractPlayer
         StateObservation state = node.getCurrentState();
         int actionId = node.getUnexploredAction();
 
-        //state = advanceState(state, actionId);
+        state = advanceState(state, actionId);
 
         // Explored state
         if(state == null)
@@ -141,6 +141,35 @@ public class Agent extends AbstractPlayer
         }
     }
 
+    private StateObservation advanceState(StateObservation stateObs, int actionId)
+    {
+        stateObs = stateObs.copy();
+        prevScore = stateObs.getGameScore();
+
+        stateObs.advance(LOOKUP_INT_ACTION.get(actionId));
+
+        if(prevScore < stateObs.getGameScore()) {
+            reduceNodeCount = true;
+
+        }
+
+        // Dead end
+        if(stateObs.isGameOver() && stateObs.getGameWinner() == Types.WINNER.PLAYER_LOSES) {
+            return null;
+        }
+
+        long stateId = stateObs.hashCode();
+
+        // State already explored
+        if(stateObs.getGameScore() < prevScore) {// ||  exploredStates.contains(stateId){
+            return null;
+        }
+
+        exploredStates.add(stateId);
+
+        return stateObs;
+    }
+
     private void checkNode(TreeNode node)
     {
         if(node.check())
@@ -158,6 +187,7 @@ public class Agent extends AbstractPlayer
             }
         }
     }
+
 
     private void evaluate(StateObservation stateObs, TreeNode node)
     {
@@ -237,6 +267,61 @@ public class Agent extends AbstractPlayer
         }
 
         return Types.ACTIONS.ACTION_NIL;
+    }
+
+    private void checkForEnd(StateObservation stateObs)
+    {
+        // Is the game nearly over
+        if (actionQueue.size() > 0 && stateObs.getGameTick() + actionQueue.getFirst().getCurrentState().getGameTick() + 10 >= 2000) {
+            executeActionNode(getOptimalActionNode());
+        }
+        // No nodes in the queue
+        else if (actionQueue.size() == 0 && calculatedActions.size() == 0) {
+            newNodeCount++;
+            clear();
+
+
+            TreeNode newNode = new TreeNode(stateObs.copy(), new LinkedList<Integer>(), NUM_ACTIONS);
+            actionQueue.add(newNode);
+
+        }
+    }
+
+    private TreeNode getOptimalActionNode() {
+        if(actionQueue.size() == 0) {
+            return null;
+        }
+
+        TreeNode optNode = actionQueue.getFirst();
+        double maxScore = prevScore;
+        int minEventCount = Integer.MAX_VALUE;
+        Iterator<TreeNode> iter = actionQueue.iterator();
+
+        StateObservation state;
+        double score;
+        int eventCount;
+        while(iter.hasNext()) {
+            TreeNode node = iter.next();
+            state = node.getCurrentState();
+            score = state.getGameScore();
+            eventCount = state.getEventsHistory().size();
+
+            // Choose the highest score with minimal events
+            if(score >= maxScore) {
+                if(score > maxScore || eventCount < minEventCount) {
+                    maxScore = score;
+                    minEventCount = eventCount;
+                    optNode = node;
+                }
+            }
+        }
+
+        // No progress was made
+        if(maxScore <= currentScore) {
+            return null;
+        }
+
+        return optNode;
     }
 
     private void clear() {

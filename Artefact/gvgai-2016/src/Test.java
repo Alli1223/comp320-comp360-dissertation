@@ -27,7 +27,7 @@ public class Test
 
         //! Other controllers
         String YOLOBOT = "YOLOBOT.Agent";
-        String breadthFirstSearch = "controllers.singlePlayer.breadthFirstSearch2.Agent";
+        String breadthFirstSearch = "controllers.singlePlayer.breadthFirstSearch3.Number27.Agent";
         //String MaastCTS2 = "controllers.singlePlayer.MaastCTS2.Agent";
 
         String allMCTSControllers[] = new String[]{sampleRandomController, sampleMCTSController, sampleFlatMCTSController, sampleOLMCTSController};
