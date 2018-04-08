@@ -212,6 +212,18 @@ public class DataCollection
             System.out.println("Error writing data file: " + e);
         }
     }
+    public void SaveDataToFile(String data,String saveName)
+    {
+        try {
+
+            PrintWriter writer = new PrintWriter(outputLocation + saveName + ".txt", "UTF-8");
+            writer.println(data);
+            writer.close();
+
+        } catch (Exception e) {
+            System.out.println("Error writing data file: " + e);
+        }
+    }
 
     //! Retrun a json object containing the x and y from a vector2D position
     private JSONObject ConvertPositionToJSON(Vector2d position)
