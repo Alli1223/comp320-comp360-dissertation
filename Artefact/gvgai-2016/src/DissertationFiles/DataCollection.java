@@ -2,6 +2,7 @@ package DissertationFiles;
 import core.game.Game;
 import core.game.Observation;
 import core.game.StateObservation;
+import ontology.Types;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
@@ -54,6 +55,8 @@ public class DataCollection
     public String ControllerName;
     //Set the block size for the game
     private int blockSize;
+    // Search depth for the tree search algorithm
+    private int searchDepth;
 
     //! Save the final image
     public Boolean renderGames = false;
@@ -97,6 +100,7 @@ public class DataCollection
             dataCollection.cellsVisited.replace(point, test);
         }
 
+
         // Add score to list
         //dataCollection.AgentScore.put(SO.getGameScore());
     }
@@ -115,6 +119,10 @@ public class DataCollection
         GameData.put("GameSpaceSearched", calculatePercentageOfExploredLevel(SO));                                      // Calculate search space
         GameData.put("TotalCellsVisisted", dataCollection.cellsExplored);
         GameData.put("EndGameTick", SO.getGameTick());
+        if(SO.getGameWinner() == Types.WINNER.PLAYER_WINS)
+            GameData.put("Win", 100);
+        else
+            GameData.put("Win", 0);
         GameData.put("levelSize", SO.getWorldDimension().width * SO.getWorldDimension().height);
 
         // Add the values to allData json object

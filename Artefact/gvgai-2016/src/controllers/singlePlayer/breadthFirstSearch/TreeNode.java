@@ -10,6 +10,7 @@ package controllers.singlePlayer.breadthFirstSearch;
 import core.game.StateObservation;
 import ontology.Types;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class TreeNode
@@ -22,7 +23,7 @@ public class TreeNode
     private static double winScore = 100000.0;
 
     //! Stores the actions
-	public LinkedList<Types.ACTIONS> actions;
+	public ArrayList<Types.ACTIONS> actions;
 	
 	
 	public TreeNode(StateObservation stateObs, TreeNode parentNode)
@@ -30,6 +31,12 @@ public class TreeNode
 		this.isExplored = true;
         this.parent = parentNode;
         this.score = stateObs.getGameScore();
+        this.actions = stateObs.getAvailableActions();
+
+		for (Types.ACTIONS act : stateObs.getAvailableActions())
+		{
+			children[0] = new TreeNode(stateObs, this);
+		}
 
         //If the state is good or bad
         if(stateObs.getGameWinner() == Types.WINNER.PLAYER_WINS)

@@ -63,7 +63,7 @@ public class Agent extends AbstractPlayer {
         traverse(elapsedTimer, root);
 
         Types.ACTIONS bestAction = null;
-        //bestAction = traverse(elapsedTimer);
+        bestAction = traverse(elapsedTimer, root);
 
         //System.out.println("======== "  + maxQ + " " + bestAction + "============");
         return bestAction;
