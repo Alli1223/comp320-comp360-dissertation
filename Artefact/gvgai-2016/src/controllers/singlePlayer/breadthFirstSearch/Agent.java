@@ -79,8 +79,6 @@ public class Agent extends AbstractPlayer {
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
 
         ((LinkedList<TreeNode>) queue).add(rootNode);
-
-
         while (queue.size() != 0 && timeElapsed.remainingTimeMillis() > 10)
         {
             TreeNode node = (TreeNode)queue.remove();
