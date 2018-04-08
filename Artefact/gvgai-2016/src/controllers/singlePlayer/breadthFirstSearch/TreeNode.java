@@ -30,9 +30,12 @@ public class TreeNode
 		this.isExplored = true;
         this.parent = parentNode;
         this.score = stateObs.getGameScore();
+
+        //If the state is good or bad
         if(stateObs.getGameWinner() == Types.WINNER.PLAYER_WINS)
-        	score = winScore;
+        	this.score = winScore;
         else if (stateObs.isGameOver())
+        	this.score = -winScore;
 		this.currentState = stateObs;
 
 	}
