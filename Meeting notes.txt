@@ -6,7 +6,7 @@
 
 TODO:
 Implement more data gathering code, to measure the depths of each search algorithms
-Measure win rate
+Measure win rate and normalised score
 
 Get a basic breadth first search and best first search working properly
 As well as minimax

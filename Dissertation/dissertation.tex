@@ -467,12 +467,6 @@ Email: AR185160@falmouth.ac.uk\\}
 		Best First Search is superior to MCTS in games xyz (or deterministic / stohastic games)
 		%Combining different search techniques with different strengths and weaknesses lead to a better AI agent.
 
-\section{Conclusion}
-	In conclusion, the literature covered in this review provides an overview of a few of the current algorithms in use in the GVG-AI competition.
-	Based on the performance of the different search algorithms within the framework, a conclusion will be drawn between the superior algorithms for certain games.
-	The GVG-AI competition provides a good framework to compare different tree search algorithms. 
-	The aim of this paper will be to create an agent for the GVG-AI competition based of the strengths and limitations of tree search algorithms.
-
 
 
 
@@ -536,17 +530,19 @@ Email: AR185160@falmouth.ac.uk\\}
 	
 	One of the big limitations for the sampleMCTS agent within GVG-AI is it's locality limitation, which can be shown in IMAGE GOES HERE
 	
-	%\subsection{Design of hyper-heuristic}
-	%How I tried to avoid the MCTS locality limitation
+% Testing of search algorithms
+	\subsection{Testing of tree search algorithms}
+		From the selection of 20 games, each game was simulated 100 times, and with the 5 different tree search algorithms being tested, roughly 10,000 games were ran to gather the results necessary to draw conclusions between the tree 			search techniques.
 	
-	%Burke et al. propose two different categories of hyper heuristics; heuristic selection and heuristic generation\cite{burke2010classification}.
 
 %%%%%%%%%%% Implementation %%%%%%%%%%%%%%%%%%%%%%%
 
   % Comparing MCTS to other tree search algorithms
  % IS MCTS superior to all other tree search algroithms in gvg-ai
  % Where (if any) does other tree search techniques suceed in the competition
- % 
+ % Try to find areas where other tree search algirthms win over MCTS
+% Initital thoughts: Best First Search better for deterministic game
+% MCTS for stohastic games
 
 % HYPOTHESIS
  % 1: MCTS is better than all other tree search algorithms
@@ -562,7 +558,7 @@ Email: AR185160@falmouth.ac.uk\\}
  % Used the Incremental Model for the development of the software artefacet
 
 	\subsection{Chosen Development Life Cycle}
-		The software artefact for this project was developed using the Incremental build model, as each feature implemented to the software was tested using travis CI.
+		The software artifact for this project was developed using the Incremental build model, as each feature implemented to the software was tested using travis CI.
 
 
 %%%%%%%%%%% Method of evaluation the research artifact (Unit Testing) and findings %%%%%%%%%%%%%%%%%%%%%%%
@@ -570,6 +566,10 @@ Email: AR185160@falmouth.ac.uk\\}
 %Junit for unit testing
 
 %Analysis of results
+	
+\section{Research findings}
+	\textbf{Preliminary results}
+		By gathering data on the sampleMCTS controller, this heatmap of where the agent was. 
 
 %%%%%%%%%%% Professional Considerations %%%%%%%%%%%%%%%%%%%%%%%
 
@@ -580,12 +580,19 @@ Email: AR185160@falmouth.ac.uk\\}
 %%%%%%%%%%% Acknowledgements %%%%%%%%%%%%%%%%%%%%%%%
 
 
-	
-\section{Research}
-	\textbf{Preliminary results}
-		By gathering data on the sampleMCTS controller, this heatmap of where the agent was 
 
 
+
+
+
+
+
+%%%%%%%%%%% Conclusion %%%%%%%%%%%%%%
+\section{Conclusion}
+	In conclusion, the literature covered in this review provides an overview of a few of the current algorithms in use in the GVG-AI competition.
+	Based on the performance of the different search algorithms within the framework, a conclusion will be drawn between the superior algorithms for certain games.
+	The GVG-AI competition provides a good framework to compare different tree search algorithms. 
+	The aim of this paper will be to create an agent for the GVG-AI competition based of the strengths and limitations of tree search algorithms.
 	 
 
 % references section
