@@ -5,4 +5,4 @@ jdk:
   - openjdk8
 
 before_install:
-  - cd Artefact/gvgai-2016/src
+  - cd Artefact/gvgai-2016
