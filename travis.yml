@@ -1,8 +1,0 @@
-language: java
-
-jdk:
-  - oraclejdk9
-  - openjdk8
-
-before_install:
-  - cd Artefact

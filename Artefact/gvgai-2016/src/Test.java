@@ -95,8 +95,8 @@ public class Test
 
 
         // 2. This plays a game in a level by the controller.
-        DataCollection.getInstance().ControllerName = breadthFirstSearch;
-        ArcadeMachine.runOneGame(game, level1, visuals, breadthFirstSearch, recordActionsFile, seed, 0);
+        DataCollection.getInstance().ControllerName = breadthFirstSearch27;
+        ArcadeMachine.runOneGame(game, level1, visuals, breadthFirstSearch27, recordActionsFile, seed, 0);
 
         // 3. This replays a game from an action file previously recorded
         //String readActionsFile = "actions_pacman_lvl1_-1877682670.txt";

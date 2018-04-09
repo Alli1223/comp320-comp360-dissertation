@@ -90,11 +90,13 @@ public class BFS extends CustomAbstractPlayer {
 		
 		checkMemoryUsage();
 		checkForEnd(stateObs);
-		
+
+
 		if(!moved && !compareStates(stateObs, prevStateObs)) {
 			switchController = true;
 			return getAction(stateObs);
 		}
+
 		
 		if(reduceNodeCount) {
 			reduceNodeCount(false);
