@@ -57,21 +57,7 @@ public class Agent extends AbstractPlayer {
         SimpleStateHeuristic heuristic =  new SimpleStateHeuristic(stateObs);
         for (Types.ACTIONS action : stateObs.getAvailableActions())
         {
-            /*
-            Queue queue = new LinkedList();
-            queue.add(this.rootNode);
-            printNode(this.rootNode);
-            rootNode.visited = true;
-            while(!queue.isEmpty()) {
-                Node node = (Node)queue.remove();
-                Node child=null;
-                while((child=getUnvisitedChildNode(node))!=null) {
-                    child.visited=true;
-                    printNode(child);
-                    queue.add(child);
-                }
-            }
-            */
+
 
         }
 

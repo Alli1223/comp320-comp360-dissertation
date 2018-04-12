@@ -5,19 +5,19 @@
  * @version customGA3
  */
 
-package controllers.singlePlayer.breadthFirstSearch3.Number27;
+package controllers.singlePlayer.breadthFirstSearch2;
 
 import java.util.LinkedList;
 
 import core.game.StateObservation;
 
-public class ActionNode {
+public class TreeNode {
 	private StateObservation currentState;
 	private LinkedList<Integer> actionHistory;
 	private LinkedList<Integer> unexploredActions;
 	
 	
-	public ActionNode(StateObservation stateObs, LinkedList<Integer> actionHistory, int numActions) {
+	public TreeNode(StateObservation stateObs, LinkedList<Integer> actionHistory, int numActions) {
 		this.actionHistory = actionHistory;
 		currentState = stateObs;
 		unexploredActions = new LinkedList<Integer>();

@@ -9,8 +9,7 @@ import ontology.Types;
 import tools.ElapsedCpuTimer;
 
 import java.awt.*;
-import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,11 +25,13 @@ public class Agent extends AbstractPlayer {
     private static int MIN_TIME = 2;
     private LinkedList<TreeNode> actionQueue;		// Node list
     private HashSet<Long> exploredStates;
+    BFS bestSearch = null;
+
 
     public Agent(StateObservation stateObs, ElapsedCpuTimer elapsedTimer)
     {
-
-
+        bestSearch = new BFS(stateObs);
+        //bestSearch.search(stateObs,elapsedTimer);
 
 
     }
@@ -51,13 +52,7 @@ public class Agent extends AbstractPlayer {
         dataCollection.AddGameStateToCollection(stateObs);
 
 
-
-
-
-        return null;
-
-
-
+        return bestSearch.Run(stateObs,elapsedTimer);
     }
 
 
@@ -77,3 +72,5 @@ public class Agent extends AbstractPlayer {
     }
 
 }
+
+
