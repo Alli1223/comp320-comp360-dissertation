@@ -106,6 +106,7 @@ public class Test
         String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
         int M = 10000;
 
+        // Process any arguments
         if(args.length > 0)
         {
             // Get the controller from first argument
@@ -114,8 +115,16 @@ public class Test
             {
                 M = Integer.parseInt(args[1]);
             }
-            //allMCTSControllers[0] = allMCTSControllers[Integer.parseInt(args[0])];
+            if(args [2] != null)
+            {
+                if(args[2].equals("Stohastic"))
+                    games = stochasticGames;
+                else if (args[2].equals("Deterministic"))
+                    games = deterministicGames;
+            }
         }
+
+        // Run the games
         for(int j = 0; j < 1; j++)
         {
             for (int i = gameIdx; i < games.length; i++)
