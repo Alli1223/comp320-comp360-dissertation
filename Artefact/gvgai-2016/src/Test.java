@@ -107,7 +107,7 @@ public class Test
         String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
         int M = 100;
 
-        // Process any arguments ( first = controller, second = number of games, second = what game to run(enpty for all))
+        // Process any arguments ( first = controller, second = number of games, second = what game to run(empty for all))
         if(args.length > 0) {
             // Get the controller from first argument
             // Controllers to run
