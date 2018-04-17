@@ -12,6 +12,9 @@
 
 package controllers.singlePlayer.breadthFirstSearch2;
 
+import DissertationFiles.DataCollection;
+import DissertationFiles.Visualisations;
+import controllers.singlePlayer.sampleMCTS.SingleMCTSPlayer;
 import core.game.Observation;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
@@ -21,7 +24,13 @@ import tools.Vector2d;
 
 import java.util.*;
 
-public class Agent extends AbstractPlayer {
+public class Agent extends AbstractPlayer
+{
+    //! Edited by Alli 16/04/18
+    // List of variables for storing and rendering MCTS information
+    private Visualisations vis = new Visualisations();
+    private DataCollection dataCollection = new DataCollection();
+
     private static int MIN_TIME = 2;
     private final long BREAK_FREE_MEMORY = 256 * 1024 * 1024L;	// Execute actions when this amount of memory left
     private final long REDUCTION_MEMORY = 1500 * 1024 * 1024L;	// Reduce node count when this amount of memory left
@@ -40,7 +49,6 @@ public class Agent extends AbstractPlayer {
     private double currentScore;					// Score of the live frame
     private double targetScore;						// Score that will be reached when the calculated actions are executed
     private int blockSize;
-    private boolean switchController;
     private long reductionMemory;
 
     private StateObservation prevStateObs;
@@ -69,7 +77,7 @@ public class Agent extends AbstractPlayer {
         prevScore = stateObs.getGameScore();
         currentScore = stateObs.getGameScore();
         blockSize = stateObs.getBlockSize();
-        switchController = false;
+
         reductionMemory = REDUCTION_MEMORY;
 
         prevStateObs = stateObs;
@@ -83,7 +91,13 @@ public class Agent extends AbstractPlayer {
     }
 
 
-    public Types.ACTIONS act(StateObservation stateObs, ElapsedCpuTimer elapsedTimer) {
+    public Types.ACTIONS act(StateObservation stateObs, ElapsedCpuTimer elapsedTimer)
+    {
+        //! Edited Alli - 16/01/2018
+        // Add game state to be collected
+        dataCollection.AddGameStateToCollection(stateObs);
+        // Edit End
+
         long remaining;
         currentScore = stateObs.getGameScore();
 
@@ -92,7 +106,7 @@ public class Agent extends AbstractPlayer {
 
 
         if(!moved && !compareStates(stateObs, prevStateObs)) {
-            switchController = true;
+
             return getAction(stateObs);
         }
 
@@ -374,7 +388,7 @@ public class Agent extends AbstractPlayer {
             }
 
             if(stateObs.getGameWinner() == Types.WINNER.PLAYER_LOSES) {
-                switchController = true;
+
                 return Types.ACTIONS.ACTION_NIL;
             }
 
@@ -433,7 +447,7 @@ public class Agent extends AbstractPlayer {
             clear();
 
             if(stateObs.getGameTick() < 5) {
-                switchController = true;
+
             }
             else {
                 TreeNode newNode = new TreeNode(stateObs.copy(), new LinkedList<Integer>(), NUM_ACTIONS);
@@ -497,6 +511,10 @@ public class Agent extends AbstractPlayer {
     }
 
 
-    public void result(StateObservation stateObservation, ElapsedCpuTimer elapsedCpuTimer) {
+    public void result(StateObservation stateObservation, ElapsedCpuTimer elapsedCpuTimer)
+    {
+        //Collect data at end game state
+        dataCollection.AddGameEndStats(stateObservation);
+
     }
 }

@@ -105,32 +105,33 @@ public class Test
 
         // 4. This plays a single game, in N levels, M times :  Use games.length for all games
         String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
-        int M = 10000;
+        int M = 100;
 
-        // Process any arguments ( first = controller, second = number of games, second = game types)
-        if(args.length > 0)
-        {
+        // Process any arguments ( first = controller, second = number of games, second = what game to run(enpty for all))
+        if(args.length > 0) {
             // Get the controller from first argument
             // Controllers to run
-            if(!args[0].isEmpty())
-            {
+            if (!args[0].isEmpty()) {
                 allMCTSControllers = new String[]{allMCTSControllers[Integer.parseInt(args[0])]};
             }
             // Number of games
-            if(!args[1].isEmpty())
-            {
+            if (!args[1].isEmpty()) {
                 M = Integer.parseInt(args[1]);
             }
-            // Type of games
-            if(!args[2].isEmpty())
-            {
-                if(args[2].equals("Stohastic"))
+            /* Type of games
+            if (!args[2].isEmpty()) {
+                if (args[2].equals("Stohastic"))
                     games = stochasticGames;
                 else if (args[2].equals("Deterministic"))
                     games = deterministicGames;
+            }*/
+            // How many games to run
+            if (!args[2].isEmpty())
+            {
+                games = new String[]{games[Integer.parseInt(args[2])]};
             }
-
         }
+
 
         // Run the games
         for(int j = 0; j < allMCTSControllers.length; j++)
