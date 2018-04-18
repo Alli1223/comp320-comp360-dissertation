@@ -13,6 +13,7 @@
 
 /Artifact/gvgai-2016/libs/*
 
+!Artifact/gvgai-2016/classes/
 ## Intermediate documents:
 *.dvi
 *-converted-to.*
