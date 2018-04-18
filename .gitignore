@@ -11,7 +11,8 @@
 *.cb
 *.cb2
 
-/Artifact/gvgai-2016/libs/*
+!Artefact/gvgai-2016/libs/
+!Artefact/gvgai-2016/classes/
 
 !Artifact/gvgai-2016/classes/
 ## Intermediate documents:
