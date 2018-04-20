@@ -467,11 +467,17 @@ Email: AR185160@falmouth.ac.uk\\}
 
 
 
+% Reasearch question I aim to answer:
+% How well do different tree search techniques scale within the gvg-ai framework
+
+% MCTS scales 
+% BeFS performs better in smaller maps
+
+
 
 \subsection{Hypothesis}
-
 	\textbf{Hypothesis One:}
-		 \par
+		 
 	\textbf{Null Hypothesis:}
 		MCTS isnt superior to all other tree search algorithms within the framework
 
@@ -496,7 +502,7 @@ Email: AR185160@falmouth.ac.uk\\}
 \section{Experimental Work}
 
 	\subsection{Tools Used}
-	For carrying out the research on the gvg-AI competition, IntelliJ IDEA 2017.3 was used. RStudio Version 1.1.419.
+	For carrying out the research on the gvg-AI competition, IntelliJ IDEA 2017.3 was used. RStudio Version 1.1.419. The simulations were copiled and executed with java jdk 9.
 	
 	%PC Specs for simulations
 	The computer used to carry out the simulations had Intel C2750 (8 Core \@ 2.4GHz), 16GB RAM, 1TB HDD.
@@ -535,6 +541,9 @@ Email: AR185160@falmouth.ac.uk\\}
 	\caption{ Table of games selected based of \cite{guerrero2017beyond, gaina2017population}.}
 	\label{GamesTable}
 	\end{table}
+
+
+	% calcuating amount of tests to be run
 	
 	
 
@@ -544,13 +553,28 @@ Email: AR185160@falmouth.ac.uk\\}
 	
 	%%Visualising the limitations of the search trees within the competition
 	To gather the data about the different search trees, I implemented a class that would visualise the time an agent spent in each cell. 
-	From this I was able to get an insight the movement patterns within the game, as shown in IMAGE HERE.
-	
+	This gathered insights into the movement patterns within the game, to help analyze if / where the agents got stuck in a level.
+	An example of this can be shown in image %% IMAGE HERE
+
 	One of the big limitations for the sampleMCTS agent within GVG-AI is it's locality limitation, which can be shown in IMAGE GOES HERE
+
+
+	
 	
 % Testing of search algorithms
 	\subsection{Testing of tree search algorithms}
-		From the selection of 20 games, each game was simulated 100 times, and with the 5 different tree search algorithms being tested, roughly 10,000 games were ran to gather the results necessary to draw conclusions between the tree search techniques.
+		Running G*Power with a Effect size of 0.05 and a type I error rate of 0.05, and type II error rate of 95\% the sample size for each game is 4331. To round this off each game was ran 5000 times.  
+
+		Using Cohen's d.
+		\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{GPower}
+		    \caption{ Sample size calculated with G * Power }
+		    \label{fig:GPower}
+		\end{figure}
+
+		
+		From the selection of 20 games, when each game was simulated 5000 times, and with the 5 different tree search algorithms being tested, each run of the competition ran roughly 500,000 games. $ 20 \cdot 5000 \cdot 5  = 500,000$
 	
 
 %%%%%%%%%%% Implementation %%%%%%%%%%%%%%%%%%%%%%%
@@ -587,8 +611,7 @@ Email: AR185160@falmouth.ac.uk\\}
 
 \section{Future Work}
 
-
-
+The experements in this paper only used 20 of the games in the competition, not just 82 games currently in the competition, so comparing all the games in the competition may lead to a better understanding. % Finish
 
 
 

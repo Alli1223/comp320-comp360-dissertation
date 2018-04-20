@@ -103,6 +103,10 @@ public class Test
         //String readActionsFile = "actions_pacman_lvl1_-1877682670.txt";
         //ArcadeMachine.replayGame(game, level1, visuals, readActionsFile);
 
+
+
+
+
         // 4. This plays a single game, in N levels, M times :  Use games.length for all games
         String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
         int M = 100;
@@ -134,8 +138,9 @@ public class Test
 
 
         // Run the games
+        // controllers to run
         for(int j = 0; j < allMCTSControllers.length; j++)
-        {
+        {// games to run
             for (int i = gameIdx; i < games.length; i++)
             {
                 game = gamesPath + games[i] + ".txt";
