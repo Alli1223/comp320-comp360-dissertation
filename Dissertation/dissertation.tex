@@ -52,6 +52,7 @@
 \usepackage{amsmath}
 \usepackage{wrapfig}
 \usepackage{todonotes}
+\usepackage{hyperref}
 \graphicspath{ {./images/} }
 
 
@@ -422,32 +423,16 @@ Email: AR185160@falmouth.ac.uk\\}
 	
 		
 	
-\section{Research Methodologies}	
-	The data of the GVG-AI sample controllers as well as the controllers submitted for the competitions in previous years will be gathered. 
-
-	% What data will be collected:
-	These are a few of the type of metrics that will be gathered from the controllers:
-	\begin{itemize}
-		\item Success rate in a particular game.
-		\item Where the agent was when it lost or won the game
-		\item How much of the search space was the controller able to search
-		\item The amount of moves that controller made in each type of game
-	\end{itemize}
-
-	%What I will create
-	There will be thousands of different simulations to run to gather the required data, this will be done by modifications to the GVG-AI framework to gather the extra information needed.
-	From this data this paper will aim to create an AI controller that will use hyper-heuristics to improve its performance. Furthermore conclusions can be drawn out as to the limitations of different search techniques and potentially any areas in which they could be improved.
 	
-	Limitations of different search tree techniques within the competition.
-
+%%%%%%%%%%% Research Methodology %%%%%%%%%%%%%%%%%%%%%%%
+\section{Methodology}	
 	
-
+	The simulations were ran on the 2016 variation of the competition framework, which can be downloaded from the GitHub repository \footnote{ \url{https://github.com/EssexUniversityMCTS/gvgai}}.
 	
-
-	%Justification of research
-	This software will provide an in depth insight into the challenges faced by each tree search algorithm.
-	Further research could include feeding this data back into the search algorithms or level generators to develop levels that the search techniques will be able to navigate.
-
+	The framework was modified to be able to collect the data from the different tree search controllers.
+	
+	\todo[inline]{inline note}
+	
 	%Hypothesis
 
 % 1 MCTS has a higher  win rate compared to other tree search algorithms in this paper on large maps
@@ -500,11 +485,7 @@ Email: AR185160@falmouth.ac.uk\\}
 
 
 
-
-
 %%%%%%%%%%% Requirements analysis and specification %%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Experimental Work}
 
 	\subsection{Tools Used}
 	For carrying out the research on the gvg-AI competition, IntelliJ IDEA 2017.3 was used. RStudio Version 1.1.419. The simulations were copiled and executed with java jdk 9.
@@ -552,8 +533,10 @@ Email: AR185160@falmouth.ac.uk\\}
 	
 	
 
-%%%%%%%%%%% Design of research artifact %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% Design  and Implementation of research artifact %%%%%%%%%%%%%%%%%%%%%%%
 
+
+% DESIGN
 	\subsection{Design of data collection}
 	
 	%%Visualising the limitations of the search trees within the competition
@@ -562,9 +545,6 @@ Email: AR185160@falmouth.ac.uk\\}
 	An example of this can be shown in image %% IMAGE HERE
 
 	One of the big limitations for the sampleMCTS agent within GVG-AI is it's locality limitation, which can be shown in IMAGE GOES HERE
-
-
-	
 	
 % Testing of search algorithms
 	\subsection{Testing of tree search algorithms}
@@ -579,40 +559,25 @@ Email: AR185160@falmouth.ac.uk\\}
 		\end{figure}
 
 		
-		From the selection of 20 games, when each game was simulated 5000 times, and with the 5 different tree search algorithms being tested, each run of the competition ran roughly 500,000 games. $ 20 \cdot 5000 \cdot 5  = 500,000$
-	
-
-%%%%%%%%%%% Implementation %%%%%%%%%%%%%%%%%%%%%%%
-
-
- 
-
-
-%%%%%%%%%%% Research Methodology %%%%%%%%%%%%%%%%%%%%%%%
-
+		From the selection of 20 games, when each game was simulated 5000 times, and with the 5 different tree search algorithms being tested, each run of the competition ran roughly 500,000 games. 
+		
+		
+% IMPLEMENTATION
  % Used the Incremental Model for the development of the software artefacet
-
 	\subsection{Chosen Development Life Cycle}
 		The software artifact for this project was developed using the Incremental build model, as each feature implemented to the software was tested using travis CI.
 
 
 %%%%%%%%%%% Method of evaluation the research artifact (Unit Testing) and findings %%%%%%%%%%%%%%%%%%%%%%%
 
-%Junit for unit testing
 
-%Analysis of results
-	
-\section{Research findings}
+%%%%%%%%%%% Analysis of results %%%%%%%%%%%%%%%%%%%%%%%	
+\section{Results}
 	\textbf{Preliminary results}
 		By gathering data on the sampleMCTS controller, this heatmap of where the agent was. 
 
-%%%%%%%%%%% Professional Considerations %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% Professional Considerations  & Acknowledgements %%%%%%%%%%%%%%%%%%%%%%%
 
-
-%%%%%%%%%%% Conclusion %%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%% Acknowledgements %%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Future Work}
 
@@ -628,6 +593,9 @@ The experements in this paper only used 20 of the games in the competition, not 
 	The GVG-AI competition provides a good framework to compare different tree search algorithms. 
 	The aim of this paper will be to create an agent for the GVG-AI competition based of the strengths and limitations of tree search algorithms.
 	 
+
+
+
 
 % references section
 
