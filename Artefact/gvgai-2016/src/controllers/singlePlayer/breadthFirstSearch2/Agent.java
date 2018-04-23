@@ -30,7 +30,7 @@ public class Agent extends AbstractPlayer
     // List of variables for storing and rendering MCTS information
     private Visualisations vis = new Visualisations();
     private DataCollection dataCollection = new DataCollection();
-
+    // Edit end
     private static int MIN_TIME = 2;
     private final long BREAK_FREE_MEMORY = 256 * 1024 * 1024L;	// Execute actions when this amount of memory left
     private final long REDUCTION_MEMORY = 1500 * 1024 * 1024L;	// Reduce node count when this amount of memory left

@@ -109,7 +109,7 @@ public class Test
 
         // 4. This plays a single game, in N levels, M times :  Use games.length for all games
         String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
-        int M = 100;
+        int M = 5;
 
         // Process any arguments ( first = controller, second = number of games, second = what game to run(empty for all))
         if(args.length > 0) {
@@ -139,16 +139,19 @@ public class Test
 
         // Run the games
         // controllers to run
-        for(int j = 0; j < allMCTSControllers.length; j++)
+        String[] levels = new String[5];
+        for(int j = 1; j < allMCTSControllers.length; j++)
         {// games to run
-            for (int i = gameIdx; i < games.length; i++)
+            for (int i = 0; i < games.length; i++)
             {
                 game = gamesPath + games[i] + ".txt";
                 DataCollection.getInstance().ControllerName = allMCTSControllers[j];
                 DataCollection.getInstance().gameIteration = i;
-                level1 = gamesPath + games[i] + "_lvl" + levelIdx + ".txt";
+                for(int l = 0; l < 5; ++l)                                                 //Loop through the different levels
+                    levels[l] = gamesPath + games[i] + "_lvl" + l + ".txt";
+
                 System.out.println("Running " + allMCTSControllers[j] +  " Controller: " + j + " of " + allMCTSControllers.length + ". and game: " + i + " of " + games.length + ". and " + M + " games per level");
-                ArcadeMachine.runGames(game, new String[]{level1}, M, allMCTSControllers[j], null, DataCollection.getInstance().renderGames);
+                ArcadeMachine.runGames(game, levels, M, allMCTSControllers[j], null, DataCollection.getInstance().renderGames);
                 DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), allMCTSControllers[j] + "_" + i);
             }
             //DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), false);
