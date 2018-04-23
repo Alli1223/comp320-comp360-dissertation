@@ -22,6 +22,7 @@ import ontology.Types;
 import tools.ElapsedCpuTimer;
 import tools.Vector2d;
 
+import java.awt.*;
 import java.util.*;
 
 public class Agent extends AbstractPlayer
@@ -510,11 +511,18 @@ public class Agent extends AbstractPlayer
         exploredStates = new HashSet<Long>();
     }
 
-
+    //! Edited by Alli 05/12/2017
+    // Draws graphics to the screen
     public void result(StateObservation stateObservation, ElapsedCpuTimer elapsedCpuTimer)
     {
         //Collect data at end game state
         dataCollection.AddGameEndStats(stateObservation);
+    }
 
+    public void draw(Graphics2D g)
+    {
+
+        //! Visualise the trees search space
+        vis.renderSearchSpace(g);
     }
 }

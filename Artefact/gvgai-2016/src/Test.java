@@ -77,8 +77,6 @@ public class Test
             deterministicGames = new String[]{"bait", "chase", "hungrybirds", "missilecommand", "plaqueattack", "camelRace", "escape", "lemmings", "modality", "waitforbreakfast" };
             stochasticGames = new String[]{"aliens", "chopper", "digdug", "intersection", "seaquest", "butterflies", "crossfire", "infection", "roguelike", "survivezombies" };
         }
-        //Other settings
-        boolean visuals = true;
         int seed = new Random().nextInt();
 
         //Game and level to play

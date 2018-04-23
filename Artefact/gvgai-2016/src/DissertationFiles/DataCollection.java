@@ -59,7 +59,7 @@ public class DataCollection
     private int searchDepth;
 
     //! Save the final image
-    public Boolean renderGames = true;
+    public Boolean renderGames = false;
 
     public int getBlockSize()
     {

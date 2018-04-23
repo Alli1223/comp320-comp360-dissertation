@@ -15,8 +15,8 @@ public class Visualisations
     private Vector<Vector2d> searchPoints = new Vector<Vector2d>();
 
     //! Booleans for choosing what should be rendered over the game
-    private boolean drawAreaSearched = false;
-    private boolean drawBestActionPath = false;
+    private boolean drawAreaSearched = true;
+    private boolean drawBestActionPath = true;
     private boolean drawPreviousLocations = true;
 
     //! Block offset for drawing in the center of the cells
@@ -29,19 +29,19 @@ public class Visualisations
     private SingleTreeNode deepestNode = null;
 
     //! Renders the tree searches over the search space
-    public void renderSearchSpace(SingleMCTSPlayer MCTSPlayer, Graphics2D g)
+    public void renderSearchSpace(SingleTreeNode m_root, Graphics2D g)
     {
         int cellSize = 0;
-        if (MCTSPlayer.m_root.state != null)
+        if (m_root.state != null)
         {
             // Get the cellSize
-            blockOffset = MCTSPlayer.m_root.state.getBlockSize() / 2;
-            cellSize = MCTSPlayer.m_root.state.getBlockSize();
+            blockOffset = m_root.state.getBlockSize() / 2;
+            cellSize = m_root.state.getBlockSize();
         }
 
 
         // Search the tree starting at the root
-        recursivelySearchTree(MCTSPlayer.m_root);
+        recursivelySearchTree(m_root);
 
         // Draw the area that is being searched
         if (drawAreaSearched)
@@ -71,7 +71,7 @@ public class Visualisations
             originPoint.y = 0.0;
 
             // Get the path of nodes that were most visited
-            Vector2d[] points = GetPathFromNode(MCTSPlayer.m_root);
+            Vector2d[] points = GetPathFromNode(m_root);
 
             // Loop through the points and draw lines between them
             if (points.length > 1)

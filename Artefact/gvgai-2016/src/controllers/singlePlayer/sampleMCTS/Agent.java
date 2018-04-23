@@ -115,7 +115,7 @@ public class Agent extends AbstractPlayer
     {
 
         //! Visualise the trees search space
-        vis.renderSearchSpace(mctsPlayer, g);
+        vis.renderSearchSpace(mctsPlayer.m_root, g);
 
 
 
