@@ -1,12 +1,1 @@
-% HYPOTHESIS
- % 1: MCTS is better than all other tree search algorithms
- % 2: Best first search is superior in deterministic/ stohastic games
- % 3: Breadth first search is superiror in the majority of xyz games
-
-
-TODO:
-Implement more data gathering code, to measure the depths of each search algorithms
-Measure win rate and normalised score
-
-Get a basic breadth first search and best first search working properly
-As well as minimax
+Breadthfirst with OSLA

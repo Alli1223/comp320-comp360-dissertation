@@ -467,23 +467,28 @@ Email: AR185160@falmouth.ac.uk\\}
 
 
 \subsection{Hypothesis}
-\todo[inline]{Refactory hypothesis}
+\todo[inline]{Refactor hypothesis}
 
 	\textbf{Hypothesis One:}
-		
+		MCTS has a higher win rate compared to other tree search algorithms in this paper on large maps
 		 
 	\textbf{Null Hypothesis:}
-		MCTS isnt superior to all other tree search algorithms within the framework
+		MCTS has a lower win rate compared to other tree search algorithms in this paper on large maps
 
 	\textbf{Hypothesis Two:}
-		Breadth First Search is superior to MCTS in  deterministic / stohastic games
+		MCTS has a higher win rate compared to other tree search algorithms in this paper on small maps
 
 	\textbf{Hypothesis Three:}
-		Best First Search is superior to MCTS in  deterministic / stohastic games
+		BrFS has a higher win rate compared to other tree search algorithms in this paper on large maps
 
 	\textbf{Hypothesis Four:}
-		Depth First search is superior to MCTS in  deterministic / stohastic games
-		%Combining different search techniques with different strengths and weaknesses lead to a better AI agent.
+		BrFS has a higher win rate compared to other tree search algorithms in this paper on small maps
+		
+	\textbf{Hypothesis Five:}
+		BeFS has a higher win rate compared to other tree search algorithms in this paper on large maps
+		
+	\textbf{Hypothesis Six:}
+		BeFS has a higher win rate compared to other tree search algorithms in this paper on small maps
 
 
 \subsection{Research philosophy}
@@ -550,15 +555,24 @@ Email: AR185160@falmouth.ac.uk\\}
 		
 		I will be 
 
+		%\begin{figure}[h]
+		   % \centering
+		    %\includegraphics[width=0.5\textwidth]{GPower}
+		    %\caption{ Sample size calculated with G * Power }
+		    %\label{fig:GPower}
+		%\end{figure}
+
+
+
 		\begin{figure}[h]
 		    \centering
-		    \includegraphics[width=0.5\textwidth]{GPower}
-		    \caption{ Sample size calculated with G * Power }
+		    \includegraphics[width=0.5\textwidth]{Rplot(meansSD)}
+		    \caption{ Means of all games }
 		    \label{fig:GPower}
 		\end{figure}
-
+		\todo[inline]{Re-do this graph with actual game data}
 		
-		From the selection of 20 games, when each game was simulated 5000 times, and with the 5 different tree search algorithms being tested, each run of the competition ran roughly 500,000 games. 
+		From the selection of 20 games, when each game was simulated 5000 times, and each game has 5 levels, with the 3 different tree search algorithms being tested, each run of the competition ran roughly 500,000 games. 
 	
 	
 
@@ -591,7 +605,7 @@ Email: AR185160@falmouth.ac.uk\\}
 %%%%%%%%%%% Analysis of results %%%%%%%%%%%%%%%%%%%%%%%	
 \section{Results}
 	\textbf{Preliminary results}
-		By gathering data on the sampleMCTS controller, this heatmap of where the agent was. 
+	
 
 %%%%%%%%%%% Professional Considerations  & Acknowledgements %%%%%%%%%%%%%%%%%%%%%%%
 
@@ -605,6 +619,7 @@ The experements in this paper only used 20 of the games in the competition, not 
 
 %%%%%%%%%%% Conclusion %%%%%%%%%%%%%%
 \section{Conclusion}
+\todo[inline]{Re-do this}
 	In conclusion, the literature covered in this review provides an overview of a few of the current algorithms in use in the GVG-AI competition.
 	Based on the performance of the different search algorithms within the framework, a conclusion will be drawn between the superior algorithms for certain games.
 	The GVG-AI competition provides a good framework to compare different tree search algorithms. 
