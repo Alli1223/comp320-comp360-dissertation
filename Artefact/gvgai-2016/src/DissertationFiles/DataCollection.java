@@ -32,7 +32,7 @@ public class DataCollection
     }
 
     // Output location
-    private String outputLocation = "../R/Data/";
+    private String outputLocation = "Results/";
     // Json object containing all the data
     public JSONObject AllData = new JSONObject();
     // The game data to be inserted into AllData

@@ -109,8 +109,9 @@ public class Test
         // 4. This plays a single game, in N levels, M times :  Use games.length for all games
         String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
         int M = 5;
+        int gameID = 0; // Used for processing game from input argument
 
-        // Process any arguments ( first = controller, second = number of games, second = what game to run(empty for all))
+        // Process any arguments ( first = controller, second = number of games, second = what game to run(empty for all)
         if(args.length > 0 && useInputArguments)
         {
             // Get the controller from first argument
@@ -125,9 +126,9 @@ public class Test
             if (!args[2].isEmpty())
             {
                 games = new String[]{games[Integer.parseInt(args[2])]};
+                gameID = Integer.parseInt(args[2]);
             }
         }
-
 
         // Run the games
         // controllers to run
@@ -144,7 +145,7 @@ public class Test
 
                 System.out.println("Running " + allMCTSControllers[j] +  " Controller: " + j + " of " + allMCTSControllers.length + ". and game: " + i + " of " + games.length + ". and " + M + " games per level");
                 ArcadeMachine.runGames(game, levels, M, allMCTSControllers[j], null, DataCollection.getInstance().renderGames);
-                DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), allMCTSControllers[j] + "_" + i);
+                DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), allMCTSControllers[j] + "_" + gameID);
             }
             //DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), false);
         }
