@@ -304,28 +304,28 @@ fabric.properties
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/dictionaries
+SimulationLauncher/.idea/**/workspace.xml
+SimulationLauncher/.idea/**/tasks.xml
+SimulationLauncher/.idea/dictionaries
 
 # Sensitive or high-churn files:
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.xml
-.idea/**/dataSources.local.xml
-.idea/**/sqlDataSources.xml
-.idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
+SimulationLauncher/.idea/**/dataSources/
+SimulationLauncher/.idea/**/dataSources.ids
+SimulationLauncher/.idea/**/dataSources.xml
+SimulationLauncher/.idea/**/dataSources.local.xml
+SimulationLauncher/.idea/**/sqlDataSources.xml
+SimulationLauncher/.idea/**/dynamic.xml
+SimulationLauncher/.idea/**/uiDesigner.xml
 
 # Gradle:
-.idea/**/gradle.xml
-.idea/**/libraries
+SimulationLauncher/.idea/**/gradle.xml
+SimulationLauncher/.idea/**/libraries
 
 # CMake
 cmake-build-debug/
 
 # Mongo Explorer plugin:
-.idea/**/mongoSettings.xml
+SimulationLauncher/.idea/**/mongoSettings.xml
 
 ## File-based project format:
 *.iws
@@ -336,13 +336,13 @@ cmake-build-debug/
 /out/
 
 # mpeltonen/sbt-idea plugin
-.idea_modules/
+SimulationLauncher/.idea_modules/
 
 # JIRA plugin
-atlassian-ide-plugin.xml
+SimulationLauncher/atlassian-ide-plugin.xml
 
 # Cursive Clojure plugin
-.idea/replstate.xml
+SimulationLauncher/.idea/replstate.xml
 
 # Ruby plugin and RubyMine
 /.rakeTasks
@@ -362,7 +362,7 @@ fabric.properties
 # *.ipr
 
 # Sonarlint plugin
-.idea/sonarlint
+SimulationLauncher/.idea/sonarlint
 
 
 # End of https://www.gitignore.io/api/pycharm
