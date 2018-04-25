@@ -48,6 +48,7 @@ public class Test
 
         //! Edited Alli - 12/02/2018
         boolean useChosenGames = true;
+        boolean useInputArguments = true;
 
         //All public games
         games = new String[]{"aliens", "angelsdemons", "assemblyline", "avoidgeorge", "bait", //0-4
@@ -110,9 +111,9 @@ public class Test
         int M = 5;
 
         // Process any arguments ( first = controller, second = number of games, second = what game to run(empty for all))
-        if(args.length > 0) {
+        if(args.length > 0 && useInputArguments)
+        {
             // Get the controller from first argument
-            // Controllers to run
             if (!args[0].isEmpty()) {
                 allMCTSControllers = new String[]{allMCTSControllers[Integer.parseInt(args[0])]};
             }
@@ -120,14 +121,7 @@ public class Test
             if (!args[1].isEmpty()) {
                 M = Integer.parseInt(args[1]);
             }
-            /* Type of games
-            if (!args[2].isEmpty()) {
-                if (args[2].equals("Stohastic"))
-                    games = stochasticGames;
-                else if (args[2].equals("Deterministic"))
-                    games = deterministicGames;
-            }*/
-            // How many games to run
+            // What game to run
             if (!args[2].isEmpty())
             {
                 games = new String[]{games[Integer.parseInt(args[2])]};
@@ -138,7 +132,7 @@ public class Test
         // Run the games
         // controllers to run
         String[] levels = new String[5];
-        for(int j = 1; j < allMCTSControllers.length; j++)
+        for(int j = 0; j < allMCTSControllers.length; j++)
         {// games to run
             for (int i = 0; i < games.length; i++)
             {
