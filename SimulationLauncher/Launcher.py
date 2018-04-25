@@ -16,7 +16,7 @@ class SimulationThread (threading.Thread):
         self.game = game
         self.game_count = total_games_to_run
         self.controller = controller
-        self.java_file = "../Artefact/gvgai-2016/gvgai-2016_jar.jar"
+        self.java_file = "../Artefact/gvgai-2016/gvgai-2016.jar"
     def run(self):
         print("Starting " + self.name)
         # Run the java process
