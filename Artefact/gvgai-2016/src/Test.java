@@ -30,9 +30,10 @@ public class Test
         String breadthFirstSearch27 = "Agent";
         String bestFirstSearch = "controllers.singlePlayer.bestFirstSearch.Agent";
         String breadthFirstSearch = "controllers.singlePlayer.breadthFirstSearch.Agent";
+        String breadthFirstSearch2 = "controllers.singlePlayer.breadthFirstSearch2.Agent";
         //String MaastCTS2 = "controllers.singlePlayer.MaastCTS2.Agent";
 
-        String allMCTSControllers[] = new String[]{sampleRandomController, breadthFirstSearch, bestFirstSearch ,sampleMCTSController, sampleFlatMCTSController, sampleOLMCTSController};
+        String allMCTSControllers[] = new String[]{sampleRandomController, breadthFirstSearch, breadthFirstSearch2, bestFirstSearch ,sampleMCTSController, sampleFlatMCTSController, sampleOLMCTSController};
 
         //Available Generators
         String randomLevelGenerator = "levelGenerators.randomLevelGenerator.LevelGenerator";
@@ -82,7 +83,7 @@ public class Test
 
         //Game and level to play
 
-        int gameIdx = 0;
+        int gameIdx = 6;
         int levelIdx = 1; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";

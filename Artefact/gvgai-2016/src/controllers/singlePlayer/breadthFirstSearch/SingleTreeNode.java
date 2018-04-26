@@ -22,19 +22,14 @@ public class SingleTreeNode
     public static Random m_rnd;
     private int m_depth;
     protected static double[] bounds = new double[]{Double.MAX_VALUE, -Double.MAX_VALUE};
-    public SingleTreeNode () { this(null, null, null); }
-
-    //public int mctsIterations;
-
-
+    public SingleTreeNode () { this(null, null); }
 
     public static int totalIters = 0;
 
-    public SingleTreeNode (StateObservation state, SingleTreeNode parent, Random rnd)
+    public SingleTreeNode (StateObservation state, SingleTreeNode parent)
     {
         this.state = state;
         this.parent = parent;
-        this.m_rnd = rnd;
         children = new SingleTreeNode[Agent.NUM_ACTIONS];
         totValue = 0.0;
         if(parent != null)
@@ -86,10 +81,10 @@ public class SingleTreeNode
             {
                 return cur.expand();
 
-
             } else { // Otherwise expand the next node
                 SingleTreeNode next = cur.nextNode();
-                //SingleTreeNode next = cur.egreedy();
+                if(next == null)
+                    break;
                 cur = next;
             }
         }
@@ -98,6 +93,7 @@ public class SingleTreeNode
     }
 
 
+    // Expand the current node
     public SingleTreeNode expand()
     {
 
@@ -114,18 +110,21 @@ public class SingleTreeNode
         StateObservation nextState = state.copy();
         nextState.advance(Agent.actions[Action]);
 
-        SingleTreeNode tn = new SingleTreeNode(nextState, this, this.m_rnd);
+        SingleTreeNode tn = new SingleTreeNode(nextState, this);
         children[Action] = tn;
         return tn;
     }
 
+    // Get the next child node in the tree
     public SingleTreeNode nextNode ()
     {
         SingleTreeNode selected = null;
         for (SingleTreeNode child : this.children)
         {
-            selected = child;
-            break;
+            if(child.notFullyExpanded()) {
+                selected = child;
+                break;
+            }
         }
 
         return selected;

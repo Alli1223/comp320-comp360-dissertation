@@ -77,9 +77,6 @@ public class Agent extends AbstractPlayer {
 
 
 
-
-
-
     public void result(StateObservation stateObservation, ElapsedCpuTimer elapsedCpuTimer)
     {
         //Collect data at end game state
@@ -92,5 +89,4 @@ public class Agent extends AbstractPlayer {
         //! Visualise the trees search space
         vis.renderSearchSpace(brFSPlayer.m_root, g);
     }
-
 }
