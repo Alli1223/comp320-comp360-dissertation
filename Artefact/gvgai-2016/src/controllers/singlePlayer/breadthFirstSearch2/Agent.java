@@ -31,6 +31,7 @@ public class Agent extends AbstractPlayer
     // List of variables for storing and rendering MCTS information
     private Visualisations vis = new Visualisations();
     private DataCollection dataCollection = new DataCollection();
+    public TreeNode rootNode;
     // Edit end
     private static int MIN_TIME = 2;
     private final long BREAK_FREE_MEMORY = 256 * 1024 * 1024L;	// Execute actions when this amount of memory left
@@ -87,6 +88,7 @@ public class Agent extends AbstractPlayer
         newNodeCount = 0;
 
         TreeNode initialNode = new TreeNode(stateObs.copy(), new LinkedList<Integer>(), NUM_ACTIONS);
+        rootNode = initialNode;
         actionQueue.add(initialNode);
 
     }
@@ -522,6 +524,7 @@ public class Agent extends AbstractPlayer
     public void draw(Graphics2D g)
     {
 
+        vis.renderSearchSpace(rootNode, g);
         //! Visualise the trees search space
         vis.renderSearchSpace(g);
     }

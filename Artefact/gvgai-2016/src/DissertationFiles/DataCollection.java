@@ -47,7 +47,7 @@ public class DataCollection
     public int gameIteration = 0;
     public int levelIteration = 0;
     private int localGameIterator = -1;
-    private boolean recordPositionsOverMultipleGames = true;
+    private boolean recordPositionsOverMultipleGames = false;
     public int totalCellsExplored = 0;
     // An Int to store the number of cells that have been explored
     private int cellsExplored = 0;
@@ -59,7 +59,7 @@ public class DataCollection
     private int searchDepth;
 
     //! Save the final image
-    public Boolean renderGames = false;
+    public Boolean renderGames = true;
 
     public int getBlockSize()
     {
@@ -151,31 +151,6 @@ public class DataCollection
 
     }
 
-    //! Covert the JSON to a CSV file
-    // TODO:FIX THIS
-    public void JSONARRAYToCSV(JSONArray jsonArray)
-    {
-        /*
-        JSONObject scores = new JSONObject();
-        scores.put("Scores", jsonArray);
-        String jsonString = scores.toString();
-
-        JSONObject output;
-        try {
-            output = new JSONObject(jsonArray.toString());
-
-
-            JSONArray docs = output.getJSONArray("Scores");
-
-            String csv = CDL.toString(docs);
-
-            SaveDataToFile(csv, true);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        */
-    }
-
 
     // Add player positions to the state observation
     private void AddPlayerPosition(StateObservation SO)
@@ -184,12 +159,6 @@ public class DataCollection
         {
             // Add player positions to the pos object
             dataCollection.AvatarPositions.put(ConvertPositionToJSON(SO.getAvatarPosition()));
-
-
-            // Add playerPosition objects
-            //dataCollection.AllData.put("AvatarPositions" + dataCollection.gameIteration, dataCollection.AvatarPositions);
-            //dataCollection.AllData.put("AvatarPositions", dataCollection.AvatarPositions);
-
         } catch (JSONException e)
         {
             System.out.println("Error adding to player positions");

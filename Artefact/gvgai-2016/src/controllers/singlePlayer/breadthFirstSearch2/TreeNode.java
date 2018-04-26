@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import core.game.StateObservation;
 
 public class TreeNode {
-	private StateObservation currentState;
+	public StateObservation currentState;
 	private LinkedList<Integer> actionHistory;
 	private LinkedList<Integer> unexploredActions;
 	

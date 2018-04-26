@@ -28,7 +28,7 @@ public class Agent extends AbstractPlayer {
     private DataCollection dataCollection = new DataCollection();
     public double max_Score;
     public LinkedList<Types.ACTIONS> path;
-    TreeNode bestNode;
+    SingleTreeNode bestNode;
     //! Edit End
 
     public Agent(StateObservation stateObs, ElapsedCpuTimer elapsedTimer)
@@ -57,74 +57,10 @@ public class Agent extends AbstractPlayer {
         // Edit End
 
 
-        TreeNode root = new TreeNode(stateObs, null);
-        root.isExplored = true;
-        traverse(elapsedTimer, root);
-
-        Types.ACTIONS bestAction = null;
-        bestAction = traverse(elapsedTimer, root);
-
-        //System.out.println("======== "  + maxQ + " " + bestAction + "============");
-        return bestAction;
-
 
     }
 
 
-    private Types.ACTIONS traverse(ElapsedCpuTimer timeElapsed, TreeNode rootNode)
-    {
-
-        Types.ACTIONS bestAction = null;
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
-
-        ((LinkedList<TreeNode>) queue).add(rootNode);
-        while (queue.size() != 0 && timeElapsed.remainingTimeMillis() > 10)
-        {
-            TreeNode node = (TreeNode)queue.remove();
-            TreeNode child = null;
-            node.score = node.currentState.getGameScore();
-            while ((child = getUnvisitedChild(node)) != null)
-            {
-                child.isExplored = true;
-                queue.add(child);
-                if(child.score > bestNode.score)
-                {
-                    bestNode = child;
-                }
-            }
-        }
-
-        if(bestNode != null)
-        {
-            GetPath(bestNode);
-            bestAction = path.getFirst();
-        }
-        return bestAction;
-    }
-
-    public void GetPath(TreeNode goal)
-    {
-        //visted.clear();
-        for (Types.ACTIONS act : goal.actions)
-        {
-            path.add(act);
-        }
-//		queue.clear();
-    }
-
-    private TreeNode getUnvisitedChild(TreeNode node)
-    {
-        TreeNode returnNode = null;
-        for (int i = 0; i < node.children.length; i++)
-        {
-            if(node.children[i] != null)
-                if(!node.children[i].isExplored)
-                {
-                    returnNode = node.children[i];
-                }
-        }
-        return returnNode;
-    }
 
 
 

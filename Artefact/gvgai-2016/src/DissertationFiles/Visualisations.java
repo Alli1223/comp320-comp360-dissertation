@@ -1,5 +1,6 @@
 package DissertationFiles;
 
+import controllers.singlePlayer.breadthFirstSearch2.TreeNode;
 import controllers.singlePlayer.sampleMCTS.SingleMCTSPlayer;
 import controllers.singlePlayer.sampleMCTS.SingleTreeNode;
 import tools.Vector2d;
@@ -16,8 +17,8 @@ public class Visualisations
 
     //! Booleans for choosing what should be rendered over the game
     private boolean drawAreaSearched = true;
-    private boolean drawBestActionPath = true;
-    private boolean drawPreviousLocations = true;
+    private boolean drawBestActionPath = false;
+    private boolean drawPreviousLocations = false;
 
     //! Block offset for drawing in the center of the cells
     private int blockOffset = 0;
@@ -50,15 +51,17 @@ public class Visualisations
             {
                 Vector2d pos = entry.getKey();
                 Integer visits = entry.getValue();
-                if (visits < 3)
-                    g.setPaint(new Color(10, 100, 0));
-                if (visits >= 3 && visits <= 10)
-                    g.setPaint(new Color(242, 233, 0));
-                if (visits > 10)
-                    g.setPaint(new Color(255, 20, 58));
+                if (visits < 1)
+                    g.setPaint(new Color(10, 100, 0, 50));
+                if (visits >= 1 && visits <= 5)
+                    g.setPaint(new Color(242, 233, 0, 50));
+                if (visits > 5)
+                    g.setPaint(new Color(255, 20, 58, 50));
 
 
-                g.draw3DRect((int) pos.x, (int) pos.y, cellSize, cellSize, false);
+                //g.setPaint(new Color(50, 50, 50, 20));
+                g.fillRect((int) pos.x, (int) pos.y, cellSize, cellSize);
+               // g.draw3DRect((int) pos.x, (int) pos.y, cellSize, cellSize, false);
             }
         }
 
@@ -88,6 +91,55 @@ public class Visualisations
                         }
                     oldPos = points[i];
                 }
+        }
+
+        if (drawPreviousLocations)
+        {
+            DrawPreviousLocations(g);
+        }
+
+
+        //System.out.println(nodesInTree + " : " + searchPoints.size());
+        //Reset the values for next search
+        searchPoints.clear();
+        timesPointVisited.clear();
+        nodesInTree = 0;
+        deepestSearchLevel = 0;
+    }
+    //! Renders the tree searches over the search space
+    public void renderSearchSpace(TreeNode m_root, Graphics2D g)
+    {
+        int cellSize = 0;
+        if (m_root.currentState != null)
+        {
+            // Get the cellSize
+            blockOffset = m_root.currentState.getBlockSize() / 2;
+            cellSize = m_root.currentState.getBlockSize();
+        }
+
+
+        // Search the tree starting at the root
+        recursivelySearchTree(m_root);
+
+        // Draw the area that is being searched
+        if (drawAreaSearched)
+        {
+            for (Map.Entry<Vector2d, Integer> entry : timesPointVisited.entrySet())
+            {
+                Vector2d pos = entry.getKey();
+                Integer visits = entry.getValue();
+                if (visits < 1)
+                    g.setPaint(new Color(10, 100, 0, 50));
+                if (visits >= 1 && visits <= 5)
+                    g.setPaint(new Color(242, 233, 0, 50));
+                if (visits > 5)
+                    g.setPaint(new Color(255, 20, 58, 50));
+
+
+                //g.setPaint(new Color(50, 50, 50, 20));
+                g.fillRect((int) pos.x, (int) pos.y, cellSize, cellSize);
+                // g.draw3DRect((int) pos.x, (int) pos.y, cellSize, cellSize, false);
+            }
         }
 
         if (drawPreviousLocations)
@@ -188,6 +240,29 @@ public class Visualisations
 
         // Search the nodes children
         SingleTreeNode reNode = null;
+        for(int i = 0; i < node.children.length; i++) {
+            if (node.children[i] != null)
+                reNode = recursivelySearchTree(node.children[i]);
+        }
+
+        // Return the node after searching its children
+        return reNode;
+    }
+
+    //! This function will run until it has searched the whole tree (Depth first search of the tree search)
+    private SingleTreeNode recursivelySearchTree(TreeNode node)
+    {
+        // IF the node has a state, get its values
+        if (node.currentState != null)
+        {
+            searchPoints.add(node.currentState.getAvatarPosition());
+            nodesInTree++;
+            timesPointVisited.put(node.currentState.getAvatarPosition(), (int) node.currentState.getGameScore());
+        }
+
+
+        // Search the nodes children
+        TreeNode reNode = null;
         for(int i = 0; i < node.children.length; i++) {
             if (node.children[i] != null)
                 reNode = recursivelySearchTree(node.children[i]);
