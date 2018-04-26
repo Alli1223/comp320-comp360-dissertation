@@ -144,7 +144,7 @@ public class SingleTreeNode {
     }
 
 
-//    public SingleTreeNode uct(StateObservation _currentObservation) {
+//    public SingleTreeNode nextNode(StateObservation _currentObservation) {
 //        SingleTreeNode selected = null;
 //        double bestValue = -Double.MAX_VALUE;
 //        int selectedIdx = 0;
@@ -152,10 +152,10 @@ public class SingleTreeNode {
 //        for (int i = 0; i < this.children.length; i++) {
 //            SingleTreeNode child = children[i];
 //            double hvVal = child.totValue;
-//            double childValue = hvVal / (child.nVisits + SingleMCTSPlayer.epsilon);
+//            double childValue = hvVal / (child.nVisits + SingleBrFSPlayer.epsilon);
 //            double uctValue = childValue +
-//                    Agent.K * Math.sqrt(Math.log(this.nVisits + 1) / (child.nVisits + SingleMCTSPlayer.epsilon)) +
-//                    SingleMCTSPlayer.randomGenerator.nextDouble() * SingleMCTSPlayer.epsilon;
+//                    Agent.K * Math.sqrt(Math.log(this.nVisits + 1) / (child.nVisits + SingleBrFSPlayer.epsilon)) +
+//                    SingleBrFSPlayer.randomGenerator.nextDouble() * SingleBrFSPlayer.epsilon;
 //
 //            // small sampleRandom numbers: break ties in unexpanded nodes
 //            if (uctValue > bestValue) {
@@ -175,9 +175,9 @@ public class SingleTreeNode {
 //        SingleTreeNode selected = null;
 //        int selectedIdx = 0;
 //
-//        if (SingleMCTSPlayer.randomGenerator.nextDouble() < egreedyEpsilon) {
+//        if (SingleBrFSPlayer.randomGenerator.nextDouble() < egreedyEpsilon) {
 //            //Choose randomly
-//            selectedIdx = SingleMCTSPlayer.randomGenerator.nextInt(children.length);
+//            selectedIdx = SingleBrFSPlayer.randomGenerator.nextInt(children.length);
 //            selected = this.children[selectedIdx];
 //
 //        } else {
@@ -209,9 +209,9 @@ public class SingleTreeNode {
 //        double bestValue = -Double.MAX_VALUE;
 //        int selectedIdx = 0;
 //
-//        if (SingleMCTSPlayer.randomGenerator.nextDouble() < eMaxGreedyEpsilon) {
+//        if (SingleBrFSPlayer.randomGenerator.nextDouble() < eMaxGreedyEpsilon) {
 //            //Choose randomly
-//            selectedIdx = SingleMCTSPlayer.randomGenerator.nextInt(children.length);
+//            selectedIdx = SingleBrFSPlayer.randomGenerator.nextInt(children.length);
 //            selected = this.children[selectedIdx];
 //
 //        } else {
@@ -219,7 +219,7 @@ public class SingleTreeNode {
 //            for (int i = 0; i < this.children.length; i++) {
 //
 //                SingleTreeNode child = children[i];
-//                double hvVal = child.expectimax + Agent.K * Math.sqrt(Math.log(this.nVisits + 1) / (child.nVisits + SingleMCTSPlayer.epsilon)) + SingleMCTSPlayer.randomGenerator.nextDouble() * SingleMCTSPlayer.epsilon - this.tabooBias;
+//                double hvVal = child.expectimax + Agent.K * Math.sqrt(Math.log(this.nVisits + 1) / (child.nVisits + SingleBrFSPlayer.epsilon)) + SingleBrFSPlayer.randomGenerator.nextDouble() * SingleBrFSPlayer.epsilon - this.tabooBias;
 //
 //                // small sampleRandom numbers: break ties in unexpanded nodes
 //                if (hvVal > bestValue) {
@@ -237,11 +237,11 @@ public class SingleTreeNode {
 //    }
 
 //    public double getUCTscore() {
-//        return totValue / nVisits + Agent.K * Math.sqrt(Math.log(parent.nVisits + 1) / (nVisits + SingleMCTSPlayer.epsilon)) - tabooBias;
+//        return totValue / nVisits + Agent.K * Math.sqrt(Math.log(parent.nVisits + 1) / (nVisits + SingleBrFSPlayer.epsilon)) - tabooBias;
 //    }
 
 //    private double getEmaxScore() {
-//        return expectimax + Agent.K * Math.sqrt(Math.log(parent.nVisits + 1) / (nVisits + SingleMCTSPlayer.epsilon)) - tabooBias;
+//        return expectimax + Agent.K * Math.sqrt(Math.log(parent.nVisits + 1) / (nVisits + SingleBrFSPlayer.epsilon)) - tabooBias;
 //    }
 
     /**

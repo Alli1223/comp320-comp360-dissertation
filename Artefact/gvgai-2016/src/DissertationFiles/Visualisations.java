@@ -107,16 +107,15 @@ public class Visualisations
         deepestSearchLevel = 0;
     }
     //! Renders the tree searches over the search space
-    public void renderSearchSpace(TreeNode m_root, Graphics2D g)
+    public void renderSearchSpace(controllers.singlePlayer.breadthFirstSearch.SingleTreeNode m_root, Graphics2D g)
     {
         int cellSize = 0;
-        if (m_root.currentState != null)
+        if (m_root.state != null)
         {
             // Get the cellSize
-            blockOffset = m_root.currentState.getBlockSize() / 2;
-            cellSize = m_root.currentState.getBlockSize();
+            blockOffset = m_root.state.getBlockSize() / 2;
+            cellSize = m_root.state.getBlockSize();
         }
-
 
         // Search the tree starting at the root
         recursivelySearchTree(m_root);
@@ -211,7 +210,7 @@ public class Visualisations
 
 
 
-    //! This function will run until it has searched the whole tree (Depth first search of the tree search)
+    //! This function will run until it has searched the whole tree (Depth first search of the tree search) - MCTS
     private SingleTreeNode recursivelySearchTree(SingleTreeNode node)
     {
         // IF the node has a state, get its values
@@ -249,21 +248,21 @@ public class Visualisations
         return reNode;
     }
 
-    //! This function will run until it has searched the whole tree (Depth first search of the tree search)
-    private SingleTreeNode recursivelySearchTree(TreeNode node)
+    //! This function will run until it has searched the whole tree (Depth first search of the tree search) - Breadth first search overload
+    private controllers.singlePlayer.breadthFirstSearch.SingleTreeNode recursivelySearchTree(controllers.singlePlayer.breadthFirstSearch.SingleTreeNode node)
     {
         // IF the node has a state, get its values
-        if (node.currentState != null)
+        if (node.state != null)
         {
-            searchPoints.add(node.currentState.getAvatarPosition());
+            searchPoints.add(node.state.getAvatarPosition());
             nodesInTree++;
-            timesPointVisited.put(node.currentState.getAvatarPosition(), (int) node.currentState.getGameScore());
+            timesPointVisited.put(node.state.getAvatarPosition(), (int) node.state.getGameScore());
         }
 
-
         // Search the nodes children
-        TreeNode reNode = null;
-        for(int i = 0; i < node.children.length; i++) {
+        controllers.singlePlayer.breadthFirstSearch.SingleTreeNode reNode = null;
+        for(int i = 0; i < node.children.length; i++)
+        {
             if (node.children[i] != null)
                 reNode = recursivelySearchTree(node.children[i]);
         }

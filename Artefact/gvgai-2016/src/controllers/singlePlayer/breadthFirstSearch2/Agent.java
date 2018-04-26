@@ -524,7 +524,6 @@ public class Agent extends AbstractPlayer
     public void draw(Graphics2D g)
     {
 
-        vis.renderSearchSpace(rootNode, g);
         //! Visualise the trees search space
         vis.renderSearchSpace(g);
     }

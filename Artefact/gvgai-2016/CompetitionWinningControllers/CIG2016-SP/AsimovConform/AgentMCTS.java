@@ -13,7 +13,7 @@ public class AgentMCTS extends Agent {
     }
 
     public void initSolvers(StateObservation so) {
-        //solver.add(new SingleMCTSPlayer(new AsimovState(so)));
+        //solver.add(new SingleBrFSPlayer(new AsimovState(so)));
     }
 
 }

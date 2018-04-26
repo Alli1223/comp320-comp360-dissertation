@@ -41,7 +41,7 @@ public class OlUctSelection implements ISelectionStrategy {
 		
 		StateObs stateObs = new StateObs(state, true);
 		
-		// use uct to select child
+		// use nextNode to select child
 		while (!state.isGameOver() && node.isFullyExpanded() && !node.getChildren().isEmpty()) {
 			double previousScore = state.getGameScore();
 			int previousNumEvents = state.getEventsHistory().size();

@@ -89,11 +89,11 @@ public class SingleTreeNode
         SingleTreeNode cur = this;
 
         //MR when game is not over and current depth is smaller than overall depth,
-        //   expend all state and get one by uct
+        //   expend all state and get one by nextNode
         while (!cur.state.isGameOver() && cur.m_depth < Agent.ROLLOUT_DEPTH) 
         {
             //MR if treenode is not fully expanded, return its expansion; 
-            //   if yes, return set its uct value as next treenode.
+            //   if yes, return set its nextNode value as next treenode.
             if (cur.notFullyExpanded()) {
                 return cur.expand();
 

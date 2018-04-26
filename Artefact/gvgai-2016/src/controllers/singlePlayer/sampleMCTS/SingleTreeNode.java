@@ -27,9 +27,6 @@ public class SingleTreeNode
         this(null, null, rnd);
     }
 
-    //public int mctsIterations;
-
-
 
     public static int totalIters = 0;
 
