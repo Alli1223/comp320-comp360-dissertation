@@ -106,7 +106,7 @@ public class Visualisations
         nodesInTree = 0;
         deepestSearchLevel = 0;
     }
-    //! Renders the tree searches over the search space
+    //! Renders the tree searches over the search space for breadth first search
     public void renderSearchSpace(controllers.singlePlayer.breadthFirstSearch.SingleTreeNode m_root, Graphics2D g)
     {
         int cellSize = 0;
@@ -119,6 +119,59 @@ public class Visualisations
 
         // Search the tree starting at the root
         recursivelySearchTree(m_root);
+
+        // Draw the area that is being searched
+        if (drawAreaSearched)
+        {
+            for (Map.Entry<Vector2d, Integer> entry : timesPointVisited.entrySet())
+            {
+                Vector2d pos = entry.getKey();
+                Integer visits = entry.getValue();
+                if (visits < 1)
+                    g.setPaint(new Color(10, 100, 0, 50));
+                if (visits >= 1 && visits <= 5)
+                    g.setPaint(new Color(242, 233, 0, 50));
+                if (visits > 5)
+                    g.setPaint(new Color(255, 20, 58, 50));
+
+
+                //g.setPaint(new Color(50, 50, 50, 20));
+                g.fillRect((int) pos.x, (int) pos.y, cellSize, cellSize);
+                // g.draw3DRect((int) pos.x, (int) pos.y, cellSize, cellSize, false);
+            }
+        }
+
+        if (drawPreviousLocations)
+        {
+            DrawPreviousLocations(g);
+        }
+
+
+        //System.out.println(nodesInTree + " : " + searchPoints.size());
+        //Reset the values for next search
+        searchPoints.clear();
+        timesPointVisited.clear();
+        nodesInTree = 0;
+        deepestSearchLevel = 0;
+    }
+    //! Renders the tree searches over the search space for breadth first search
+    public void renderSearchSpace(LinkedList<TreeNode> actionQueue, Graphics2D g)
+    {
+        int cellSize = 0;
+        if(actionQueue.size() > 0) {
+
+
+            TreeNode rootState = actionQueue.get(0);
+
+            if (rootState != null) {
+                // Get the cellSize
+                blockOffset = rootState.currentState.getBlockSize() / 2;
+                cellSize = rootState.currentState.getBlockSize();
+            }
+        }
+
+        // Search the tree starting at the root
+        recursivelySearchTree(actionQueue);
 
         // Draw the area that is being searched
         if (drawAreaSearched)
@@ -256,7 +309,7 @@ public class Visualisations
         {
             searchPoints.add(node.state.getAvatarPosition());
             nodesInTree++;
-            timesPointVisited.put(node.state.getAvatarPosition(), (int) node.state.getGameScore());
+            timesPointVisited.put(node.state.getAvatarPosition(), (int) node.nVisits);
         }
 
         // Search the nodes children
@@ -269,6 +322,20 @@ public class Visualisations
 
         // Return the node after searching its children
         return reNode;
+    }
+
+    //! This function will run until it has searched the whole tree (Depth first search of the tree search) - Breadth first search 2 overload
+    private void recursivelySearchTree(LinkedList<TreeNode> actionQueue)
+    {
+
+        for (TreeNode node : actionQueue)
+        {
+            if(node.currentState != null) {
+                searchPoints.add(node.currentState.getAvatarPosition());
+                nodesInTree++;
+                timesPointVisited.put(node.currentState.getAvatarPosition(), (int) node.visits);
+            }
+        }
     }
 
 

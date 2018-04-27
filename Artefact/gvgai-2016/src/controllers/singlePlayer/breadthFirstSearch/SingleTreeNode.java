@@ -96,7 +96,6 @@ public class SingleTreeNode
     // Expand the current node
     public SingleTreeNode expand()
     {
-
         int Action = 0;
         for (int i = 0; i < children.length; i++)
         {

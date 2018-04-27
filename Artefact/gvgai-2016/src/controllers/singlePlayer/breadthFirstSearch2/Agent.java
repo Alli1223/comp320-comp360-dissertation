@@ -32,6 +32,7 @@ public class Agent extends AbstractPlayer
     private Visualisations vis = new Visualisations();
     private DataCollection dataCollection = new DataCollection();
     public TreeNode rootNode;
+
     // Edit end
     private static int MIN_TIME = 2;
     private final long BREAK_FREE_MEMORY = 256 * 1024 * 1024L;	// Execute actions when this amount of memory left
@@ -43,7 +44,7 @@ public class Agent extends AbstractPlayer
     private static HashMap<Integer, Types.ACTIONS> LOOKUP_INT_ACTION;
     private static HashMap<Types.ACTIONS, Integer> LOOKUP_ACTION_INT;
 
-    private LinkedList<TreeNode> actionQueue;		// Node list
+    public LinkedList<TreeNode> actionQueue;		// Node list
     private HashSet<Long> exploredStates;
 
     private LinkedList<Integer> calculatedActions;	// Actions that will be executed
@@ -138,6 +139,7 @@ public class Agent extends AbstractPlayer
         }
 
         TreeNode node = actionQueue.getFirst();
+
 
         StateObservation state = node.getCurrentState();
         int actionId = node.getUnexploredAction();
@@ -525,6 +527,6 @@ public class Agent extends AbstractPlayer
     {
 
         //! Visualise the trees search space
-        vis.renderSearchSpace(g);
+        vis.renderSearchSpace(actionQueue, g);
     }
 }

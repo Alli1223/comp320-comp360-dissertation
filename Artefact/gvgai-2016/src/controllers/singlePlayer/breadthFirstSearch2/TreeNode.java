@@ -15,20 +15,25 @@ public class TreeNode {
 	public StateObservation currentState;
 	private LinkedList<Integer> actionHistory;
 	private LinkedList<Integer> unexploredActions;
+	public TreeNode[] children;
+	public int visits = 0;
 	
-	
-	public TreeNode(StateObservation stateObs, LinkedList<Integer> actionHistory, int numActions) {
+	public TreeNode(StateObservation stateObs, LinkedList<Integer> actionHistory, int numActions)
+	{
+		children = new TreeNode[numActions];
 		this.actionHistory = actionHistory;
 		currentState = stateObs;
 		unexploredActions = new LinkedList<Integer>();
 		
-		for(int i = 0; i < numActions; i++) {
+		for(int i = 0; i < numActions; i++)
+		{
 			unexploredActions.add(i);
 		}
 	}
 	
 	
 	public boolean check() {
+		visits++;
 		if(unexploredActions.size() == 0) {
 			return true;
 		}
