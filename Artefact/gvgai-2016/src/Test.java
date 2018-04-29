@@ -133,7 +133,7 @@ public class Test
 
         // Run the games
         // controllers to run
-        String[] levels = new String[5];
+        String[] levels = new String[1];
         for(int j = 0; j < allMCTSControllers.length; j++)
         {// games to run
             for (int i = 0; i < games.length; i++)
@@ -141,7 +141,7 @@ public class Test
                 game = gamesPath + games[i] + ".txt";
                 DataCollection.getInstance().ControllerName = allMCTSControllers[j];
                 DataCollection.getInstance().gameIteration = i;
-                for(int l = 0; l < 5; ++l)                                                 //Loop through the different levels
+                for(int l = 0; l < levels.length; ++l)                                                 //Loop through the different levels
                     levels[l] = gamesPath + games[i] + "_lvl" + l + ".txt";
 //
                 System.out.println("Running " + allMCTSControllers[j] +  " Controller: " + j + " of " + allMCTSControllers.length + ". and game: " + i + " of " + games.length + ". and " + M + " games per level");

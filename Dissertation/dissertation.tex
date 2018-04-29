@@ -574,6 +574,9 @@ Email: AR185160@falmouth.ac.uk\\}
 	When running the simulation of all the games in the framework, there were a few issues that arose, the main issue being that when running roughly 1.5M games, ($ 5000(simulations) \cdot 5 (levels) \cdot 20 (games) \cdot 3 (controllers) = 1,500,000$) the java executable would run out of memory.
 	To solve this a simulation launcher was developed where it would run a set amount of games concurrently, until they finished executing, then another one from the list of games would be added to the queue. This means that each java executable ran only 5000 games, compared to 1.5-2M. Moreover, the python launcher program is a lot more scalable in comparison.
 	Typically the total games to concurrently simulate is set to the core count of the processor.
+
+	%Use of cloud computing
+	
 	
 	One of the big limitations for any tree search agent within GVG-AI is it's locality limitation, which can be shown in image
 	
@@ -593,7 +596,7 @@ Email: AR185160@falmouth.ac.uk\\}
 
 %Temp Results
 
-A few competition winning controllers use a variation of tree search algorithms, i.e. Maast and number27  \cite{perez2018general, schuster2015mcts} both use breadth first search for deterministic games.
+A lot of competition winning controllers use a variation of tree search algorithms, i.e. Maast and number27  \cite{perez2018general, schuster2015mcts} both use breadth first search for deterministic games.
 	
 
 %%%%%%%%%%% Professional Considerations  & Acknowledgements %%%%%%%%%%%%%%%%%%%%%%%
