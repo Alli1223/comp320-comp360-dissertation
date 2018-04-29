@@ -1,11 +1,11 @@
-import os.path,subprocess
-from subprocess import STDOUT,PIPE
+import subprocess
 import threading
 import queue
 
 total_games_to_run = 1
-number_of_concurrent_games = 6
+number_of_concurrent_games = 4
 gameQueue = queue.Queue(number_of_concurrent_games)
+
 
 # A class to contain the game data for the thread
 class SimulationThread (threading.Thread):
@@ -27,26 +27,24 @@ class SimulationThread (threading.Thread):
         # Remove this item from the queue
         gameQueue.get(self)
 
+
 def main():
     # Arguments for java program are as follows:
     # 0: int(controller to run) 1: int(number of games) 2: int(game to run)
     totalControllers = 4
     totalGames = 20
 
+    # Loop through the controllers and games, and wait for there to be space in the queue
     for i in range(totalControllers):
         for j in range(totalGames):
             add_to_queue(i, j)
 
 
-    for thread in gameQueue:  # iterates over the threads
-            thread.join()  # waits until the thread has finished work
-
-
+# Adds a game thread to the queue
 def add_to_queue(controller, game):
         thread = SimulationThread(controller * game, "Game Thread " + str(controller) + "," + str(game), game, controller, total_games_to_run)
         gameQueue.put(thread)
         thread.start()
-
 
 
 # Execute the java program
@@ -57,5 +55,6 @@ def execute_java(java_file, simulation_count, numberOfControllers ):
     print (java_file + java_returned)
 
 
+# Main
 if __name__ == '__main__':
         main()

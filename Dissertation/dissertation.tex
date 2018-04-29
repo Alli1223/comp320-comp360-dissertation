@@ -505,12 +505,11 @@ Email: AR185160@falmouth.ac.uk\\}
 %%%%%%%%%%% Requirements analysis and specification %%%%%%%%%%%%%%%%%%%%%%%
 
 	\subsection{Tools Used}
-	For carrying out the research on the gvg-AI competition, IntelliJ IDEA 2017.3 was used. RStudio Version 1.1.419. The simulations were copiled and executed with java jdk 9, and simulated on ubuntu 16.04.
-	Pycharm 2018.1.2 was used to create the simulation launcher.
+	For carrying out the research on the gvg-AI competition, IntelliJ IDEA 2017.3 was used. RStudio Version 1.1.419. The simulations were compiled and executed with java jdk 9, and simulated on ubuntu 16.04.
+	Pycharm 2018.1.2 with python 3.6 was used to create the simulation launcher.
 	
 	%PC Specs for simulations
 	The computer used to carry out the simulations had Intel C2750 (8 Core @ 2.4GHz), 16GB RAM, 1TB HDD.
-	\todo[inline]{Add specs for studio PCs}
 
 	% Choosing what games to test the tree search algorithms on
 	\subsection{Choosing the Games}
@@ -551,7 +550,6 @@ Email: AR185160@falmouth.ac.uk\\}
 	% calcuating amount of tests to be run
 		Running G*Power with a Effect size of 0.05 and a type I error rate of 0.05, and type II error rate of 95\% the sample size required for each game is 4331.
 
-
 		\begin{figure}[h]
 		    \centering
 		    \includegraphics[width=0.5\textwidth]{Rplot(meansSD)}
@@ -559,7 +557,6 @@ Email: AR185160@falmouth.ac.uk\\}
 		    \label{fig:GPower}
 		\end{figure}
 		
-		From the selection of 20 games, when each game was simulated 5000 times, and each game has 5 levels, with the 3 different tree search algorithms being tested, each run of the competition ran roughly 500,000 games. 
 	
 	
 
@@ -575,12 +572,10 @@ Email: AR185160@falmouth.ac.uk\\}
 	
 	%Creation of the launcher
 	When running the simulation of all the games in the framework, there were a few issues that arose, the main issue being that when running roughly 1.5M games, ($ 5000(simulations) \cdot 5 (levels) \cdot 20 (games) \cdot 3 (controllers) = 1,500,000$) the java executable would run out of memory.
-	To solve this a simulation launcher was developed where it would run a set amoount of games concurrently, until they finished executing, then another one from the list of games would be added to the queue. This means that each java executable ran only 5000 games, compared to 1.5-2M. Moreover, the python launcher program is a lot more scalable in comparison.
+	To solve this a simulation launcher was developed where it would run a set amount of games concurrently, until they finished executing, then another one from the list of games would be added to the queue. This means that each java executable ran only 5000 games, compared to 1.5-2M. Moreover, the python launcher program is a lot more scalable in comparison.
+	Typically the total games to concurrently simulate is set to the core count of the processor.
 	
-
-	An example of this can be shown in image %% IMAGE HERE
-
-	One of the big limitations for any tree search agent within GVG-AI is it's locality limitation, which can be shown in 
+	One of the big limitations for any tree search agent within GVG-AI is it's locality limitation, which can be shown in image
 	
 	\subsection{Testing of tree search algorithms}
 	

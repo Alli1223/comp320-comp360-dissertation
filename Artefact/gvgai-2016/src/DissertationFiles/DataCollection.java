@@ -1,5 +1,4 @@
 package DissertationFiles;
-import core.game.Game;
 import core.game.Observation;
 import core.game.StateObservation;
 import ontology.Types;
@@ -59,7 +58,7 @@ public class DataCollection
     private int searchDepth;
 
     //! Save the final image
-    public Boolean renderGames = true;
+    public Boolean headless = true;
 
     public int getBlockSize()
     {
@@ -239,7 +238,7 @@ public class DataCollection
     //! Capture the screen
     private void CaptureScreen(StateObservation SO)
     {
-        if(renderGames)
+        if(!headless)
         {
             try
             {

@@ -96,8 +96,8 @@ public class Test
 
 
         // 2. This plays a game in a level by the controller.
-        DataCollection.getInstance().ControllerName = breadthFirstSearch2;
-        ArcadeMachine.runOneGame(game, level1, DataCollection.getInstance().renderGames, breadthFirstSearch2, recordActionsFile, seed, 0);
+        //DataCollection.getInstance().ControllerName = breadthFirstSearch2;
+        //ArcadeMachine.runOneGame(game, level1, DataCollection.getInstance().headless, breadthFirstSearch2, recordActionsFile, seed, 0);
 
         // 3. This replays a game from an action file previously recorded
         //String readActionsFile = "actions_pacman_lvl1_-1877682670.txt";
@@ -133,23 +133,23 @@ public class Test
 
         // Run the games
         // controllers to run
-        //String[] levels = new String[5];
-        //for(int j = 0; j < allMCTSControllers.length; j++)
-        //{// games to run
-        //    for (int i = 0; i < games.length; i++)
-        //    {
-        //        game = gamesPath + games[i] + ".txt";
-        //        DataCollection.getInstance().ControllerName = allMCTSControllers[j];
-        //        DataCollection.getInstance().gameIteration = i;
-        //        for(int l = 0; l < 5; ++l)                                                 //Loop through the different levels
-        //            levels[l] = gamesPath + games[i] + "_lvl" + l + ".txt";
+        String[] levels = new String[5];
+        for(int j = 0; j < allMCTSControllers.length; j++)
+        {// games to run
+            for (int i = 0; i < games.length; i++)
+            {
+                game = gamesPath + games[i] + ".txt";
+                DataCollection.getInstance().ControllerName = allMCTSControllers[j];
+                DataCollection.getInstance().gameIteration = i;
+                for(int l = 0; l < 5; ++l)                                                 //Loop through the different levels
+                    levels[l] = gamesPath + games[i] + "_lvl" + l + ".txt";
 //
-        //        System.out.println("Running " + allMCTSControllers[j] +  " Controller: " + j + " of " + allMCTSControllers.length + ". and game: " + i + " of " + games.length + ". and " + M + " games per level");
-        //        ArcadeMachine.runGames(game, levels, M, allMCTSControllers[j], null, DataCollection.getInstance().renderGames);
-        //        DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), allMCTSControllers[j] + "_" + gameID);
-        //    }
-        //    //DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), false);
-        //}
+                System.out.println("Running " + allMCTSControllers[j] +  " Controller: " + j + " of " + allMCTSControllers.length + ". and game: " + i + " of " + games.length + ". and " + M + " games per level");
+                ArcadeMachine.runGames(game, levels, M, allMCTSControllers[j], null, !DataCollection.getInstance().headless);
+                DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), allMCTSControllers[j] + "_" + gameID);
+            }
+            //DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), false);
+        }
 
         //// Save all game data
         DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), "AllControllersData");
