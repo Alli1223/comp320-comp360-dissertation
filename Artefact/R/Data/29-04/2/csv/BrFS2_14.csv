@@ -1,0 +1,5 @@
+﻿"|","|__TotalCellsVisisted","|__ControllerName","|__levelSize","|__GameSpaceSearched","|__GameScore","|__Win","|__EndGameTick"
+"GameData_0_2","143","controllers.singlePlayer.breadthFirstSearch2.Agent","333564","61.904761904761905","-29","0","2000"
+"GameData_0_3","158","controllers.singlePlayer.breadthFirstSearch2.Agent","333564","68.3982683982684","-28","0","2000"
+"GameData_0_0","70","controllers.singlePlayer.breadthFirstSearch2.Agent","333564","30.303030303030305","-35","0","2000"
+"GameData_0_1","106","controllers.singlePlayer.breadthFirstSearch2.Agent","333564","45.887445887445885","-35","0","2000"
