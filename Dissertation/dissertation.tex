@@ -509,7 +509,7 @@ Email: AR185160@falmouth.ac.uk\\}
 	Pycharm 2018.1.2 with python 3.6 was used to create the simulation launcher.
 	
 	%PC Specs for simulations
-	The computer used to carry out the simulations had Intel C2750 (8 Core @ 2.4GHz), 16GB RAM, 1TB HDD.
+	The computer used to carry out the simulations had Intel C2750 (16 Core @ 2.4GHz), 16GB RAM, 1TB HDD.
 
 	% Choosing what games to test the tree search algorithms on
 	\subsection{Choosing the Games}
@@ -554,7 +554,7 @@ Email: AR185160@falmouth.ac.uk\\}
 		    \centering
 		    \includegraphics[width=0.5\textwidth]{Rplot(meansSD)}
 		    \caption{ Means of all games }
-		    \label{fig:GPower}
+		    \label{fig:game0Means}
 		\end{figure}
 		
 	
@@ -566,7 +566,7 @@ Email: AR185160@falmouth.ac.uk\\}
 % DESIGN
 	\subsection{Design of data collection}
 	
-	%%Visualising the limitations of the search trees within the competition
+	%Visualising the limitations of the search trees within the competition
 	To gather the data about the different search trees, I implemented a class that would visualise the time an agent spent in each cell. 
 	This gathered insights into the movement patterns within the game, to help analyze if / where the agents got stuck in a level.
 	
@@ -576,11 +576,20 @@ Email: AR185160@falmouth.ac.uk\\}
 	Typically the total games to concurrently simulate is set to the core count of the processor.
 
 	%Use of cloud computing
+	Because this solution is a lot more salable, the results were gathered by using digital oceans \footnote{\url{https://cloud.digitalocean.com}} cloud computing services.
 	
-	
-	One of the big limitations for any tree search agent within GVG-AI is it's locality limitation, which can be shown in image
+	One of the big limitations for any tree search agent within GVG-AI is it's locality limitation, which can be shown in image \ref{game0Means}
+
+	\begin{figure}[h]
+		   \centering
+		   \includegraphics[width=0.5\textwidth]{BrFS-Locality}
+		   \caption{ Means of all games }
+		   \label{fig:game0Means}
+	\end{figure}
+
 	
 	\subsection{Testing of tree search algorithms}
+	
 	
 		
 		
@@ -597,7 +606,10 @@ Email: AR185160@falmouth.ac.uk\\}
 %Temp Results
 
 A lot of competition winning controllers use a variation of tree search algorithms, i.e. Maast and number27  \cite{perez2018general, schuster2015mcts} both use breadth first search for deterministic games.
-	
+
+
+\section{Possible Issues}
+
 
 %%%%%%%%%%% Professional Considerations  & Acknowledgements %%%%%%%%%%%%%%%%%%%%%%%
 

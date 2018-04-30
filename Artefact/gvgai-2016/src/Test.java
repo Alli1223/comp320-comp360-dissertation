@@ -84,7 +84,7 @@ public class Test
         //Game and level to play
 
         int gameIdx = 0;
-        int levelIdx = 1; //level names from 0 to 4 (game_lvlN.txt).
+        int levelIdx = 0; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
 
@@ -96,8 +96,8 @@ public class Test
 
 
         // 2. This plays a game in a level by the controller.
-        //DataCollection.getInstance().ControllerName = breadthFirstSearch2;
-        //ArcadeMachine.runOneGame(game, level1, DataCollection.getInstance().headless, breadthFirstSearch2, recordActionsFile, seed, 0);
+        DataCollection.getInstance().ControllerName = breadthFirstSearch;
+        ArcadeMachine.runOneGame(game, level1, !DataCollection.getInstance().headless, breadthFirstSearch, recordActionsFile, seed, 0);
 
         // 3. This replays a game from an action file previously recorded
         //String readActionsFile = "actions_pacman_lvl1_-1877682670.txt";
@@ -109,7 +109,7 @@ public class Test
 
         // 4. This plays a single game, in N levels, M times :  Use games.length for all games
         String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
-        int M = 5;
+        int M = 1;
         int gameID = 0; // Used for processing game from input argument
 
         // Process any arguments ( first = controller, second = number of games, second = what game to run(empty for all)
@@ -132,24 +132,27 @@ public class Test
         }
 
         // Run the games
+        // Levels to run
+        String[] levels = new String[5];
         // controllers to run
-        String[] levels = new String[1];
-        for(int j = 0; j < allMCTSControllers.length; j++)
-        {// games to run
-            for (int i = 0; i < games.length; i++)
-            {
-                game = gamesPath + games[i] + ".txt";
-                DataCollection.getInstance().ControllerName = allMCTSControllers[j];
-                DataCollection.getInstance().gameIteration = i;
-                for(int l = 0; l < levels.length; ++l)                                                 //Loop through the different levels
-                    levels[l] = gamesPath + games[i] + "_lvl" + l + ".txt";
+        //for(int j = 1; j < allMCTSControllers.length; j++)
+        //{// games to run
+        //    for (int i = 0; i < games.length; i++)
+        //    {
+        //        game = gamesPath + games[i] + ".txt";
+        //        // Set dataCollection singleton values
+        //        DataCollection.getInstance().ControllerName = allMCTSControllers[j];
+        //        DataCollection.getInstance().gameIteration = i;
 //
-                System.out.println("Running " + allMCTSControllers[j] +  " Controller: " + j + " of " + allMCTSControllers.length + ". and game: " + i + " of " + games.length + ". and " + M + " games per level");
-                ArcadeMachine.runGames(game, levels, M, allMCTSControllers[j], null, !DataCollection.getInstance().headless);
-                DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), allMCTSControllers[j] + "_" + gameID);
-            }
-            //DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), false);
-        }
+        //        //Loop through the different levels
+        //        for(int l = 0; l < levels.length; ++l)
+        //            levels[l] = gamesPath + games[i] + "_lvl" + l + ".txt";
+//
+        //        System.out.println("Running " + allMCTSControllers[j] +  " Controller: " + j + " of " + allMCTSControllers.length + ". and game: " + i + " of " + games.length + ". and " + M + " games per level");
+        //        ArcadeMachine.runGames(game, levels, M, allMCTSControllers[j], null, !DataCollection.getInstance().headless);
+        //        DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), allMCTSControllers[j] + "_" + gameID);
+        //    }
+        //}
 
         //// Save all game data
         DataCollection.getInstance().SaveDataToFile(DataCollection.getInstance().AllData.toString(), "AllControllersData");

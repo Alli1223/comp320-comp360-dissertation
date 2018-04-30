@@ -417,9 +417,7 @@ public class BFS
         }
 
     }
-    public void GetPath(Types.ACTIONS act)
-    {
-        path.add(act);
-    }
+
+
 
 }

@@ -120,10 +120,29 @@ public class SingleTreeNode
         SingleTreeNode selected = null;
         for (SingleTreeNode child : this.children)
         {
-            if(child.notFullyExpanded()) {
+            if(child.notFullyExpanded())
+            {
                 selected = child;
                 break;
             }
+            /*
+            else
+            {
+                if(this.parent != null)
+                    if(this.parent.children.length > 0)
+                    {
+                        for(int i = 0; i < this.parent.children.length; i++)
+                        {
+                            if(this.parent.children[i].notFullyExpanded())
+                            {
+                                selected = this.parent.children[i];
+                                break;
+                            }
+                        }
+
+                    }
+
+            }*/
         }
 
         return selected;

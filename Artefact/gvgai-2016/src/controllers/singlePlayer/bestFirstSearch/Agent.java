@@ -23,7 +23,6 @@ public class Agent extends AbstractPlayer {
     private Visualisations vis = new Visualisations();
     private DataCollection dataCollection = new DataCollection();
     private static int MIN_TIME = 2;
-    private LinkedList<TreeNode> actionQueue;		// Node list
     private HashSet<Long> exploredStates;
     BFS bestSearch = null;
 

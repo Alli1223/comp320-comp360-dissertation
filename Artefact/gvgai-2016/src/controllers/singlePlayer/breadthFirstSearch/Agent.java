@@ -19,7 +19,7 @@ import java.util.Random;
 /**
  * Created with IntelliJ IDEA.
  * User: Alastair
- * Date: 04/05/18
+ * Date: 04/04/18
  * Time: 22:45
  * This is a Java port from Tom Schaul's VGDL - https://github.com/schaul/py-vgdl
  */
