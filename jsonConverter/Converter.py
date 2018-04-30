@@ -9,19 +9,24 @@ if sys.argv[1] is not None and sys.argv[2] is not None:
     inputFile.close() # close the input file
     output = csv.writer(outputFile) # create a csv.write
 
-    totalGames = 4
-    for i in range(totalGames):
-        if(data["GameData_0_" + str(i)] != None):
-            game = data["GameData_0_" + str(i)]
-            controllerName = data["GameData_0_" + str(i)]["ControllerName"]
+    games = data.keys()
+    output.writerow(data["GameData_0_0"])  # header row
 
-            output.writerow(str(controllerName))
-
-
-    test = data["GameData_0_0"]
-    test2 = data["GameData_0_2"]["ControllerName"]
-    output.writerow(test.keys())  # header row
-    for row in data:
-        output.writerow(str(row)) # values rows())
-        data[row]
-
+    for i in range(len(games)): # Loop through the games
+        gameData = []
+        game = data["GameData_0_" + str(i)]
+        TotalCellsVisisted = data["GameData_0_" + str(i)]["TotalCellsVisisted"]
+        controllerName = data["GameData_0_" + str(i)]["ControllerName"]
+        levelSize = data["GameData_0_" + str(i)]["levelSize"]
+        GameSpaceSearched = data["GameData_0_" + str(i)]["GameSpaceSearched"]
+        GameScore = data["GameData_0_" + str(i)]["GameScore"]
+        Win = data["GameData_0_" + str(i)]["Win"]
+        EndGameTick = data["GameData_0_" + str(i)]["EndGameTick"]
+        gameData.append(controllerName)
+        gameData.append(TotalCellsVisisted)
+        gameData.append(levelSize)
+        gameData.append(GameSpaceSearched)
+        gameData.append(GameScore)
+        gameData.append(Win)
+        gameData.append(EndGameTick)
+        output.writerow(gameData)
