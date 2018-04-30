@@ -1,5 +1,5 @@
 package controllers.singlePlayer.bestFirstSearch;
-
+//! Copied and modified this algorithm from the competition winning controller ICELab
 import core.game.StateObservation;
 import ontology.Types;
 import tools.ElapsedCpuTimer;

@@ -552,8 +552,8 @@ Email: AR185160@falmouth.ac.uk\\}
 
 		\begin{figure}[h]
 		    \centering
-		    \includegraphics[width=0.5\textwidth]{Rplot(meansSD)}
-		    \caption{ Means of all games }
+		    \includegraphics[width=0.5\textwidth]{treeSearchComparison_0}
+		    \caption{ The score of all tree search controllers on the first game of the competition }
 		    \label{fig:game0Means}
 		\end{figure}
 		
@@ -564,7 +564,7 @@ Email: AR185160@falmouth.ac.uk\\}
 
 
 % DESIGN
-	\subsection{Design of data collection}
+	\subsection{Design of Data Collection}
 	
 	%Visualising the limitations of the search trees within the competition
 	To gather the data about the different search trees, I implemented a class that would visualise the time an agent spent in each cell. 
@@ -578,25 +578,32 @@ Email: AR185160@falmouth.ac.uk\\}
 	%Use of cloud computing
 	Because this solution is a lot more salable, the results were gathered by using digital oceans \footnote{\url{https://cloud.digitalocean.com}} cloud computing services.
 	
-	One of the big limitations for any tree search agent within GVG-AI is it's locality limitation, which can be shown in image \ref{game0Means}
+	One of the big limitations for any tree search agent within GVG-AI is it's locality limitation, which can be shown in image \ref{fig:locality}
 
 	\begin{figure}[h]
 		   \centering
 		   \includegraphics[width=0.5\textwidth]{BrFS-Locality}
-		   \caption{ Means of all games }
-		   \label{fig:game0Means}
+		   \caption{ Tree search locality }
+		   \label{fig:locality}
 	\end{figure}
 
 	
-	\subsection{Testing of tree search algorithms}
+	\subsection{Implementation of tree search algorithms}
+	%Breadth first
+	There are two implementations of the breadth first search algorithm in this paper, one which was modified from the \textit{number27} controller, and  a basic one I wrote. The one that was modified from number27's controller is one that expands the game tree search over several game ticks, where as the one I wrote creates a new tree search every tick of the game.
+	%MCTS
+	The MCTS controller implementations are provided by the competition, as described in section \ref{sssec:sampleMCTS}.
+	%Best First
+	The best first search algorithm was extracted and modified from the 2016 ICELab controller.
+
+	These algorithms will record various stats about the game they will play, such as; \textit{score, level size, percentage of level explored, total cells visited and end game tick}.
 	
 	
-		
 		
 % IMPLEMENTATION
  % Used the Incremental Model for the development of the software artefacet
 	\subsection{Chosen Development Life Cycle}
-		The software artifact for this project was developed using the Incremental build model, as each feature implemented to the software was tested using travis CI.
+		The software artifact for this project was developed using the Incremental build model.
 
 
 %%%%%%%%%%% Method of evaluation the research artifact (Unit Testing) and results %%%%%%%%%%%%%%%%%%%%%%%
@@ -616,6 +623,7 @@ A lot of competition winning controllers use a variation of tree search algorith
 \section{Future Work}
 
 The experiments in this paper only used 20 of the games in the competition, not just 82 games currently in the competition, so comparing all the games in the competition may lead to a better understanding. % Finish
+There are also quite a few other tree searching algorithms that are not evaluated in this paper.
 
 
 
