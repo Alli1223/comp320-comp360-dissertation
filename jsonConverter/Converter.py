@@ -9,10 +9,16 @@ if sys.argv[1] is not None and sys.argv[2] is not None:
     inputFile.close() # close the input file
     output = csv.writer(outputFile) # create a csv.write
 
-    games = data.keys()
-    output.writerow(data["GameData_0_0"])  # header row
+    # Get the total games
+    total_games = data.keys()
+    header = dict()
+    header.update({"game": "0"})
+    header.update(data["GameData_0_0"])
 
-    for i in range(len(games)): # Loop through the games
+    output.writerow(header)  # header row
+
+    # Loop through the games
+    for i in range(len(total_games)):
         gameData = []
         game = data["GameData_0_" + str(i)]
         TotalCellsVisisted = data["GameData_0_" + str(i)]["TotalCellsVisisted"]
@@ -22,8 +28,9 @@ if sys.argv[1] is not None and sys.argv[2] is not None:
         GameScore = data["GameData_0_" + str(i)]["GameScore"]
         Win = data["GameData_0_" + str(i)]["Win"]
         EndGameTick = data["GameData_0_" + str(i)]["EndGameTick"]
-        gameData.append(controllerName)
+        gameData.append(i)
         gameData.append(TotalCellsVisisted)
+        gameData.append(controllerName)
         gameData.append(levelSize)
         gameData.append(GameSpaceSearched)
         gameData.append(GameScore)
