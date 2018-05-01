@@ -1,0 +1,7 @@
+Compare winrate, rather than game score!
+
+Use visualisations as an aid to show why one search tree algorithm is better than another
+
+Hypothesis: MCTS has a higher win rate compared to breadth first and best first on smaller stohastic games
+
+use a low effect size because i am able to run thousands of simulations

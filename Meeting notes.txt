@@ -1,6 +1,6 @@
 Dissertation:
 	Include code snippets?
-	Explain what I did for the artefact?
-
+	Explain  in detail what I did for the artefact?
+	What I need to do for a better grade
 Artefact:
 	
