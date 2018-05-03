@@ -108,7 +108,6 @@ public class Test
 
 
         // 4. This plays a single game, in N levels, M times :  Use games.length for all games
-        String level2 = gamesPath + games[gameIdx] + "_lvl" + 1 +".txt";
         int M = 1;
         int gameID = 0; // Used for processing game from input argument
 
@@ -135,7 +134,7 @@ public class Test
         // Levels to run
         String[] levels = new String[5];
         // controllers to run
-        for(int j = 1; j < allMCTSControllers.length; j++)
+        for(int j = 0; j < allMCTSControllers.length; j++)
         {// games to run
             for (int i = 0; i < games.length; i++)
             {

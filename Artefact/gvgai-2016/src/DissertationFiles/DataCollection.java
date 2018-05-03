@@ -58,7 +58,7 @@ public class DataCollection
     private int searchDepth;
 
     //! Save the final image
-    public Boolean headless = false;
+    public Boolean headless = true;
 
     public int getBlockSize()
     {
