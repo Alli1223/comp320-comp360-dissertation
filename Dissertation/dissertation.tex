@@ -97,7 +97,7 @@ Email: AR185160@falmouth.ac.uk\\}
 
 \section{Introduction}
 	\IEEEPARstart{T}{his} paper compares tree search techniques used within the General Video Game Artificial Intelligence (GVG-AI) competition.  
-	Games play an important role in the development and bench-marking of Artificial Intelligence (AI). This literature review will cover the existing work around the GVG-AI competition and the different solutions that are available.
+	Games play an important role in the development and bench-marking of Artificial Intelligence (AI). This paper will cover the existing work around the GVG-AI competition and compare tree search algorithms that are being used in the competition.
 	The GVG-AI competition is a recurring video game playing competition designed to simulate and benchmark general artificial intelligence. For an AI agent to be tested, they are submitted to the competition site, then they are tested against previously unseen arcade-style video games like the ones shown in figure \ref{fig:VGDL}. The games that the agents are tested against change every year to stop them from becoming too domain specific.
 
 	There is a large amount of tree search techniques used within the GVG-AI competition, many of them are based around Monte Carlo Tree Search (MCTS). This project will compare the success rates of each of the different methods, as well as an in depth comparison as to where each tree search technique succeeds in a set of existing games.
@@ -291,8 +291,6 @@ In the competition all the games are either deterministic or stochastic,
 			\end{figure}
 			
 			% Stages of Evilutionary algorithms
-			
-			
 			A Typical genetic algorithm is composed of several stages;
 			First the algorithm creates a population of random individuals, then it will iteratively go though the sample and calculate the fitness (i.e. the evaluation function as described in \ref{sssec:Common}) of every individual in the population. 
 			The most fit individuals are then used to form a new generation, and each individual is modified with a combination of crossover and mutation. 
@@ -310,14 +308,21 @@ In the competition all the games are either deterministic or stochastic,
 
 				Minimax attempts to minimize the opponent's maximum reward at each state. The tree search is often stopped prematurely and a value function is used to estimate the outcome of the game, then the Alpha-Beta heuristic is used to prune the search tree \cite{browne2012survey, knuth1975analysis}.
 			
+
+
 		\subsubsection{Depth First Search}
 				Depth First Search (DFS) is a tree search algorithm that iteratively expands each unvisited child node of the tree until a non-expandable node is reached. The search then navigates back up the tree until it finds the next unvisited node to expand and continues the search until all the nodes have been visited \cite{perez2014solving}.
-				Depth first search with alpha-beta pruning \cite{knuth1975analysis} has achieved superhuman performance in chess, checkers and orthello. However it has not been effective in the game Go \cite{silver2016mastering}.
+				Depth first search with alpha-beta pruning \cite{knuth1975analysis} has achieved superhuman performance in chess, checkers and orthello, however it has not been effective in the game Go \cite{silver2016mastering}.
 			
 		
 		
-		\subsubsection{Breadth First Search (BFS) }\label{sssec:BFS}
-			This paper proposes an efficient implementation of BFS for GVGP \cite{EfficientBFS} which uses a hash function.
+		\subsubsection{Breadth First Search} \label{sssec:BrFS}
+			Breadth First Search (BrFS) searches the tree one level at a time, it starts at the root node and searches neighbouring nodes first, before searching their child nodes. Within the gvg-ai competition, there have been several variations of this, one of them which uses a hash function to
+improve the performance of the algorithm \cite{EfficientBFS}, which is similar to the BrFS Extended controller used in this paper.
+
+	\subsubsection{Best First Search}\label{sssec:BeFS}
+			Best First Search (BeFS) explores a tree by selecting the most promising node and expanding it until a specified limit is reached, or a solution is found.
+			Breadth First Search is used by YOLOBOT, which was developed by T. Joppen et al. \cite{joppen2017informed} and arguably the most successful controller in the competition as of writing this paper, their approach uses Best First Search for deterministic games and MCTS for stochastic games \cite{perez2018general}.
 
 	\subsection{Hyper-Heuristics}
 		A hyper-heuristic approach typically combines several AI methods and automate them to be able to choose the best solution for that situation, a term used to describe them is `\textit{heuristics to choose heuristics}' \cite{burke2013hyper, burke2010classification}.
@@ -482,9 +487,9 @@ A lot of competition winning controllers use a variation of tree search algorith
 \todo[inline]{Refactor hypothesis}
 
 	\textbf{Hypothesis One:}
-		MCTS has a higher win rate compared to BrFS and BeFS on larger deterministic games
+		MCTS has a higher win rate compared to BrFS and BeFS on large deterministic games
 	\textbf{Null Hypothesis:}
-		MCTS has a lower win rate compared to BrFS and BeFS on larger deterministic games
+		MCTS has a higher win rate compared to BrFS and BeFS on small stochastic games
 
 	\textbf{Hypothesis One:}
 		MCTS has a higher win rate compared to BrFS and BeFS on larger stochastic games
@@ -492,7 +497,7 @@ A lot of competition winning controllers use a variation of tree search algorith
 		MCTS has a lower win rate compared to BrFS and BeFS on larger stochastic games
 
 	\textbf{Hypothesis Two:}
-		MCTS has a higher win rate compared to BrFS and BeFS on smaller maps
+		MCTS has a higher win rate compared to BrFS and BeFS on smaller maps	
 	\textbf{Null Hypothesis:}
 		MCTS has a lower win rate compared to BrFS and BeFS on smaller maps
 
@@ -538,7 +543,7 @@ A lot of competition winning controllers use a variation of tree search algorith
 	Pycharm 2018.1.2 with python 3.6 was used to create the simulation launcher.
 	
 	%PC Specs for simulations
-	The computer used to carry out the simulations had Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz - 128GB RAM, 1.1TB SSD.
+	The computer used to carry out the simulations had Intel(R) Xeon(R) CPU E5-2650 24core @ 2.20GHz - 128GB RAM, 1.1TB SSD.
 
 
 
@@ -580,13 +585,14 @@ A lot of competition winning controllers use a variation of tree search algorith
 	\subsection{Choosing the Tree Search Algorithms}
 	In this paper, a total of 6 tree search algorithms were chosen to compare.
 	
-	\subsubsection{Best First Search}
-
-	\subsubsection{Breadth First Search}
+	\textbf{Best First Search}
+	This algorithm chosen because it is used in one of the best controllers submitted to this competition, as mentioned in section \ref{sssec:BeFS}.
 
 	\textbf{Breadth First Search}
+This tree search method was used because it is one of the most basic tree search algorithms, as it ecentially brute-force searches the tree, and can be used as a benchmark for the other tree searching algorithms. In this paper, breadth first search starts a new tree search from 
 
 	\textbf{Breadth First Search Extended}
+	
 
 	\subsubsection{MCTS}
 
@@ -595,6 +601,10 @@ A lot of competition winning controllers use a variation of tree search algorith
 	\textbf{Sample Flat MCTS}
 
 	\textbf{Sample Open Loop MCTS}
+
+
+
+
 
 	% calcuating amount of tests to be run
 		Running G*Power with a Effect size of 0.05 and a type I error rate of 0.05, and type II error rate of 95\% the sample size required for each game is 4331.
@@ -613,28 +623,21 @@ A lot of competition winning controllers use a variation of tree search algorith
 	Typically the total games to concurrently simulate is set to the core count of the processor.
 
 	%Use of cloud computing
-	Because this solution is a lot more salable, the results were gathered by using digital oceans \footnote{\url{https://cloud.digitalocean.com}} cloud computing services.
+	Because this solution is a lot more salable, the results were gathered using a cloud computing solution which allowed many simulations to run in parallel, for long periods without any interference.
 	
-	One of the big limitations for any tree search agent within GVG-AI is it's locality limitation, which can be shown in image \ref{fig:locality}.
-
-	\begin{figure}[h]
-		   \centering
-		   \includegraphics[width=0.5\textwidth]{BrFS-Locality}
-		   \caption{ Tree search locality represented in by green cells }
-		   \label{fig:locality}
-	\end{figure}
 
 	% Development of json-csv converter
 	As the data collection class outputs a json file, which was intended to be used for nested data structures, however only ended up only outputting flat json, thus a simple json to csv converter was developed in python to be used for importing large datasets into R. This specific converter can be located in the Github directory for this project \footnote{\url{https://github.com/Alli1223/comp320-comp360-dissertation}}.
 
 	%Visualising the limitations of the search trees within the competition
 	To gather the data about the different search trees, I implemented a class that would visualise the time an agent spent in each cell. 
-	This gathered insights into the movement patterns within the game, to help analyze if / where the agents got stuck in a level.
+	This gathered insights into the movement patterns within the game, to help analyze if / where the agents got stuck in a level. An example of this can be shown in figure \ref{fig:locality}
 
 	
-	\subsection{Implementation of tree search algorithms}
+	\subsection{Implementation of tree search algorithms} \label{TSImplementation}
 	%Breadth first
-	There are two implementations of the breadth first search algorithm in this paper, one which was modified from the \textit{number27} controller, and  a basic one I wrote. The one that was modified from number27's controller is one that expands the game tree search over several game ticks, where as the one I wrote creates a new tree search every tick of the game.
+	There are two implementations of the breadth first search algorithm in this paper, one which was modified from the \textit{number27} controller, and  a basic one I wrote. The one that was modified from number27's controller is one that expands the game tree search over several game ticks and is named Breadth First Search Extended (BrFSE) in this paper, where as the one I wrote creates a new tree search every tick of the game and is named Breadth First Search (BrFS).
+	
 	%MCTS
 	The MCTS controller implementations are provided by the competition, as described in section \ref{sssec:sampleMCTS}.
 	%Best First
@@ -649,14 +652,19 @@ A lot of competition winning controllers use a variation of tree search algorith
 % IMPLEMENTATION
  % Used the Incremental Model for the development of the software artefacet
 	\subsection{Chosen Development Life Cycle}
-		The software artifact for this project was developed using the agile approach to software developement \cite{beck2001manifesto, cockburn2001agile, dybaa2008empirical}, this is a method of software development where the software is developed incrementally, in small iterations.
+		The software artifact for this project was developed using the agile approach to software development \cite{beck2001manifesto, cockburn2001agile, dybaa2008empirical}, this is a method of software development where the software is developed and tested incrementally, in small iterations.
 
 
 
 
 
-
-
+	% visualisation of tree search
+	\begin{figure}[h]
+		   \centering
+		   \includegraphics[width=0.5\textwidth]{BrFS-Locality}
+		   \caption{ Tree search locality represented in by green cells }
+		   \label{fig:locality}
+	\end{figure}
 
 
 
@@ -664,7 +672,6 @@ A lot of competition winning controllers use a variation of tree search algorith
 %%%%%%%%%%% Method of evaluation the research artifact (Unit Testing) and results %%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Results}
-
 		\begin{figure}[h]
 		    \centering
 		    \includegraphics[width=0.5\textwidth]{allGameBarPlot}
@@ -677,19 +684,20 @@ A lot of competition winning controllers use a variation of tree search algorith
 
 
 	%Analysis of image
-		Figure \ref{allGameBarPlot} shows the win percentage of all the games being tested, this shows that all the different tree search techniques generally stuggle with similar games, of which are both deterministic and stochastic games.
-In this graph, only the first level of each game was tested.
+		Figure \ref{fig:allGameBarPlot} shows the win percentage of all the games being tested, this shows that all the different tree search techniques generally struggle with similar games, of which are both deterministic and stochastic games.
+In figure \ref{fig:allGameBarPlot}, only the first level of each game was tested.
 
-	One notable finding is how well the random controller did in both infection and modality games, with a > 50 \% winrate on those games. This may suggest that those games may be not too challenging compared to the other games selected.
+	One notable finding is how well the random controller did in both infection and modality games, with a $>$ 50\% winrate on those games. This may suggest that those games may be not too challenging compared to the other games selected.
 
 
 
-	All the graphs were compiled using R, figure \ref{croppedR1} shows how the large data sets were loaded into R.
+	All the graphs were compiled using R, figure \ref{fig:croppedR1} shows how the large data sets were loaded into R. As this is a large image, the full size image can be viewed in the git repository for this project \footnote{\url{https://github.com/Alli1223/comp320-comp360-dissertation/blob/Development/Dissertation/images/allGameBarPlot.png}}.
+
 	% R code
 	\begin{figure}[h]
 		    \centering
 		    \includegraphics[width=0.5\textwidth]{croppedR1}
-		    \caption{ R for loading games }
+		    \caption{ R code snippet used for loading large game data sets }
 		    \label{fig:croppedR1}
 		\end{figure}
 
@@ -705,7 +713,6 @@ In this graph, only the first level of each game was tested.
 
 
 \section{Possible Issues}
-TODO
 
 
 
@@ -740,7 +747,6 @@ There are also quite a few other tree searching algorithms that are not evaluate
 			\todo[inline]{TODO}
 
 		\section{Reflective report}
-	
 		\subsection{Issues with collecting the data}
 			One of the big issues I faced when I initially started collecting the data was being able to run many games at one time, and as each game takes on average about 1-2minutes to complete, when there are roughly 600,000 games to simulate, if I was to run one game at a time, it would have taken about 1.14 years (416 days) to gather all my data. This is why the creation of the simulation launcher help so much, the only issue was that it was only created 2 weeks before the deadline, so I ended up having to spin up 4 large servers, that had a total of 56 processing cores and 224GB of RAM, which was able to parallelise the data gathered. This means that the data only took about a week to gather, however this still meant that I needed to analyse the data and write it up in only a few days. In hindsight, I should have created the simulation launcher months ago.
 
