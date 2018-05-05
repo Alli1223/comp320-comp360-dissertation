@@ -53,6 +53,7 @@
 \usepackage{wrapfig}
 \usepackage{todonotes}
 \usepackage{hyperref}
+\usepackage{incgraph,tikz}
 \graphicspath{ {./images/} }
 
 
@@ -485,6 +486,11 @@ A lot of competition winning controllers use a variation of tree search algorith
 	\textbf{Null Hypothesis:}
 		MCTS has a lower win rate compared to BrFS and BeFS on larger deterministic games
 
+	\textbf{Hypothesis One:}
+		MCTS has a higher win rate compared to BrFS and BeFS on larger stochastic games
+	\textbf{Null Hypothesis:}
+		MCTS has a lower win rate compared to BrFS and BeFS on larger stochastic games
+
 	\textbf{Hypothesis Two:}
 		MCTS has a higher win rate compared to BrFS and BeFS on smaller maps
 	\textbf{Null Hypothesis:}
@@ -571,6 +577,24 @@ A lot of competition winning controllers use a variation of tree search algorith
 	\label{GamesTable}
 	\end{table}
 
+	\subsection{Choosing the Tree Search Algorithms}
+	In this paper, a total of 6 tree search algorithms were chosen to compare.
+	
+	\subsubsection{Best First Search}
+
+	\subsubsection{Breadth First Search}
+
+	\textbf{Breadth First Search}
+
+	\textbf{Breadth First Search Extended}
+
+	\subsubsection{MCTS}
+
+	\textbf{Sample MCTS}
+
+	\textbf{Sample Flat MCTS}
+
+	\textbf{Sample Open Loop MCTS}
 
 	% calcuating amount of tests to be run
 		Running G*Power with a Effect size of 0.05 and a type I error rate of 0.05, and type II error rate of 95\% the sample size required for each game is 4331.
@@ -621,12 +645,14 @@ A lot of competition winning controllers use a variation of tree search algorith
 	
 
 
-
 		
 % IMPLEMENTATION
  % Used the Incremental Model for the development of the software artefacet
 	\subsection{Chosen Development Life Cycle}
-		The software artifact for this project was developed using the agile aproach to software developement \cite{beck2001manifesto, cockburn2001agile, dybaa2008empirical}, this is a method of software development where the software is developed incrementally, in small iterations.
+		The software artifact for this project was developed using the agile approach to software developement \cite{beck2001manifesto, cockburn2001agile, dybaa2008empirical}, this is a method of software development where the software is developed incrementally, in small iterations.
+
+
+
 
 
 
@@ -642,26 +668,36 @@ A lot of competition winning controllers use a variation of tree search algorith
 		\begin{figure}[h]
 		    \centering
 		    \includegraphics[width=0.5\textwidth]{allGameBarPlot}
+			%\incgraph[overlay={\node[red] at (page.center) {\Huge Picture sized to paper};}][width=\paperwidth,height=\paperheight {allGameBarPlot}
+	%\makebox[\linewidth*2]{ \includegraphics[width=2\linewidth]{allGameBarPlot}}
 		    \caption{ The win rate of all tree search controllers on the chosen 20 games of the competition}
 		    \label{fig:allGameBarPlot}
 		\end{figure}
+
+
 
 	%Analysis of image
 		Figure \ref{allGameBarPlot} shows the win percentage of all the games being tested, this shows that all the different tree search techniques generally stuggle with similar games, of which are both deterministic and stochastic games.
 In this graph, only the first level of each game was tested.
 
-	One notable finding is how well the random controller did in both infection and modality games, with a > 50 \% winrate on those games. This may show that those games may be not too challenging for the controllers.
+	One notable finding is how well the random controller did in both infection and modality games, with a > 50 \% winrate on those games. This may suggest that those games may be not too challenging compared to the other games selected.
 
 
 
-	All the graphs were compiled using R, 
+	All the graphs were compiled using R, figure \ref{croppedR1} shows how the large data sets were loaded into R.
 	% R code
 	\begin{figure}[h]
 		    \centering
 		    \includegraphics[width=0.5\textwidth]{croppedR1}
-		    \caption{ R for loading games}
+		    \caption{ R for loading games }
 		    \label{fig:croppedR1}
 		\end{figure}
+
+
+
+
+
+
 
 
 
@@ -672,13 +708,18 @@ In this graph, only the first level of each game was tested.
 TODO
 
 
+
+
+
+
+
+
 %%%%%%%%%%% Professional Considerations  & Acknowledgements %%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Future Work}
 
-The experiments in this paper only used 20 of the games in the competition, not just 82 games currently in the competition, so comparing all the games in the competition may lead to a better understanding. % Finish
-There are also quite a few other tree searching algorithms that are not evaluated in this paper.
-
+The experiments in this paper only used 20 of the games in the competition, when there are currently 82 games in the competition, so comparing all the games in the competition may lead to more interesting results.
+There are also quite a few other tree searching algorithms that are not evaluated in this paper, as this paper only analysed 4-5 when there are a lot of other algorithms that have not been looked at due to the project scope.
 
 
 
@@ -692,6 +733,19 @@ There are also quite a few other tree searching algorithms that are not evaluate
 	 
 
 
+
+	% Apendicies
+	\appendices
+		\section{Acknowledgements}
+			\todo[inline]{TODO}
+
+		\section{Reflective report}
+	
+		\subsection{Issues with collecting the data}
+			One of the big issues I faced when I initially started collecting the data was being able to run many games at one time, and as each game takes on average about 1-2minutes to complete, when there are roughly 600,000 games to simulate, if I was to run one game at a time, it would have taken about 1.14 years (416 days) to gather all my data. This is why the creation of the simulation launcher help so much, the only issue was that it was only created 2 weeks before the deadline, so I ended up having to spin up 4 large servers, that had a total of 56 processing cores and 224GB of RAM, which was able to parallelise the data gathered. This means that the data only took about a week to gather, however this still meant that I needed to analyse the data and write it up in only a few days. In hindsight, I should have created the simulation launcher months ago.
+
+		\subsection{Not having a defined hypothesis before collecting the data}
+			When I started collecting the data about the different tree searching algorithms I did not have a defined objective that I wanted to prove, this meant that at the start of the development of the artifact I spent a while working on some visualisation stuff that were not relevant to proving my hypotheses.
 
 
 % references section
