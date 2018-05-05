@@ -399,7 +399,9 @@ In the competition all the games are either deterministic or stochastic,
 
 %The forward model
 The game uses the forward model, which allows the game to copy the current state of the game and advance it by executing a specified action.
-		
+
+		%Temp Results
+A lot of competition winning controllers use a variation of tree search algorithms, i.e. Maast and number27  \cite{schuster2015mcts} both use breadth first search for deterministic games, this is due to the game states not changing during the game so extended tree searches work well \cite{perez2018general}.
 		
 		The framework has an StateObservation object that has an interaction set that consists of \textit{up, down, left, right, nil, escape} and \textit{use}.
 
@@ -440,7 +442,6 @@ The game uses the forward model, which allows the game to copy the current state
 	The simulations were ran on the 2016 variation of the competition framework, which can be downloaded from the official GitHub repository \footnote{ \url{https://github.com/EssexUniversityMCTS/gvgai}}.
 	
 	The framework was modified to be able to collect the data from the different tree search controllers.
-	
 	
 	
 	%Hypothesis
@@ -574,21 +575,11 @@ The game uses the forward model, which allows the game to copy the current state
 	% calcuating amount of tests to be run
 		Running G*Power with a Effect size of 0.05 and a type I error rate of 0.05, and type II error rate of 95\% the sample size required for each game is 4331.
 
-		\begin{figure}[h]
-		    \centering
-		    \includegraphics[width=0.5\textwidth]{allGameBarPlot}
-		    \caption{ The win rate of all tree search controllers on the chosen 20 games of the competition}
-		    \label{fig:allGameBarPlot}
-		\end{figure}
 
-	%Analysis of image
-		In  figure \ref{allGameBarPlot} shows the win percentage of all the games being tested, 
 	
 	
 
 %%%%%%%%%%% Design  and Implementation of research artifact %%%%%%%%%%%%%%%%%%%%%%%
-
-
 % DESIGN
 	\subsection{Design of Data Collection}
 	
@@ -628,6 +619,9 @@ The game uses the forward model, which allows the game to copy the current state
 	These algorithms will record various stats about the game they will play, such as; \textit{score, level size, percentage of level explored, total cells visited} and \textit{end game tick}.
 	
 	
+
+
+
 		
 % IMPLEMENTATION
  % Used the Incremental Model for the development of the software artefacet
@@ -635,12 +629,43 @@ The game uses the forward model, which allows the game to copy the current state
 		The software artifact for this project was developed using the agile aproach to software developement \cite{beck2001manifesto, cockburn2001agile, dybaa2008empirical}, this is a method of software development where the software is developed incrementally, in small iterations.
 
 
+
+
+
+
+
+
 %%%%%%%%%%% Method of evaluation the research artifact (Unit Testing) and results %%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Results}
 
-%Temp Results
-A lot of competition winning controllers use a variation of tree search algorithms, i.e. Maast and number27  \cite{perez2018general, schuster2015mcts} both use breadth first search for deterministic games.
+		\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{allGameBarPlot}
+		    \caption{ The win rate of all tree search controllers on the chosen 20 games of the competition}
+		    \label{fig:allGameBarPlot}
+		\end{figure}
+
+	%Analysis of image
+		Figure \ref{allGameBarPlot} shows the win percentage of all the games being tested, this shows that all the different tree search techniques generally stuggle with similar games, of which are both deterministic and stochastic games.
+In this graph, only the first level of each game was tested.
+
+	One notable finding is how well the random controller did in both infection and modality games, with a > 50 \% winrate on those games. This may show that those games may be not too challenging for the controllers.
+
+
+
+	All the graphs were compiled using R, 
+	% R code
+	\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{croppedR1}
+		    \caption{ R for loading games}
+		    \label{fig:croppedR1}
+		\end{figure}
+
+
+
+
 
 
 \section{Possible Issues}
