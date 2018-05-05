@@ -185,7 +185,7 @@ In the competition all the games are either deterministic or stochastic,
 		In stochastic games there is some inherent randomness, meaning any values found by a  tree search using the forward model (as explained in section \ref{Framework}, may change in following ticks of the game. So an agent that executes exactly the same actions each game will lead to different outcomes.
 
 	\textbf{Deterministic}
-		
+		In deterministic games each action is predictable, and any object found using the forward model will not change in forthcoming game ticks. 
 		
 		\subsubsection{Monte Carlo Tree Search (MCTS) }\label{sssec:MCTS}
 
@@ -437,7 +437,7 @@ The game uses the forward model, which allows the game to copy the current state
 %%%%%%%%%%% Research Methodology %%%%%%%%%%%%%%%%%%%%%%%
 \section{Methodology}	
 	
-	The simulations were ran on the 2016 variation of the competition framework, which can be downloaded from the GitHub repository \footnote{ \url{https://github.com/EssexUniversityMCTS/gvgai}}.
+	The simulations were ran on the 2016 variation of the competition framework, which can be downloaded from the official GitHub repository \footnote{ \url{https://github.com/EssexUniversityMCTS/gvgai}}.
 	
 	The framework was modified to be able to collect the data from the different tree search controllers.
 	
@@ -481,21 +481,33 @@ The game uses the forward model, which allows the game to copy the current state
 
 	\textbf{Hypothesis One:}
 		MCTS has a higher win rate compared to BrFS and BeFS on larger deterministic games
+	\textbf{Null Hypothesis:}
+		MCTS has a lower win rate compared to BrFS and BeFS on larger deterministic games
 
 	\textbf{Hypothesis Two:}
 		MCTS has a higher win rate compared to BrFS and BeFS on smaller maps
+	\textbf{Null Hypothesis:}
+		MCTS has a lower win rate compared to BrFS and BeFS on smaller maps
 
 	\textbf{Hypothesis Three:}
 		BrFS has a higher win rate compared to MCTS and BeFS on larger maps
+	\textbf{Null Hypothesis:}
+		BrFS has a lower win rate compared to MCTS and BeFS on larger maps
 
 	\textbf{Hypothesis Four:}
 		BrFS has a higher win rate compared to MCTS and BeFS on smaller maps
-		
+	\textbf{Null Hypothesis:}
+		BrFS has a lower win rate compared to MCTS and BeFS on smaller maps
+
 	\textbf{Hypothesis Five:}
 		BeFS has a higher win rate compared to MCTS and BrFS on larger maps
+	\textbf{Null Hypothesis:}
+		BeFS has a lower win rate compared to MCTS and BrFS on larger maps
 		
 	\textbf{Hypothesis Six:}
 		BeFS has a higher win rate compared to  MCTS and BrFS on smaller maps
+	\textbf{Null Hypothesis:}
+		BeFS has a lower win rate compared to  MCTS and BrFS on smaller maps
 
 
 \subsection{Research philosophy}
@@ -564,11 +576,13 @@ The game uses the forward model, which allows the game to copy the current state
 
 		\begin{figure}[h]
 		    \centering
-		    \includegraphics[width=0.5\textwidth]{treeSearchComparison_0}
-		    \caption{ The score of all tree search controllers on the first game of the competition }
-		    \label{fig:game0Means}
+		    \includegraphics[width=0.5\textwidth]{allGameBarPlot}
+		    \caption{ The win rate of all tree search controllers on the chosen 20 games of the competition}
+		    \label{fig:allGameBarPlot}
 		\end{figure}
-		
+
+	%Analysis of image
+		In  figure \ref{allGameBarPlot} shows the win percentage of all the games being tested, 
 	
 	
 
