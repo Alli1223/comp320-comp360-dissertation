@@ -516,13 +516,11 @@ A lot of competition winning controllers use a variation of tree search algorith
 %%%%%%%%%%% Requirements analysis and specification %%%%%%%%%%%%%%%%%%%%%%%
 
 	\subsection{Tools Used}
-	For carrying out the research on the gvg-AI competition, IntelliJ IDEA 2017.3 was used. RStudio Version 1.1.419. The simulations were compiled and executed with java jdk 9, and simulated on ubuntu 16.04.
-	Pycharm 2018.1.2 with python 3.6 was used to create the simulation launcher.
+	For carrying out the research on the gvg-AI competition, IntelliJ IDEA 2017.3 was used, RStudio Version 1.1.4 was used for compiling the graphs, and the simulations were compiled and executed with java jdk 10, on ubuntu 16.04 LTS.
+	Pycharm 2018.1.2 with python 3.6 was used to create the simulation launcher and json to csv converter.
 	
 	%PC Specs for simulations
 	The computer used to carry out the simulations had Intel(R) Xeon(R) CPU E5-2650 24core @ 2.20GHz - 128GB RAM, 1.1TB SSD.
-
-
 
 	% Choosing what games to test the tree search algorithms on
 	\subsection{Choosing the Games}
@@ -580,11 +578,11 @@ This tree search method was used because it is one of the most basic tree search
 
 	\textbf{Flat MCTS}
 
-	Sample Flat MCTS is a monte carlo tree search simulation where actions at the current state are uniformly sampled and no tree is built \cite{browne2012survey}, this was chosen as it is interesting to compare how the different sample MCTS controllers perform.
+	Sample flat MCTS is a monte carlo tree search simulation where actions at the current state are uniformly sampled and no tree is built \cite{browne2012survey}, this was chosen as it is interesting to compare how the different sample MCTS controllers perform.
 
 	\textbf{Open Loop MCTS}
 
-	The Sample Open Loop variation of MCTS (OLMCTS) was also chosen to compare against the other sample MCTS variations.
+	The sample open loop variation of MCTS (OLMCTS) as mentioned in section \ref{sssec:sampleOLMCTS} and \ref{ssec:GST}. This was also chosen to compare against the other sample MCTS variations.
 
 
 

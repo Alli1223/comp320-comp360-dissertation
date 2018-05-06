@@ -111,7 +111,7 @@ public class Test
         int M = 1;
         int gameID = 0; // Used for processing game from input argument
 
-        // Process any arguments ( first = controller, second = number of games, second = what game to run(empty for all)
+        // Process any arguments ( first = controller, second = number of games, second = what game to run
         if(args.length > 0 && useInputArguments)
         {
             // Get the controller from first argument
