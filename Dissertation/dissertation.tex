@@ -265,7 +265,7 @@ In the competition all the games are either deterministic or stochastic,
 
 		\subsubsection{MCTS Variations} \label{sssec:MCTSvariations}
 			MCTS is one of the most promising baseline approaches in the  literature.
-			There has been a good deal of research on MCTS variants, each providing better results according to different domains \cite{browne2012survey, park2015mcts, perez2014knowledge, ilhan2017monte, de2016monte, frydenberg2015investigating}.
+			There has been a good deal of research on MCTS variants, each providing better results according to different domains \cite{browne2012survey, park2015mcts, perez2014knowledge, ilhan2017monte, de2016monte, frydenberg2015investigating, subramanianefficient}.
 
 			While MCTS has been extensively applied to zero-sum games, with two players that alternate terns in discrete action spaces, it has also been applied to other domain types, such as single and multiplayer games, RTS and games with lots of uncertainty \cite{browne2012survey, de2016monte, frydenberg2015investigating}.
 
@@ -361,12 +361,10 @@ improve the performance of the algorithm \cite{EfficientBFS}, which is similar t
 		The hardware for the Atari 2600 is very limited compared to today's standards, it had a 1.19Mhz CPU and 128 Bytes of RAM. These hardware specifications limit the complexity of the games that can be played on it, which strikes a balance of challenging but allowing search algorithms to have a small enough search space as to not have a large horizon effect \cite{bellemare2013arcade}.
 		ALE has been used deep reinforcement learning techniques, that have been able to reach human level of play \cite{mnih2015human, gaina2017rolling}.
 		
-
-		
-		
-		
 		%Summary
 		The growing interest in competitions such as the ones mentioned above clearly reflects a desire for general competency for AI within games.
+
+
 
 	\subsubsection{Challenges and Goals of GVG-AI}
 
@@ -376,6 +374,7 @@ improve the performance of the algorithm \cite{EfficientBFS}, which is similar t
 		Furthermore this also is what defines the difference between GVG-AI and GGP, because having such a short amount of time to compute an action is what makes the competition such a challenge, otherwise the agent will be able to brute force the search space to find the best possible solution, which may take minutes or hours to compute each game tick.
 		
 		
+
 	\subsubsection{Competition \& Rules}
 	
 		The winning conditions are decided by three factors:
@@ -390,6 +389,7 @@ improve the performance of the algorithm \cite{EfficientBFS}, which is similar t
 		The controllers can also use up to 1 second of CPU time for initialization and 40ms to compute an action each game tick. However if the controller takes between 40ms and 50ms, the action return will be \textit{NIL}(Where no movement will be applied), anymore than 50ms will result in the controller automatically loosing \cite{horn2016mcts, perez20162014}.
 	
 	
+
 	\subsubsection{The GVG-AI Framework \& Sample Controllers} \label{Framework}
 	
 		%Limits of the framework
@@ -442,37 +442,14 @@ A lot of competition winning controllers use a variation of tree search algorith
 	
 
 	
+
+
 %%%%%%%%%%% Research Methodology %%%%%%%%%%%%%%%%%%%%%%%
 \section{Methodology}	
 	
 	The simulations were ran on the 2016 variation of the competition framework, which can be downloaded from the official GitHub repository \footnote{ \url{https://github.com/EssexUniversityMCTS/gvgai}}.
 	
 	The framework was modified to be able to collect the data from the different tree search controllers.
-	
-	
-	%Hypothesis
-
-% 1 MCTS has a higher  win rate compared to other tree search algorithms in this paper on large maps
-% 2 (NULL) MCTS has a lower  win rate compared to other tree search algorithms in this paper on large maps
-% 3 MCTS has a higher  win rate compared to other tree search algorithms in this paper on small maps
-% 4 (NULL) MCTS has a lower  win rate compared to other tree search algorithms in this paper on small maps
-
-% 1 BrFS has a higher  win rate compared to other tree search algorithms in this paper on large maps
-% 2 (NULL) BrFS has a lower  win rate compared to other tree search algorithms in this paper on large maps
-% 3 BrFS has a higher  win rate compared to other tree search algorithms in this paper on small maps
-% 4 (NULL) BrFS has a lower  win rate compared to other tree search algorithms in this paper on small maps
-
-% 1 BeFS has a higher  win rate compared to other tree search algorithms in this paper on large maps
-% 2 (NULL) BeFS has a lower  win rate compared to other tree search algorithms in this paper on large maps
-% 3 BeFS has a higher  win rate compared to other tree search algorithms in this paper on small maps
-% 4 (NULL) BeFS has a lower  win rate compared to other tree search algorithms in this paper on small maps
-
-
-% correlation between map size and tree search performance
-% BeFS's performance increases with larger levels
-% MCTS's performance increases 
-% BrFS's performance increases with larger levels
-
 
 % Reasearch question I aim to answer:
 % How well do different tree search techniques scale within the gvg-ai framework
@@ -586,21 +563,28 @@ A lot of competition winning controllers use a variation of tree search algorith
 	In this paper, a total of 6 tree search algorithms were chosen to compare.
 	
 	\textbf{Best First Search}
+
 	This algorithm chosen because it is used in one of the best controllers submitted to this competition, as mentioned in section \ref{sssec:BeFS}.
 
 	\textbf{Breadth First Search}
-This tree search method was used because it is one of the most basic tree search algorithms, as it ecentially brute-force searches the tree, and can be used as a benchmark for the other tree searching algorithms. In this paper, breadth first search starts a new tree search from 
+
+This tree search method was used because it is one of the most basic tree search algorithms, as it essentially brute-force searches the tree, and can be used as a benchmark for the other tree searching algorithms. In this paper, breadth first search starts a new tree search at each game tick.
 
 	\textbf{Breadth First Search Extended}
-	
 
-	\subsubsection{MCTS}
+	This is the same as the other breadth first search, with the only difference is that it continues the search throughout the game, so the agent will sit idle until the tree search finds a solution.
 
-	\textbf{Sample MCTS}
+	\textbf{MCTS}
 
-	\textbf{Sample Flat MCTS}
+	The sample MCTS controller is the vanilla MCTS algorithm as mentioned in section \ref{sssec:MCTS}, this was chosen because it has been one of the most successful algorithms in the competition, and has been used widely within the competition \cite{perez20162014, perez2018general}
 
-	\textbf{Sample Open Loop MCTS}
+	\textbf{Flat MCTS}
+
+	Sample Flat MCTS is a monte carlo tree search simulation where actions at the current state are uniformly sampled and no tree is built \cite{browne2012survey}, this was chosen as it is interesting to compare how the different sample MCTS controllers perform.
+
+	\textbf{Open Loop MCTS}
+
+	The Sample Open Loop variation of MCTS (OLMCTS) was also chosen to compare against the other sample MCTS variations.
 
 
 
@@ -652,9 +636,7 @@ This tree search method was used because it is one of the most basic tree search
 % IMPLEMENTATION
  % Used the Incremental Model for the development of the software artefacet
 	\subsection{Chosen Development Life Cycle}
-		The software artifact for this project was developed using the agile approach to software development \cite{beck2001manifesto, cockburn2001agile, dybaa2008empirical}, this is a method of software development where the software is developed and tested incrementally, in small iterations.
-
-
+		The software artifact for this project was developed using the agile approach to software development \cite{beck2001manifesto, cockburn2001agile, dybaa2008empirical}, this is a method of software development where the software is developed and tested incrementally, in small iterations. The reason why this development methodology was chosen is because this project can be easily broken into small sections and tested iteratively.
 
 
 
@@ -749,7 +731,7 @@ There are also quite a few other tree searching algorithms that are not evaluate
 		\section{Reflective report}
 		\subsection{Issues with collecting the data}
 			One of the big issues I faced when I initially started collecting the data was being able to run many games at one time, and as each game takes on average about 1-2minutes to complete, when there are roughly 600,000 games to simulate, if I was to run one game at a time, it would have taken about 1.14 years (416 days) to gather all my data. This is why the creation of the simulation launcher help so much, the only issue was that it was only created 2 weeks before the deadline, so I ended up having to spin up 4 large servers, that had a total of 56 processing cores and 224GB of RAM, which was able to parallelise the data gathered. This means that the data only took about a week to gather, however this still meant that I needed to analyse the data and write it up in only a few days. In hindsight, I should have created the simulation launcher months ago.
-
+			I focused too much on gathering  a large data set for statistical accuracy, when this wasn't necessary, only a small amount of games actually needed to be simulated to gather an insight to what the controllers stats were.
 		\subsection{Not having a defined hypothesis before collecting the data}
 			When I started collecting the data about the different tree searching algorithms I did not have a defined objective that I wanted to prove, this meant that at the start of the development of the artifact I spent a while working on some visualisation stuff that were not relevant to proving my hypotheses.
 
