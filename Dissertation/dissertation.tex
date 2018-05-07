@@ -458,22 +458,22 @@ A lot of competition winning controllers use a variation of tree search algorith
 
 \subsection{Hypothesis}
 	\textbf{Hypothesis One:}
-		MCTS has a higher win rate compared to BrFS and BeFS as map size increases in deterministic games
+		MCTS has a higher win rate compared to BrFS and BeFS as map size increases in deterministic games % FALSE  -  bait - false (BeFS & BrFSE > MCTS & OLMCTS), hungry birds - false, modality - false
 
 	\textbf{Hypothesis Two:}
-		MCTS has a higher win rate compared to BrFS and BeFS as map size increases in stochastic games
+		MCTS has a higher win rate compared to BrFS and BeFS as map size increases in stochastic games % TRUE
 
 	\textbf{Hypothesis Three:}
-		BrFS has a higher win rate compared to MCTS and BeFS as map size increases in deterministic games
+		BrFS has a higher win rate compared to MCTS and BeFS as map size increases in deterministic games % TRUE
 
 	\textbf{Hypothesis Four:}
-		BrFS has a higher win rate compared to MCTS and BeFS as map size increases in stochastic games
+		BrFS has a higher win rate compared to MCTS and BeFS as map size increases in stochastic games % FALSE
 		
 	\textbf{Hypothesis Five:}
-		BeFS has a higher win rate compared to  MCTS and BrFS as map size increases in deterministic games
+		BeFS has a higher win rate compared to  MCTS and BrFS as map size increases in deterministic games % FALSE - but > MCTS
 
 	\textbf{Hypothesis Six:}
-		BeFS has a higher win rate compared to  MCTS and BrFS as map size increases in stochastic games
+		BeFS has a higher win rate compared to  MCTS and BrFS as map size increases in stochastic games % FALSE
 
 
 \subsection{Research philosophy}
@@ -535,7 +535,7 @@ A lot of competition winning controllers use a variation of tree search algorith
 	\end{table}
 
 	\subsection{Choosing the Tree Search Algorithms}
-	In this paper, a total of 6 tree search algorithms were chosen to compare.
+	In this paper, a total of 6 tree search algorithms were chosen to compare;
 	
 	\textbf{Best First Search}
 
@@ -560,17 +560,6 @@ This tree search method was used because it is one of the most basic tree search
 	\textbf{Open Loop MCTS}
 
 	The sample open loop variation of MCTS (OLMCTS) as mentioned in section \ref{sssec:sampleOLMCTS} and \ref{ssec:GST}. This was also chosen to compare against the other sample MCTS variations.
-
-
-
-
-	Game that will be comapred for win percent vs level size:
-	0, 4, 11, 16
-
-
-	% calcuating amount of tests to be run
-		Running G*Power with a Effect size of 0.05 and a type I error rate of 0.05, and type II error rate of 95\% the sample size required for each game is 4331.
-
 
 	
 	
@@ -598,7 +587,7 @@ This tree search method was used because it is one of the most basic tree search
 	
 	\subsection{Implementation of tree search algorithms} \label{TSImplementation}
 	%Breadth first
-	There are two implementations of the breadth first search algorithm in this paper, one which was modified from the \textit{number27} controller, and  a basic one I wrote. The one that was modified from number27's controller is one that expands the game tree search over several game ticks and is named Breadth First Search Extended (BrFSE) in this paper, where as the one I wrote creates a new tree search every tick of the game and is named Breadth First Search (BrFS).
+	There are two implementations of the breadth first search algorithm in this paper, one which was modified from the \textit{number27} controller, and one I wrote. The one that was modified from number27's controller is one that expands the game tree search over several game ticks and is named Breadth First Search Extended (BrFSE) in this paper, where as the one I wrote creates a new tree search every tick of the game and is named Breadth First Search (BrFS).
 	
 	%MCTS
 	The MCTS controller implementations are provided by the competition, as described in section \ref{sssec:sampleMCTS}.
@@ -607,17 +596,8 @@ This tree search method was used because it is one of the most basic tree search
 
 	These algorithms will record various stats about the game they will play, such as; \textit{score, level size, percentage of level explored, total cells visited} and \textit{end game tick}.
 	
+	\subsection{Game Visualisations}
 	
-
-
-		
-% IMPLEMENTATION
- % Used the Incremental Model for the development of the software artefacet
-	\subsection{Chosen Development Life Cycle}
-		The software artifact for this project was developed using the agile approach to software development \cite{beck2001manifesto, cockburn2001agile, dybaa2008empirical}, this is a method of software development where the software is developed and tested incrementally, in small iterations. The reason why this development methodology was chosen is because this project can be easily broken into small sections and tested iteratively.
-
-
-
 	% visualisation of tree search
 	\begin{figure}[h]
 		   \centering
@@ -625,6 +605,26 @@ This tree search method was used because it is one of the most basic tree search
 		   \caption{ Tree search locality represented in by green cells }
 		   \label{fig:locality}
 	\end{figure}
+
+
+	\subsubsection{Visualisating time spent in areas}
+	At the start of this project, to learn how to start gathering data about the different tree search algorithms, I started by creating some visualisation tools to help understand how the sample controllers worked, one which visualized the area in which the agent searched, and one to visualize how much the agent explored in a level. This worked by
+ calculating how long the agent spends in each cell of the game, as shown in figure \ref{fig:treeSearchComparson}.
+	From this you can see that only best first search and breadth first extended were able to win the game, this is due to them both being able to expand their tree searches over several game ticks, where as all the other algorithms suffer more from the locality limitation, as they start a new tree search every 40ms.
+	\begin{figure}[h]
+		   \centering
+		   \includegraphics[width=0.5\textwidth]{treeSearchComparison}
+		   \caption{ Time agent spend in each cell of the game }
+		   \label{fig:treeSearchComparson}
+	\end{figure}
+
+
+		
+% IMPLEMENTATION
+ % Used the Incremental Model for the development of the software artefacet
+	\subsection{Chosen Development Life Cycle}
+		The software artifact for this project was developed using the agile approach to software development \cite{beck2001manifesto, cockburn2001agile, dybaa2008empirical}, this is a method of software development where the software is developed and tested incrementally, in small iterations. The reason why this development methodology was chosen is because at the start of the project I wasn't sure what direction to take with the project, and agile gives freedom to quickly adapt to any changes \cite{cockburn2001agile}. 
+
 
 
 
@@ -743,7 +743,10 @@ This tree search method was used because it is one of the most basic tree search
 		    \caption{ Comparison of win rate for search algorithms in the game Butterflies with confidence levels }
 		    \label{fig:game_11_win}
 		\end{figure}
-		Figure \ref{fig:game_11_win} shows that MCTS and OLMCTSs performance actually increased as the level size increased. One reason for why this might be is because the level size did not actually increase by much, only by 6\%, so this may not actually have any significance towards affecting tree searching.
+		Figure \ref{fig:game_11_win} shows that MCTS and OLMCTSs performance actually increased as the level size increased. One reason for why this might be is because the level size did not actually increase by much, only by 6\%, as discussed in section \ref{issues}.
+
+		However this graph suggests that hypothesis two is true, since both breadth first search had a total win percentage of 0\% in all the games, and best first search had $<$ 5\% over all the levels.
+		Moreover this also proves the null hypothesis to be true for hypotheses four and six.
 
 		%Score
 		\begin{figure}[h]
@@ -752,10 +755,8 @@ This tree search method was used because it is one of the most basic tree search
 		    \caption{ Comparison of win rate for search algorithms in the game HungryBirds }
 		    \label{fig:game_11_score_confidence}
 		\end{figure}
-		However in figure \ref{fig:game_11_score_confidence} all the controllers scores dropped almost by almost the same amount equally.
+		In figure \ref{fig:game_11_score_confidence} all the controllers scores decreased almost uniformly, however MCTS and OLMCTS got the highest scores throughout the games.
 		
-
-
 
 
 
@@ -775,19 +776,14 @@ This tree search method was used because it is one of the most basic tree search
 
 
 
-
-
-
-
-
-
-
-\section{Possible Issues}
+\section{Possible Issues}\label{issues}
 	\subsection{Game Level Comparisons}
 		When comparing the 4 different games with varying map sizes, each game has different scaling of map sizes, and as mentioned in \ref{AoSG} Butterflies only has a 6\% total map size increase, where as HungryBirds has a 36.3\% total increase in level size.
 
-
-
+	\subsection{Not Enough Results}
+		In these results each level was tested only 10 times, so a total of 50 games per game was used, this was chosen as it is the same amount as the official gvg-ai testing servers use. However there were plans to do 5000 games per level, but unfortunately those results turned out to be incomplete, and insufficient time was left to be able to re-run the same amount. 
+		Another issue was that only four games that data had been collected from had varying map sizes, in hindsight the creation of a standardised map size variation for each of the 20 games should have been created to give more reliable conclusions.
+		This also lead to an odd number of stochastic and deterministic games being measured, which is not ideal.
 
 
 
@@ -800,17 +796,18 @@ This tree search method was used because it is one of the most basic tree search
 
 The experiments in this paper only used 20 of the games in the competition, when there are currently 82 games in the competition, so comparing all the games in the competition may lead to more interesting results.
 There are also quite a few other tree searching algorithms that are not evaluated in this paper, as this paper only analysed 4-5 when there are a lot of other algorithms that have not been looked at due to the project scope.
+Moreover, the best first search implementation in this paper searches the game over several game ticks, like the BrFSE controller, however there isn't an BeFS controller that starts a new search every game tick, like BeFS. This gives an unfair comparison for BeFS as there really should be two different versions, one that searches over several game ticks, and one that starts a new search every game tick.
+
+Another item is measuring the tree search vs level size performance on a wide verity of games, instead of just four, as mentioned in \ref{issues}.
 
 
 
 %%%%%%%%%%% Conclusion %%%%%%%%%%%%%%
 \section{Conclusion}
-\todo[inline]{Re-do this}
-	In conclusion, the literature covered in this review provides an overview of a few of the current algorithms in use in the GVG-AI competition.
-	Based on the performance of the different search algorithms within the framework, a conclusion will be drawn between the superior algorithms for certain games.
-	The GVG-AI competition provides a good framework to compare different tree search algorithms. 
-	The aim of this paper will be to create an agent for the GVG-AI competition based of the strengths and limitations of tree search algorithms.
-	 
+While there are far more tree searing algorithms 
+
+This paper found that breadth first search and best first search and both perform better than the sample MCTS for deterministic games as the level size increases (thus the total possible actions the agent can make). Furthermore this paper also found that MCTS performs better on stochastic games comapred to 
+While a lot of attention has been drawn to more complex tree searching algorithms such as MCTS and 
 
 
 
