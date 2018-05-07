@@ -91,18 +91,16 @@ Email: AR185160@falmouth.ac.uk\\}
 \begin{abstract}
 	Video games have been used for benchmarking artificial intelligence techniques, however in many cases the AI use very domain specific knowledge to improve their results. 
 	The General Video Game AI (GVG-AI) competition aims to address the issue of creating an Artificial General Intelligence (AGI) which in this context means to create an AI that is able to complete video games albeit not up to a human skill level. The games within the GVG-AI competition are all arcade style game, such as \textit{Pac-Man} and \textit{Zelda}. 
-	This paper describes the goals of GVG-AI as well as its rules and challenges, it also covers the different types of tree search techniques used in General Game Playing (GGP) as well as other game search techniques for AGI.
+	This paper describes the goals of GVG-AI as well as its rules and challenges, it also covers the different types of tree search techniques used in General Game Playing (GGP). This paper analyses 3 popular tree searching algorithms and how they scale with changing level sizes within the GVG-AI competition. The algorithms are; Breadth First Search (BrFS), Best First Search (BeFS) and Monte Carlo Tree Search (MCTS) and finds that BrFS and BeFS have a higher win percentage on deterministic games, whereas MCTS outshines both BrFS and BeFS on stochastic games.
 	
 \end{abstract}
 
 \section{Introduction}
 	\IEEEPARstart{T}{his} paper compares tree search techniques used within the General Video Game Artificial Intelligence (GVG-AI) competition.  
 	Games play an important role in the development and bench-marking of Artificial Intelligence (AI). This paper will cover the existing work around the GVG-AI competition and compare tree search algorithms that are being used in the competition.
-	The GVG-AI competition is a recurring video game playing competition designed to simulate and benchmark general artificial intelligence. For an AI agent to be tested, they are submitted to the competition site, then they are tested against previously unseen arcade-style video games like the ones shown in figure \ref{fig:VGDL}. The games that the agents are tested against change every year to stop them from becoming too domain specific.
+	The GVG-AI competition is a recurring video game playing competition designed to simulate and benchmark general artificial intelligence. For an AI agent to be tested, they are submitted to the competition site, then they are tested against previously unseen arcade-style video games like the ones shown in figure \ref{fig:VGDL}. The games that the agents are tested against change every year to stop them from becoming too domain-specific.
 
-	There is a large amount of tree search techniques used within the GVG-AI competition, many of them are based around Monte Carlo Tree Search (MCTS). This project will compare the success rates of each of the different methods, as well as an in depth comparison as to where each tree search technique succeeds in a set of existing games.
-
-\todo[inline]{Add finding and resutls here, as well as contribution}
+	There is a large amount of tree search techniques used within the GVG-AI competition, many of them are based around Monte Carlo Tree Search (MCTS). However there is little research comparing how well basic tree searching techniques compare, this project compares how well basic tree searching algorithms such as BrFS and BeFS perform in comparison to MCTS and it's variants, as mentioned in section \ref{sssec:MCTSvariations}.
 
 \begin{figure}[h]
 		    \centering
@@ -116,30 +114,14 @@ Email: AR185160@falmouth.ac.uk\\}
 	%Motivation
 	There has been considerable literature on GVG-AI and individual AI techniques within the competition, and very little covering an in depth look into the comparison of the different search algorithms.
 
-	Furthermore within the GVG-AI competition there are a few different tree search techniques used, a few of which are mentioned in section \ref{ssec:GST}. 
+	Furthermore, within the GVG-AI competition, there are a few different tree search techniques used, a few of which are mentioned in section \ref{ssec:GST}. 
 	
 	%Questions to answer with paper
-	These techniques perform quite differently within the competition, this paper will aim to answer \textit{What are the strengths and weaknesses of different search techniques} as well as \textit{What type of game does each search technique succeed at?}
+	These techniques perform quite differently within the competition, this paper will aim to answer \textit{How does MCTS compare to more straightforward algorithms?} as well as \textit{How does changing level size effect the performance of each of these algorithms?}
 
-
-	
 	%Importance
-	The research gathered from this could lead to a Hyper-Heuristic \footnote{A Hyper-Heuristic contains a portfolio of algorithms and is able to select the most appropriate algorithm to use depending on the game state \cite{hyperHeurisicMendes, horn2016mcts}.}  that can be implemented into a controller for the competition. 
-	Furthermore this paper will outline the challenges of using the different search techniques, such as issues of games that have a large search space, or multiple objectives and show what are the most challenging areas for AI within the GVG-AI competition.
+	This paper outlines the challenges faced by different tree search algorithms, it also shows that MCTS performs better in stochastic games, compared to BrFS and BeFS. Whereas BeFS and BrFS perform better in deterministic games.
 	
-
-
-%What games have too large of a search space for what techniques
-%TODO: Simplify research questions
-%\begin{itemize}
-    %\item How does game tree search techniques compare for GVGAI? 
-    %\item Where does each tree search technique do well in each game? 
-    %\item What are the strengths and weaknesses of different search techniques and how can they be improved? 
-%\end{itemize}
-
-
-%Does tree search algorithms perform better than Evolutionary Algorithms?
-%Where does tree search algorithms out perform Evolutionary Algorithms?
 
 \section{Literature Review}
 	\subsection{Artificial General Intelligence in games}
@@ -157,11 +139,11 @@ Email: AR185160@falmouth.ac.uk\\}
 
 		During the match against Fan Hui, AlphaGo evaluated thousands of times fewer positions than Deep blue did against Kasparov. It did this by selecting those positions more intelligently using the policy network, then evaluating them more precisely using the value network, where as Deep blue used a more brute force approach \cite{silver2016mastering, DeepBlue}.
 
-		The reason for these AI's success are often as a result of very domain specific knowledge about the game it is playing and means they become highly specialized and cannot be easily ported to other games. 
+		The reason for these AI's success are often as a result of very domain-specific knowledge about the game it is playing and means they become highly specialized and cannot be easily ported to other games. 
 		This is what started the General Game Playing (GGP) competition (described in section \ref{ssec:GVGAIC}) which was to create general AI for board games, this is similar to what happened with GVG-AI where there was lots of specialized AI for games, which were all very domain specficic, such as Starcraft AI \cite{ontanon2013survey, hingston2010new}.
 		This lead to the need for general AI for games, hence GVG-AI and Arcade Learning Environment which is described in section \ref{ssec:GVGAIC}.
 		
-		A long standing goal of AI is to develop algorithms capable of completing various tasks without any need to create domain specific tailoring.
+		A long standing goal of AI is to develop algorithms capable of completing various tasks without any need to create domain-specific tailoring.
 		
 	\subsection{Game Search Techniques} \label{ssec:GST}
 		\subsubsection{Common Terms Used in Tree Search Algorithms} \label{sssec:Common}
@@ -215,7 +197,7 @@ In the competition all the games are either deterministic or stochastic,
 
 
 		\textbf{Selection}
-			Starting at the root node, a selection policy is recursively applied to descend the tree until the most urgent \footnote{Most urgent most commonly means the node with the highest UCT value.} node is reached. 
+			Starting at the root node, a selection policy is recursively applied to descend the tree until the most urgent (node with the highest UCT value) node is reached. 
 			The next action is chosen in a way that balances between exploitation and exploration. For most of the tasks, the option is to choose exploitation, which leads to the best results so far. However there may still be actions that have not been explored that could lead to good results, thus exploration is used to try and find any promising actions \cite{chaslot2008monte}.
 			
 			%UCT	
@@ -324,13 +306,11 @@ improve the performance of the algorithm \cite{EfficientBFS}, which is similar t
 			Best First Search (BeFS) explores a tree by selecting the most promising node and expanding it until a specified limit is reached, or a solution is found.
 			Breadth First Search is used by YOLOBOT, which was developed by T. Joppen et al. \cite{joppen2017informed} and arguably the most successful controller in the competition as of writing this paper, their approach uses Best First Search for deterministic games and MCTS for stochastic games \cite{perez2018general}.
 
-	\subsection{Hyper-Heuristics}
-		A hyper-heuristic approach typically combines several AI methods and automate them to be able to choose the best solution for that situation, a term used to describe them is `\textit{heuristics to choose heuristics}' \cite{burke2013hyper, burke2010classification}.
+	\subsection{Hyper-Heuristics} \label{HH}
+		A hyper-heuristic approach typically combines several AI methods and automate them to be able to choose the best solution for that situation, a term used to describe them is `\textit{heuristics to choose heuristics}' \cite{burke2013hyper, burke2010classification, hyperHeurisicMendes}.
 		During the 2015 competition, the three winning controllers all were a type of hyper-heuristic \cite{horn2016mcts}.
 
 
-			
-		
 		
 
 	\subsection{The General Video Game AI Competition} \label{ssec:GVGAIC}
@@ -339,7 +319,7 @@ improve the performance of the algorithm \cite{EfficientBFS}, which is similar t
 		In most modern video games the AI is tailored specifically for that game and can't easily be modified for use in a different game type. However this is what GVG-AI aims to solve, by creating an AI that can play any game. 
 		
 		There have been quite a few AI competitions before in video games, such as Unreal Tournament \cite{hingston2010new}, Super Mario Bros \cite{shaker2013turing}, Starcraft \cite{ontanon2013survey}. 
-		However most of the winning AI strategies used in those games are very domain specific and it is often more about knowing the game than developing good general AI \cite{perez20162014}. 
+		However most of the winning AI strategies used in those games are very domain-specific and it is often more about knowing the game than developing good general AI \cite{perez20162014}. 
 		 \par
 		
 		
@@ -349,14 +329,14 @@ improve the performance of the algorithm \cite{EfficientBFS}, which is similar t
 		%GVGAI Competiton
 		The GVG-AI Competition is a competition framework that proposes the challenge of creating controllers for general video game playing. The controllers must be able to play a wide variety of video games, many of them will be completely unknown to the controller. This means the controller must have some general AI to discover the mechanics and goal of the game, so it can increase its score and win the game. \cite{GVGAI, perez20162014}
 		
-		The framework contains a library of 2D video games some of which are based of classic arcade games, there are currently as of writing this, 82 different singleplayer games and 20 multiplayer games that AI controllers can be tested on.
+		The framework contains a library of 2D video games some of which are based of classic arcade games, there are currently as of writing this, 82 different singleplayer games and 20 multiplayer games that AI controllers can be tested on \cite{GVGAI, Gonzalez-castro}.
 		
 		%VGDL
 		Games in the GVG-AI competition are written using the Video Game Description Language \cite{schaul2014extensible}, which is a high level description language designed to be able to create a wide variety of arcade style games, where the rules take the form of sprite movement and interaction on a 2D grid \cite{nelson2016investigating}.
 		VGDL in GVG-AI is a JAVA port from pyVGDL which was programmed in python. The VGDL is a powerful tool for conducting research on computational intelligence and games \cite{schaul2014extensible, love2008general}.
 
 		%ALE
-		The Arcade Learning Environment \cite{bellemare2013arcade} provides an interface to hundreds of Atari 2600 game environments. ALE is similar to GVG-AI in a couple of ways; firstly it provides a test bed for benchmarking AI techniques within video games and secondly it is focused around creating agents within video games, as opposed to the GGP competition \cite{GGP2005general}.
+		The Arcade Learning Environment \cite{bellemare2013arcade, Chrabaszcz2018} provides an interface to hundreds of Atari 2600 game environments. ALE is similar to GVG-AI in a couple of ways; firstly it provides a test bed for benchmarking AI techniques within video games and secondly it is focused around creating agents within video games, as opposed to the GGP competition \cite{GGP2005general}.
 		The Atari 2600 is a video game console developed in 1977 , it has had over 500 original games released for the console, and nearly all popular arcade games at the time were pored to the console such as; \textit{PAC-MAN} and \textit{SPACE INVADERS} \cite{bellemare2013arcade}. This provides a large test-bed for AI agents.
 		The hardware for the Atari 2600 is very limited compared to today's standards, it had a 1.19Mhz CPU and 128 Bytes of RAM. These hardware specifications limit the complexity of the games that can be played on it, which strikes a balance of challenging but allowing search algorithms to have a small enough search space as to not have a large horizon effect \cite{bellemare2013arcade}.
 		ALE has been used deep reinforcement learning techniques, that have been able to reach human level of play \cite{mnih2015human, gaina2017rolling}.
@@ -369,9 +349,9 @@ improve the performance of the algorithm \cite{EfficientBFS}, which is similar t
 	\subsubsection{Challenges and Goals of GVG-AI}
 
 		The goal of GVG-AI is to create a generally intelligent agent that is able to win any game it is placed in, when it doesn't know the game.
-		During the tournament a completely new set of games are used, to avoid the agents becoming too domain specific.
+		During the tournament a completely new set of games are used, to avoid the agents becoming too domain-specific.
 		Another challenge is the time limit that an agent can choose an action, this avoids the agent spending too long deciding a task and not making an action \cite{schuster2015mcts}. 
-		Furthermore this also is what defines the difference between GVG-AI and GGP, because having such a short amount of time to compute an action is what makes the competition such a challenge, otherwise the agent will be able to brute force the search space to find the best possible solution, which may take minutes or hours to compute each game tick.
+		Furthermore, this also is what defines the difference between GVG-AI and GGP, because having such a short amount of time to compute an action is what makes the competition such a challenge, otherwise the agent will be able to brute force the search space to find the best possible solution, which may take minutes or hours to compute each game tick.
 		
 		
 
@@ -384,7 +364,7 @@ improve the performance of the algorithm \cite{EfficientBFS}, which is similar t
 		    \item Total time spent
 		\end{itemize}
 		The fist objective to be considered is the number of victories, however in case of a tie, the next objective is the number of points. Then if those two are a tie then the final decider is the total time spent before the win \cite{perez20162014}.
-		In the competition the agent will play 10 unknown games and 5 levels per game. Furthermore each level is played ten times, so each agent plays roughly 500 total games in the tournament \cite{schuster2015mcts}.
+		In the competition the agent will play 10 unknown games and 5 levels per game. Furthermore, each level is played ten times, so each agent plays roughly 500 total games in the tournament \cite{schuster2015mcts}.
 		The competition does now allow multithreading that is used by some MCTS enhancements, some MCTS enhancements that are used are discussed in section \ref{sssec:MCTSvariations}.
 		The controllers can also use up to 1 second of CPU time for initialization and 40ms to compute an action each game tick. However if the controller takes between 40ms and 50ms, the action return will be \textit{NIL}(Where no movement will be applied), anymore than 50ms will result in the controller automatically loosing \cite{horn2016mcts, perez20162014}.
 	
@@ -401,7 +381,7 @@ improve the performance of the algorithm \cite{EfficientBFS}, which is similar t
 		The \textit{HUMAN} player and the \textit{REPLAYER} can be used for debugging the game and to help the programmer get a better understanding of how the game can be played.
 		
 		
-		The framework uses a Video Game Description Language (VGDL) to describe a wide variety of video games. The VGDL is based on a python version developed by Schaul (2014) called PyVGDL \cite{schuster2015mcts}. Furthermore in the GVG-AI Competition the AI agent does not have access to the whole games description, where as in GGP the agent was able to see the whole game description. This means that the agent has to analyze and simulate the game in order to figure out the rules and goal of the game.
+		The framework uses a Video Game Description Language (VGDL) to describe a wide variety of video games. The VGDL is based on a python version developed by Schaul (2014) called PyVGDL \cite{schuster2015mcts}. Furthermore, in the GVG-AI Competition the AI agent does not have access to the whole games description, where as in GGP the agent was able to see the whole game description. This means that the agent has to analyze and simulate the game in order to figure out the rules and goal of the game.
 
 %The forward model
 The game uses the forward model, which allows the game to copy the current state of the game and advance it by executing a specified action.
@@ -474,20 +454,6 @@ A lot of competition winning controllers use a variation of tree search algorith
 
 	\textbf{Hypothesis Six:}
 		BeFS has a higher win rate compared to  MCTS and BrFS as map size increases in stochastic games % FALSE
-
-
-\subsection{Research philosophy}
-	When researching, a positivist approach \cite{scientific-method, crossan2003research} was taken to this project. 
-	This means that the researcher was independent to the research being carried out, and maintained an objective stance.
-	
-	
-	% Posivitism
-	% collect data -> Test hypothesis based on statistical analysis of data -> Confirm or reject hypothesis
-
-	% Research philosophy
-	% Posivitist 
-	% Induction
-
 
 
 %%%%%%%%%%% Requirements analysis and specification %%%%%%%%%%%%%%%%%%%%%%%
@@ -611,6 +577,7 @@ This tree search method was used because it is one of the most basic tree search
 	At the start of this project, to learn how to start gathering data about the different tree search algorithms, I started by creating some visualisation tools to help understand how the sample controllers worked, one which visualized the area in which the agent searched, and one to visualize how much the agent explored in a level. This worked by
  calculating how long the agent spends in each cell of the game, as shown in figure \ref{fig:treeSearchComparson}.
 	From this you can see that only best first search and breadth first extended were able to win the game, this is due to them both being able to expand their tree searches over several game ticks, where as all the other algorithms suffer more from the locality limitation, as they start a new tree search every 40ms.
+	%Area search
 	\begin{figure}[h]
 		   \centering
 		   \includegraphics[width=0.5\textwidth]{treeSearchComparison}
@@ -618,12 +585,22 @@ This tree search method was used because it is one of the most basic tree search
 		   \label{fig:treeSearchComparson}
 	\end{figure}
 
+	%Tree Search
+	\begin{figure}[h]
+		   \centering
+		   \includegraphics[width=0.5\textwidth]{game_0_firstFive}
+		   \caption{ Tree area search comparison for first five levels on the game Bait }
+		   \label{fig:game_0_firstFive}
+	\end{figure}
+
+
+
 
 		
 % IMPLEMENTATION
  % Used the Incremental Model for the development of the software artefacet
 	\subsection{Chosen Development Life Cycle}
-		The software artifact for this project was developed using the agile approach to software development \cite{beck2001manifesto, cockburn2001agile, dybaa2008empirical}, this is a method of software development where the software is developed and tested incrementally, in small iterations. The reason why this development methodology was chosen is because at the start of the project I wasn't sure what direction to take with the project, and agile gives freedom to quickly adapt to any changes \cite{cockburn2001agile}. 
+		The software artifact for this project was developed using the agile approach to software development \cite{beck2001manifesto, cockburn2001agile, dybaa2008empirical}, this is a method of software development where the software is developed and tested incrementally, in small iterations. The reason why this development methodology was chosen is because at the start of the project I wasn't sure what direction to take with the project, and agile gives freedom to quickly adapt to any changes \cite{cockburn2001agile, boehm1988spiral}. Compared to other development methodologies, such as the waterfall method \cite{balaji2012waterfall}, where it is a lot less flexible to changing requirements.
 
 
 
@@ -656,7 +633,7 @@ This tree search method was used because it is one of the most basic tree search
 
 	%GAME 0
 		\subsubsection{Bait}
-		Bait is a game where there are holes blocking the player from getting a key to unlock the door, and the agent has to move rocks into the holes to get the key to win, figure \ref{fig:locality} is what the second level  of this game looks like.
+		Bait is a game where there are holes blocking the player from getting a key to unlock the door, and the agent has to move rocks into the holes to get the key to win, figure \ref{fig:game_0_firstFive} is what the second level  of this game looks like.
 		% basic win
 		\begin{figure}[h]
 		    \centering
@@ -699,15 +676,6 @@ This tree search method was used because it is one of the most basic tree search
 
 		\subsubsection{Modality}
 		The game Modality is similar to the game bait, however the agent only has to move one object into a hole by walking into it, figure \ref{fig:MCTS-Locality} shows an image of the game.
-		%Modality image
-		\begin{figure}[h]
-		    \centering
-		    \includegraphics[width=0.5\textwidth]{MCTS-Locality}
-		    \caption{ Visualising MCTS tree search in the game modality on the second level}
-		    \label{fig:MCTS-Locality}
-		\end{figure}
-
-
 		% win image
 		\begin{figure}[h]
 		    \centering
@@ -759,18 +727,7 @@ This tree search method was used because it is one of the most basic tree search
 		
 
 
-
-
-
-	All the graphs were compiled using R, figure \ref{fig:croppedR1} shows how the large data sets were loaded into R. As this is a large image, the full size image can be viewed in the git repository for this project \footnote{\url{https://github.com/Alli1223/comp320-comp360-dissertation/blob/Development/Dissertation/images/allGameBarPlot.png}}.
-
-	% R code
-	\begin{figure}[h]
-		    \centering
-		    \includegraphics[width=0.5\textwidth]{croppedR1}
-		    \caption{ R code snippet used for loading large game data sets }
-		    \label{fig:croppedR1}
-		\end{figure}
+	
 
 
 
@@ -804,25 +761,60 @@ Another item is measuring the tree search vs level size performance on a wide ve
 
 %%%%%%%%%%% Conclusion %%%%%%%%%%%%%%
 \section{Conclusion}
-While there are far more tree searing algorithms 
-
-This paper found that breadth first search and best first search and both perform better than the sample MCTS for deterministic games as the level size increases (thus the total possible actions the agent can make). Furthermore this paper also found that MCTS performs better on stochastic games comapred to 
-While a lot of attention has been drawn to more complex tree searching algorithms such as MCTS and 
+While this paper focused on a very small subset of games and tree searching algorithms, these findings can help to lead the development of better AI, not only for games, but also a wide verity of applications outside of games research as well.
+There has been a lot of attention has been drawn to more complex tree searching algorithms such as MCTS, but there has been very little for basic tree search algorithms, such as depth and breadth searches.
+This paper found that breadth first search and best first search and both perform better than the sample MCTS for deterministic games as the level size increases. Furthermore, this paper also found that MCTS performs better on stochastic games compared to breadth first search and best first search.
 
 
 
 	% Apendicies
 	\appendices
-		\section{Acknowledgements}
-			\todo[inline]{TODO}
-
 		\section{Reflective report}
 		\subsection{Issues with collecting the data}
-			One of the big issues I faced when I initially started collecting the data was being able to run many games at one time, and as each game takes on average about 1-2minutes to complete, when there are roughly 600,000 games to simulate, if I was to run one game at a time, it would have taken about 1.14 years (416 days) to gather all my data. This is why the creation of the simulation launcher help so much, the only issue was that it was only created 2 weeks before the deadline, so I ended up having to spin up 4 large servers, that had a total of 56 processing cores and 224GB of RAM, which was able to parallelise the data gathered. This means that the data only took about a week to gather, however this still meant that I needed to analyse the data and write it up in only a few days. In hindsight, I should have created the simulation launcher months ago.
-			I focused too much on gathering  a large data set for statistical accuracy, when this wasn't necessary, only a small amount of games actually needed to be simulated to gather an insight to what the controllers stats were.
-		\subsection{Not having a defined hypothesis before collecting the data}
+			One of the big issues I faced when I initially started collecting the data was being able to run many games at one time, and as each game takes on average about 1-2minutes to complete, when there are roughly 600,000 games to simulate, if I was to run one game at a time, it would have taken about 1.14 years (416 days) to gather all my data. This is why the creation of the simulation launcher help so much, the only issue was that it was only created 2 weeks before the deadline, so I ended up having to spin up 4 large servers, that had a total of 56 processing cores and 224GB of RAM, which was able to parallelise the data gathered. This means that the data only took about a week to gather. However when I went to collect the results, I found that a few of the games had errors, which meant I had to throw away all that collected data. I was planning on combining two of my large data sets (one of 100 and one of 1000 simulations) however when loading the data into R, it doesn't like having columns of different lengths. So i had to end up running a quick run through of the games 10 times, just so that I would have results to analyse.
+			This was the biggest problem because I focused too much on gathering  a large data set for statistical accuracy, when this wasn't necessary, only a small amount of games actually needed to be simulated to gather an insight to what the controllers stats were. This would have also meant I would have a lot more time for the write up and analysis of the data, because I ended up only having a day to do the write up.
+		\subsection{Not having a defined hypothesis before collecting the data, to base my research around}
+
 			When I started collecting the data about the different tree searching algorithms I did not have a defined objective that I wanted to prove, this meant that at the start of the development of the artifact I spent a while working on some visualisation stuff that were not relevant to proving my hypotheses.
 
+		\subsection{Outputting json data}
+			At the start of the project, i planned on outputting nested json data, which would contain the values of where the agents went, which would have been used for a heatmap. However to load data into R I started using an online json to csv converter, but this took a long time, as there were about 120 total conversions I would have had to do by hand. I did this once, but then when I had to do it a second time, I created a simple python script that converted all the json to a csv format.
+
+	\subsection{Unit Testing}
+		While developing the software, I attempted to set up junit 5 with travisCI early on in the software development lifecycle, however I was not sure how to set up junit to build my project correctly. Moreover, I was unsure what to actually test with unit testing, figure \ref{fig:TravisCI} shows the build errors from the TravisCI website \cite{TravisCI}.
+		\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{TravisCI}
+		    \caption{ TravisCI builds failing because project hasn't yet been set up, due to being unsure about what to unit test. }
+		    \label{fig:TravisCI}
+		\end{figure}
+
+	\subsection{Prioritisation of tasks}
+		Throughout a large part of this project I ended up working of items that in the end had no relevance to my research question or hypothesis, such as the visualizations class in the project, which i spent about 1-2 months working on.
+
+		\subsection{conclusion}
+			Although I am happy with the software side to this project, I feel that this project will have very little impact towards the greater scientific community.
+
+\section{R code snippets}
+All the graphs were compiled using R, figure \ref{fig:croppedR1} shows how the large data sets were loaded into R. As this is a large image, the full size image can be viewed in the git repository for this project \footnote{\url{https://github.com/Alli1223/comp320-comp360-dissertation/blob/Development/Dissertation/images/allGameBarPlot.png}}.
+
+	% R code
+		\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{croppedR1}
+		    \caption{ R code snippet used for loading large game data sets }
+		    \label{fig:croppedR1}
+		\end{figure}
+
+		\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{croppedR2}
+		    \caption{ R code snippet used for creating scatter plot with linear regression line and confidence bounds with smoothing }
+		    \label{fig:croppedR2}
+		\end{figure}
+
+		\section{Acknowledgements}
+			I would like to thank my project supervisor, Dr. Edward Powley, for his guidance and knowledge throughout this project. I would also like to thank all the final year BSc students who helped give peer feedback and support throughout the project. Finally I would like to thank Dr. Michael Scott and all the other BSc Teaching staff at Falmouth University for their excellent teaching throughout the last three years.
 
 % references section
 
