@@ -469,26 +469,16 @@ BeFS has a higher win rate compared to MCTS and BrFS on deterministic games
 \todo[inline]{Refactor hypothesis}
 
 	\textbf{Hypothesis One:}
-		MCTS has a higher win rate compared to BrFS and BeFS on large deterministic games
-	\textbf{Null Hypothesis:}
-		MCTS has a higher win rate compared to BrFS and BeFS on small stochastic games
-
-	Level size affects 
-
-	\textbf{Hypothesis One:}
-		MCTS has a higher win rate compared to BrFS and BeFS on larger stochastic games
-	\textbf{Null Hypothesis:}
-		MCTS has a lower win rate compared to BrFS and BeFS on larger stochastic games
+		MCTS has a higher win rate compared to BrFS and BeFS as map size increases in deterministic games
 
 	\textbf{Hypothesis Two:}
-		MCTS has a higher win rate compared to BrFS and BeFS on smaller maps	
-	\textbf{Null Hypothesis:}
-		MCTS has a lower win rate compared to BrFS and BeFS on smaller maps
+		MCTS has a higher win rate compared to BrFS and BeFS as map size increases in stochastic games
+
+	\textbf{Hypothesis Two:}
+		MCTS has a higher win rate compared to BrFS and BeFS as map size increases in deterministic games	
 
 	\textbf{Hypothesis Three:}
-		BrFS has a higher win rate compared to MCTS and BeFS on larger maps
-	\textbf{Null Hypothesis:}
-		BrFS has a lower win rate compared to MCTS and BeFS on larger maps
+		BrFS has a higher win rate compared to MCTS and BeFS as map size increases in deterministic games
 
 	\textbf{Hypothesis Four:}
 		BrFS has a higher win rate compared to MCTS and BeFS on smaller maps
@@ -594,6 +584,9 @@ This tree search method was used because it is one of the most basic tree search
 
 
 
+	Game that will be comapred for win percent vs level size:
+	0, 4, 11, 16
+
 
 	% calcuating amount of tests to be run
 		Running G*Power with a Effect size of 0.05 and a type I error rate of 0.05, and type II error rate of 95\% the sample size required for each game is 4331.
@@ -671,11 +664,60 @@ This tree search method was used because it is one of the most basic tree search
 
 
 	%Analysis of image
-		Figure \ref{fig:allGameBarPlot} shows the win percentage of all the games being tested, this shows that all the different tree search techniques generally struggle with similar games, of which are both deterministic and stochastic games.
-In figure \ref{fig:allGameBarPlot}, only the first level of each game was tested.
+		Figure \ref{fig:allGameBarPlot} shows the win percentage of the first level of each of the 20 games being tested, this shows that all the different tree search techniques generally struggle with similar games, of which are both deterministic and stochastic games.
+
 
 	One notable finding is how well the random controller did in both infection and modality games, with a $>$ 50\% winrate on those games. This may suggest that those games may be not too challenging compared to the other games selected.
 
+	
+	The within the chosen 20 games, four of them have varing level sizes, 3 of those games are deterministic, and one is stochastic.
+	%Games analysis
+	 \subsection{Anaysis of Deterministic Games}
+
+	%GAME 0
+		\subsubsection{Bait}
+		Bait is a game where there are holes blocking the player from getting a key to unlock the door, and the agent has to move rocks into the holes to get the key to win, figure \ref{fig:locality} is what the second level  of this game looks like.
+		% basic win
+		\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{Scatter/game_0_win}
+		    \caption{ Comparison of win rate for search algorithms in the game bait }
+		    \label{fig:game_0_win}
+		\end{figure}
+	Figure \ref{fig:game_0_win} shows that level size does effect the win percent of the controllers, and it seems to effect all the controllers almost equally.
+		%win smoothing
+		\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{Scatter/game_0_Score_smoothing_confidence}
+		    \caption{ Comparison of score for search algorithms in the game bait with smoothing}
+		    \label{fig:game_0_win_smoothing}
+		\end{figure}
+
+
+	%Game 4
+		\subsubsection{HungryBirds}
+		Hungry birds is a game where the agents have to find and collect birds in the level, which run away from the player.
+		\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{Scatter/game_4_win_confidence}
+		    \caption{ Comparison of win rate for search algorithms in the game HungryBirds }
+		    \label{fig:game_4_win_confidence}
+		\end{figure}
+
+		\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{Scatter/game_4_Score_smoothing_confidence}
+		    \caption{ Comparison of win rate for search algorithms in the game HungryBirds }
+		    \label{fig:game_4_win_confidence}
+		\end{figure}
+
+
+
+	%Analysis of stochastic games
+	 \subsection{Anaysis of Stochastic Games}
+		\subsubsection{Butterflies}
+		
+		
 
 
 	All the graphs were compiled using R, figure \ref{fig:croppedR1} shows how the large data sets were loaded into R. As this is a large image, the full size image can be viewed in the git repository for this project \footnote{\url{https://github.com/Alli1223/comp320-comp360-dissertation/blob/Development/Dissertation/images/allGameBarPlot.png}}.
