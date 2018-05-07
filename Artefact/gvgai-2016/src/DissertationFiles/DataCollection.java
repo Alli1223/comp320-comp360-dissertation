@@ -57,8 +57,8 @@ public class DataCollection
     // Search depth for the tree search algorithm
     private int searchDepth;
 
-    //! Save the final image
-    public Boolean headless = true;
+    //! Whether to run the game without graphics ( true = no visuals )
+    public Boolean headless = false;
 
     public int getBlockSize()
     {

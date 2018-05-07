@@ -16,9 +16,9 @@ public class Visualisations
     private Vector<Vector2d> searchPoints = new Vector<Vector2d>();
 
     //! Booleans for choosing what should be rendered over the game
-    private boolean drawAreaSearched = true;
+    private boolean drawAreaSearched = false;
     private boolean drawBestActionPath = false;
-    private boolean drawPreviousLocations = false;
+    private boolean drawPreviousLocations = true;
 
     //! Block offset for drawing in the center of the cells
     private int blockOffset = 0;

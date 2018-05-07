@@ -684,11 +684,11 @@ This tree search method was used because it is one of the most basic tree search
 		    \caption{ Comparison of win rate for search algorithms in the game bait }
 		    \label{fig:game_0_win}
 		\end{figure}
-	Figure \ref{fig:game_0_win} shows that level size does effect the win percent of the controllers, and it seems to effect all the controllers almost equally.
+	Figure \ref{fig:game_0_win} shows that level size does effect the win percent of the controllers, and it seems to effect all the controllers almost equally. The last level of bait
 		%win smoothing
 		\begin{figure}[h]
 		    \centering
-		    \includegraphics[width=0.5\textwidth]{Scatter/game_0_Score_smoothing_confidence}
+		    \includegraphics[width=0.5\textwidth]{Scatter/game_0_score_smoothing_confidence}
 		    \caption{ Comparison of score for search algorithms in the game bait with smoothing}
 		    \label{fig:game_0_win_smoothing}
 		\end{figure}
@@ -696,27 +696,48 @@ This tree search method was used because it is one of the most basic tree search
 
 	%Game 4
 		\subsubsection{HungryBirds}
-		Hungry birds is a game where the agents have to find and collect birds in the level, which run away from the player.
+		Hungry birds is a game where the agents have to find a way to the goal, while their health is slowly decreasing, and there are bugs that the player can find and eat to recover health and get a higher score.
 		\begin{figure}[h]
 		    \centering
 		    \includegraphics[width=0.5\textwidth]{Scatter/game_4_win_confidence}
 		    \caption{ Comparison of win rate for search algorithms in the game HungryBirds }
 		    \label{fig:game_4_win_confidence}
 		\end{figure}
+		In figure \ref{fig:game_4_win_confidence} the extended breadth first search, maintained an average win percentage of 82\%, and did not seem to be effected by the level size, this is likely due to the game space being easy to explore over several game ticks.
+		Best first searchs score actually increased very slightly with the level size, however MCTS and OLMCTS win percentage dropped significantly.
+		Flat MCTS and breadth first search both had an almost 0 \% win rate in this game, simply because they couldn't search the game space deep enough.
 
 		\begin{figure}[h]
 		    \centering
 		    \includegraphics[width=0.5\textwidth]{Scatter/game_4_Score_smoothing_confidence}
 		    \caption{ Comparison of win rate for search algorithms in the game HungryBirds }
-		    \label{fig:game_4_win_confidence}
+		    \label{fig:game_4_score_confidence}
 		\end{figure}
 
 
 
 	%Analysis of stochastic games
-	 \subsection{Anaysis of Stochastic Games}
+	 \subsection{Anaysis of Stochastic Games} \label{AoSG}
 		\subsubsection{Butterflies}
-		
+		In the game butterflies, the agent has to catch all the butterflies before they eat all their food. However the butterflies move around randomly.
+
+		%Win
+		\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{Scatter/game_11_name_confidence}
+		    \caption{ Comparison of win rate for search algorithms in the game Butterflies with confidence levels }
+		    \label{fig:game_11_win}
+		\end{figure}
+		Figure \ref{fig:game_11_win} shows that MCTS and OLMCTSs performance actually increased as the level size increased. One reason for why this might be is because the level size did not actually increase by much, only by 6\%, so this may not actually have any significance towards affecting tree searching.
+
+		%Score
+		\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{Scatter/game_11_score_confidence}
+		    \caption{ Comparison of win rate for search algorithms in the game HungryBirds }
+		    \label{fig:game_11_score_confidence}
+		\end{figure}
+		However in figure \ref{fig:game_11_score_confidence} all the controllers scores dropped almost by almost the same amount equally.
 		
 
 
@@ -742,6 +763,9 @@ This tree search method was used because it is one of the most basic tree search
 
 
 \section{Possible Issues}
+	\subsection{Game Level Comparisons}
+		When comparing the 4 different games with varying map sizes, each game has different scaling of map sizes, and as mentioned in \ref{AoSG} Butterflies only has a 6\% total map size increase, where as HungryBirds has a 36.3\% total increase in level size.
+
 
 
 
