@@ -455,45 +455,25 @@ A lot of competition winning controllers use a variation of tree search algorith
 % How well do different tree search techniques scale within the gvg-ai framework
 % Can 
 
-% Map size decreases the performance of 
-% BeFS performs better in smaller maps
-
-
-1: MCTS has a higher win rate compared to BrFS and BeFS on deterministic games
-1- MCTS has a lower win rate compared to BrFS and BeFS on deterministic games
-
-BrFS has a higher win rate compared to MCTS and BeFS on deterministic games
-BeFS has a higher win rate compared to MCTS and BrFS on deterministic games
 
 \subsection{Hypothesis}
-\todo[inline]{Refactor hypothesis}
-
 	\textbf{Hypothesis One:}
 		MCTS has a higher win rate compared to BrFS and BeFS as map size increases in deterministic games
 
 	\textbf{Hypothesis Two:}
 		MCTS has a higher win rate compared to BrFS and BeFS as map size increases in stochastic games
 
-	\textbf{Hypothesis Two:}
-		MCTS has a higher win rate compared to BrFS and BeFS as map size increases in deterministic games	
-
 	\textbf{Hypothesis Three:}
 		BrFS has a higher win rate compared to MCTS and BeFS as map size increases in deterministic games
 
 	\textbf{Hypothesis Four:}
-		BrFS has a higher win rate compared to MCTS and BeFS on smaller maps
-	\textbf{Null Hypothesis:}
-		BrFS has a lower win rate compared to MCTS and BeFS on smaller maps
-
-	\textbf{Hypothesis Five:}
-		BeFS has a higher win rate compared to MCTS and BrFS on larger maps
-	\textbf{Null Hypothesis:}
-		BeFS has a lower win rate compared to MCTS and BrFS on larger maps
+		BrFS has a higher win rate compared to MCTS and BeFS as map size increases in stochastic games
 		
+	\textbf{Hypothesis Five:}
+		BeFS has a higher win rate compared to  MCTS and BrFS as map size increases in deterministic games
+
 	\textbf{Hypothesis Six:}
-		BeFS has a higher win rate compared to  MCTS and BrFS on smaller maps
-	\textbf{Null Hypothesis:}
-		BeFS has a lower win rate compared to  MCTS and BrFS on smaller maps
+		BeFS has a higher win rate compared to  MCTS and BrFS as map size increases in stochastic games
 
 
 \subsection{Research philosophy}
@@ -681,7 +661,7 @@ This tree search method was used because it is one of the most basic tree search
 		\begin{figure}[h]
 		    \centering
 		    \includegraphics[width=0.5\textwidth]{Scatter/game_0_win}
-		    \caption{ Comparison of win rate for search algorithms in the game bait }
+		    \caption{ Scatterplot with regression line of win rate for search algorithms in the game bait }
 		    \label{fig:game_0_win}
 		\end{figure}
 	Figure \ref{fig:game_0_win} shows that level size does effect the win percent of the controllers, and it seems to effect all the controllers almost equally. The last level of bait
@@ -689,7 +669,7 @@ This tree search method was used because it is one of the most basic tree search
 		\begin{figure}[h]
 		    \centering
 		    \includegraphics[width=0.5\textwidth]{Scatter/game_0_score_smoothing_confidence}
-		    \caption{ Comparison of score for search algorithms in the game bait with smoothing}
+		    \caption{ Comparison of score for search algorithms in the game bait with regression line smoothing and confidence bounds}
 		    \label{fig:game_0_win_smoothing}
 		\end{figure}
 
@@ -710,9 +690,44 @@ This tree search method was used because it is one of the most basic tree search
 		\begin{figure}[h]
 		    \centering
 		    \includegraphics[width=0.5\textwidth]{Scatter/game_4_Score_smoothing_confidence}
-		    \caption{ Comparison of win rate for search algorithms in the game HungryBirds }
+		    \caption{ Comparison of win rate for search algorithms in the game hungrybirds with regression line smoothing and confidence bounds}
 		    \label{fig:game_4_score_confidence}
 		\end{figure}
+
+
+
+
+		\subsubsection{Modality}
+		The game Modality is similar to the game bait, however the agent only has to move one object into a hole by walking into it, figure \ref{fig:MCTS-Locality} shows an image of the game.
+		%Modality image
+		\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{MCTS-Locality}
+		    \caption{ Visualising MCTS tree search in the game modality on the second level}
+		    \label{fig:MCTS-Locality}
+		\end{figure}
+
+
+		% win image
+		\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{Scatter/game_16_win}
+		    \caption{ Comparison of win rate for search algorithms in the game modality with regression line smoothing and confidence bounds}
+		    \label{fig:game_16_win}
+		\end{figure}
+		Figure \ref{fig:game_16_win} shows a significant decline in all tree search performance as the map sizes increase.
+		The only controllers that were able to even complete the largest level were best first and breadth first extended.
+
+		% score image
+		\begin{figure}[h]
+		    \centering
+		    \includegraphics[width=0.5\textwidth]{Scatter/game_16_Score_smoothing_confidence}
+		    \caption{ Comparison of win rate for search algorithms in the game modality with regression line smoothing and confidence bounds}
+		    \label{fig:game_4_score_confidence}
+		\end{figure}
+
+		
+		
 
 
 
@@ -739,6 +754,11 @@ This tree search method was used because it is one of the most basic tree search
 		\end{figure}
 		However in figure \ref{fig:game_11_score_confidence} all the controllers scores dropped almost by almost the same amount equally.
 		
+
+
+
+
+
 
 
 	All the graphs were compiled using R, figure \ref{fig:croppedR1} shows how the large data sets were loaded into R. As this is a large image, the full size image can be viewed in the git repository for this project \footnote{\url{https://github.com/Alli1223/comp320-comp360-dissertation/blob/Development/Dissertation/images/allGameBarPlot.png}}.
